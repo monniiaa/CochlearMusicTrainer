@@ -525,7 +525,7 @@
                     "name": "",
                     "id": "8da6ed3a-f621-49fe-8c76-1f6b7d7754d6",
                     "path": "<XRController>{LeftHand}/Primary2DAxis",
-                    "interactions": "Sector(directions=1)",
+                    "interactions": "Sector(directions=-1)",
                     "processors": "",
                     "groups": "Noncontinuous Move",
                     "action": "Teleport Mode Activate",
@@ -1069,6 +1069,142 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "XRI RightHand Tracking",
+            "id": "4e6fca10-fa0d-49e6-a401-ac6a650848cc",
+            "actions": [
+                {
+                    "name": "Position",
+                    "type": "Value",
+                    "id": "5b8fd3d4-d8dc-4aaa-a914-39ab56c71b37",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Rotation",
+                    "type": "Value",
+                    "id": "340856a7-40a3-4f45-ae34-ad71102fdd26",
+                    "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Tracking",
+                    "type": "Value",
+                    "id": "03afcc2a-d14c-489e-a2b8-32a1aa08b1bb",
+                    "expectedControlType": "Integer",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "23398e41-670e-4a7c-a905-ae8a619604fd",
+                    "path": "<TrackedDevice>/{rightHand}/devicePosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "299b3390-cd18-442f-822c-5060285448f7",
+                    "path": "<TrackedDevice>/{rightHand}/deviceRotation",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "08ea431a-0152-44f9-beba-4d0a16330baa",
+                    "path": "<TrackedDevice>/{rightHand}/isTracked",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tracking",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "XRI LeftHand Tracking",
+            "id": "30f4936b-a9ba-4c20-b056-ede70705584e",
+            "actions": [
+                {
+                    "name": "Position",
+                    "type": "Value",
+                    "id": "bd4677b2-0f67-4a04-9eb2-0cc86a64507c",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Rotation",
+                    "type": "Value",
+                    "id": "7b275ef6-f1aa-42c6-9f26-08c326c02a58",
+                    "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Tracking",
+                    "type": "Value",
+                    "id": "61a50bf7-1e6e-4b1b-b837-ce1887d729a7",
+                    "expectedControlType": "Integer",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e916f017-f6f7-4436-84d9-73872476e175",
+                    "path": "<MetaAimHand>/{leftHand}/devicePosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d23e532e-cc63-4211-aa8e-f799af6b04de",
+                    "path": "<MetaAimHand>/{leftHand}/deviceRotation",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b1ee1a10-3409-438b-9e7c-1839f3d5b88f",
+                    "path": "<MetaAimHand>/{leftHand}/isTracked",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tracking",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

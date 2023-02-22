@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 1839023327
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 352e5e6c233ae9eba42d69ccce8ee536
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 070e64028d0fb02d3485eb0d43485f8b
+HashAppended: 0
+ClassTypes:
+- Class: 48
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Plugins/QFSW/Quantum Console/Source/Shaders/Blur.shader
+- Assets/TextMesh Pro/Shaders/TMP_SDF.shader
+- Assets/Oculus/Interaction/Runtime/Shaders/OculusHand.shader
+Dependencies: []

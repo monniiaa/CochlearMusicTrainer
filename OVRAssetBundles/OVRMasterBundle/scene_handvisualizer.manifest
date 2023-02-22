@@ -1,0 +1,61 @@
+ManifestFileVersion: 0
+CRC: 713885471
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: cacf0b636c4d1de7c997deb63297bd63
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 600e333384b2412e0c89e689bc39203d
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 20
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 81
+  Script: {instanceID: 0}
+- Class: 89
+  Script: {instanceID: 0}
+- Class: 104
+  Script: {instanceID: 0}
+- Class: 108
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: e0cb9aa70a22847b5925ee5f067c10a9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5a2a9c34df4095f47b9ca8f975175f5b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c2fadf230d1919748a9aa21d40f74619, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2e9813c68d7d6f44282ace8bd2d1fd46, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 120
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+- Class: 157
+  Script: {instanceID: 0}
+- Class: 196
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Samples/XR Hands/1.1.0-pre.2/HandVisualizer/HandVisualizer.unity
+Dependencies:
+- C:/Users/danie/OneDrive/Documents/Unity/CochlearMusicTrainer/OVRAssetBundles/OVRMasterBundle/asset_fbx0
+- C:/Users/danie/OneDrive/Documents/Unity/CochlearMusicTrainer/OVRAssetBundles/OVRMasterBundle/asset_prefab0
