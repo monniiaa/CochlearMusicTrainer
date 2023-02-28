@@ -9,11 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/OculusSetup.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 0
-    path: Assets/Samples/XR Hands/1.1.0-pre.2/HandVisualizer/HandVisualizer.unity
-    guid: ab7acf0d9677fbe4db51bc36647d4fcb
-  - enabled: 1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Group Folders/Daniel/Scenes/Movement/HandTrackingTeleportation.unity
     guid: 4d039d46299e23e4e98da99013ec50d0
+  - enabled: 1
+    path: Assets/12.unity
+    guid: 908e98fc302d86345af584c802028259
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 597b89b649d512843aa161a2a00b82c1, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 41a7fb176e5481345b99e2fa1059f5a5, type: 2}
