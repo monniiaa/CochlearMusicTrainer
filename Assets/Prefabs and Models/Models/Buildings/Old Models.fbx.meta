@@ -1,0 +1,607 @@
+fileFormatVersion: 2
+guid: 11c1eb704bddafd4b835db14edc41614
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BasketOutlineTexture
+    second: {fileID: 2100000, guid: d0db85f9591512f47a1dbe8f1953e09a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BasketTexture
+    second: {fileID: 2100000, guid: 03f97087b703ffd44a6a9e384d5788b3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bin
+    second: {fileID: 2100000, guid: 0652d7b5ee5da3948b195669f227fe39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Board
+    second: {fileID: 2100000, guid: b90d4fc8f5adbc54488f270133ebe89d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BoardGamesTexture
+    second: {fileID: 2100000, guid: a8d41010b4591474891e37f12e076509, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BooksTexture1
+    second: {fileID: 2100000, guid: 455b5a20e82aaac4a896cfee5a4a3b04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BooksTexture2
+    second: {fileID: 2100000, guid: 23b1b7b828bb6fd48b9928c7aeab0aa6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BooksTexture3
+    second: {fileID: 2100000, guid: 835926b386a9b654cb57b27d7679d2ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bowl
+    second: {fileID: 2100000, guid: d6a55367d47358c43b75918a7808093c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BoxEmbellishmentTexture
+    second: {fileID: 2100000, guid: ae582d5fc861f454a9d1a1486014a664, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BoxLabelTexture
+    second: {fileID: 2100000, guid: 2256e7cd2f56b394a8ff663b66789aa8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BoxTexture
+    second: {fileID: 2100000, guid: 688ef8697bd03084cbd5ebdfdcdb077f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CabinBackTexture
+    second: {fileID: 2100000, guid: c094aa64a1ca56843b14c62c3e4dc998, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CabinSupportTexture
+    second: {fileID: 2100000, guid: b9a44a7bdd0a8f547814802ff0635740, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CabinTexture
+    second: {fileID: 2100000, guid: 426265663370f344bb8ba78f359852ef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CalendarTexture
+    second: {fileID: 2100000, guid: 45fb10397a9a3c84d84ea6e8e29cb0f1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CandleLight
+    second: {fileID: 2100000, guid: 161036b047622cf42b6d73c0ddbade2c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CardboardBoxTexture
+    second: {fileID: 2100000, guid: 03079c515f4284e41bb26c2276f6f4d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CeilingTexture
+    second: {fileID: 2100000, guid: 2c0df53c33b2d1e429c67c368ed72f24, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ChairTexture
+    second: {fileID: 2100000, guid: e36c59a57c709b3479337fce40959439, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ChairWheelsTexture
+    second: {fileID: 2100000, guid: 6108b0a212c3f7843a393db7294cfe3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ChairWoodTexture
+    second: {fileID: 2100000, guid: 5fbaad6a626888546901f63311b44714, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Circle
+    second: {fileID: 2100000, guid: 78cb123f7291c7f4eb3795fe1cd78f77, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cross
+    second: {fileID: 2100000, guid: 74079eb9b16b5d5458a66733be750c7f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DoorDoubleHandleTexture
+    second: {fileID: 2100000, guid: 5dde8e0b71f161844a5307da896a5979, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DoorGlass
+    second: {fileID: 2100000, guid: 087bfbf0b71d82a4191b6cb40abb060e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DoorKeyholeTexture
+    second: {fileID: 2100000, guid: c76f13a6ba92aa043b339c63e5f7393f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DoorSingleHandleTexture
+    second: {fileID: 2100000, guid: cc2f59a2141428447890fca64d523128, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DoorTexture
+    second: {fileID: 2100000, guid: 60a75cdc564b5864ebce0b9cb7d79f6a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eraser
+    second: {fileID: 2100000, guid: c5aad7de3979b574d8c6d593dc719497, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EraserHandle
+    second: {fileID: 2100000, guid: 593e6a895e27ef2488efec604c66c49c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorTexture
+    second: {fileID: 2100000, guid: 132f9f1490b65ec4ab824ba83da1e3d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FolderLabelTexture
+    second: {fileID: 2100000, guid: e1afc9c844ee3fa4ebc3d991c8a62169, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FolderSilverTexture
+    second: {fileID: 2100000, guid: 773651777529f1949bf43f66b7540cbb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FolderTexture
+    second: {fileID: 2100000, guid: 4e62b5551994e734e99bc9c2b64122e5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HandTexture
+    second: {fileID: 2100000, guid: 69b2f0f2b03a4cc478e83af3b846b2a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LampCeiling
+    second: {fileID: 2100000, guid: 3a7caa65b587b86428967873d1dbceed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LampSilverTexture
+    second: {fileID: 2100000, guid: 3161587a3f2115143aff475c86290f43, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LampTexture
+    second: {fileID: 2100000, guid: 54942bb3f1e5eed488ee07266bf45340, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MarkerCap
+    second: {fileID: 2100000, guid: 55f2f8a6aa6945f42bac130b51f40686, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MarkerCapBlack
+    second: {fileID: 2100000, guid: 6e20812ffa573ac4d978e821a1d910fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MarkerCapBlue
+    second: {fileID: 2100000, guid: f9cf737005eefb047a94c5c8941c7a12, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MarkerCapGreen
+    second: {fileID: 2100000, guid: df4214cef0b2d564da29db2437c5ec9d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MarkerCapOrange
+    second: {fileID: 2100000, guid: f12e2b1c5396e56409857dceaa3f38e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MarkerCapPink
+    second: {fileID: 2100000, guid: ee56670b9d48c1843b0653f6e135f403, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MarkerCapPurple
+    second: {fileID: 2100000, guid: 2283a780321ad3a41a7ccedb6810edb2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MarkerCapRed
+    second: {fileID: 2100000, guid: 7837b3ca6ff95a04e84fc5ed42df1338, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MarkerCapTurquoise
+    second: {fileID: 2100000, guid: 28a6bca120d19fc48a3fd7a3a0c4e2a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MarkerCapYellow
+    second: {fileID: 2100000, guid: 516e6eae563e2d849b9167c0000f53fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MarkerTexture
+    second: {fileID: 2100000, guid: 9244e8931ae4fd84abf4fcaca1238836, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Molding
+    second: {fileID: 2100000, guid: 9ffa4f03399f4db42bac56043d3fb125, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NoteLeftTexture
+    second: {fileID: 2100000, guid: 2f1c9bff239f2b646a04f08b5216c32c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NoteRightTexture
+    second: {fileID: 2100000, guid: dfbaf63314098c346be4fba3939d4da7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PaintingBoardStandTexture
+    second: {fileID: 2100000, guid: a6fa192fc803c064db1199653b0dfd07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PaintingBoardTexture
+    second: {fileID: 2100000, guid: 3a25be3d434729f44b581411034b9899, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PencilCupSilver
+    second: {fileID: 2100000, guid: 436c25e28a5602e41bed807323e60bb5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PencilCupTransparent
+    second: {fileID: 2100000, guid: 40f207234d178384fb78ea9fc26cf96b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PencilCupWhite
+    second: {fileID: 2100000, guid: 354f3e2f7f8edf64c9611d49202b115e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PictureBigFirst
+    second: {fileID: 2100000, guid: 8abb438946054164bb45346e42a02a3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PictureBigSecond
+    second: {fileID: 2100000, guid: 35f09ca02bb9ee44f9cc5a4dcb4cdd29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PictureFirstTexture
+    second: {fileID: 2100000, guid: d7afa517ba3e67f45b1824a527f77cae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PictureFourthTexture
+    second: {fileID: 2100000, guid: 0f392d448f7ec274e94f79d3170d5422, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PictureFrameTextureBlack
+    second: {fileID: 2100000, guid: 991f66b84ec613d4ca4d7178da75fc1e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PictureFrameTextureWhite
+    second: {fileID: 2100000, guid: 7edd309dc11b00c46a0b6f43088e06be, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PictureGroundTexture
+    second: {fileID: 2100000, guid: 841ec51b7857f9e4c9fc6f6aa9b6af99, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PictureSecondTexture
+    second: {fileID: 2100000, guid: 3f1dedf6b3249584d985f027da642ec9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PictureShelfTexture
+    second: {fileID: 2100000, guid: 39d19e9fabea4f348b7ba227a21d809a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PictureSpecialTexture
+    second: {fileID: 2100000, guid: b5a8631aa9122844480c87715c74473c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PictureThirdTexture
+    second: {fileID: 2100000, guid: aa7f8b89bd5d99c458f4da256bf1eaae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PictureTopExtraTexture
+    second: {fileID: 2100000, guid: 37abbb2a7130ebf45854dabaf89d08ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PictureTopFirstTexture
+    second: {fileID: 2100000, guid: a03cba17a30805f4d8ceb341a8d1b40d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PictureTopFourthTexture
+    second: {fileID: 2100000, guid: 9b2a8f77646d4994789430fb84d6d416, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PictureTopSecondTexture
+    second: {fileID: 2100000, guid: 4b1af8b0e4e74d440ae66f32e9494b11, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PictureTopSpecialTexture
+    second: {fileID: 2100000, guid: 81db08276063ba5478fe45590972a0b6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PictureTopThirdTexture
+    second: {fileID: 2100000, guid: c34f5fca82c3b9a42b6e4e9b1b083c92, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PictureWallTexture
+    second: {fileID: 2100000, guid: ad8ad36020da80a468b83a242c466a2c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PlantGreenTexture
+    second: {fileID: 2100000, guid: 31caacb14e1a1c145816f57a0b5daea2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PlantYellowTexture
+    second: {fileID: 2100000, guid: 0d1c2ff9447342248b3794c46864104f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PotBlack
+    second: {fileID: 2100000, guid: 2a47119d9bef5084bb856b705053963e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PotWhite
+    second: {fileID: 2100000, guid: b78f56e59ff236e408e9675833faa09e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Projector
+    second: {fileID: 2100000, guid: 53d8ffc8438d7924bb6e5b3f15224d2f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RadiatorCopperTexture
+    second: {fileID: 2100000, guid: 7a4a4bc5c72a5c540bef5be56496f9c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RadiatorPlasticTexture
+    second: {fileID: 2100000, guid: 7b5404911daada84eaa9354b6ee7c2ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RadiatorTexture
+    second: {fileID: 2100000, guid: f48a673e324b84e4a8b74d7a0990f985, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ShelfTexture
+    second: {fileID: 2100000, guid: 3ef1a4c0633512147ac1cd14d29bf594, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Socket
+    second: {fileID: 2100000, guid: 24ff3d5aec79fe54b851cfbcc563e707, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SocketHoles
+    second: {fileID: 2100000, guid: 255103ce36d620946b71f6d1059eb1e6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SpeakerFrontTexture
+    second: {fileID: 2100000, guid: 6779b4499464cdf4d8a29724e9573de8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SpeakerTexture
+    second: {fileID: 2100000, guid: ace38431026f9eb44b3778294f398ea7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Spotlights
+    second: {fileID: 2100000, guid: cabb54a1447b38244bc16e6843e1e97f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SpotlightsShade
+    second: {fileID: 2100000, guid: 44d9a49ae739ac34b864ba9a824fff14, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TableTexture
+    second: {fileID: 2100000, guid: 14bc164debf128241959b90ab1c7dcef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TelevisionScreenTexture
+    second: {fileID: 2100000, guid: 45abf40d9954c2d4899ea4d8ee03ed13, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TelevisionTexture
+    second: {fileID: 2100000, guid: 650fe86828730c54790623496bccf489, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TimelineTexture
+    second: {fileID: 2100000, guid: 076c9f7997676374eaeef0c97624c690, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WallTexture
+    second: {fileID: 2100000, guid: 97e3f2bf9f94af04a902ddf116c105bc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Whiteboard
+    second: {fileID: 2100000, guid: ffd57ba184b3dc44c870cbc319ebf3e2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WhiteboardCornersTexture
+    second: {fileID: 2100000, guid: e88b549235eae17478ca8ae2ac6f8c48, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WhiteboardFrameTexture
+    second: {fileID: 2100000, guid: c0ec90c786c3d3841a76a1fc7b8d67ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WindowGlass
+    second: {fileID: 2100000, guid: 254821a161c1aef4ebd3b298be06f1aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WindowTexture
+    second: {fileID: 2100000, guid: 9566ed8e82ca2d74e9eb6233fbd4dfcd, type: 2}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 2
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    fileIdsGeneration: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 6
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 0
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
