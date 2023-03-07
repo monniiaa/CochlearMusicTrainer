@@ -13,7 +13,7 @@ public class AllowPickUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (DVRInput.Get(DVRInput.Button.Two))
+        // if (DVRInput.Get(DVRInput.Button.Two))
         {
             if (PickUpDrumstick.pickedUp == true)
             {
