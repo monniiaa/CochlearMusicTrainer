@@ -9,7 +9,7 @@ public class AllowPickUp : MonoBehaviour
     {
         
     }
-
+    /*
     // Update is called once per frame
     void Update()
     {
@@ -20,5 +20,5 @@ public class AllowPickUp : MonoBehaviour
                 PickUpDrumstick.pickedUp = false;
             }
         }
-    }
+    }*/
 }
