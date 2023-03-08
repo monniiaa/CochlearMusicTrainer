@@ -576,6 +576,17 @@
                 },
                 {
                     "name": "",
+                    "id": "2be2ffe4-7815-44da-ae57-a8d78d0e0a44",
+                    "path": "<XRInputV1::Oculus::OculusTouchControllerLeft>{LeftHand}/thumbresttouch",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left Touchpad Touched",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "0e3c4e9d-b05c-4f70-89b5-56414a848e61",
                     "path": "<XRController>{LeftHand}/touchpadClick",
                     "interactions": "",
@@ -743,6 +754,17 @@
                     "name": "",
                     "id": "67675d1d-e68a-4624-9f93-1ebd76b5c159",
                     "path": "<XRController>{RightHand}/touchpadTouch",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right Touchpad Touched",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6e5acb52-0e4c-4192-b21c-687f3b85b6c1",
+                    "path": "<XRInputV1::Oculus::OculusTouchControllerRight>{RightHand}/thumbresttouch",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
