@@ -314,7 +314,11 @@
     },
     "io.extendreality.tilia.input.combinedactions.unity": {
       "version": "2.0.7",
+<<<<<<< HEAD
+      "depth": 1,
+=======
       "depth": 0,
+>>>>>>> master
       "source": "registry",
       "dependencies": {
         "io.extendreality.zinnia.unity": "2.6.0"
@@ -368,6 +372,26 @@
         "io.extendreality.tilia.utilities.shaders.unity": "1.3.1",
         "io.extendreality.tilia.indicators.objectpointers.unity": "2.1.13",
         "io.extendreality.tilia.interactions.interactables.unity": "2.9.3"
+      },
+      "url": "https://registry.npmjs.org"
+    },
+    "io.extendreality.tilia.locomotors.axismove.unity": {
+      "version": "2.0.16",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "io.extendreality.zinnia.unity": "2.6.0",
+        "io.extendreality.tilia.utilities.shaders.unity": "1.3.1",
+        "io.extendreality.tilia.input.combinedactions.unity": "2.0.7"
+      },
+      "url": "https://registry.npmjs.org"
+    },
+    "io.extendreality.tilia.locomotors.movementamplifier.unity": {
+      "version": "2.0.7",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "io.extendreality.zinnia.unity": "2.6.0"
       },
       "url": "https://registry.npmjs.org"
     },
