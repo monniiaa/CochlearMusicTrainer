@@ -23,7 +23,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Group Folders/Daniel/Scenes/TestSuite/TestArea.unity
     guid: 9205ee81cb6a3894197087c13ac742fc
+  - enabled: 0
+    path: Assets/Group Folders/Sofie/Scenes/ConceptScene.unity
+    guid: 09bf7c397dfd8894598ece8977427267
+  - enabled: 1
+    path: Assets/Group Folders/Peter/PeterDrumFreePlay.unity
+    guid: 455063f1815344815a245aeaecc54a98
   m_configObjects:
-    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 597b89b649d512843aa161a2a00b82c1, type: 2}
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 41a7fb176e5481345b99e2fa1059f5a5, type: 2}
-    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 9914f2acb8ed2c94d8060911518b59d5, type: 2}
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 597b89b649d512843aa161a2a00b82c1,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 41a7fb176e5481345b99e2fa1059f5a5,
+      type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 9914f2acb8ed2c94d8060911518b59d5,
+      type: 2}
