@@ -52,7 +52,22 @@ public class PitchIdentification : MonoBehaviour
     {
         if(difficulty == Difficulty.Easy)
         {
-            pitchDifference = 5;
+            Speaker[] speakers = GameObject.FindObjectsOfType<Speaker>();
+            Speaker highestSpeaker = null;
+            for (int i = 0; i < speakers.Length; i++)
+            {
+                speakers[i].pitch = (Random.Range(1, 5));
+                for(int j = i + 1; j< speakers.Length;)
+                {
+                     while(speakers[i].pitch  == speakers[j].pitch) { }
+                }
+                if (speakers[i].pitch > highestSpeaker.pitch)
+                {
+                    highestSpeaker = speakers[i];
+                }
+                
+            }
+
         } 
     }
 
