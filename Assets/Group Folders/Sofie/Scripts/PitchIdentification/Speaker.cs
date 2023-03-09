@@ -5,7 +5,7 @@ using UnityEngine;
 public class Speaker : MonoBehaviour
 {
     [SerializeField]
-    private AudioSource audioSource;
+    public AudioSource audioSource;
     [SerializeField]
     private AudioClip sound;
     public int pitch;

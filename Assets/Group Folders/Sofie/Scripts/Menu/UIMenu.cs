@@ -24,17 +24,14 @@ public class UIMenu : MonoBehaviour
     [SerializeField]
     private Image lockedStar;
 
-    private void Start()
-    {
-    }
+    [SerializeField]
+    private GameObject[] levels;
+
     public void ActivateLevel(int level)
     {
-        for (int i = 0; i < level; i++)
-        {
-            levelsText[i].text = level.ToString();
-            levelImages[i].sprite = activeLevelImage;
-        }
-            
+            levelsText[level - 1].text = level.ToString();
+            levelImages[level - 1].sprite = activeLevelImage;
+            levels[level - 1].tag = "UnlockedLevel";
     }
 
     private void LockLevels(int levels)

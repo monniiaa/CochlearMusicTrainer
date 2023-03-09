@@ -1,27 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PitchIdentification : MonoBehaviour
 {
-    public DataManager dataManager;
-    public UIMenu pitchModeMenu;
+
     private int maxLevel = 4;
-    private int currentLevel = 1;
-    private int currentScore = 0;
     private GameData data;
     private string path = "PitchIdentification";
 
     private Difficulty difficulty;
+    [SerializeField]
     private GameObject[] modes;
-    private int pitchDifference = 0;
+
+    private Speaker highestSpeaker;
+    private bool correctPick;
+
+    private int currentLevel;
+    private int currentScore = 0;
+
+    private int tries = 0;
+  
 
     private void Start()
     {
-        data = dataManager.CreateGameData(maxLevel, currentScore, currentLevel);
-        dataManager.SaveDataToJson(data, path);
-        pitchModeMenu.ActivateLevel(data.level);
-        pitchModeMenu.ShowLevelInfo(data.level, data.levelScore[data.level]);
+        data =  DataManager.ReadJson(path);
+        currentLevel = data.level;
+        SetMode();
+        SetPitchDifference();
     }
     
     private void SetMode()
@@ -50,25 +57,55 @@ public class PitchIdentification : MonoBehaviour
 
     private void SetPitchDifference()
     {
-        if(difficulty == Difficulty.Easy)
+        Speaker[] speakers = GameObject.FindObjectsOfType<Speaker>();
+        highestSpeaker = speakers[0];
+        for (int i = 0; i < speakers.Length; i++)
         {
-            Speaker[] speakers = GameObject.FindObjectsOfType<Speaker>();
-            Speaker highestSpeaker = null;
-            for (int i = 0; i < speakers.Length; i++)
+            speakers[i].pitch = (Random.Range(1, 5));
+            speakers[i].SetPitch();
+            for (int j = 0; j < speakers.Length;j++)
             {
-                speakers[i].pitch = (Random.Range(1, 5));
-                for(int j = i + 1; j< speakers.Length;)
+                if(j != i)
                 {
-                     while(speakers[i].pitch  == speakers[j].pitch) { }
+                    while (speakers[i].pitch == speakers[j].pitch)
+                    {
+                        speakers[i].pitch = (Random.Range(1, 5));
+                        speakers[i].SetPitch();
+                    }
                 }
-                if (speakers[i].pitch > highestSpeaker.pitch)
-                {
-                    highestSpeaker = speakers[i];
-                }
-                
             }
+            if (speakers[i].pitch > highestSpeaker.pitch)
+            {
+                highestSpeaker = speakers[i];
+            }
+        }
+    }
+    public void SpeakerPicked(Speaker speaker)
+    {
+        tries++;
+        if(speaker == highestSpeaker)
+        {
+            currentScore += 1;
+            data.levelScore[currentLevel-1] = currentScore;
+        }
+        switch (tries)
+        {
+            case 1:
+                //TODO: Cool speaker animation to look like new speakers pop up + indication of correct answer
+                SetPitchDifference();
+                break;
+            case 2:
+                //TODO:  Cool speaker animation to look like new speakers pop up + indication of correct answer
+                SetPitchDifference();
+                break;
+            case 3:
+                currentLevel++;
+                data.level = currentLevel;
+                DataManager.SaveDataToJson(data, path);
+                SceneManager.LoadScene("Menu");
+                break;
 
-        } 
+        }
     }
 
     enum Difficulty

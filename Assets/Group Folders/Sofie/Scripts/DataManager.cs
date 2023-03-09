@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class DataManager : MonoBehaviour
+public static class DataManager 
 {
-    public GameData CreateGameData(int numberOfLevels, int currentScore, int currentLevel)
+    public static GameData CreateGameData(int numberOfLevels, int currentScore, int currentLevel)
     {
         GameData data = new GameData();
         data.levelScore = new int[numberOfLevels];
@@ -14,7 +14,7 @@ public class DataManager : MonoBehaviour
         return data;
     }
 
-    public void SaveDataToJson(GameData data, string minigame)
+    public static void SaveDataToJson(GameData data, string minigame)
     {
         string json = JsonUtility.ToJson(data);
 
@@ -25,7 +25,7 @@ public class DataManager : MonoBehaviour
         writer.Close();
     }
 
-    public GameData ReadJson(string minigame)
+    public static GameData ReadJson(string minigame)
     {
         string filePath = Application.dataPath + "/MiniGameData/" + minigame +  "/ScoreData.json";
         StreamReader reader = new StreamReader(filePath);
