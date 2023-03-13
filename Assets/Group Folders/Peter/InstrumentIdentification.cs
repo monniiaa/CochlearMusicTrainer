@@ -43,12 +43,12 @@ public class InstrumentIdentification : MonoBehaviour
                 Debug.Log("Incorrect difficulty, Choose either: 0 = easy, 1 = medium, 2 = hard");
             break;
         }
-        Debug.Log(objectToFolderMap);
+        //Debug.Log(objectToFolderMap);
     }
 
     private void ChooseSound(int difficulty)
     {
-        Debug.Log(objectsToChooseFrom.Length - difficulty + " test");
+        //Debug.Log(objectsToChooseFrom.Length - difficulty + " test");
         // Choose a random object from the list
         int randomIndex = Random.Range(0, objectsToChooseFrom.Length - difficulty);
         GameObject chosenObject = objectsToChooseFrom[randomIndex];
@@ -87,17 +87,22 @@ public class InstrumentIdentification : MonoBehaviour
         {
             Debug.LogError("No folder name found for game object: " + chosenObject.name);
         }
-        Debug.Log(randomIndex + "rand");
-        Debug.Log(objectsToChooseFrom.Length + "length");
+        //Debug.Log(randomIndex + "rand");
+        //Debug.Log(objectsToChooseFrom.Length + "length");
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && difficulty == 2)
         {
-            Debug.Log(difficultyAdjust + "diffadj");
-            ChooseSound(difficultyAdjust);
-            audioSource.Play();
+            //Debug.Log(difficultyAdjust + "diffadj");
+            //The additional difficulty check, the for loop and the else if
+            //can be deleted if it's not supposed play multiple instruments
+            for (int i = 0; i < 2; i++)
+            {
+                ChooseSound(difficultyAdjust);
+                audioSource.Play();
+            }
            /* if (audioSource != null && audioSource.clip != null)
             {
                 audioSource.Play();
@@ -106,6 +111,11 @@ public class InstrumentIdentification : MonoBehaviour
             {
                 Debug.LogWarning("No audio clip specified in Script");
             }*/
+        }
+        else if (Input.GetKeyDown(KeyCode.Space) && difficulty >= 1)
+        {
+            ChooseSound(difficultyAdjust);
+            audioSource.Play();
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
