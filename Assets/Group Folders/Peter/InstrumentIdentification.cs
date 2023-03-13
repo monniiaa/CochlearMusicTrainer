@@ -10,23 +10,37 @@ public class InstrumentIdentification : MonoBehaviour
     {"DrumKit", "DrumTrack"},
     {"KeyboardStand", "PianoTrack"},
     {"AcousticGuitar (7)", "GuitarTrack" },
+    {"Bass", "BassTrack" },
+    {"ElectricGuitar", "ElectricGuitarTrack"},
     // Add more entries as needed
 };
-    [SerializeField] private bool mediumDifficulty;
+    [SerializeField] private GameObject easy, medium, hard;
+    [SerializeField] private int difficulty;
     private int difficultyAdjust;
 
     private AudioSource audioSource;
 
     private void Awake()
     {
-        switch (mediumDifficulty)
+        switch (difficulty)
         {
-            case (true):
+            case (2):
                 difficultyAdjust = 0;
+
             break;
 
-            default:
+            case (1):
                 difficultyAdjust = 1;
+                hard.SetActive(false);
+                break;
+            case (0):
+                difficultyAdjust = 3;
+                hard.SetActive(false);
+                medium.SetActive(false);
+                break;
+
+            default:
+                Debug.Log("Incorrect difficulty, Choose either: 0 = easy, 1 = medium, 2 = hard");
             break;
         }
         Debug.Log(objectToFolderMap);
@@ -93,5 +107,15 @@ public class InstrumentIdentification : MonoBehaviour
                 Debug.LogWarning("No audio clip specified in Script");
             }*/
         }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            StopMusic();
+        }
+    }
+
+    private void StopMusic()
+    {
+        //Incorporate picking method here, so we can stop the current music and get ready for new or switch level?
+        audioSource.Stop();
     }
 }
