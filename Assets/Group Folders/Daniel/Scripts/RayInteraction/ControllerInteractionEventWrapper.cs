@@ -15,8 +15,8 @@ public class ControllerInteractionEventWrapper : MonoBehaviour
 
     public UnityEvent<float> gripPressed;
     public UnityEvent joystickReleased;
-    public UnityEvent joystickNorthPressed;
-    public UnityEvent joystickSouthPressed;
+    public UnityEvent<Vector2> joystickNorthPressed;
+    public UnityEvent<Vector2> joystickSouthPressed;
 
     private void Awake()
     {
@@ -28,8 +28,8 @@ public class ControllerInteractionEventWrapper : MonoBehaviour
         _actionBasedController.activateAction.action.performed += _ => triggerPressed.Invoke();
         _actionBasedController.activateAction.action.canceled += _ => triggerReleased.Invoke();
         _actionBasedController.selectActionValue.action.performed += context => gripPressed.Invoke(context.ReadValue<float>());
-        _actionBasedController.translateAnchorAction.action.performed += _ => joystickNorthPressed.Invoke();
-        _actionBasedController.rotateAnchorAction.action.performed += _ => joystickSouthPressed.Invoke();
+        _actionBasedController.translateAnchorAction.action.performed += context => joystickNorthPressed.Invoke(context.ReadValue<Vector2>());
+        _actionBasedController.rotateAnchorAction.action.performed += context => joystickSouthPressed.Invoke(context.ReadValue<Vector2>());
         
         // Joystick Released
         _actionBasedController.translateAnchorAction.action.canceled += _ => joystickReleased.Invoke();

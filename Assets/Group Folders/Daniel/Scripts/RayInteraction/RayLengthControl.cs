@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using QFSW.QC;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.XR.Interaction.Toolkit;
 
 
@@ -10,32 +12,42 @@ public class RayLengthControl : MonoBehaviour
 {
     private XRRayInteractor _xrRayInteractor;
 
-    [SerializeField] private float duration;
-    private float time = 0;
-    private const float MaxLength = 50;
-    private const float MinLength = 1;
-    private float currentLength;
-    public bool isChangingLength;
-    public int joystickDirection;
-    void Start()
+    [SerializeField] private float speed;
+    [SerializeField] private float maxLength = 50;
+    [SerializeField] private float minLength = 1;
+    private float _currentLength;
+    
+    public bool isChangingLength { set; get; }
+    public int joystickDirection { set; get; } // 1 means forward, -1 means backwards
+    void Awake()
     {
         _xrRayInteractor = GetComponent<XRRayInteractor>();
+        _currentLength = _xrRayInteractor.maxRaycastDistance;
+        _currentLength = Mathf.Clamp(_xrRayInteractor.maxRaycastDistance, minLength, maxLength);
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        if (!isChangingLength)
+        if (!isChangingLength) return;
+
+        _currentLength = _xrRayInteractor.maxRaycastDistance;
+        
+        if (_currentLength > maxLength || _currentLength < minLength)
         {
-            time = 0;
+            _xrRayInteractor.maxRaycastDistance = Mathf.Clamp(_xrRayInteractor.maxRaycastDistance, minLength, maxLength);
             return;
         }
-        currentLength = _xrRayInteractor.maxRaycastDistance;
-        if (currentLength is > MaxLength or < MinLength)
+
+        _xrRayInteractor.maxRaycastDistance += joystickDirection * speed * Time.deltaTime;
+    }
+
+    public void ChangeDirectionFromJoystick(Vector2 direction)
+    {
+        if (direction == Vector2.zero)
         {
-            _xrRayInteractor.maxRaycastDistance = Mathf.Clamp(_xrRayInteractor.maxRaycastDistance, MinLength, MaxLength);
+            joystickDirection = 0;
             return;
         }
-        _xrRayInteractor.maxRaycastDistance += joystickDirection * duration * Time.deltaTime;
+        joystickDirection = (direction.x > 0) ? (int) direction.x : (int) direction.y;
     }
 }
