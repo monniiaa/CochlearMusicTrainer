@@ -4,25 +4,17 @@ using UnityEngine;
 
 public class Speaker : MonoBehaviour
 {
-    [SerializeField]
-    public AudioSource audioSource;
-    [SerializeField]
-    private AudioClip sound;
-    public int pitch;
- 
+    public Animator animator;
 
-    public  void SetPitch()
+    private void Start()
     {
-        audioSource.pitch = pitch;
+        animator = GetComponent<Animator>();
+        SetPickedState(false);
     }
 
-    public void PlaySound()
-    {
-        audioSource.PlayOneShot(sound);
-    }
 
-    public void StopSound()
+    public void SetPickedState(bool state)
     {
-        audioSource.Stop();
+        animator.SetBool("Picked", state);
     }
 }
