@@ -1,35 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject menuPanel;
-    public Text scoreText;
-    public Button playButton;
-    public Button quitButton;
-
-    void Start()
+    public GameObject menu;
+   
+    public static bool GameIsPaused = false;
+    
+    void Update()
     {
-        menuPanel = GameObject.Find("MenuPanel");
-        scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
-        playButton = GameObject.Find("PlayButton").GetComponent<Button>();
-        quitButton = GameObject.Find("QuitButton").GetComponent<Button>();
+
     }
 
-    public void SetScoreText(int score)
+    void Resume()
     {
-        scoreText.text = "Score: " + score.ToString();
+        menu.SetActive(false);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
     }
 
-    public void SetPlayButtonActive(bool isActive)
+    void Pause()
     {
-        playButton.gameObject.SetActive(isActive);
+        menu.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
+    }
+    
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void SetQuitButtonActive(bool isActive)
+    public void LoadMainMenu()
     {
-        quitButton.gameObject.SetActive(isActive);
+        SceneManager.LoadScene("HovedmenuTEST");
+        Debug.Log("Loadede Hovedmenu");
     }
 }
