@@ -14,7 +14,7 @@ public class PitchIdentification : MonoBehaviour
     [SerializeField]
     private GameObject[] modes;
 
-    private Speaker highestSpeaker;
+    private ToneGenerator highestSpeaker;
     private bool correctPick;
 
     private int currentLevel;
@@ -28,7 +28,6 @@ public class PitchIdentification : MonoBehaviour
         data =  DataManager.ReadJson(path);
         currentLevel = data.level;
         SetMode();
-        SetPitchDifference();
     }
     
     private void SetMode()
@@ -55,32 +54,37 @@ public class PitchIdentification : MonoBehaviour
         }
     }
 
-    private void SetPitchDifference()
+    public void SetPitchDifference(ToneGenerator[] speakers)
     {
-        Speaker[] speakers = GameObject.FindObjectsOfType<Speaker>();
+
         highestSpeaker = speakers[0];
         for (int i = 0; i < speakers.Length; i++)
         {
-            speakers[i].pitch = (Random.Range(1, 5));
-            speakers[i].SetPitch();
+            int randFrequency = Random.Range(20,900);
+            speakers[i].frequency1 = randFrequency;
+            speakers[i].frequency2 = randFrequency;
             for (int j = 0; j < speakers.Length;j++)
             {
-                if(j != i)
+                if (j != i)
                 {
-                    while (speakers[i].pitch == speakers[j].pitch)
+                    int interval = 200;
+                    while ( speakers[i].frequency1 + (interval/2) > speakers[j].frequency1 &&
+                        speakers[i].frequency1 -(interval/2) < speakers[j].frequency1 )
                     {
-                        speakers[i].pitch = (Random.Range(1, 5));
-                        speakers[i].SetPitch();
+                        int rand= Random.Range(20, 900);
+                        speakers[i].frequency1 = rand;
+                        speakers[i].frequency2 = rand;
+                        Debug.Log("xd");
                     }
                 }
             }
-            if (speakers[i].pitch > highestSpeaker.pitch)
+            if (speakers[i].frequency1 > highestSpeaker.frequency1)
             {
                 highestSpeaker = speakers[i];
             }
         }
     }
-    public void SpeakerPicked(Speaker speaker)
+    public void SpeakerPicked(ToneGenerator speaker, ToneGenerator[] speakers)
     {
         tries++;
         if(speaker == highestSpeaker)
@@ -92,11 +96,11 @@ public class PitchIdentification : MonoBehaviour
         {
             case 1:
                 //TODO: Cool speaker animation to look like new speakers pop up + indication of correct answer
-                SetPitchDifference();
+                SetPitchDifference(speakers);
                 break;
             case 2:
                 //TODO:  Cool speaker animation to look like new speakers pop up + indication of correct answer
-                SetPitchDifference();
+                SetPitchDifference(speakers);
                 break;
             case 3:
                 currentLevel++;
@@ -104,7 +108,6 @@ public class PitchIdentification : MonoBehaviour
                 DataManager.SaveDataToJson(data, path);
                 SceneManager.LoadScene("Menu");
                 break;
-
         }
     }
 

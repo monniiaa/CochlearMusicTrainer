@@ -5,21 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class RayCastManager : MonoBehaviour
 {
-    private Camera camera;
+    public Camera camera;
     public PitchIdentification pitchIdentification;
     RaycastHit hit;
     RaycastHit PreviousHit;
 
+    private ToneGenerator[] tones;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        camera = Camera.main;
+        tones = GameObject.FindObjectsOfType<ToneGenerator>();
+        pitchIdentification.SetPitchDifference(tones);
     }
 
     // Update is called once per frame
     void Update()
     {
         DetectObjectWithRaycast();
+       
     }
 
     public void DetectObjectWithRaycast()
@@ -29,26 +34,40 @@ public class RayCastManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-           
-            if (hit.collider.gameObject.tag == "Speaker" && PreviousHit.collider.gameObject != hit.collider.gameObject)
+         //  && PreviousHit.collider.gameObject != hit.collider.gameObject
+            if (hit.collider.gameObject.tag == "Speaker" )
             {
-                Debug.Log("HIT");
-                Speaker speaker = hit.collider.gameObject.GetComponent<Speaker>();
-                if (speaker.audioSource.isPlaying == false)
-                {
-                    speaker.PlaySound();
-                }
-                
-            }
-            if (hit.collider.gameObject.tag == "Speaker")
-            {
-                Speaker speaker = hit.collider.gameObject.GetComponent<Speaker>();
                 if (Input.GetMouseButtonDown(0))
                 {
-                    pitchIdentification.SpeakerPicked(speaker);
+                   
+                    Debug.Log("HIT");
+                    ToneGenerator tone = hit.collider.gameObject.GetComponent<ToneGenerator>();
+                    if (tone.playing == false)
+                    {
+                        foreach (ToneGenerator t in tones)
+                        {
+                            t.StopAudio();
+                           t.gameObject.GetComponent<Speaker>().SetPickedState(false);
+
+
+
+                        }
+                        tone.PlayAudio();
+                        hit.collider.gameObject.GetComponent<Speaker>().SetPickedState(true);
+
+
+                    }
+                    else if (tone.playing == true)
+                    {
+                        tone.StopAudio();
+                        hit.collider.gameObject.GetComponent<Speaker>().SetPickedState(false);
+                    }
                 }
             }
+
+            }
             
-        }
+            
+        
     }
 }
