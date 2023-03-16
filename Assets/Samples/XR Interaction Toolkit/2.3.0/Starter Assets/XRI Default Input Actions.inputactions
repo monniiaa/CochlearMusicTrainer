@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "MenuZXCX",
+                    "type": "Button",
+                    "id": "fc4eb5c2-b84f-4800-90db-95bef2c8ac28",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -243,6 +252,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Is Tracked",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7484a462-7e9b-4d5c-978c-4534daa23dfe",
+                    "path": "<OculusTouchController>{RightHand}/thumbstickTouched",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuZXCX",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
