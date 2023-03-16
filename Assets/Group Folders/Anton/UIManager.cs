@@ -18,13 +18,12 @@ public class UIManager : MonoBehaviour
     {
         if (showMenuButton.action.WasPressedThisFrame())
         {
-            Pause();
+            ActivateDeactivateMenu();
             Debug.Log("Menu Pressed!");
 
             if (menu.activeSelf)
             {
                 menu.transform.position = head.position + new Vector3(head.forward.x, 0, head.forward.z).normalized * spawnDistance;
-                
             }
         }
 
@@ -35,18 +34,25 @@ public class UIManager : MonoBehaviour
 
     public static bool GameIsPaused = false;
     
-   
-    void Resume()
+    public void ActivateDeactivateMenu()
     {
-        menu.SetActive(menu.activeSelf);
+        menu.SetActive(!menu.activeSelf);
+        if(GameIsPaused)
+        {
+            ResumeTime();
+        }
+        else
+        {
+            PauseTime();
+        }
+    }
+   
+    void ResumeTime(){
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
 
-    void Pause()
-    {
-        menu.SetActive(!menu.activeSelf);
-        
+    void PauseTime(){ 
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
@@ -54,7 +60,11 @@ public class UIManager : MonoBehaviour
     public void RestartScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        ResumeTime();
     }
+    // void Start() {
+    //     ResumeTime();
+    // }
 
     public void LoadMainMenu()
     {
