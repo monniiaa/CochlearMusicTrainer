@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InstrumentIdentification : MonoBehaviour
 {
+    //Music objects
     public GameObject[] objectsToChooseFrom;
     public Dictionary<string, string> objectToFolderMap = new Dictionary<string, string>()
 {
@@ -15,10 +16,17 @@ public class InstrumentIdentification : MonoBehaviour
     // Add more entries as needed
 };
     [SerializeField] private GameObject easy, medium, hard;
+    private AudioSource audioSource;
+    private AudioSource[] allAudioSources;
+
+    //Difficulty and round variables
     [SerializeField] private int difficulty;
+    private bool round1 = false, round2 = false, round3 = false;
     private int difficultyAdjust;
 
-    private AudioSource audioSource;
+    //Scoring variables
+    private float time;
+    public float points;
 
     private void Awake()
     {
@@ -26,9 +34,7 @@ public class InstrumentIdentification : MonoBehaviour
         {
             case (2):
                 difficultyAdjust = 0;
-
-            break;
-
+                break;
             case (1):
                 difficultyAdjust = 1;
                 hard.SetActive(false);
@@ -38,17 +44,15 @@ public class InstrumentIdentification : MonoBehaviour
                 hard.SetActive(false);
                 medium.SetActive(false);
                 break;
-
             default:
                 Debug.Log("Incorrect difficulty, Choose either: 0 = easy, 1 = medium, 2 = hard");
             break;
         }
-        //Debug.Log(objectToFolderMap);
+        Round();
     }
 
     private void ChooseSound(int difficulty)
     {
-        //Debug.Log(objectsToChooseFrom.Length - difficulty + " test");
         // Choose a random object from the list
         int randomIndex = Random.Range(0, objectsToChooseFrom.Length - difficulty);
         GameObject chosenObject = objectsToChooseFrom[randomIndex];
@@ -73,26 +77,43 @@ public class InstrumentIdentification : MonoBehaviour
                 {
                     audioSource.clip = clipInFolderToPlay;
                 }
-                else
-                {
-                    Debug.LogError("AudioSource component not found on game object: " + chosenObject.name);
-                }
-            }
-            else
-            {
-                Debug.LogWarning("No audio clips found in folder: " + folderName);
             }
         }
-        else
-        {
-            Debug.LogError("No folder name found for game object: " + chosenObject.name);
-        }
-        //Debug.Log(randomIndex + "rand");
-        //Debug.Log(objectsToChooseFrom.Length + "length");
     }
 
     private void Update()
     {
+        time += Time.deltaTime;
+        //Picking the objects needs to be integrated here
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            StopMusic();
+            if (round1 == false)
+            {
+                round1 = true;
+                Round();
+                Debug.Log("round 1 complete");
+            }
+            else if (round2 == false)
+            {
+                round2 = true;
+                Round();
+                Debug.Log("round 2 complete");
+            }
+            else if (round3 == false)
+            {
+                round3 = true;
+                Debug.Log("round 3 complete");
+            }
+            else if (round3 == true)
+            {               
+                Debug.Log("training over");
+            }
+        }
+    }
+
+    private void Round()
+    {/*
         if (Input.GetKeyDown(KeyCode.Space) && difficulty == 2)
         {
             //Debug.Log(difficultyAdjust + "diffadj");
@@ -103,29 +124,33 @@ public class InstrumentIdentification : MonoBehaviour
                 ChooseSound(difficultyAdjust);
                 audioSource.Play();
             }
-           /* if (audioSource != null && audioSource.clip != null)
-            {
-                audioSource.Play();
-            }
-            else
-            {
-                Debug.LogWarning("No audio clip specified in Script");
-            }*/
         }
         else if (Input.GetKeyDown(KeyCode.Space) && difficulty >= 1)
         {
             ChooseSound(difficultyAdjust);
             audioSource.Play();
-        }
-        if (Input.GetKeyDown(KeyCode.A))
+        }*/
+        if (difficulty == 2)
         {
-            StopMusic();
+            for (int i = 0; i < 2; i++)
+            {
+                ChooseSound(difficultyAdjust);
+                audioSource.Play();
+            }
+        }
+        else if (difficulty <= 1)
+        {
+            ChooseSound(difficultyAdjust);
+            audioSource.Play();
         }
     }
 
     private void StopMusic()
     {
-        //Incorporate picking method here, so we can stop the current music and get ready for new or switch level?
-        audioSource.Stop();
+        allAudioSources = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
+        foreach (AudioSource audioS in allAudioSources)
+        {
+            audioS.Stop();
+        }
     }
 }
