@@ -10,6 +10,9 @@ TagManager:
   - UnlockedLevel
   - Left Hand
   - Right Hand
+  - Interactable
+  - Surface
+  - Whiteboard
   layers:
   - Default
   - TransparentFX
@@ -19,7 +22,7 @@ TagManager:
   - UI
   - Player
   - Interactable
-  - 
+  - CENTERPOINT
   - 
   - 
   - 
