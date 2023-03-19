@@ -178,9 +178,10 @@ GameObject:
   - component: {fileID: 9029642370053576074}
   - component: {fileID: 6533399990642729280}
   - component: {fileID: 803316334724055676}
+  - component: {fileID: 4988504713018923337}
   m_Layer: 0
   m_Name: RANDOM SPEAKER LOCATION
-  m_TagString: Untagged
+  m_TagString: InteractablePrefabTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -349,6 +350,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &4988504713018923337
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4732070297377915029}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf1716f0db36c5b4cb0fdb4f38c87b89, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5706347317043214616
 GameObject:
   m_ObjectHideFlags: 0
