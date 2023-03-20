@@ -11159,7 +11159,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980064079}
   m_LocalRotation: {x: -0, y: 0.71249175, z: -0, w: 0.7016805}
-  m_LocalPosition: {x: 27.291, y: -0.006, z: -13.227}
+  m_LocalPosition: {x: 25.37, y: -0.006, z: -12.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15902,7 +15902,9 @@ MonoBehaviour:
   easy: {fileID: 1592691657}
   medium: {fileID: 1046554711}
   hard: {fileID: 1008810529}
-  difficulty: 1
+  difficulty: 0
+  points: 0
+  camera: {fileID: 980064081}
 --- !u!4 &1390472903
 Transform:
   m_ObjectHideFlags: 0
@@ -23349,6 +23351,7 @@ GameObject:
   - component: {fileID: 4357816455184721803}
   - component: {fileID: 1990280645623141185}
   - component: {fileID: 4357816455184721804}
+  - component: {fileID: 4357816455184721805}
   m_Layer: 0
   m_Name: KeyboardStand
   m_TagString: Untagged
@@ -35097,6 +35100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4197759442373690865}
   - component: {fileID: 4197759442373690866}
+  - component: {fileID: 4197759442373690867}
   m_Layer: 0
   m_Name: DrumKit
   m_TagString: Untagged
@@ -35227,6 +35231,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &4197759442373690867
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4197759442373690864}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.11
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &4199348348624699066
 Transform:
   m_ObjectHideFlags: 0
@@ -36139,6 +36156,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &4357816455184721805
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44501375708328596}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.79
+  m_Center: {x: -0.0017354636, y: 0.45501736, z: 0.0000019073171}
 --- !u!224 &4364897177098885966
 RectTransform:
   m_ObjectHideFlags: 0

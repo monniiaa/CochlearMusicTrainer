@@ -27,6 +27,12 @@ public class InstrumentIdentification : MonoBehaviour
     //Scoring variables
     private float time;
     public float points;
+    private bool isCorrect = false;
+    private GameObject currentInstrument;
+
+    RaycastHit hit;
+    RaycastHit previousHit;
+    public Camera camera;
 
     private void Awake()
     {
@@ -56,6 +62,8 @@ public class InstrumentIdentification : MonoBehaviour
         // Choose a random object from the list
         int randomIndex = Random.Range(0, objectsToChooseFrom.Length - difficulty);
         GameObject chosenObject = objectsToChooseFrom[randomIndex];
+        currentInstrument = chosenObject;
+        currentInstrument.tag = "playing";
 
         // Get the folder name specific to the chosen game object
         string folderName;
@@ -84,6 +92,9 @@ public class InstrumentIdentification : MonoBehaviour
     private void Update()
     {
         time += Time.deltaTime;
+        SelectInstrument();
+        //Debug.DrawRay(ray.origin, ray.direction * 10);
+
         //Picking the objects needs to be integrated here
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -91,7 +102,14 @@ public class InstrumentIdentification : MonoBehaviour
             if (round1 == false)
             {
                 round1 = true;
+                if (isCorrect)
+                {
+                    points += 50;
+                    Debug.Log("test");
+                }
                 Round();
+                Debug.Log(points + "points");
+                isCorrect = false;
                 Debug.Log("round 1 complete");
             }
             else if (round2 == false)
@@ -124,11 +142,6 @@ public class InstrumentIdentification : MonoBehaviour
                 ChooseSound(difficultyAdjust);
                 audioSource.Play();
             }
-        }
-        else if (Input.GetKeyDown(KeyCode.Space) && difficulty >= 1)
-        {
-            ChooseSound(difficultyAdjust);
-            audioSource.Play();
         }*/
         if (difficulty == 2)
         {
@@ -145,12 +158,33 @@ public class InstrumentIdentification : MonoBehaviour
         }
     }
 
+    private void SelectInstrument()
+    {
+        previousHit = hit;
+        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast (ray, out hit))
+        {
+            if (hit.collider.gameObject.tag == "playing")
+            {
+                if (Input.GetMouseButton(0))
+                {
+                    isCorrect = true;
+                }
+            }
+            else
+            {
+                points -= 15;
+            }
+        }
+    }
+
     private void StopMusic()
     {
         allAudioSources = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
         foreach (AudioSource audioS in allAudioSources)
         {
             audioS.Stop();
+            currentInstrument.tag = "default";
         }
     }
 }
