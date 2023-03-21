@@ -68,12 +68,22 @@ public class UIManager : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene("HovedmenuTEST");
+        SceneManager.LoadScene("Vælg Bane");
         Debug.Log("Loadede Hovedmenu");
     }
 
     public void LoadPitchTrainingScene()
     {
         Debug.Log("Loaded Pitch training");
+    }
+    public void LoadUIScene()
+    {
+        SceneManager.LoadScene("UI");
+        Debug.Log("Loaded UI");
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("QUIT Game!");
     }
 }
