@@ -71,4 +71,9 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene("HovedmenuTEST");
         Debug.Log("Loadede Hovedmenu");
     }
+
+    public void LoadPitchTrainingScene()
+    {
+        Debug.Log("Loaded Pitch training");
+    }
 }
