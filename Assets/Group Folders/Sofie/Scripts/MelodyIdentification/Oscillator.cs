@@ -9,10 +9,12 @@ public class Oscillator : MonoBehaviour
     private double phase;
     private double sampling_frequency = 48000.0;
 
-    public float gain = 0;
-    public float volume = 0.1f;
-    public float[] frequencies;
-    public int thisFreq;
+    private float gain = 0;
+    private float volume = 0.05f;
+    private float[] frequencies;
+    private int thisFreq;
+    public int startFreq { get; private set; }
+
 
     private void Start()
     {
@@ -27,26 +29,26 @@ public class Oscillator : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SetNotePlaying(true);
-            CreateStartNote();
-            StartCoroutine(PlaySequence(4, 7));
-        } 
-        
-    }
 
     public void CreateStartNote()
     {
-        int thisFreq = Random.Range(0, 7);
+        startFreq = Random.Range(0, frequencies.Length);
         
     }
 
-
-    IEnumerator PlaySequence(int interval, int length)
+    public void CreateStartNote(int i)
     {
+        startFreq = i;
+    }
+    public void PlayMelody()
+    {
+        StartCoroutine(PlaySequence(2, 4, 0.4f));
+    }
+
+
+    IEnumerator PlaySequence(int interval, int length, float noteTime)
+    {
+        thisFreq = startFreq;
         int i = 0;
         do
         {
@@ -54,7 +56,7 @@ public class Oscillator : MonoBehaviour
             thisFreq += interval;
             thisFreq = thisFreq % frequencies.Length;
             i++;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(noteTime);
 
         } while (i < length);
 
