@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using UnityEngine;
 using System.Linq;
@@ -32,11 +33,24 @@ public class CSVManager : MonoBehaviour
         stream.Close();
     }
 
+    private void Start()
+    {
+        SaveScore(10);
+    }
+
     public void SaveScore(float score)
     {
+        /*
         if (File.ReadLines(_csvFiles.Path).FirstOrDefault() == string.Empty)
         {
-            CSVHelper.InsertColumnNames(_csvFiles.Path, "score");
+            CSVHelper.InsertColumnNames(_csvFiles.Path, "Date", "Score", "NewThing");
+        }
+        */
+        using (StreamWriter sw = File.AppendText(_csvFiles.Path))
+        {
+            sw.WriteLine("Hello");
+            sw.WriteLine("And");
+            sw.WriteLine("Welcome");
         }
     }
     
