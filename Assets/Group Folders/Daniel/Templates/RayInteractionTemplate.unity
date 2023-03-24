@@ -406,6 +406,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractableSphere
       objectReference: {fileID: 0}
+    - target: {fileID: 1774893619744407495, guid: a648578362d7c354cb64f82a0d2e238e, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1774893619744407495, guid: a648578362d7c354cb64f82a0d2e238e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c115fa2e09362946be7b4ce0e8e3dc7, type: 2}
+    - target: {fileID: 1774893619744407495, guid: a648578362d7c354cb64f82a0d2e238e, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 106f3ff43a17d4967a2b64c7a92e49ec, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a648578362d7c354cb64f82a0d2e238e, type: 3}
 --- !u!1001 &3221912668628666161
