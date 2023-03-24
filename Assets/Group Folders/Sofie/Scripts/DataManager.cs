@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public static class DataManager 
+public static class DataManager
 {
     public static GameData CreateGameData(int numberOfLevels, int currentScore, int currentLevel)
     {
         GameData data = new GameData();
         data.levelScore = new int[numberOfLevels];
-        data.levelScore[currentLevel -1] = currentScore;
+        data.levelScore[currentLevel - 1] = currentScore;
         data.level = currentLevel;
         return data;
     }
@@ -23,15 +23,25 @@ public static class DataManager
 
         writer.Write(json);
         writer.Close();
+
     }
 
     public static GameData ReadJson(string minigame)
     {
-        string filePath = Application.dataPath + "/MiniGameData/" + minigame +  "/ScoreData.json";
+        string filePath = Application.dataPath + "/MiniGameData/" + minigame + "/ScoreData.json";
         StreamReader reader = new StreamReader(filePath);
         string json = reader.ReadToEnd();
         reader.Close();
-        GameData data = JsonUtility.FromJson<GameData>(json);
-        return data;
+        string jsonData = File.ReadAllText(filePath);
+        if (jsonData != string.Empty)
+        {
+            Debug.Log(jsonData);
+            GameData data = JsonUtility.FromJson<GameData>(json);
+            return data;
+        }
+        GameData newData = CreateGameData(10, 0, 1);
+        SaveDataToJson(newData, minigame);
+        return newData;
     }
 }
+

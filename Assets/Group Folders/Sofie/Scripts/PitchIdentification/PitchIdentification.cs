@@ -29,24 +29,32 @@ public class PitchIdentification : MonoBehaviour
     public AudioClip sucessAudio;
     public AudioClip failAudio;
     [SerializeField]
+    Material sucessMaterial;
+    [SerializeField]
+    Material failMaterial;
+    [SerializeField]
     Canvas endOfRoundCanvas;
+    Speaker[] speakers;
 
-  
+
+
 
     private void Start()
     {
         gameplayAudio = GetComponent<AudioSource>();
         data =  DataManager.ReadJson(path);
+
         currentLevel = data.level;
         SetMode();
-        Speaker[] speakers = GameObject.FindObjectsOfType<Speaker>();
-        Debug.Log(speakers.Length);
+        speakers = GameObject.FindObjectsOfType<Speaker>();
         initialPositions = new Vector3[speakers.Length];
         endOfRoundCanvas.gameObject.SetActive(false);
         for( int i = 0; i < speakers.Length;i++)
         {
             initialPositions[i] = speakers[i].transform.position;
         }
+        StartRound();
+
     }
     
     private void SetMode()
@@ -73,7 +81,7 @@ public class PitchIdentification : MonoBehaviour
         }
     }
 
-    public void SetPitchDifference(Speaker[] speakers, int minfrequency, int maxfrequency, int intervalFrequency)
+    public void SetPitchDifference(int minfrequency, int maxfrequency, int intervalFrequency)
     {
         highestSpeaker = speakers[0];
         for (int i = 0; i < speakers.Length; i++)
@@ -100,30 +108,33 @@ public class PitchIdentification : MonoBehaviour
             }
         }
     }
-    public void SpeakerPicked(Speaker speaker, Speaker[] speakers)
+    public void SpeakerPicked(Speaker speaker)
     {
         tries++;
         Debug.Log(tries);
-        if (speaker == highestSpeaker) { 
-
+        if (speaker== highestSpeaker) {
             gameplayAudio.PlayOneShot(sucessAudio);
+            speaker.GetComponent<MeshRenderer>().material = sucessMaterial;
             currentScore += 1;
             data.levelScore[currentLevel-1] = currentScore;
-        } else if (speaker != highestSpeaker)
+
+        } else if (speaker!= highestSpeaker)
         {
             gameplayAudio.PlayOneShot(failAudio);
+            speaker.GetComponent<MeshRenderer>().material = failMaterial;
         }
         switch (tries)
         {
             case 1:
-                StartRound(speakers);
+                StartRound();
                 break;
             case 2:
 
-                StartRound(speakers);
+                StartRound();
                 break;
             case 3:
-                foreach(Speaker s in speakers)
+                StartRound();
+                foreach (Speaker s in speakers)
                 {
                     s.DestroySpeaker();
                 }
@@ -132,19 +143,22 @@ public class PitchIdentification : MonoBehaviour
                 DataManager.SaveDataToJson(data, path);
                 endOfRoundCanvas.gameObject.SetActive(true);
                 break;
+              
         }
     }
 
-    public void EndRound(Speaker speaker,Speaker[] speakers)
+
+
+    public void EndRound(Speaker speaker)
     {
-        SpeakerPicked(speaker, speakers);
+        SpeakerPicked(speaker);
         foreach (Speaker s in speakers)
         {
             s.DestroyAnimation();
         }
     }
 
-    public void StartRound(Speaker[] speakers)
+    public void StartRound()
     {
         foreach(Speaker speaker in speakers)
         {
@@ -153,14 +167,13 @@ public class PitchIdentification : MonoBehaviour
         switch (difficulty)
         {
             case Difficulty.Easy:
-
-                SetPitchDifference(speakers, 700, 2000, 1000 - data.level * 20);
+                SetPitchDifference( 700, 4000, 2000 - data.level * 20);
                 break;
             case Difficulty.Medium:
-                SetPitchDifference(speakers, 300, 1500, 1000 - data.level * 20);
+                SetPitchDifference( 300, 1500, 1000 - data.level * 20);
                 break;
             case Difficulty.Hard:
-                SetPitchDifference(speakers, 100, 900, 400 - data.level * 20);
+                SetPitchDifference( 100, 900, 400 - data.level * 20);
                 break;
             default:
                 break;
