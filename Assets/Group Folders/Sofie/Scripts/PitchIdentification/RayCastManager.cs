@@ -21,7 +21,7 @@ public class RayCastManager : MonoBehaviour
     void Start()
     {
         speakers = GameObject.FindObjectsOfType<Speaker>();
-        pitchIdentification.StartRound(speakers);
+      //  pitchIdentification.StartRound(speakers);
     }
 
     // Update is called once per frame
@@ -29,7 +29,7 @@ public class RayCastManager : MonoBehaviour
     {
         DetectObjectWithRaycast();
        if(Input.GetKeyDown(KeyCode.Space)) {
-            pitchIdentification.EndRound(pickedSpeaker, speakers);
+           // pitchIdentification.EndRound(pickedSpeaker, speakers);
             pickedSpeaker.StopAudio();
             pickedSpeaker = null;
         }

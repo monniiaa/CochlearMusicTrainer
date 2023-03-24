@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIMenu : MonoBehaviour
 {
@@ -26,21 +27,54 @@ public class UIMenu : MonoBehaviour
 
     [SerializeField]
     private GameObject[] levels;
+    [SerializeField]
+    private Image[] levelDots;
+    [SerializeField]
+    private Sprite unlockedDot;
+    [SerializeField]
+    private Sprite lockedDot;
+    [SerializeField]
+    private Sprite gradientDot;
 
-    public void ActivateLevel(int level)
+    public void ActivateLevels(int level)
     {
-            levelsText[level - 1].text = level.ToString();
-            levelImages[level - 1].sprite = activeLevelImage;
-            levels[level - 1].tag = "UnlockedLevel";
+        for (int i = 0; i < level; i++)
+        {
+            levelsText[i].text = (i+1).ToString();
+            levelImages[i].sprite = activeLevelImage;
+            levels[i].tag = "UnlockedLevel";
+        }
+        ActivateDots(level);
     }
 
-    private void LockLevels(int levels)
+    public void ActivateDots(int level)
+    {
+        for (int i = 0; i < (level - 1) * 3; i++)
+        {
+            levelDots[i].sprite = unlockedDot;
+
+        }
+        levelDots[(level - 1) * 3].sprite = unlockedDot;
+        levelDots[((level - 1) * 3) + 1].sprite = gradientDot;
+    }
+
+    public void LockLevels(int levels)
     {
         for(int i = 0; i < levels; i++)
         {
             levelsText[i].text = "";
             levelImages[i].sprite = lockedLevelImage;
         }
+        for (int i = 0; i < (levels - 1) * 3; i++)
+        {
+            levelDots[i].sprite = lockedDot;
+
+        }
+    }
+
+    public void LoadScene(string scenename)
+    {
+        SceneManager.LoadScene(scenename);
     }
 
     public void ShowLevelInfo(int level, int score)

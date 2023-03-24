@@ -8,13 +8,8 @@ TagManager:
   - path
   - Speaker
   - UnlockedLevel
-  - Left Hand
-  - Right Hand
-  - Interactable
-  - Surface
-  - Whiteboard
-  - InteractablePrefabTag
-  - EndLaserTag
+  - Original
+  - Equivalent
   layers:
   - Default
   - TransparentFX
@@ -22,9 +17,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
-  - Interactable
-  - CENTERPOINT
+  - 
+  - 
+  - 
   - 
   - 
   - 
