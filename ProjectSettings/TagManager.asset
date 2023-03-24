@@ -14,6 +14,7 @@ TagManager:
   - Surface
   - Whiteboard
   - InteractablePrefabTag
+  - EndLaserTag
   layers:
   - Default
   - TransparentFX

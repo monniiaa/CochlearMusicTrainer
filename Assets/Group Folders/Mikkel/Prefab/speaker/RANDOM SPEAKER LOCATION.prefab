@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 6533399990642729280}
   - component: {fileID: 803316334724055676}
   - component: {fileID: 4988504713018923337}
+  - component: {fileID: -6110868411778348631}
   m_Layer: 0
   m_Name: RANDOM SPEAKER LOCATION
   m_TagString: InteractablePrefabTag
@@ -370,6 +371,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-6110868411778348631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4732070297377915029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 644ce88007f70db4aaa3a3cee6dc52ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5706347317043214616
 GameObject:
   m_ObjectHideFlags: 0
