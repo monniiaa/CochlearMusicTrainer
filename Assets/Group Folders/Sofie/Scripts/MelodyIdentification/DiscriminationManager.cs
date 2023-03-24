@@ -14,6 +14,9 @@ public class DiscriminationManager : MonoBehaviour
     private void Start()
     {
         melodies = GameObject.FindObjectsOfType<Oscillator>();
+        SetOriginalMelody();
+        SetEquivalentMelody();
+        SetDissimilarMelodies();
     }
 
     
@@ -21,7 +24,7 @@ public class DiscriminationManager : MonoBehaviour
     {
         foreach(Oscillator melody in melodies)
         {
-            if (melody.GetComponent<Melody>().isOriginal)
+            if (melody.gameObject.CompareTag("Original"))
             {
                 originalMelody = melody;
                 melody.CreateStartNote();
@@ -38,19 +41,20 @@ public class DiscriminationManager : MonoBehaviour
         } while (melodies[rand].GetComponent<Melody>().isOriginal);
 
         melodies[rand].CreateStartNote(originalMelody.startFreq);
-        melodies[rand].GetComponent<Melody>().isEquivalent = true;
+        melodies[rand].gameObject.tag = "Equivalent";
     }
 
     public void SetDissimilarMelodies()
     {
         foreach(Oscillator melody in melodies)
         {
-            if (!melody.GetComponent<Melody>().isOriginal && !melody.GetComponent<Melody>().isEquivalent)
+            if (!melody.gameObject.CompareTag("Original") && !melody.CompareTag("Equivalent"))
             {
                 do
                 {
                     melody.CreateStartNote();
-                } while (melody.startFreq > originalMelody.startFreq - intervalDistance && melody.startFreq < originalMelody.startFreq + intervalDistance );
+                } while (melody.startFreq < originalMelody.startFreq + intervalDistance && melody.startFreq > originalMelody.startFreq - intervalDistance
+                && melody.startFreq <= (originalMelody.startFreq + intervalDistance) % originalMelody.frequencies.Length);
             }
         }
     }

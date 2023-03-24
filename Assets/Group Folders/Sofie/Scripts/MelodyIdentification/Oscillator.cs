@@ -11,7 +11,7 @@ public class Oscillator : MonoBehaviour
 
     private float gain = 0;
     private float volume = 0.05f;
-    private float[] frequencies;
+    public float[] frequencies { get; private set; }
     private int thisFreq;
     public int startFreq { get; private set; }
 

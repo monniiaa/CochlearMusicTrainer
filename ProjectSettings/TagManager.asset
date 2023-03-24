@@ -8,6 +8,8 @@ TagManager:
   - path
   - Speaker
   - UnlockedLevel
+  - Original
+  - Equivalent
   layers:
   - Default
   - TransparentFX

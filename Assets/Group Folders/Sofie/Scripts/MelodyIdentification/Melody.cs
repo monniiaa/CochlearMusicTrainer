@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Melody : MonoBehaviour
 {
+    [SerializeField]
     public bool isOriginal { get; private set; }
 
     public bool isEquivalent;
