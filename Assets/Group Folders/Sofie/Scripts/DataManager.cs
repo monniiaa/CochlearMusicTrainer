@@ -29,9 +29,15 @@ public static class DataManager
     public static GameData ReadJson(string minigame)
     {
         string filePath = Application.dataPath + "/MiniGameData/" + minigame + "/ScoreData.json";
+        if (!File.Exists(filePath))
+        {
+            FileStream streamfile = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            streamfile.Close();
+        }
         StreamReader reader = new StreamReader(filePath);
         string json = reader.ReadToEnd();
         reader.Close();
+
         string jsonData = File.ReadAllText(filePath);
         if (jsonData != string.Empty)
         {

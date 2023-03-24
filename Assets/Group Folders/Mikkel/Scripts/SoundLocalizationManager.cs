@@ -5,31 +5,51 @@ using UnityEngine;
 public class SoundLocalizationManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject Prefab;
-    GameObject Speaker;
+    private GameObject prefab;
+    public GameObject speaker;
     private int CurrentLevel;
     private int CurrentScore;
     private string path = "SoundLocalization";
     GameData gameData;
-    // Start is called before the first frame update
+
+    [SerializeField]
+    private DistanceTracker distanceTracker;
+    private static float distanceTreshold = 1;
+    [SerializeField]
+    randomizeSoundLocation speakerspawner;
+
     void Start()
     {
         gameData = DataManager.ReadJson(path);
         CurrentLevel = gameData.level;
-        Speaker = GameObject.FindGameObjectWithTag("InteractablePrefabTag");
+        speaker = speakerspawner.SpawnSpeaker(prefab);
+        distanceTracker = GameObject.FindObjectOfType<DistanceTracker>();
+    }
+    private void OnEnable()
+    {
+        distanceTracker.distanceEvent += EndRound;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void EndRound(float distance)
     {
-        
+        speaker.GetComponent<DeletusMaximus>().Destroy();
+        speaker = speakerspawner.SpawnSpeaker(prefab);
+        IncrementPoint(distance);
+
     }
 
-    private void EndRound()
+    private void IncrementPoint(float distance)
     {
-        CurrentScore = ShootInteraction.points;
-        Speaker.GetComponent<DeletusMaximus>().Destroy();
-        Instantiate(Prefab);
 
+        if (distance <= distanceTreshold)
+        {
+            CurrentScore += 1;
+            Debug.Log(CurrentScore);
+        }
+        else
+        {
+            CurrentLevel += 0;
+            Debug.Log(CurrentScore);
+        }
     }
 }
