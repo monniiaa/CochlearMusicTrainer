@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class PitchBoard : MonoBehaviour
 {
-    private Camera camera;
-    RaycastHit hit;
 
     public UIMenu pitchModeMenu;
     public string path = "PitchIdentification";
@@ -14,39 +12,13 @@ public class PitchBoard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        camera = Camera.main;
         levelData = DataManager.ReadJson(path);
+
+        pitchModeMenu.LockLevels(levelData.levelScore.Length);
+        pitchModeMenu.ActivateLevels(levelData.level);
+           // pitchModeMenu.ShowLevelInfo(i, levelData.levelScore[i - 1]);
         
-        for (int i = 1; i <= levelData.level; i++)
-        {
-            pitchModeMenu.ActivateLevel(i);
-            pitchModeMenu.ShowLevelInfo(i, levelData.levelScore[i - 1]);
-        }
         
     }
 
-    void Update()
-    {
-        DetectObjectWithRaycast();
-    }
-
-
-
-    public void DetectObjectWithRaycast()
-    {
-        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            if (hit.collider.gameObject.tag == "UnlockedLevel")
-            {
-                Debug.Log("hit");
-                if (Input.GetMouseButtonDown(0))
-                {
-                    SceneManager.LoadScene("PitchIdentification");
-                }
-            }
-        }
-
-    }
 }

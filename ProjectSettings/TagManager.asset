@@ -8,8 +8,8 @@ TagManager:
   - path
   - Speaker
   - UnlockedLevel
-  - Left Hand
-  - Right Hand
+  - Original
+  - Equivalent
   layers:
   - Default
   - TransparentFX
@@ -17,8 +17,8 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
-  - Interactable
+  - 
+  - 
   - 
   - 
   - 
