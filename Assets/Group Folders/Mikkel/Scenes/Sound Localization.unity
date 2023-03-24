@@ -504,7 +504,6 @@ GameObject:
   - component: {fileID: 1662117887}
   - component: {fileID: 1662117886}
   - component: {fileID: 1662117889}
-  - component: {fileID: 1662117888}
   m_Layer: 0
   m_Name: scriptholder
   m_TagString: Untagged
@@ -524,7 +523,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba3c48819b043914e8fb1b777cccf0c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 4732070297377915029, guid: c3d56614813ab2041946de51dc7b220b, type: 3}
   minDistanceToPlayer: 2.71
   roomSize: 8.93
   height: 2.16
@@ -543,19 +541,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1662117888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1662117885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33b35b112b35b0442baff635cb300be4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceTracker: {fileID: 1663862704}
 --- !u!114 &1662117889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -568,7 +553,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3992e677cb7f44643b0ce9e04e57ef30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 4732070297377915029, guid: c3d56614813ab2041946de51dc7b220b, type: 3}
+  prefab: {fileID: 4732070297377915029, guid: c3d56614813ab2041946de51dc7b220b, type: 3}
+  speaker: {fileID: 0}
+  distanceTracker: {fileID: 1663862704}
+  speakerspawner: {fileID: 1662117886}
 --- !u!1 &1663862701 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1562352078738373110, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
