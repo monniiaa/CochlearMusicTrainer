@@ -9,7 +9,7 @@ public class ShootInteraction : MonoBehaviour
 {
     [SerializeField]
     private DistanceTracker distanceTracker;
-    private static float distanceTreshold;
+    private static float distanceTreshold = 4;
     public static int points { get; private set; }
 
     private void OnEnable()
