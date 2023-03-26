@@ -181,11 +181,4 @@ public class PitchIdentification : MonoBehaviour
 
     }
 
-    enum Difficulty
-    {
-        Easy,
-        Medium,
-        Hard
-    }
-
 }

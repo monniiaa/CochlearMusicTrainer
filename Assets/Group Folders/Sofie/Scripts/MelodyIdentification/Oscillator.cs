@@ -16,9 +16,9 @@ public class Oscillator : MonoBehaviour
     public int startFreq { get; private set; }
 
 
-    private void Start()
+    private void Awake()
     {
-        frequencies = new float[7];
+        frequencies = new float[14];
         frequencies[0] = 523.25f;
         frequencies[1] = 587.33f;
         frequencies[2] = 659.25f;
@@ -27,12 +27,21 @@ public class Oscillator : MonoBehaviour
         frequencies[5] = 880.00f;
         frequencies[6] = 987.77f;
 
+        frequencies[7] = 1046.50f;
+        frequencies[8] = 1174.66f;
+        frequencies[9] = 1318.51f;
+        frequencies[10] = 1396.91f;
+        frequencies[11] = 1567.98f;
+        frequencies[12] = 1760.00f;
+        frequencies[13] = 1975.53f;
+
     }
 
 
     public void CreateStartNote()
     {
-        startFreq = Random.Range(0, frequencies.Length);
+        int rand = Random.Range(0, frequencies.Length);
+        startFreq = rand;
         
     }
 
@@ -42,7 +51,8 @@ public class Oscillator : MonoBehaviour
     }
     public void PlayMelody()
     {
-        StartCoroutine(PlaySequence(2, 4, 0.4f));
+        StartCoroutine(PlaySequence(DiscriminationManager.levelInterval, DiscriminationManager.levelSequenceLength, DiscriminationManager.levelNoteTime));
+      //  StartCoroutine(PlaySequence(2,4,0.4f));
     }
 
 
@@ -52,6 +62,10 @@ public class Oscillator : MonoBehaviour
         int i = 0;
         do
         {
+            if(thisFreq >= 7)
+            {
+                volume = 0.025f;
+            }
             frequency = frequencies[thisFreq];
             thisFreq += interval;
             thisFreq = thisFreq % frequencies.Length;
