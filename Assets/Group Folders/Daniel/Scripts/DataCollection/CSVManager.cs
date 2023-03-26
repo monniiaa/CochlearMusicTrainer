@@ -28,29 +28,29 @@ public class CSVManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        _csvFiles = new CSVFile($"{Application.dataPath}/TestDataFiles/player_data.csv");
-        FileStream stream = File.Create(_csvFiles.Path);
-        stream.Close();
+        
+        _csvFiles = new CSVFile($"{Application.dataPath}/TestDataFiles/player_data.csv", "Date,Month,Year".Split(","));
+        SaveScore(10);
     }
 
     private void Start()
     {
-        SaveScore(10);
+        
     }
 
+    public void SaveLocalizationPerformance(SoundLocalizationData data)
+    {
+        IMiniGameData miniGameData = new SoundLocalizationData(1, 1);
+    }
+    
     public void SaveScore(float score)
     {
-        /*
-        if (File.ReadLines(_csvFiles.Path).FirstOrDefault() == string.Empty)
+        using (StreamWriter stream = File.AppendText(_csvFiles.Path))
         {
-            CSVHelper.InsertColumnNames(_csvFiles.Path, "Date", "Score", "NewThing");
-        }
-        */
-        using (StreamWriter sw = File.AppendText(_csvFiles.Path))
-        {
-            sw.WriteLine("Hello");
-            sw.WriteLine("And");
-            sw.WriteLine("Welcome");
+            for (int i = 0; i < 10; i++)
+            {
+                stream.WriteLine("Hello,No,Yes");
+            }
         }
     }
     
