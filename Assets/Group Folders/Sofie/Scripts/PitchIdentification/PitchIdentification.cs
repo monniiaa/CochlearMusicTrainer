@@ -19,9 +19,11 @@ public class PitchIdentification : LevelManager
     private void Start()
     {
         gameplayAudio = GetComponent<AudioSource>();
+        path = "PitchIdentification";
         gameData =  DataManager.ReadJson(path);
 
         currentLevel = gameData.level;
+        Debug.Log("Level: " +currentLevel);
         SetMode();
         speakers = GameObject.FindObjectsOfType<Speaker>();
         initialPositions = new Vector3[speakers.Length];
@@ -31,7 +33,6 @@ public class PitchIdentification : LevelManager
             initialPositions[i] = speakers[i].transform.position;
         }
         StartRound();
-        path = "PitchIdentification";
     }
     
 
@@ -100,33 +101,29 @@ public class PitchIdentification : LevelManager
     public override void SetRoundFunctionality()
     {
         round++;
-        switch (round)
+        if (round < 4)
         {
-            case 1:
-                StartRound();
-                break;
-            case 2:
-                StartRound();
-                break;
-            case 3:
-                StartRound();
-                foreach (Speaker s in speakers)
-                {
-                    s.DestroySpeaker();
-                }
-                currentLevel++;
-                gameData.level = currentLevel;
-                DataManager.SaveDataToJson(gameData, path);
-                endOfRoundCanvas.gameObject.SetActive(true);
-                break;
-
+            StartRound();
+        }
+        else
+        {
+            foreach (Speaker s in speakers)
+            {
+                s.DestroySpeaker();
+            }
+            currentLevel++;
+            gameData.level = currentLevel;
+            DataManager.SaveDataToJson(gameData, path);
+            endOfRoundCanvas.gameObject.SetActive(true);
         }
     }
 
     protected override void EndRound()
     {
+
         foreach (Speaker s in speakers)
         {
+            s.ResetFrequency();
             s.DestroyAnimation();
         }
     }
