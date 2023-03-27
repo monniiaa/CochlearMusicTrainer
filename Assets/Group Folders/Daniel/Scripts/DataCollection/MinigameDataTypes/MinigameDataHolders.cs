@@ -27,7 +27,7 @@ public readonly struct InstrumentSeparationData : IMiniGameData
     
     public string ToCsv()
     {
-        
+        return $"{Score},{Level},";
     }
 
     public readonly Dictionary<string, float> InstrumentSeparation;
@@ -49,7 +49,7 @@ public readonly struct PitchIdentificationData : IMiniGameData
     public int Level { get; }
     public string ToCsv()
     {
-        
+        return "";
     }
 }
 
