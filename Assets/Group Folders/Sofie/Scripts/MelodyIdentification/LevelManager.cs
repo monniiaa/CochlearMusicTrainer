@@ -16,6 +16,17 @@ public abstract class LevelManager : MonoBehaviour
     protected string path;
     protected int round = 1;
 
+    [SerializeField]
+    protected AudioSource gameplayAudio;
+    [SerializeField]
+    protected AudioClip sucessAudio;
+    [SerializeField]
+    protected  AudioClip failAudio;
+    [SerializeField]
+    protected Material sucessMaterial;
+    [SerializeField]
+    protected Material failMaterial;
+
     private void Start()
     {
         SetMode();

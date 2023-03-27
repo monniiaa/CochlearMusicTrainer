@@ -11,14 +11,6 @@ public class DiscriminationManager : LevelManager
     private int intervalDistance = 4;
     private Oscillator originalMelody;
 
-    public AudioSource gameplayAudio;
-    public AudioClip sucessAudio;
-    public AudioClip failAudio;
-    [SerializeField]
-    Material sucessMaterial;
-    [SerializeField]
-    Material failMaterial;
-
     private Oscillator pickedMelody;
 
     private void Start()
@@ -31,7 +23,6 @@ public class DiscriminationManager : LevelManager
         gameData = DataManager.ReadJson(path);
         currentLevel = gameData.level;
         SetDifficultyChanges();
-
     }
 
     
