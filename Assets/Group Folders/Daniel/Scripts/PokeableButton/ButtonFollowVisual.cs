@@ -11,7 +11,7 @@ public class ButtonFollowVisual : MonoBehaviour
 {
     public Transform m_visualTarget;
     public Vector3 m_localAxis;
-    public float m_resetSpeed;
+    public float m_resetSpeed = 5;
     public float m_followAngleThreshold = 45;
 
     private bool _freeze;
