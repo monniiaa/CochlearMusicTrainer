@@ -8,8 +8,13 @@ TagManager:
   - path
   - Speaker
   - UnlockedLevel
+<<<<<<< HEAD
   - Original
   - Equivalent
+=======
+  - playing
+  - default
+>>>>>>> origin/InstrumentIdentificationV2
   layers:
   - Default
   - TransparentFX
