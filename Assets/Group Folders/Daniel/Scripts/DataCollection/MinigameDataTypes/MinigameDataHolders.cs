@@ -1,13 +1,38 @@
 
+using System;
 using System.Collections.Generic;
 
-internal interface IMiniGameData
+public interface IMiniGameData
 {
+    string FileName { get; }
     string Path { get; }
+    string CsvColumns { get; }
     int Score { get; }
-    int Level { get; }
 
     string ToCsv();
+}
+
+public readonly struct TimbreIdentification : IMiniGameData
+{
+    public TimbreIdentification(TimeSpan time, int score)
+    {
+        Time = time;
+        Score = score;
+        Path = "/TimbreIdentification/";
+        CsvColumns = "Time,Score";
+        FileName = "instrument_separation_data.csv";
+    }
+
+    public string FileName { get; }
+    public string Path { get; }
+    public string CsvColumns { get; }
+    public int Score { get; }
+    public TimeSpan Time { get; }
+
+    public string ToCsv()
+    {
+        return $"{Time},{Score}";
+    }
 }
 
 public readonly struct InstrumentSeparationData : IMiniGameData
@@ -18,10 +43,14 @@ public readonly struct InstrumentSeparationData : IMiniGameData
         Score = score;
         Level = level;
         InstrumentSeparation = instrumentSeparation;
-        Path = "/InstrumentSeparation/instrument_separation_data.csv";
+        Path = "/InstrumentSeparation/";
+        CsvColumns = "Score,Level";
+        FileName = "instrument_separation_data.csv";
     }
 
+    public string FileName { get; }
     public string Path { get; }
+    public string CsvColumns { get; }
     public int Score { get; }
     public int Level { get; }
     
@@ -41,10 +70,14 @@ public readonly struct PitchIdentificationData : IMiniGameData
     {
         Score = score;
         Level = level;
-        Path = "/PitchIdentification/pitch_identification_data.csv";
+        Path = "/PitchIdentification/";
+        CsvColumns = "Date,Score,Level,Hello";
+        FileName = "pitch_identification_data.csv";
     }
 
+    public string FileName { get; }
     public string Path { get; }
+    public string CsvColumns { get; }
     public int Score { get; }
     public int Level { get; }
     public string ToCsv()
@@ -59,10 +92,14 @@ public readonly struct MelodyIdentificationData : IMiniGameData
     {
         Score = score;
         Level = level;
-        Path = "/MelodyIdentification/melody_identification_data.csv";
+        Path = "/MelodyIdentification/";
+        CsvColumns = "Date,Score,Level,Melody";
+        FileName = "melody_identification_data.csv";
     }
 
+    public string FileName { get; }
     public string Path { get; }
+    public string CsvColumns { get; }
     public int Score { get; }
 
     public int Level { get; }
@@ -79,21 +116,38 @@ public readonly struct SoundLocalizationData : IMiniGameData
     {
         Score = score;
         Level = level;
-        Path = "/SoundLocalization/sound_localization_data.csv";
+        Path = "/SoundLocalization/";
+        CsvColumns = "Date,Score,Level";
+        FileName = "sound_localization_data.csv";
     }
 
-    public const string FileName = "SoundLocalization";
+    public string FileName { get; }
     public string Path { get; }
+    public string CsvColumns { get; }
     public int Score { get; }
     public int Level { get; }
     public string ToCsv()
     {
-        return $"{Score},{Level}";
+        return $"{DateTime.Now},{Level}";
     }
 }
 
-public struct InstrumentIdentificationData
+public struct InstrumentIdentificationData : IMiniGameData
 {
-    public int Score { get; }
     
+    public InstrumentIdentificationData(int score, int level)
+    {
+        Score = score;
+        Level = level;
+        Path = "/SoundLocalization/";
+        CsvColumns = "Date,";
+        FileName = "instrument_identification_data.csv";
+    }
+
+    public string FileName { get; }
+    public string Path { get; }
+    public string CsvColumns { get; }
+    public int Score { get; }
+    public int Level { get; }
+    public string ToCsv() => $"{Score},{Level}";
 }

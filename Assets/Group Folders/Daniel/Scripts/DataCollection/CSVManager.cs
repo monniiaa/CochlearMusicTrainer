@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using UnityEngine;
 using System.Linq;
+using System.Text;
 
 public class CSVManager : MonoBehaviour
 {
@@ -28,34 +29,30 @@ public class CSVManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        
-        _csvFiles = new CSVFile($"{Application.dataPath}/TestDataFiles/player_data.csv", "Date,Month,Year".Split(","));
-        SaveScore(10);
     }
 
     private void Start()
     {
-        
+        SaveMiniGameData(new TimbreIdentification(DateTime.Today - DateTime.Today, 1));
     }
 
-    public void SaveLocalizationPerformance(SoundLocalizationData data)
+    public void SaveMiniGameData(IMiniGameData data)
     {
-        IMiniGameData miniGameData = new SoundLocalizationData(1, 1);
-    }
-    
-    public void SaveScore(float score)
-    {
-        using (StreamWriter stream = File.AppendText(_csvFiles.Path))
+        if (!File.Exists(data.Path))
         {
-            for (int i = 0; i < 10; i++)
-            {
-                stream.WriteLine("Hello,No,Yes");
-            }
+            SetupDataFile($"{Application.dataPath}/TestDataFiles" + data.Path, data.CsvColumns, data.FileName);
+        }
+        using (StreamWriter stream = File.AppendText(data.Path))
+        {
+            stream.WriteLine(data.ToCsv());
         }
     }
-    
-    public void SaveProgress(float score)
+
+    private void SetupDataFile(string path, string columns, string fileName)
     {
-        
+        Directory.CreateDirectory(path);
+        FileStream fileStream = File.Create(path + fileName + ".csv");
+        fileStream.Write(new UTF8Encoding().GetBytes(columns));
+        fileStream.Close();
     }
 }
