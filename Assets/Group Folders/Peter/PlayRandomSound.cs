@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayRandomSound : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class PlayRandomSound : MonoBehaviour
     public int difficulty = 1; // the difficulty level (1-3)
 
     private List<GameObject> selectedObjects = new List<GameObject>(); // list of selected child objects
+    private List<string> objectsPlayed = new List<string>();
 
     private AudioSource[] allAudioSources;
 
@@ -14,9 +16,11 @@ public class PlayRandomSound : MonoBehaviour
 
     //Scoring variables
     private float time;
+    private float timer1, timer2, timer3;
     public float points;
     private bool isCorrect = false;
     private GameObject currentInstrument;
+    [SerializeField] private TMP_Text firstInstrument, secondInstrument, thirdInstrument;
 
     RaycastHit hit;
     RaycastHit previousHit;
@@ -24,8 +28,6 @@ public class PlayRandomSound : MonoBehaviour
 
     private void Awake()
     {
-        // select up to 2 or 3 parent objects, depending on difficulty
-        //int numParents = difficulty == 3 ? 3 : Random.Range(2, 4);
         int numParents = difficulty;
         List<int> pickedFamily = new List<int>();
         for (int i = 0; i < numParents; i++)
@@ -43,7 +45,7 @@ public class PlayRandomSound : MonoBehaviour
             // select a random child object from the parent object and add it to the list
             int numChildren = parent.childCount;
             int randomChildIndex = Random.Range(0, numChildren);
-            Debug.Log("children" + randomChildIndex);
+            //Debug.Log("children" + randomChildIndex);
             GameObject child = parent.GetChild(randomChildIndex).gameObject;
             selectedObjects.Add(child);
         }
@@ -54,47 +56,50 @@ public class PlayRandomSound : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Round();
+    }
+
     private void Update()
     {
         time += Time.deltaTime;
         SelectInstrument();
-        //Debug.DrawRay(ray.origin, ray.direction * 10);
 
-        //Picking the objects needs to be integrated here
+        //Finish round button instead of keycode here
         if (Input.GetKeyDown(KeyCode.A))
         {
             StopMusic();
             if (round1 == false)
             {
+                timer1 = time;
                 round1 = true;
                 if (isCorrect)
                 {
                     points += 50;
-                    Debug.Log("test");
                 }
                 Round();
-                Debug.Log(points + "points");
+                time = 0;
                 isCorrect = false;
-                Debug.Log("round 1 complete");
             }
             else if (round2 == false)
             {
+                timer2 = time;
                 round2 = true;
                 {
                     points += 50;
-                    Debug.Log("test");
                 }
                 Round();
-                Debug.Log("round 2 complete");
+                time = 0;
             }
             else if (round3 == false)
             {
+                timer3 = time;
                 round3 = true;
                 {
                     points += 50;
-                    Debug.Log("test");
                 }
-                Debug.Log("round 3 complete");
+                EndFeedback();
             }
             else if (round3 == true)
             {
@@ -103,10 +108,18 @@ public class PlayRandomSound : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void EndFeedback()
     {
-        Round();
+        //UI implementation, with text files showing which instruments were played
+        firstInstrument.text = objectsPlayed[0];
+        firstInstrument.gameObject.SetActive(true);
+        secondInstrument.text = objectsPlayed[1];
+        secondInstrument.gameObject.SetActive(true);
+        thirdInstrument.text = objectsPlayed[2];
+        thirdInstrument.gameObject.SetActive(true);
+
     }
+
     private void Round()
     { 
         // randomly select one of the selected child objects and play a random sound from its associated sound folder
@@ -121,6 +134,7 @@ public class PlayRandomSound : MonoBehaviour
             AudioSource audioSource = selectedObject.GetComponent<AudioSource>();
             selectedObject.tag = "playing";
             currentInstrument = selectedObject;
+            objectsPlayed.Add(selectedObject.ToString());
             audioSource.clip = randomClip;
             audioSource.Play();
         }
