@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public interface IMiniGameData
 {
     string FileName { get; }
-    string Path { get; }
+    string Folder { get; }
     string CsvColumns { get; }
     int Score { get; }
 
@@ -18,13 +18,13 @@ public readonly struct TimbreIdentification : IMiniGameData
     {
         Time = time;
         Score = score;
-        Path = "/TimbreIdentification/";
+        Folder = "/TimbreIdentification/";
         CsvColumns = "Time,Score";
         FileName = "instrument_separation_data.csv";
     }
 
     public string FileName { get; }
-    public string Path { get; }
+    public string Folder { get; }
     public string CsvColumns { get; }
     public int Score { get; }
     public TimeSpan Time { get; }
@@ -43,13 +43,13 @@ public readonly struct InstrumentSeparationData : IMiniGameData
         Score = score;
         Level = level;
         InstrumentSeparation = instrumentSeparation;
-        Path = "/InstrumentSeparation/";
+        Folder = "/InstrumentSeparation/";
         CsvColumns = "Score,Level";
-        FileName = "instrument_separation_data.csv";
+        FileName = "instrument_separation_data";
     }
 
     public string FileName { get; }
-    public string Path { get; }
+    public string Folder { get; }
     public string CsvColumns { get; }
     public int Score { get; }
     public int Level { get; }
@@ -70,13 +70,13 @@ public readonly struct PitchIdentificationData : IMiniGameData
     {
         Score = score;
         Level = level;
-        Path = "/PitchIdentification/";
+        Folder = "/PitchIdentification/";
         CsvColumns = "Date,Score,Level,Hello";
-        FileName = "pitch_identification_data.csv";
+        FileName = "pitch_identification_data";
     }
 
     public string FileName { get; }
-    public string Path { get; }
+    public string Folder { get; }
     public string CsvColumns { get; }
     public int Score { get; }
     public int Level { get; }
@@ -92,13 +92,13 @@ public readonly struct MelodyIdentificationData : IMiniGameData
     {
         Score = score;
         Level = level;
-        Path = "/MelodyIdentification/";
+        Folder = "/MelodyIdentification/";
         CsvColumns = "Date,Score,Level,Melody";
-        FileName = "melody_identification_data.csv";
+        FileName = "melody_identification_data";
     }
 
     public string FileName { get; }
-    public string Path { get; }
+    public string Folder { get; }
     public string CsvColumns { get; }
     public int Score { get; }
 
@@ -112,23 +112,25 @@ public readonly struct MelodyIdentificationData : IMiniGameData
 public readonly struct SoundLocalizationData : IMiniGameData
 {
     
-    public SoundLocalizationData(int score, int level)
+    public SoundLocalizationData(int score, int level, float distance)
     {
         Score = score;
         Level = level;
-        Path = "/SoundLocalization/";
-        CsvColumns = "Date,Score,Level";
-        FileName = "sound_localization_data.csv";
+        Distance = distance;
+        Folder = "/SoundLocalization/";
+        CsvColumns = "Score,Level,Distance";
+        FileName = "sound_localization_data";
     }
 
     public string FileName { get; }
-    public string Path { get; }
+    public string Folder { get; }
     public string CsvColumns { get; }
     public int Score { get; }
     public int Level { get; }
+    public float Distance { get; }
     public string ToCsv()
     {
-        return $"{DateTime.Now},{Level}";
+        return $"{Level},{Score},{Distance}";
     }
 }
 
@@ -139,13 +141,13 @@ public struct InstrumentIdentificationData : IMiniGameData
     {
         Score = score;
         Level = level;
-        Path = "/SoundLocalization/";
+        Folder = "/SoundLocalization/";
         CsvColumns = "Date,";
-        FileName = "instrument_identification_data.csv";
+        FileName = "instrument_identification_data";
     }
 
     public string FileName { get; }
-    public string Path { get; }
+    public string Folder { get; }
     public string CsvColumns { get; }
     public int Score { get; }
     public int Level { get; }
