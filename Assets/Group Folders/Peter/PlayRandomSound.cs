@@ -9,7 +9,6 @@ public class PlayRandomSound : MonoBehaviour
 
     private List<GameObject> selectedObjects = new List<GameObject>(); // list of selected child objects
     private List<string> objectsPlayed = new List<string>();
-
     private AudioSource[] allAudioSources;
 
     private bool round1 = false, round2 = false, round3 = false;
@@ -21,6 +20,9 @@ public class PlayRandomSound : MonoBehaviour
     private bool isCorrect = false;
     private GameObject currentInstrument;
     [SerializeField] private TMP_Text firstInstrument, secondInstrument, thirdInstrument;
+    SelectionOutline outline;
+    private List<int> errorCount = new List<int>();
+    private List<float> timerCount = new List<float>();
 
     RaycastHit hit;
     RaycastHit previousHit;
@@ -73,10 +75,15 @@ public class PlayRandomSound : MonoBehaviour
             if (round1 == false)
             {
                 timer1 = time;
+                timerCount.Add(timer1);
                 round1 = true;
                 if (isCorrect)
                 {
                     points += 50;
+                }
+                else
+                {
+                    errorCount.Add(1);
                 }
                 Round();
                 time = 0;
@@ -85,9 +92,15 @@ public class PlayRandomSound : MonoBehaviour
             else if (round2 == false)
             {
                 timer2 = time;
+                timerCount.Add(timer2);
                 round2 = true;
+                if(isCorrect)
                 {
                     points += 50;
+                }
+                else
+                {
+                    errorCount.Add(1);
                 }
                 Round();
                 time = 0;
@@ -95,11 +108,18 @@ public class PlayRandomSound : MonoBehaviour
             else if (round3 == false)
             {
                 timer3 = time;
+                timerCount.Add(timer3);
                 round3 = true;
+                if(isCorrect)
                 {
                     points += 50;
                 }
+                else
+                {
+                    errorCount.Add(1);
+                }
                 EndFeedback();
+                Debug.Log(errorCount.Count);
             }
             else if (round3 == true)
             {
@@ -117,11 +137,12 @@ public class PlayRandomSound : MonoBehaviour
         secondInstrument.gameObject.SetActive(true);
         thirdInstrument.text = objectsPlayed[2];
         thirdInstrument.gameObject.SetActive(true);
-
     }
 
     private void Round()
-    { 
+    {
+        //Clear any outlines
+        //outline.ClearOutline();
         // randomly select one of the selected child objects and play a random sound from its associated sound folder
         int selectedIndex = Random.Range(0, selectedObjects.Count);
         GameObject selectedObject = selectedObjects[selectedIndex];
