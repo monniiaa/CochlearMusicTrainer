@@ -34,21 +34,15 @@ public class JsonManager : MonoBehaviour
         WriteDataToFile<SoundLocalizationDataContainer>(new SoundLocalizationDataContainer(10, 90));
     }
 
-    private static void WriteDataToFile<T>(AbstractDataContainer dataContainer) where T : AbstractDataContainer
+    public static void WriteDataToFile<T>(AbstractDataContainer dataContainer) where T : AbstractDataContainer
     {
         string fullPath = Application.dataPath + "\\TestDataFiles\\" + dataContainer.Path;
-        Debug.Log(Application.dataPath);
-        Debug.Log(fullPath);
         if(!Directory.Exists(fullPath)) Directory.CreateDirectory(Path.GetDirectoryName(fullPath) ?? throw new InvalidOperationException());
 
-        DataContainerList<T> dataContainerList;
+        DataContainerList<T> dataContainerList = new DataContainerList<T>();;
         if (File.Exists(fullPath))
         {
             dataContainerList = JsonUtility.FromJson<DataContainerList<T>>(File.ReadAllText(fullPath));
-        }
-        else
-        {
-            dataContainerList = new DataContainerList<T>();
         }
 
         dataContainerList.DataList.Add((T) dataContainer);
