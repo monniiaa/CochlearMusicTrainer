@@ -4,22 +4,17 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - DrumStickHead
   - path
-  - Speaker
-  - UnlockedLevel
-<<<<<<< HEAD
-  - Original
-  - Equivalent
-=======
-  - playing
-  - default
->>>>>>> origin/InstrumentIdentificationV2
+  - Surface
+  - Whiteboard
+  - Interactable
+  - Test
+  - InteractablePrefabTag
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ShootingDisc
   - Water
   - UI
   - 

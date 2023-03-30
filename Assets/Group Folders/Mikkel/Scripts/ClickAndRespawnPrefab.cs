@@ -41,25 +41,4 @@ public class ClickAndRespawnPrefab : MonoBehaviour
             spawnedPrefab.transform.localScale = spawnedPrefab.transform.localScale * scaleFactor;
         }
     }
-
-    /* void Update()
-    {
-        // Check for mouse click
-        if (Input.GetMouseButtonDown(0))
-        {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            // Check if mouse click hits the spawned prefab
-            if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == spawnedPrefab)
-            {
-                // Destroy the spawned prefab
-                Destroy(spawnedPrefab);
-
-                // Spawn a new, smaller prefab
-                spawnedPrefab = Instantiate(prefabToSpawn, transform.position, Quaternion.identity);
-                spawnedPrefab.transform.localScale = spawnedPrefab.transform.localScale * scaleFactor;
-            }
-        }
-    }*/
 }

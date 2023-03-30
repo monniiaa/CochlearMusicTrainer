@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
+using System.Linq;
 
 public class SoundLocalizationManager : MonoBehaviour
 {
@@ -8,18 +10,21 @@ public class SoundLocalizationManager : MonoBehaviour
     private GameObject prefab;
     public GameObject speaker;
     private int CurrentLevel;
-    private int CurrentScore;
+    private int CurrentScore;           
     private string path = "SoundLocalization";
     GameData gameData;
+    private XRRayInteractor _xrRayInteractor; 
 
     [SerializeField]
     private DistanceTracker distanceTracker;
-    private static float distanceTreshold = 1;
+    private static float distanceTreshold = 10;
     [SerializeField]
     randomizeSoundLocation speakerspawner;
+    private XRInteractorLineVisual _interactorLine;
 
     void Start()
     {
+        _xrRayInteractor = FindObjectOfType<XRRayInteractor>();
         gameData = DataManager.ReadJson(path);
         CurrentLevel = gameData.level;
         speaker = speakerspawner.SpawnSpeaker(prefab);
@@ -30,26 +35,29 @@ public class SoundLocalizationManager : MonoBehaviour
         distanceTracker.distanceEvent += EndRound;
     }
 
-    private void EndRound(float distance)
+    private void EndRound()
     {
+        
+        Debug.Log(CheckRayHit());
         speaker.GetComponent<DeletusMaximus>().Destroy();
         speaker = speakerspawner.SpawnSpeaker(prefab);
-        IncrementPoint(distance);
+        
 
     }
 
-    private void IncrementPoint(float distance)
-    {
 
-        if (distance <= distanceTreshold)
+
+    public int CheckRayHit()
+    {
+        List<Collider> colliders = new List<Collider>();
+        RaycastHit[] results = new RaycastHit[3];
+        Ray ray = new Ray(_xrRayInteractor.rayOriginTransform.position, _xrRayInteractor.rayOriginTransform.forward);
+        Physics.RaycastNonAlloc(ray, results, Mathf.Infinity, LayerMask.GetMask("ShootingDisc"));
+        foreach (RaycastHit hit in results)
         {
-            CurrentScore += 1;
-            Debug.Log(CurrentScore);
+            if (hit.collider == null) continue;
+            colliders.Add(hit.collider);
         }
-        else
-        {
-            CurrentLevel += 0;
-            Debug.Log(CurrentScore);
-        }
+        return colliders.Count;
     }
 }

@@ -76,3 +76,7 @@ imgui.ini
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 imgui.ini
+imgui.ini
+Assets/SimpleNaturePack/SimpleNaturePack_URP_2019.3_v1.22.unitypackage.meta
+Assets/SimpleNaturePack/SimpleNaturePack_LWRP_2018.4_v1.22.unitypackage.meta
+Assets/SimpleNaturePack/SimpleNaturePack_HDRP_2018.4_v1.22.unitypackage.meta

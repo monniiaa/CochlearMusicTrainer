@@ -302,6 +302,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: XROriginWithRayInteraction
       objectReference: {fileID: 0}
+    - target: {fileID: 1562352078738373110, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221912666994667555, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
+      propertyPath: m_TagString
+      value: MainCamera
+      objectReference: {fileID: 0}
     - target: {fileID: 3221912667309710912, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
       propertyPath: m_Reticle
       value: 
@@ -309,6 +317,46 @@ PrefabInstance:
     - target: {fileID: 3221912667309710912, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
       propertyPath: m_TreatSelectionAsValidState
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221912667309710914, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
+      propertyPath: m_MaxRaycastDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221912667889877413, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
+      propertyPath: triggerPressed.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221912667889877413, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
+      propertyPath: triggerReleased.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221912667889877413, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
+      propertyPath: triggerPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221912667889877413, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
+      propertyPath: triggerPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221912667889877413, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
+      propertyPath: triggerPressed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221912667889877413, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
+      propertyPath: triggerPressed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221912667889877413, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
+      propertyPath: triggerPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221912667889877413, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
+      propertyPath: triggerPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221912668658340147, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
+      propertyPath: m_TagString
+      value: Test
       objectReference: {fileID: 0}
     - target: {fileID: 8808924321306672497, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
       propertyPath: m_RootOrder
@@ -354,7 +402,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3221912667309710916, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
 --- !u!1 &1068147584
 GameObject:
@@ -483,7 +532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxRaycastDistance: 10
-  m_ReticlePrefab: {fileID: 2180401109749453343, guid: 84472433e2b017b45ada187eb89037ba, type: 3}
+  m_ReticlePrefab: {fileID: 0}
   m_PrefabScalingFactor: 0.1
   m_UndoDistanceScaling: 0
   m_AlignPrefabWithSurfaceNormal: 0
@@ -524,8 +573,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minDistanceToPlayer: 2.71
-  roomSize: 8.93
-  height: 2.16
+  roomSize: 4.68
+  height: 2.11
 --- !u!4 &1662117887
 Transform:
   m_ObjectHideFlags: 0
@@ -553,8 +602,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3992e677cb7f44643b0ce9e04e57ef30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 4732070297377915029, guid: c3d56614813ab2041946de51dc7b220b, type: 3}
-  speaker: {fileID: 0}
+  prefab: {fileID: 8969580668940092037, guid: 4ce26379d368d2d4cab4aaa80ab26bfd, type: 3}
+  speaker: {fileID: 8969580668940092037, guid: 4ce26379d368d2d4cab4aaa80ab26bfd, type: 3}
   distanceTracker: {fileID: 1663862704}
   speakerspawner: {fileID: 1662117886}
 --- !u!1 &1663862701 stripped
@@ -575,7 +624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   object1: {fileID: 164567134}
-  object2: {fileID: 5395418395222153775, guid: c3d56614813ab2041946de51dc7b220b, type: 3}
+  object2: {fileID: 4806594766132251888, guid: a891113a2e11eac49a02aabf586922cb, type: 3}
   controller: {fileID: 1114107300}
 --- !u!1 &1739271466
 GameObject:
