@@ -31,6 +31,7 @@ public static class DataManager
         string filePath = Application.dataPath + "/MiniGameData/" + minigame + "/ScoreData.json";
         if (!File.Exists(filePath))
         {
+            Debug.Log("exists");
             FileStream streamfile = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
             streamfile.Close();
         }
@@ -41,7 +42,6 @@ public static class DataManager
         string jsonData = File.ReadAllText(filePath);
         if (jsonData != string.Empty)
         {
-            Debug.Log(jsonData);
             GameData data = JsonUtility.FromJson<GameData>(json);
             return data;
         }
