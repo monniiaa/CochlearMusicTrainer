@@ -58,8 +58,14 @@ public class Speaker : MonoBehaviour
 
     public void PlayAudio()
     {
+  
         audioSource.Play();
         playing = true;
+    }
+    public void ResetFrequency()
+    {
+        frequency1 = 0;
+        frequency2 = 0;
     }
 
     public void StopAudio()
