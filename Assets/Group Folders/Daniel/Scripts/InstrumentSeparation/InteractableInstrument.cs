@@ -9,17 +9,25 @@ public class InteractableInstrument : MonoBehaviour
 {
     public bool canBeHeard { get; private set; }
     public bool hasClickedOnce { get; private set; }
+    private XRRayInteractor _interactor;
     private XRBaseInteractable _interactable;
+    private XRGrabInteractable _grabInteractable;
+    private RayLengthControl _rayLengthControl;
     private Outline _outline;
     private Button _button;
     private TextMeshProUGUI _buttonText;
 
     private const string HearingText = "Jeg kan høre instrumentet";
     private const string CannotHearText = "Jeg kan IKKE høre instrumentet";
+    private const string DefaultText = "Ikke valgt endnu";
     
     private void Awake()
     {
-        _interactable = GetComponent<XRBaseInteractable>();
+        _grabInteractable = GetComponent<XRGrabInteractable>();
+        _interactable = _grabInteractable;
+
+        _interactor = FindObjectOfType<XRRayInteractor>();
+        _rayLengthControl = FindObjectOfType<RayLengthControl>();
 
         _button = GetComponentInChildren<Button>();
         _buttonText = _button.GetComponentInChildren<TextMeshProUGUI>();
@@ -34,6 +42,7 @@ public class InteractableInstrument : MonoBehaviour
     private void Start()
     {
         _button.image.color = Color.gray;
+        _buttonText.text = DefaultText;
     }
 
     private void OnEnable()
@@ -54,11 +63,14 @@ public class InteractableInstrument : MonoBehaviour
     private void OnInteraction(SelectEnterEventArgs args)
     {
         ToggleOutline();
+        _interactor.lineType = _rayLengthControl.rayLineType = XRRayInteractor.LineType.BezierCurve;
     }
 
     private void OnStopInteraction(SelectExitEventArgs args)
     {
         ToggleOutline();
+        _interactor.lineType = _rayLengthControl.rayLineType = XRRayInteractor.LineType.StraightLine;
+        _rayLengthControl.XRRayInteractor.maxRaycastDistance = 10000;
     }
 
     private void OnInstrumentHearingButtonClicked()
