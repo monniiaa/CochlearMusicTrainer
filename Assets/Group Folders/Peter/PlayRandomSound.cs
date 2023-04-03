@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class PlayRandomSound : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class PlayRandomSound : MonoBehaviour
     private bool round1 = false, round2 = false, round3 = false;
 
     //Scoring variables
-    private float time;
+    public float time;
     private float timer1, timer2, timer3;
     public float points;
     private bool isCorrect = false;
@@ -24,12 +25,15 @@ public class PlayRandomSound : MonoBehaviour
     private List<int> errorCount = new List<int>();
     private List<float> timerCount = new List<float>();
 
+    private XRInteractionManager interactor;
+
     RaycastHit hit;
     RaycastHit previousHit;
     public Camera camera;
 
     private void Awake()
     {
+        interactor = GetComponent<XRInteractionManager>();
         int numParents = difficulty;
         List<int> pickedFamily = new List<int>();
         for (int i = 0; i < numParents; i++)
@@ -60,7 +64,7 @@ public class PlayRandomSound : MonoBehaviour
 
     private void Start()
     {
-        Round();
+        //Round();
     }
 
     private void Update()
@@ -69,7 +73,7 @@ public class PlayRandomSound : MonoBehaviour
         SelectInstrument();
 
         //Finish round button instead of keycode here
-        if (Input.GetKeyDown(KeyCode.A))
+        if (OVRInput.Get(OVRInput.RawButton.B))
         {
             StopMusic();
             if (round1 == false)
@@ -94,7 +98,7 @@ public class PlayRandomSound : MonoBehaviour
                 timer2 = time;
                 timerCount.Add(timer2);
                 round2 = true;
-                if(isCorrect)
+                if (isCorrect)
                 {
                     points += 50;
                 }
@@ -110,7 +114,7 @@ public class PlayRandomSound : MonoBehaviour
                 timer3 = time;
                 timerCount.Add(timer3);
                 round3 = true;
-                if(isCorrect)
+                if (isCorrect)
                 {
                     points += 50;
                 }
@@ -139,10 +143,8 @@ public class PlayRandomSound : MonoBehaviour
         thirdInstrument.gameObject.SetActive(true);
     }
 
-    private void Round()
+    public void Round()
     {
-        //Clear any outlines
-        //outline.ClearOutline();
         // randomly select one of the selected child objects and play a random sound from its associated sound folder
         int selectedIndex = Random.Range(0, selectedObjects.Count);
         GameObject selectedObject = selectedObjects[selectedIndex];
@@ -184,6 +186,18 @@ public class PlayRandomSound : MonoBehaviour
         {
             audioS.Stop();
             currentInstrument.tag = "default";
+        }
+    }
+
+    public void Triggered()
+    {
+        if (gameObject.tag == "playing")
+        {
+            isCorrect = true;
+        }
+        else
+        {
+            isCorrect = false;
         }
     }
 }

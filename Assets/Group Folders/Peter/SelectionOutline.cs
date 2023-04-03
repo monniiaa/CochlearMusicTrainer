@@ -16,8 +16,10 @@ public class SelectionOutline : MonoBehaviour
         outline.enabled = !outline.enabled;
     }
 
+
     public void ClearOutline()
     {
+        
         outline.enabled = false;
     }
 }
