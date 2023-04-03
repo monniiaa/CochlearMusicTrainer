@@ -27,16 +27,8 @@ EditorBuildSettings:
     path: Assets/Group Folders/Sofie/Scenes/PitchIdentification.unity
     guid: 2fffb9d6288b4954599f344e2a5ec072
   - enabled: 1
-<<<<<<< HEAD
     path: Assets/Group Folders/Peter/TrainingEnvironmentTest.unity
     guid: 2de4999831d304ac69828f27693cdb7f
-=======
-    path: "Assets/Group Folders/Anton/Bin/V\xE6lg Bane.unity"
-    guid: 5bd2c994fcb565d469909e8f56fdbe89
-  - enabled: 1
-    path: Assets/Group Folders/Anton/UI.unity
-    guid: b95c5b9ae8de2ce4cb4cab60efa5c614
->>>>>>> origin/UI
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 597b89b649d512843aa161a2a00b82c1, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 41a7fb176e5481345b99e2fa1059f5a5, type: 2}
