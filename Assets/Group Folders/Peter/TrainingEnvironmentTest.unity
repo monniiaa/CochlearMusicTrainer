@@ -8468,6 +8468,7 @@ GameObject:
   - component: {fileID: 493689618}
   - component: {fileID: 493689620}
   - component: {fileID: 493689619}
+  - component: {fileID: 493689621}
   m_Layer: 0
   m_Name: Guitar
   m_TagString: Untagged
@@ -8667,6 +8668,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a72d33bb1e8054e3483f79580b16c9b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outline: {fileID: 0}
+  selected: {fileID: 0}
 --- !u!114 &493689620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8768,6 +8771,20 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!64 &493689621
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493689613}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2096794972710530699, guid: d04c492ed1dbbdf4ab351fc0c39f399a, type: 3}
 --- !u!1 &494310954
 GameObject:
   m_ObjectHideFlags: 0
@@ -15854,6 +15871,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a72d33bb1e8054e3483f79580b16c9b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outline: {fileID: 0}
+  selected: {fileID: 0}
 --- !u!114 &885889167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16791,6 +16810,7 @@ MonoBehaviour:
   text1: {fileID: 387485859}
   text2: {fileID: 458648182}
   text3: {fileID: 1794246282}
+  soundStart: {fileID: 0}
 --- !u!1 &909829314
 GameObject:
   m_ObjectHideFlags: 0
@@ -21710,6 +21730,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a72d33bb1e8054e3483f79580b16c9b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outline: {fileID: 0}
+  selected: {fileID: 0}
 --- !u!114 &1109053144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23396,6 +23418,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a72d33bb1e8054e3483f79580b16c9b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outline: {fileID: 0}
+  selected: {fileID: 0}
 --- !u!1 &1173837790
 GameObject:
   m_ObjectHideFlags: 0
@@ -24420,6 +24444,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a72d33bb1e8054e3483f79580b16c9b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outline: {fileID: 0}
+  selected: {fileID: 0}
 --- !u!114 &1213216858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29493,6 +29519,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1568146439}
   - component: {fileID: 1568146438}
+  - component: {fileID: 1568146440}
   m_Layer: 0
   m_Name: PlayRandomSound
   m_TagString: Untagged
@@ -29518,6 +29545,7 @@ MonoBehaviour:
   - {fileID: 483210030}
   - {fileID: 104945098}
   difficulty: 3
+  time: 0
   points: 0
   firstInstrument: {fileID: 1664008174}
   secondInstrument: {fileID: 523273964}
@@ -29538,6 +29566,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1568146440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568146437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 273ca3b4cdaba4ee39af2e248168494a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selected: {fileID: 0}
 --- !u!1 &1577987289
 GameObject:
   m_ObjectHideFlags: 0
@@ -49029,43 +49070,28 @@ MonoBehaviour:
   triggerPressed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3221912668906925994}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 908467791}
+        m_TargetAssemblyTypeName: IntroExplanation, Assembly-CSharp
+        m_MethodName: IntroText
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
   triggerReleased:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3221912668906925994}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   gripPressed:
     m_PersistentCalls:
-      m_Calls: []
-  joystickReleased:
-    m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3221912668906926001}
-        m_TargetAssemblyTypeName: RayLengthControl, Assembly-CSharp
-        m_MethodName: set_isChangingLength
-        m_Mode: 6
+      - m_Target: {fileID: 1568146438}
+        m_TargetAssemblyTypeName: PlayRandomSound, Assembly-CSharp
+        m_MethodName: Triggered
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -49074,60 +49100,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  joystickReleased:
+    m_PersistentCalls:
+      m_Calls: []
   joystickNorthPressed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3221912668906926001}
-        m_TargetAssemblyTypeName: RayLengthControl, Assembly-CSharp
-        m_MethodName: set_isChangingLength
-        m_Mode: 6
+      - m_Target: {fileID: 1568146438}
+        m_TargetAssemblyTypeName: PlayRandomSound, Assembly-CSharp
+        m_MethodName: StopRound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 3221912668906926001}
-        m_TargetAssemblyTypeName: RayLengthControl, Assembly-CSharp
-        m_MethodName: ChangeDirectionFromJoystick
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
   joystickSouthPressed:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3221912668906926001}
-        m_TargetAssemblyTypeName: RayLengthControl, Assembly-CSharp
-        m_MethodName: set_isChangingLength
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 3221912668906926001}
-        m_TargetAssemblyTypeName: RayLengthControl, Assembly-CSharp
-        m_MethodName: ChangeDirectionFromJoystick
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: -1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &3221912667257892951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50346,7 +50339,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3221912668906925994}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab4473bc5a6f3fb42ab391ebc36c8154, type: 3}
   m_Name: 
@@ -50695,7 +50688,7 @@ MonoBehaviour:
   m_AllowHoverHapticsWhileSelecting: 1
   m_LineType: 0
   m_BlendVisualLinePoints: 1
-  m_MaxRaycastDistance: 1
+  m_MaxRaycastDistance: 52.1
   m_RayOriginTransform: {fileID: 3221912667395337027}
   m_ReferenceFrame: {fileID: 0}
   m_Velocity: 16
@@ -50720,8 +50713,8 @@ MonoBehaviour:
   m_AutoDeselect: 0
   m_TimeToAutoDeselect: 3
   m_EnableUIInteraction: 1
-  m_AllowAnchorControl: 1
-  m_UseForceGrab: 1
+  m_AllowAnchorControl: 0
+  m_UseForceGrab: 0
   m_RotateSpeed: 180
   m_TranslateSpeed: 6.59
   m_AnchorRotateReferenceFrame: {fileID: 0}
@@ -55086,6 +55079,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a72d33bb1e8054e3483f79580b16c9b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outline: {fileID: 0}
+  selected: {fileID: 0}
 --- !u!114 &4380311358734841811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59709,6 +59704,7 @@ GameObject:
   - component: {fileID: 7174288248907932084}
   - component: {fileID: 7174288248907932086}
   - component: {fileID: 7174288248907932085}
+  - component: {fileID: 7174288248907932087}
   m_Layer: 0
   m_Name: Saxophone
   m_TagString: Untagged
@@ -60195,6 +60191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a72d33bb1e8054e3483f79580b16c9b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outline: {fileID: 0}
+  selected: {fileID: 0}
 --- !u!114 &7174288248907932086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60296,6 +60294,20 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!64 &7174288248907932087
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6878186436203771053}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1963521994490203869, guid: 16e5d24954d924103b6946af5a9274a4, type: 3}
 --- !u!1 &7186187105933859762
 GameObject:
   m_ObjectHideFlags: 0
@@ -62093,6 +62105,7 @@ GameObject:
   - component: {fileID: 8026139115277227962}
   - component: {fileID: 8026139115277227964}
   - component: {fileID: 8026139115277227963}
+  - component: {fileID: 8026139115277227965}
   m_Layer: 0
   m_Name: Trompet
   m_TagString: Untagged
@@ -62226,6 +62239,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a72d33bb1e8054e3483f79580b16c9b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outline: {fileID: 0}
+  selected: {fileID: 0}
 --- !u!114 &8026139115277227964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62327,6 +62342,20 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!64 &8026139115277227965
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8026139115277227960}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &8058994792679643759
 GameObject:
   m_ObjectHideFlags: 0

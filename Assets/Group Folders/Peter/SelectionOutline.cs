@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class SelectionOutline : MonoBehaviour
 {
-    Outline outline;
+    public Outline outline;
+    public GameObject selected;
+    private OutlineManager manager;
+    public delegate void outlineChanged(GameObject gameObject);
+    public event outlineChanged OnOutlineChange;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        manager = FindObjectOfType<OutlineManager>();
         outline = GetComponent<Outline>();
     }
 
    public void SetOutline()
     {
         outline.enabled = !outline.enabled;
-    }
-
-
-    public void ClearOutline()
-    {
-        
-        outline.enabled = false;
+        OnOutlineChange.Invoke(gameObject);
     }
 }

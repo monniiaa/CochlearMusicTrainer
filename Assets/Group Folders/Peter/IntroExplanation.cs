@@ -6,17 +6,17 @@ using TMPro;
 public class IntroExplanation : MonoBehaviour
 {
     public TMP_Text text1, text2, text3;
+    //In order to call the method from PlayRandomSound, there needs to be a reference to the script, which is declared here. 
     public PlayRandomSound soundStart;
 
     private void Start()
     {
+        //It then finds the object with the PlayRandomSound, in order to establish the link, I guess
         soundStart = FindObjectOfType(typeof(PlayRandomSound)) as PlayRandomSound;
     }
-    // Update is called once per frame
-    void Update()
+
+    public void IntroText()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
             if(text1.IsActive())
             {
                 text1.gameObject.SetActive(false);
@@ -34,6 +34,5 @@ public class IntroExplanation : MonoBehaviour
                 soundStart.time = Time.deltaTime;
                 Debug.Log(soundStart.time);
             }
-        }
     }
 }

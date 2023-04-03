@@ -8,6 +8,7 @@ public class PlayRandomSound : MonoBehaviour
     public Transform[] parentObjects; // array of parent objects to select from
     public int difficulty = 1; // the difficulty level (1-3)
 
+    //Variables in charge of getting the child objects and their audiosources
     private List<GameObject> selectedObjects = new List<GameObject>(); // list of selected child objects
     private List<string> objectsPlayed = new List<string>();
     private AudioSource[] allAudioSources;
@@ -21,11 +22,11 @@ public class PlayRandomSound : MonoBehaviour
     private bool isCorrect = false;
     private GameObject currentInstrument;
     [SerializeField] private TMP_Text firstInstrument, secondInstrument, thirdInstrument;
-    SelectionOutline outline;
     private List<int> errorCount = new List<int>();
     private List<float> timerCount = new List<float>();
 
-    private XRInteractionManager interactor;
+    //VR interaction variables
+    OutlineManager outline;
 
     RaycastHit hit;
     RaycastHit previousHit;
@@ -33,7 +34,7 @@ public class PlayRandomSound : MonoBehaviour
 
     private void Awake()
     {
-        interactor = GetComponent<XRInteractionManager>();
+        outline = FindObjectOfType<OutlineManager>();
         int numParents = difficulty;
         List<int> pickedFamily = new List<int>();
         for (int i = 0; i < numParents; i++)
@@ -64,17 +65,31 @@ public class PlayRandomSound : MonoBehaviour
 
     private void Start()
     {
-        //Round();
+
     }
 
     private void Update()
     {
         time += Time.deltaTime;
-        SelectInstrument();
+        //SelectInstrument();
 
-        //Finish round button instead of keycode here
-        if (OVRInput.Get(OVRInput.RawButton.B))
-        {
+    }
+
+    private void EndFeedback()
+    {
+        //UI implementation, with text files showing which instruments were played
+        firstInstrument.text = objectsPlayed[0];
+        firstInstrument.gameObject.SetActive(true);
+        secondInstrument.text = objectsPlayed[1];
+        secondInstrument.gameObject.SetActive(true);
+        //thirdInstrument.text = objectsPlayed[2];
+        //testing below
+        thirdInstrument.text = points.ToString();
+        thirdInstrument.gameObject.SetActive(true);
+    }
+
+    public void StopRound()
+    {
             StopMusic();
             if (round1 == false)
             {
@@ -129,18 +144,6 @@ public class PlayRandomSound : MonoBehaviour
             {
                 Debug.Log("training over");
             }
-        }
-    }
-
-    private void EndFeedback()
-    {
-        //UI implementation, with text files showing which instruments were played
-        firstInstrument.text = objectsPlayed[0];
-        firstInstrument.gameObject.SetActive(true);
-        secondInstrument.text = objectsPlayed[1];
-        secondInstrument.gameObject.SetActive(true);
-        thirdInstrument.text = objectsPlayed[2];
-        thirdInstrument.gameObject.SetActive(true);
     }
 
     public void Round()
@@ -185,13 +188,12 @@ public class PlayRandomSound : MonoBehaviour
         foreach (AudioSource audioS in allAudioSources)
         {
             audioS.Stop();
-            currentInstrument.tag = "default";
         }
     }
 
     public void Triggered()
     {
-        if (gameObject.tag == "playing")
+        if (currentInstrument.Equals (outline.selected))
         {
             isCorrect = true;
         }
