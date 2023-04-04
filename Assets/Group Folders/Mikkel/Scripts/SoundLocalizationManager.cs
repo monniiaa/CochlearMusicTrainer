@@ -26,13 +26,18 @@ public class SoundLocalizationManager : MonoBehaviour
 
     private MeshRenderer meshRenderer;
 
+    public Animator speakerAnimator;
+
     void Start()
     {
         _xrRayInteractor = FindObjectOfType<XRRayInteractor>();
         gameData = DataManager.ReadJson(path);
         CurrentLevel = gameData.level;
         speaker = speakerspawner.SpawnSpeaker(prefab);
-        speaker.GetComponentInChildren<MeshRenderer>().enabled = false;
+        meshRenderer = speaker.GetComponentInChildren<MeshRenderer>();
+        speakerAnimator = speaker.GetComponentInChildren<Animator>();
+        meshRenderer.enabled = false;
+        speakerAnimator.enabled = false;
         distanceTracker = GameObject.FindObjectOfType<DistanceTracker>();
     }
     private void OnEnable()
@@ -43,6 +48,17 @@ public class SoundLocalizationManager : MonoBehaviour
     private void EndRound()
     {
         if (waitForTarget != null) return;
+
+
+        int numCollidersHit = CheckRayHit();
+
+        if (numCollidersHit > 0)
+        {
+            speakerAnimator.enabled = true;
+        }
+
+        meshRenderer.enabled = true;
+
         Debug.Log(CheckRayHit());
 
         waitForTarget = StartCoroutine(WaitForVisibleShootingDisc());
@@ -54,7 +70,10 @@ public class SoundLocalizationManager : MonoBehaviour
     {
         speaker.GetComponent<DeletusMaximus>().Destroy();
         speaker = speakerspawner.SpawnSpeaker(prefab);
-        speaker.GetComponentInChildren<MeshRenderer>().enabled = false;
+        meshRenderer = speaker.GetComponentInChildren<MeshRenderer>();
+        meshRenderer.enabled = false;
+        speakerAnimator = speaker.GetComponentInChildren<Animator>();
+        speakerAnimator.enabled = false;
     }
 
 
@@ -65,19 +84,21 @@ public class SoundLocalizationManager : MonoBehaviour
         RaycastHit[] results = new RaycastHit[3];
         Ray ray = new Ray(_xrRayInteractor.rayOriginTransform.position, _xrRayInteractor.rayOriginTransform.forward);
         Physics.RaycastNonAlloc(ray, results, Mathf.Infinity, LayerMask.GetMask("ShootingDisc"));
-        MeshRenderer meshRenderer = speaker.GetComponentInChildren<MeshRenderer>();
-        meshRenderer.enabled = !meshRenderer.enabled;
+
         foreach (RaycastHit hit in results)
         {
             if (hit.collider == null) continue;
             colliders.Add(hit.collider);
+
         }
+
         return colliders.Count;
     }
 
     IEnumerator WaitForVisibleShootingDisc()
     {
-        yield return new WaitForSeconds(5);
+        
+        yield return new WaitForSeconds(2.5f);
         RespawnSpeaker();
         waitForTarget = null;
     }
