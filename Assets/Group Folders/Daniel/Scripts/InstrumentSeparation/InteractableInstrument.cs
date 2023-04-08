@@ -7,8 +7,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 [RequireComponent(typeof(XRBaseInteractable))]
 public class InteractableInstrument : MonoBehaviour
 {
-    public bool canBeHeard { get; private set; }
-    public bool hasClickedOnce { get; private set; }
+    public bool CanBeHeard { get; private set; }
+    public bool HasClickedOnce { get; private set; }
     private XRRayInteractor _interactor;
     private XRBaseInteractable _interactable;
     private XRGrabInteractable _grabInteractable;
@@ -75,10 +75,10 @@ public class InteractableInstrument : MonoBehaviour
 
     private void OnInstrumentHearingButtonClicked()
     {
-        hasClickedOnce = true;
-        canBeHeard = !canBeHeard;
-        _buttonText.text = (canBeHeard) ? HearingText : CannotHearText;
-        _button.image.color = (canBeHeard) ? new Color(0, 100, 0) : new Color(128, 0, 0);
+        HasClickedOnce = true;
+        CanBeHeard = !CanBeHeard;
+        _buttonText.text = (CanBeHeard) ? HearingText : CannotHearText;
+        _button.image.color = (CanBeHeard) ? new Color(0, 100, 0) : new Color(128, 0, 0);
     }
 
     private void ToggleOutline() => _outline.enabled = !_outline.enabled;

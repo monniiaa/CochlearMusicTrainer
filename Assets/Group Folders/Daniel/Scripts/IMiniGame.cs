@@ -1,5 +1,7 @@
-interface IMiniGame
+public interface IMiniGame
 {
+   public string MiniGamePrefabPath { get; }
+   public string RigPrefab { get; }
    void ShowInstructions();
    void StartGame();
 

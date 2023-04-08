@@ -17,7 +17,7 @@ public class InstrumentSpawner : MonoBehaviour
         instruments = Resources.LoadAll<GameObject>("Instruments");
     }
 
-    void Start()
+    private void Start()
     {
         SpawnInstruments();
     }
