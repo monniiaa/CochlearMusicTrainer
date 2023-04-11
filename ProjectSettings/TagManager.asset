@@ -11,7 +11,6 @@ TagManager:
   - Test
   - InteractablePrefabTag
   - UnlockedLevel
-  - InteractablePrefabTag
   - EndLaserTag
   - Speaker
   - Left Hand
@@ -19,6 +18,7 @@ TagManager:
   - path
   - playing
   - default
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
