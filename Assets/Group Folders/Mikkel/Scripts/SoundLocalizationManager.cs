@@ -9,6 +9,10 @@ public class SoundLocalizationManager : MonoBehaviour
     [SerializeField]
     private GameObject prefab;
     public GameObject speaker;
+
+    private int currentRound = 0;
+    private int maxRounds = 3;
+
     private int CurrentLevel;
     private int CurrentScore;           
     private string path = "SoundLocalization";
@@ -39,6 +43,8 @@ public class SoundLocalizationManager : MonoBehaviour
         meshRenderer.enabled = false;
         speakerAnimator.enabled = false;
         distanceTracker = GameObject.FindObjectOfType<DistanceTracker>();
+        StartNewRound();//maybe
+
     }
     private void OnEnable()
     {
@@ -63,7 +69,19 @@ public class SoundLocalizationManager : MonoBehaviour
 
         waitForTarget = StartCoroutine(WaitForVisibleShootingDisc());
        
+    }
 
+    private void StartNewRound() //maybe
+    {
+        currentRound++;
+        Debug.Log("Round: " + currentRound);
+        if (currentRound > maxRounds)
+        {
+            Debug.Log("Game over");
+            return;
+        }
+
+        RespawnSpeaker();
     }
 
     private void RespawnSpeaker()
@@ -99,7 +117,9 @@ public class SoundLocalizationManager : MonoBehaviour
     {
         
         yield return new WaitForSeconds(2.5f);
-        RespawnSpeaker();
+        meshRenderer.enabled = false;
+        speakerAnimator.enabled = false;
         waitForTarget = null;
+        StartNewRound();
     }
 }
