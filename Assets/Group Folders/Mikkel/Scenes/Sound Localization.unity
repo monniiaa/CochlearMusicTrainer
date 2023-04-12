@@ -673,6 +673,14 @@ PrefabInstance:
       propertyPath: m_TreatSelectionAsValidState
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3221912667309710912, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
+      propertyPath: m_InvalidColorGradient.key0.a
+      value: 0.7764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221912667309710912, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
+      propertyPath: m_InvalidColorGradient.key1.a
+      value: 0.5176471
+      objectReference: {fileID: 0}
     - target: {fileID: 3221912667309710914, guid: 15e0f9ffae82d514cb225ccdb8138d7d, type: 3}
       propertyPath: m_MaxRaycastDistance
       value: 10
