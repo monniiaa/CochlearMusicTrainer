@@ -45,7 +45,6 @@ public class SoundLocalizationManager : MonoBehaviour
         _xrRayInteractor = FindObjectOfType<XRRayInteractor>();
         gameData = DataManager.ReadJson(path);
         CurrentLevel = gameData.level;
-        speaker = speakerspawner.SpawnSpeaker(prefab);
         meshRenderer = speaker.GetComponentInChildren<MeshRenderer>();
         speakerAnimator = speaker.GetComponentInChildren<Animator>();
         meshRenderer.enabled = false;
@@ -61,6 +60,7 @@ public class SoundLocalizationManager : MonoBehaviour
 
     private void EndRound()
     {
+        if (gameIsOver) return;
         if (waitForTarget != null) return;
 
         if(CheckRayHit())
@@ -82,32 +82,35 @@ public class SoundLocalizationManager : MonoBehaviour
         Debug.Log("Score: " + CurrentScore);
         if (currentRound > maxRounds)
         {
+            speaker.GetComponent<DeletusMaximus>().Destroy();
+            gameIsOver = true;
             Debug.Log("Game over");
             switch (CurrentScore)
             {
                 case 0:
                     FeedbackZero.SetActive(true);
                     FeedbackZero.GetComponent<Animator>().enabled = true;
-                    break;
+                    return;
                 case 1:
                     FeedbackOne.SetActive(true);
                     FeedbackOne.GetComponent<Animator>().enabled = true;
-                    break;
+                    return;
                 case 2:
                     FeedbackTwo.SetActive(true);
                     FeedbackTwo.GetComponent<Animator>().enabled = true;
-                    break;
+                    return;
                 case 3:
                     FeedbackThree.SetActive(true);
                     FeedbackThree.GetComponent<Animator>().enabled = true;
-                    break;
+                    return;
                 default:
-                    break;
+                    return;
             }
-            return;
         }
-
+        Debug.Log( currentRound > maxRounds);
+        Debug.Log("Spawn");
         RespawnSpeaker();
+        
     }
 
     private void RespawnSpeaker()
@@ -137,10 +140,7 @@ public class SoundLocalizationManager : MonoBehaviour
         meshRenderer.enabled = false;
         speakerAnimator.enabled = false;
         waitForTarget = null;
-        if (currentRound > maxRounds)
-        {
-            StartNewRound();
-        }
-       
+        
+        StartNewRound();
     }
 }
