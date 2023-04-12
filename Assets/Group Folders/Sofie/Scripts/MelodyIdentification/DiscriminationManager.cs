@@ -12,6 +12,8 @@ public class DiscriminationManager : LevelManager
     private Oscillator originalMelody;
 
     private Oscillator pickedMelody;
+    public Canvas endOfLevelCanvas;
+    public GameObject[] starAnimation = new GameObject[4];
 
     private void Start()
     {
@@ -23,6 +25,7 @@ public class DiscriminationManager : LevelManager
         gameData = DataManager.ReadJson(path);
         currentLevel = gameData.level;
         SetDifficultyChanges();
+        endOfLevelCanvas.gameObject.SetActive(false);
     }
 
     
@@ -126,14 +129,15 @@ public class DiscriminationManager : LevelManager
         EndRound();
        if(round < 4)
         {
-            
             StartRound();
         }
         else
         {
-           // currentLevel++;
-          //  gameData.level = currentLevel;
-          //  DataManager.SaveDataToJson(gameData, path);
+           currentLevel++;
+           gameData.level = currentLevel;
+           DataManager.SaveDataToJson(gameData, path);
+           endOfLevelCanvas.gameObject.SetActive(true);
+            starAnimation[currentScore].SetActive(true);
         }
     }
 }

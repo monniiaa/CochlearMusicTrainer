@@ -19,6 +19,8 @@ TagManager:
   - playing
   - default
   - SpawnPoint
+  - Original
+  - Equivalent
   layers:
   - Default
   - TransparentFX
