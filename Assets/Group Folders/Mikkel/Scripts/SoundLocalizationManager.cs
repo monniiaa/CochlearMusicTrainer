@@ -19,6 +19,9 @@ public class SoundLocalizationManager : MonoBehaviour
     GameData gameData;
     private XRRayInteractor _xrRayInteractor;
 
+
+    private bool gameIsOver = false;
+
     private Coroutine waitForTarget;
 
     [SerializeField]
@@ -32,6 +35,11 @@ public class SoundLocalizationManager : MonoBehaviour
 
     public Animator speakerAnimator;
 
+    public GameObject FeedbackZero;
+    public GameObject FeedbackOne;
+    public GameObject FeedbackTwo;
+    public GameObject FeedbackThree;
+   
     void Start()
     {
         _xrRayInteractor = FindObjectOfType<XRRayInteractor>();
@@ -55,17 +63,13 @@ public class SoundLocalizationManager : MonoBehaviour
     {
         if (waitForTarget != null) return;
 
-
-        int numCollidersHit = CheckRayHit();
-
-        if (numCollidersHit > 0)
+        if(CheckRayHit())
         {
             speakerAnimator.enabled = true;
+            CurrentScore++;
         }
 
         meshRenderer.enabled = true;
-
-        Debug.Log(CheckRayHit());
 
         waitForTarget = StartCoroutine(WaitForVisibleShootingDisc());
        
@@ -75,9 +79,31 @@ public class SoundLocalizationManager : MonoBehaviour
     {
         currentRound++;
         Debug.Log("Round: " + currentRound);
+        Debug.Log("Score: " + CurrentScore);
         if (currentRound > maxRounds)
         {
             Debug.Log("Game over");
+            switch (CurrentScore)
+            {
+                case 0:
+                    FeedbackZero.SetActive(true);
+                    FeedbackZero.GetComponent<Animator>().enabled = true;
+                    break;
+                case 1:
+                    FeedbackOne.SetActive(true);
+                    FeedbackOne.GetComponent<Animator>().enabled = true;
+                    break;
+                case 2:
+                    FeedbackTwo.SetActive(true);
+                    FeedbackTwo.GetComponent<Animator>().enabled = true;
+                    break;
+                case 3:
+                    FeedbackThree.SetActive(true);
+                    FeedbackThree.GetComponent<Animator>().enabled = true;
+                    break;
+                default:
+                    break;
+            }
             return;
         }
 
@@ -96,30 +122,25 @@ public class SoundLocalizationManager : MonoBehaviour
 
 
 
-    public int CheckRayHit()
+    public bool CheckRayHit()
     {
         List<Collider> colliders = new List<Collider>();
-        RaycastHit[] results = new RaycastHit[3];
+        RaycastHit[] results = new RaycastHit[1];
         Ray ray = new Ray(_xrRayInteractor.rayOriginTransform.position, _xrRayInteractor.rayOriginTransform.forward);
-        Physics.RaycastNonAlloc(ray, results, Mathf.Infinity, LayerMask.GetMask("ShootingDisc"));
-
-        foreach (RaycastHit hit in results)
-        {
-            if (hit.collider == null) continue;
-            colliders.Add(hit.collider);
-
-        }
-
-        return colliders.Count;
+        return Physics.Raycast(ray, Mathf.Infinity, LayerMask.GetMask("ShootingDisc"));
     }
+        
 
     IEnumerator WaitForVisibleShootingDisc()
     {
-        
         yield return new WaitForSeconds(2.5f);
         meshRenderer.enabled = false;
         speakerAnimator.enabled = false;
         waitForTarget = null;
-        StartNewRound();
+        if (currentRound > maxRounds)
+        {
+            StartNewRound();
+        }
+       
     }
 }
