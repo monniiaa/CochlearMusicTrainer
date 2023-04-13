@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class InstrumentIntroduction : MonoBehaviour
 {
@@ -9,11 +10,7 @@ public class InstrumentIntroduction : MonoBehaviour
     public TMP_Text[] texts;
     private int currentIndex = 0;
     private int currentTextIndex = 0;
-
-    private void Awake()
-    {
-        
-    }
+    [SerializeField] GameObject startGameButton;
 
     // Activate the next game object in the array
     public void ActivateNext()
@@ -28,10 +25,20 @@ public class InstrumentIntroduction : MonoBehaviour
         texts[currentTextIndex].gameObject.SetActive(false);  // Deactivate current game object
         currentTextIndex = nextTextIndex;  // Set current index to next index
         Debug.Log(currentIndex);
+
+        if (currentIndex >= AllInstruments.Length-1)
+        {
+            startGameButton.SetActive(true);
+        }
     }
 
     public void Instrument(GameObject item)
     {
         item.SetActive(true);        
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("TrainingEnvironmentTest");
     }
 }
