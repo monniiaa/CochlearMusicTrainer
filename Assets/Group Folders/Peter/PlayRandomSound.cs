@@ -82,9 +82,9 @@ public class PlayRandomSound : MonoBehaviour
         firstInstrument.gameObject.SetActive(true);
         secondInstrument.text = objectsPlayed[1];
         secondInstrument.gameObject.SetActive(true);
-        //thirdInstrument.text = objectsPlayed[2];
+        thirdInstrument.text = objectsPlayed[2];
         //testing below
-        thirdInstrument.text = points.ToString();
+        //thirdInstrument.text = points.ToString();
         thirdInstrument.gameObject.SetActive(true);
     }
 
@@ -168,6 +168,7 @@ public class PlayRandomSound : MonoBehaviour
 
     private void SelectInstrument()
     {
+        //Possibly outdated method here, from testing stage
         previousHit = hit;
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit))
