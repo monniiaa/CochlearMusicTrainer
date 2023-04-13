@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.InputSystem;
 
 public class PlayRandomSound : MonoBehaviour
 {
@@ -31,6 +32,8 @@ public class PlayRandomSound : MonoBehaviour
     RaycastHit hit;
     RaycastHit previousHit;
     public Camera camera;
+
+    public InputActionReference XRinput;
 
     private void Awake()
     {
@@ -88,7 +91,7 @@ public class PlayRandomSound : MonoBehaviour
         thirdInstrument.gameObject.SetActive(true);
     }
 
-    public void StopRound()
+    public void StopRound(InputAction.CallbackContext ctx)
     {
             StopMusic();
             if (round1 == false)
@@ -203,4 +206,10 @@ public class PlayRandomSound : MonoBehaviour
             isCorrect = false;
         }
     }
+
+    private void OnEnable()
+    {
+        XRinput.action.performed += StopRound;
+    }
+
 }

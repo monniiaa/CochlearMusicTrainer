@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Group Folders/Sofie/Scenes/PitchIdentification.unity
     guid: 2fffb9d6288b4954599f344e2a5ec072
   - enabled: 1
+    path: Assets/Group Folders/Peter/InstrumentIntro.unity
+    guid: c6a16fd1ff3f541bab79ec8029eb19da
+  - enabled: 1
     path: Assets/Group Folders/Peter/TrainingEnvironmentTest.unity
     guid: 2de4999831d304ac69828f27693cdb7f
   m_configObjects:
