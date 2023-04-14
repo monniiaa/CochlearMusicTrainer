@@ -9,11 +9,18 @@ public class SoundLocalizationManager : MonoBehaviour
     [SerializeField]
     private GameObject prefab;
     public GameObject speaker;
+
+    private int currentRound = 0;
+    private int maxRounds = 3;
+
     private int CurrentLevel;
     private int CurrentScore;           
     private string path = "SoundLocalization";
     GameData gameData;
     private XRRayInteractor _xrRayInteractor;
+
+
+    private bool gameIsOver = false;
 
     private Coroutine waitForTarget;
 
@@ -28,17 +35,23 @@ public class SoundLocalizationManager : MonoBehaviour
 
     public Animator speakerAnimator;
 
+    public GameObject FeedbackZero;
+    public GameObject FeedbackOne;
+    public GameObject FeedbackTwo;
+    public GameObject FeedbackThree;
+   
     void Start()
     {
         _xrRayInteractor = FindObjectOfType<XRRayInteractor>();
         gameData = DataManager.ReadJson(path);
         CurrentLevel = gameData.level;
-        speaker = speakerspawner.SpawnSpeaker(prefab);
         meshRenderer = speaker.GetComponentInChildren<MeshRenderer>();
         speakerAnimator = speaker.GetComponentInChildren<Animator>();
         meshRenderer.enabled = false;
         speakerAnimator.enabled = false;
         distanceTracker = GameObject.FindObjectOfType<DistanceTracker>();
+        StartNewRound();//maybe
+
     }
     private void OnEnable()
     {
@@ -47,23 +60,57 @@ public class SoundLocalizationManager : MonoBehaviour
 
     private void EndRound()
     {
+        if (gameIsOver) return;
         if (waitForTarget != null) return;
 
-
-        int numCollidersHit = CheckRayHit();
-
-        if (numCollidersHit > 0)
+        if(CheckRayHit())
         {
             speakerAnimator.enabled = true;
+            CurrentScore++;
         }
 
         meshRenderer.enabled = true;
 
-        Debug.Log(CheckRayHit());
-
         waitForTarget = StartCoroutine(WaitForVisibleShootingDisc());
        
+    }
 
+    private void StartNewRound() //maybe
+    {
+        currentRound++;
+        Debug.Log("Round: " + currentRound);
+        Debug.Log("Score: " + CurrentScore);
+        if (currentRound > maxRounds)
+        {
+            speaker.GetComponent<DeletusMaximus>().Destroy();
+            gameIsOver = true;
+            Debug.Log("Game over");
+            switch (CurrentScore)
+            {
+                case 0:
+                    FeedbackZero.SetActive(true);
+                    FeedbackZero.GetComponent<Animator>().enabled = true;
+                    return;
+                case 1:
+                    FeedbackOne.SetActive(true);
+                    FeedbackOne.GetComponent<Animator>().enabled = true;
+                    return;
+                case 2:
+                    FeedbackTwo.SetActive(true);
+                    FeedbackTwo.GetComponent<Animator>().enabled = true;
+                    return;
+                case 3:
+                    FeedbackThree.SetActive(true);
+                    FeedbackThree.GetComponent<Animator>().enabled = true;
+                    return;
+                default:
+                    return;
+            }
+        }
+        Debug.Log( currentRound > maxRounds);
+        Debug.Log("Spawn");
+        RespawnSpeaker();
+        
     }
 
     private void RespawnSpeaker()
@@ -78,28 +125,22 @@ public class SoundLocalizationManager : MonoBehaviour
 
 
 
-    public int CheckRayHit()
+    public bool CheckRayHit()
     {
         List<Collider> colliders = new List<Collider>();
-        RaycastHit[] results = new RaycastHit[3];
+        RaycastHit[] results = new RaycastHit[1];
         Ray ray = new Ray(_xrRayInteractor.rayOriginTransform.position, _xrRayInteractor.rayOriginTransform.forward);
-        Physics.RaycastNonAlloc(ray, results, Mathf.Infinity, LayerMask.GetMask("ShootingDisc"));
-
-        foreach (RaycastHit hit in results)
-        {
-            if (hit.collider == null) continue;
-            colliders.Add(hit.collider);
-
-        }
-
-        return colliders.Count;
+        return Physics.Raycast(ray, Mathf.Infinity, LayerMask.GetMask("ShootingDisc"));
     }
+        
 
     IEnumerator WaitForVisibleShootingDisc()
     {
-        
         yield return new WaitForSeconds(2.5f);
-        RespawnSpeaker();
+        meshRenderer.enabled = false;
+        speakerAnimator.enabled = false;
         waitForTarget = null;
+        
+        StartNewRound();
     }
 }

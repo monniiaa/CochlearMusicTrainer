@@ -15,6 +15,7 @@ public class PitchIdentification : LevelManager
     [SerializeField]
     Canvas endOfRoundCanvas;
     Speaker[] speakers;
+    public GameObject[] starAnimation = new GameObject[4];
 
     private void Start()
     {
@@ -115,6 +116,7 @@ public class PitchIdentification : LevelManager
             gameData.level = currentLevel;
             DataManager.SaveDataToJson(gameData, path);
             endOfRoundCanvas.gameObject.SetActive(true);
+            starAnimation[currentScore].gameObject.SetActive(true);
         }
     }
 
