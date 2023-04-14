@@ -117,6 +117,17 @@ public class SoundLocalizationManager : MonoBehaviour
     {
         speaker.GetComponent<DeletusMaximus>().Destroy();
         speaker = speakerspawner.SpawnSpeaker(prefab);
+        if (CurrentLevel < 3)
+        {
+            speaker.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+        }else if (CurrentLevel >=3 && CurrentLevel < 6)
+        {
+            speaker.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+        }
+        else
+        {
+            speaker.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        }
         meshRenderer = speaker.GetComponentInChildren<MeshRenderer>();
         meshRenderer.enabled = false;
         speakerAnimator = speaker.GetComponentInChildren<Animator>();
