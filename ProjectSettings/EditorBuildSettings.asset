@@ -50,6 +50,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/FinalScenes/Scenes/SoundLocalization.unity
     guid: 69d8ea22791a5544a87b5e8c55e08342
+  - enabled: 1
+    path: Assets/FinalScenes/Scenes/TrainingEnvironmentTest.unity
+    guid: af635143e71c97f47abf0e44c3a8c722
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 597b89b649d512843aa161a2a00b82c1, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 41a7fb176e5481345b99e2fa1059f5a5, type: 2}
