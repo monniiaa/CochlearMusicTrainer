@@ -7,6 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 [RequireComponent(typeof(XRBaseInteractable))]
 public class InteractableInstrument : MonoBehaviour
 {
+    public InstrumentFamily instrumentFamily;
     public bool CanBeHeard { get; private set; }
     public bool HasClickedOnce { get; private set; }
     private XRRayInteractor _interactor;
@@ -14,7 +15,7 @@ public class InteractableInstrument : MonoBehaviour
     private XRGrabInteractable _grabInteractable;
     private RayLengthControl _rayLengthControl;
     private Outline _outline;
-    private Button _button;
+    public Button Button { get; private set; }
     private TextMeshProUGUI _buttonText;
 
     private const string HearingText = "Jeg kan høre instrumentet";
@@ -29,10 +30,10 @@ public class InteractableInstrument : MonoBehaviour
         _interactor = FindObjectOfType<XRRayInteractor>();
         _rayLengthControl = FindObjectOfType<RayLengthControl>();
 
-        _button = GetComponentInChildren<Button>();
-        _buttonText = _button.GetComponentInChildren<TextMeshProUGUI>();
+        Button = GetComponentInChildren<Button>(true);
+        _buttonText = Button.GetComponentInChildren<TextMeshProUGUI>(true);
 
-        _outline = gameObject.AddComponent<Outline>();
+        _outline = GetComponentInChildren<MeshRenderer>().gameObject.AddComponent<Outline>();
         _outline.OutlineMode = Outline.Mode.OutlineAll;
         _outline.OutlineColor = Color.green;
         _outline.OutlineWidth = 5f;
@@ -41,7 +42,7 @@ public class InteractableInstrument : MonoBehaviour
 
     private void Start()
     {
-        _button.image.color = Color.gray;
+        Button.image.color = Color.gray;
         _buttonText.text = DefaultText;
     }
 
@@ -50,14 +51,14 @@ public class InteractableInstrument : MonoBehaviour
         _interactable.selectEntered.AddListener(OnInteraction);
         _interactable.selectExited.AddListener(OnStopInteraction);
         
-        _button.onClick.AddListener(OnInstrumentHearingButtonClicked);
+        Button.onClick.AddListener(OnInstrumentHearingButtonClicked);
     }
 
     private void OnDisable()
     {
         _interactable.selectEntered.RemoveListener(OnInteraction);
         _interactable.selectExited.RemoveListener(OnStopInteraction);
-        _button.onClick.RemoveListener(OnInstrumentHearingButtonClicked);
+        Button.onClick.RemoveListener(OnInstrumentHearingButtonClicked);
     }
 
     private void OnInteraction(SelectEnterEventArgs args)
@@ -78,7 +79,7 @@ public class InteractableInstrument : MonoBehaviour
         HasClickedOnce = true;
         CanBeHeard = !CanBeHeard;
         _buttonText.text = (CanBeHeard) ? HearingText : CannotHearText;
-        _button.image.color = (CanBeHeard) ? new Color(0, 100, 0) : new Color(128, 0, 0);
+        Button.image.color = (CanBeHeard) ? new Color(0, 100, 0) : new Color(128, 0, 0);
     }
 
     private void ToggleOutline() => _outline.enabled = !_outline.enabled;

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4b8fe175747614da7e5a461b9580ec, type: 3}
+  m_Name: Trombone
+  m_EditorClassIdentifier: 
+  instrument: 1
+  instrumentFamily: 1
+  instrumentPrefab: {fileID: 7287268831523003274, guid: 97e196b14b198704bb1279a12cdb083d, type: 3}

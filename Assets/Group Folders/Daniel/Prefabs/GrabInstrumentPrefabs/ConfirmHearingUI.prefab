@@ -148,7 +148,6 @@ GameObject:
   - component: {fileID: 5978604411222079859}
   - component: {fileID: 5978604411222079852}
   - component: {fileID: -3993853819737639179}
-  - component: {fileID: 6799150036083796323}
   m_Layer: 5
   m_Name: ConfirmHearingUI
   m_TagString: Untagged
@@ -174,7 +173,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.1049805}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1512, y: 935}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5978604411222079858
@@ -257,18 +256,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
---- !u!114 &6799150036083796323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5978604411222079854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db8a0a84189966a478cbd0bbbe993720, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5978604412321318137
 GameObject:
   m_ObjectHideFlags: 0

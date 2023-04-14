@@ -42,7 +42,7 @@ public class MiniGameManager : MonoBehaviour
 
     private void Start()
     {
-        SwitchMiniGame(2);
+        SwitchMiniGame(1);
     }
 
     public void SwitchMiniGame(int miniGameId)
@@ -62,6 +62,7 @@ public class MiniGameManager : MonoBehaviour
         return miniGame switch
         {
             MiniGame.SoundSeparation => new SoundSeparationMiniGame(),
+            MiniGame.PitchIdentification => new PitchIdentificationMiniGame(),
             _ => null
         };
     }
