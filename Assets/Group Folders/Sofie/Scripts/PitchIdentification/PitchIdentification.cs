@@ -19,7 +19,7 @@ public class PitchIdentification : LevelManager
     public InstrumentSeparation ModeManager;
 
 
-    private void Start()
+    private void Awake()
     {
         ModeManager = InstrumentSeparation.Instance;
         gameplayAudio = GetComponent<AudioSource>();
@@ -110,6 +110,18 @@ public class PitchIdentification : LevelManager
         }
     }
 
+    IEnumerator End()
+    {
+        yield return new WaitForSeconds(0.7f);
+        foreach (Speaker s in speakers)
+        {
+            s.gameObject.SetActive(false);
+        }
+        ModeManager.EndGame();
+        //TODO: SHOW STAR RESULT
+
+    }
+
     public override void SetRoundFunctionality()
     {
         round++;
@@ -119,14 +131,11 @@ public class PitchIdentification : LevelManager
         }
         else
         {
-            foreach (Speaker s in speakers)
-            {
-                s.gameObject.SetActive(false);
-            }
+            StartCoroutine(End());
             currentLevel++;
             gameData.level = currentLevel;
             DataManager.SaveDataToJson(gameData, path);
-            ModeManager.EndGame();
+
             
         }
     }

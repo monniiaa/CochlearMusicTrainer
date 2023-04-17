@@ -13,9 +13,9 @@ public class Speaker : MonoBehaviour
     public AudioClip currentClip;
     public int note;
 
-    void Start()
+    void Awake()
     {
-        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         audioSource.playOnAwake = false;
         audioSource.spatialBlend = 0; //force 2D sound
         audioSource.Stop(); //avoids audiosource from starting to play automatically
