@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1334,8 +1334,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Genstart
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3abe03ddbf477564f8f48c89cbfbc5e2, type: 2}
-  m_sharedMaterial: {fileID: -6576086088797478858, guid: 3abe03ddbf477564f8f48c89cbfbc5e2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
+  m_sharedMaterial: {fileID: -8816214507793482341, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2137,8 +2137,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Hovedmenu
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3abe03ddbf477564f8f48c89cbfbc5e2, type: 2}
-  m_sharedMaterial: {fileID: -6576086088797478858, guid: 3abe03ddbf477564f8f48c89cbfbc5e2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
+  m_sharedMaterial: {fileID: -8816214507793482341, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2828,8 +2828,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Forts\xE6t"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3abe03ddbf477564f8f48c89cbfbc5e2, type: 2}
-  m_sharedMaterial: {fileID: -6576086088797478858, guid: 3abe03ddbf477564f8f48c89cbfbc5e2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
+  m_sharedMaterial: {fileID: -8816214507793482341, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2859,7 +2859,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -4065,7 +4065,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1971943587
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4413,8 +4413,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Bane X
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3abe03ddbf477564f8f48c89cbfbc5e2, type: 2}
-  m_sharedMaterial: {fileID: -6576086088797478858, guid: 3abe03ddbf477564f8f48c89cbfbc5e2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
+  m_sharedMaterial: {fileID: -8816214507793482341, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4444,7 +4444,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
