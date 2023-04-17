@@ -26,6 +26,7 @@ public abstract class LevelManager : MonoBehaviour
     protected Material sucessMaterial;
     [SerializeField]
     protected Material failMaterial;
+    public bool LevelAlreadyCompleted = false;
 
     private void Start()
     {

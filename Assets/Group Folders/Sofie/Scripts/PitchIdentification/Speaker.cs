@@ -6,19 +6,12 @@ public class Speaker : MonoBehaviour
 {
     public Animator animator;
 
-    public float frequency1 = 0;
 
-    //Creates a slider in the inspector
-    public float frequency2 = 0;
 
-    public float sampleRate = 44100;
-    public float waveLengthInSeconds = 2.0f;
-
-    public float amplitude;
-
+    public AudioClip[] notes;
     AudioSource audioSource;
-    int timeIndex = 0;
-    public bool playing = false;
+    public AudioClip currentClip;
+    public int note;
 
     void Start()
     {
@@ -31,54 +24,27 @@ public class Speaker : MonoBehaviour
 
     }
 
-    void OnAudioFilterRead(float[] data, int channels)
+    public void ResetCurrentNote()
     {
-        for (int i = 0; i < data.Length; i += channels)
-        {
-            data[i] = CreateSine(timeIndex, frequency1, sampleRate);
-
-            if (channels == 2)
-                data[i + 1] = CreateSine(timeIndex, frequency2, sampleRate);
-
-            timeIndex++;
-
-            //if timeIndex gets too big, reset it to 0
-            if (timeIndex >= (sampleRate * waveLengthInSeconds))
-            {
-                timeIndex = 0;
-            }
-        }
+        note = 0;
+        currentClip = null;
     }
 
-    //Creates a sinewave
-    public float CreateSine(int timeIndex, float frequency, float sampleRate)
+    public void SetNote(int clip)
     {
-        return amplitude * (Mathf.Sin(2 * Mathf.PI * timeIndex * frequency / sampleRate));
+        currentClip = notes[clip];
+    }
+    public void PlayClip()
+    {
+        audioSource.PlayOneShot(currentClip);
     }
 
-    public void PlayAudio()
-    {
-  
-        audioSource.Play();
-        playing = true;
-    }
-    public void ResetFrequency()
-    {
-        frequency1 = 0;
-        frequency2 = 0;
-    }
 
     public void StopAudio()
     {
         audioSource.Stop();
-        playing = false;
     }
 
-
-    private void OnDisable()
-    {
-        StopAudio();
-    }
 
 
     public void SetPickedState(bool state)
