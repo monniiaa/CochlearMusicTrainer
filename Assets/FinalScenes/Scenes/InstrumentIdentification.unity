@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18315986, g: 0.22882213, b: 0.3065539, a: 1}
+  m_IndirectSpecularColor: {r: 0.18315944, g: 0.2288214, b: 0.30655283, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12777,10 +12777,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 655750856818971827, guid: 2e250de71bbaf5d4b9dad64e4bef5951, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
+    - target: {fileID: 655750856818971827, guid: 2e250de71bbaf5d4b9dad64e4bef5951, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 655750856818971827, guid: 2e250de71bbaf5d4b9dad64e4bef5951, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8816214507793482341, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
     - target: {fileID: 655750856859623785, guid: 2e250de71bbaf5d4b9dad64e4bef5951, type: 3}
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 8858925551812616517}
+    - target: {fileID: 655750856913842962, guid: 2e250de71bbaf5d4b9dad64e4bef5951, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
+    - target: {fileID: 655750856913842962, guid: 2e250de71bbaf5d4b9dad64e4bef5951, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 655750856913842962, guid: 2e250de71bbaf5d4b9dad64e4bef5951, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8816214507793482341, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
     - target: {fileID: 655750856935774196, guid: 2e250de71bbaf5d4b9dad64e4bef5951, type: 3}
       propertyPath: m_Name
       value: Instrumentidentification - intro
@@ -12833,6 +12857,30 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 8858925551812616517}
+    - target: {fileID: 655750857239161742, guid: 2e250de71bbaf5d4b9dad64e4bef5951, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
+    - target: {fileID: 655750857239161742, guid: 2e250de71bbaf5d4b9dad64e4bef5951, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 655750857239161742, guid: 2e250de71bbaf5d4b9dad64e4bef5951, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8816214507793482341, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
+    - target: {fileID: 655750857461274868, guid: 2e250de71bbaf5d4b9dad64e4bef5951, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
+    - target: {fileID: 655750857461274868, guid: 2e250de71bbaf5d4b9dad64e4bef5951, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 655750857461274868, guid: 2e250de71bbaf5d4b9dad64e4bef5951, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8816214507793482341, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
     - target: {fileID: 655750857595215681, guid: 2e250de71bbaf5d4b9dad64e4bef5951, type: 3}
       propertyPath: m_InteractionManager
       value: 
