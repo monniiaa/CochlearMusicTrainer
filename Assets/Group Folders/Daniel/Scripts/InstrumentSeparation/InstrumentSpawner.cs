@@ -53,8 +53,14 @@ public class InstrumentSpawner : MonoBehaviour
 
     public void SpawnInstruments()
     {
+        Random.InitState((int)DateTime.Now.Ticks);
         SongData randomSong = songs[Random.Range(0, songs.Length)];
         _grabbableInstruments = new GameObject[randomSong.stems.Length];
+
+        foreach (var stem in randomSong.stems)
+        {
+            
+        }
         
         for (int i = 0; i < _spawnPoints.Length; i++)
         {

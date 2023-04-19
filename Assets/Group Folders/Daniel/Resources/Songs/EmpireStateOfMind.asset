@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f0494509f551a64f81b6e5218754fb5, type: 3}
+  m_Name: EmpireStateOfMind
+  m_EditorClassIdentifier: 
+  stems:
+  - {fileID: 11400000, guid: 10131ba7b55dcd046b237ff94e091b37, type: 2}
+  - {fileID: 11400000, guid: 80f0e5178a77f8c46a1f733c719c9653, type: 2}
+  - {fileID: 11400000, guid: cc7c1739bc535734ab432cef8fbe13ac, type: 2}
+  - {fileID: 11400000, guid: 9abc60ad055505240a33e4e3e0904704, type: 2}

@@ -21,6 +21,7 @@ public class OutsideMapChecker : MonoBehaviour
     private void OnDisable()
     {
         StopCoroutine(CheckForOutsideBounds(m_checkIntervalsSeconds));
+        _interactables = new Dictionary<XRBaseInteractable, Vector3>();
     }
 
     IEnumerator CheckForOutsideBounds(float checkIntervalSeconds)
