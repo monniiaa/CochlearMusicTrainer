@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Group Folders/Peter/MoreInstruments/Saxophone/saxophone/source.meta
 guid: f7207b21a3e584e6f85587805bfda43a
 folderAsset: yes
+========
+guid: 5cb061bd4907a974b9a53fcab21c160e
+>>>>>>>> origin/UI:Assets/Group Folders/Anton/Select Mode.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

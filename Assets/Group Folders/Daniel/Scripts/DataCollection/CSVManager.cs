@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using UnityEngine;
 using System.Linq;
+using System.Text;
 
 public class CSVManager : MonoBehaviour
 {
@@ -27,21 +29,25 @@ public class CSVManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        _csvFiles = new CSVFile($"{Application.dataPath}/TestDataFiles/player_data.csv");
-        FileStream stream = File.Create(_csvFiles.Path);
-        stream.Close();
     }
 
-    public void SaveScore(float score)
+    public void SaveMiniGameData(IMiniGameData data)
     {
-        if (File.ReadLines(_csvFiles.Path).FirstOrDefault() == string.Empty)
+        if (!File.Exists(data.Folder))
         {
-            CSVHelper.InsertColumnNames(_csvFiles.Path, "score");
+            SetupDataFile($"{Application.dataPath}/TestDataFiles" + data.Folder, data.FileName, data.CsvColumns);
+        }
+        using (StreamWriter stream = File.AppendText($"{Application.dataPath}/TestDataFiles" + data.Folder + data.FileName + ".csv"))
+        {
+            stream.WriteLine(data.ToCsv());
         }
     }
-    
-    public void SaveProgress(float score)
+
+    private void SetupDataFile(string path, string fileName, string columns)
     {
-        
+        Directory.CreateDirectory(path);
+        FileStream fileStream = File.Create(path + fileName + ".csv");
+        fileStream.Write(new UTF8Encoding().GetBytes(columns + Environment.NewLine));
+        fileStream.Close();
     }
 }

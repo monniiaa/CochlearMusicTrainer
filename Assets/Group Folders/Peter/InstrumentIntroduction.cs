@@ -39,6 +39,6 @@ public class InstrumentIntroduction : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("TrainingEnvironmentTest");
+        SceneManager.LoadScene(6);
     }
 }

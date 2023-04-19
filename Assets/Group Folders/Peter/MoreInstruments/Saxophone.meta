@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Group Folders/Peter/MoreInstruments/Saxophone.meta
 guid: 4c8e08d52c9334149a4fc088bfee028c
 folderAsset: yes
 DefaultImporter:
+========
+guid: dd9508fcc3c5fce4abb01d2f72977307
+TextScriptImporter:
+>>>>>>>> origin/PitchDiscrimination:Assets/MiniGameData/ScoreData.json.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

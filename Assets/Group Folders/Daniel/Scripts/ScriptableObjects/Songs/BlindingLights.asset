@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f0494509f551a64f81b6e5218754fb5, type: 3}
+  m_Name: BlindingLights
+  m_EditorClassIdentifier: 
+  stems:
+  - {fileID: 11400000, guid: b92c62cc9b7231c45934e67e78bd79de, type: 2}
+  - {fileID: 11400000, guid: d815b2c1a77612a4fbd377ac0b63abe9, type: 2}
+  - {fileID: 11400000, guid: d0b5ba9295ab5b14191dadd46d144b3b, type: 2}
+  - {fileID: 11400000, guid: b2f4c96ecdae0c245a52a95d0d97c113, type: 2}

@@ -11,7 +11,7 @@ public class ButtonFollowVisual : MonoBehaviour
 {
     public Transform m_visualTarget;
     public Vector3 m_localAxis;
-    public float m_resetSpeed;
+    public float m_resetSpeed = 5;
     public float m_followAngleThreshold = 45;
 
     private bool _freeze;
@@ -34,42 +34,46 @@ public class ButtonFollowVisual : MonoBehaviour
         _interactable.selectEntered.AddListener(Freeze);
     }
 
-    public void Follow(HoverEnterEventArgs args)
+    public void Follow(HoverEnterEventArgs hover)
     {
-        if (args.interactorObject is not XRPokeInteractor interactor) return;
-        XRPokeInteractor pokeInteractor = interactor;
-
-        _isFollowing = true;
-        _freeze = false;
-        
-        _pokeAttachTransform = pokeInteractor.attachTransform;
-        _offset = m_visualTarget.position - _pokeAttachTransform.position;
-
-        float pokeAngle = Vector3.Angle(_offset, m_visualTarget.TransformPoint(m_localAxis));
-        Debug.Log(pokeAngle);
-        if (pokeAngle < m_followAngleThreshold)
+        if (hover.interactorObject is XRPokeInteractor)
         {
-            _isFollowing = true;
-            _freeze = false;
+            XRPokeInteractor pokeInteractor = (XRPokeInteractor)hover.interactorObject;
+
+            _pokeAttachTransform = pokeInteractor.attachTransform;
+            _offset = m_visualTarget.position - _pokeAttachTransform.position;
+
+            float pokeAngle = Vector3.Angle(_offset, m_visualTarget.TransformPoint(m_localAxis));
+            Debug.Log(pokeAngle);
+            if (pokeAngle < m_followAngleThreshold)
+            {
+                _isFollowing = true;
+                _freeze = false;
+            }
         }
     }
 
-    public void Reset(HoverExitEventArgs args)
+    public void Reset(HoverExitEventArgs hover)
     {
-        if (args.interactorObject is not XRPokeInteractor) return;
-        _isFollowing = false;
-        _freeze = false;
+        if (hover.interactorObject is not XRPokeInteractor) return;
+       {
+            _isFollowing = false;
+            _freeze = false;
+       } 
     }
 
-    public void Freeze(SelectEnterEventArgs args)
+    public void Freeze(SelectEnterEventArgs hover)
     {
-        if (args.interactorObject is not XRPokeInteractor) return;
-        _freeze = true;
+        if (hover.interactorObject is not XRPokeInteractor) return;
+        {
+            _freeze = true;
+        }
     }
 
     void Update()
     {
-        if (_freeze) return;
+        if (_freeze) 
+            return;
         if (_isFollowing)
         {
             Vector3 localTargetPosition = m_visualTarget.InverseTransformPoint(_pokeAttachTransform.position + _offset);

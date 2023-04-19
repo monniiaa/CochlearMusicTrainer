@@ -197,6 +197,8 @@ public class PlayRandomSound : MonoBehaviour
 
     public void Triggered()
     {
+        //Debug.Log("Instrument " + currentInstrument);
+        //Debug.Log("Outline " + outline);
         if (currentInstrument.Equals (outline.selected))
         {
             isCorrect = true;

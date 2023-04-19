@@ -4,8 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - UnlockedLevel
+  - path
+  - Surface
+  - Whiteboard
+  - Interactable
+  - Test
   - InteractablePrefabTag
+  - UnlockedLevel
   - EndLaserTag
   - Speaker
   - Left Hand
@@ -13,11 +18,14 @@ TagManager:
   - path
   - playing
   - default
+  - SpawnPoint
+  - Original
+  - Equivalent
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ShootingDisc
   - Water
   - UI
   - 

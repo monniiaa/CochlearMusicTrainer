@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Group Folders/Peter/MoreInstruments.meta
 guid: 88fbe999e7648412cb32bf5d2accc7f5
 folderAsset: yes
 DefaultImporter:
+========
+guid: f6c57c52b5279f14a828ca1b0a6c2066
+TextScriptImporter:
+>>>>>>>> origin/PitchDiscrimination:Assets/MiniGameData/PitchDiscrimination/ScoreData.json.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
