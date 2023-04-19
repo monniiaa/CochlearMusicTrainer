@@ -1995,7 +1995,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3528,6 +3528,7 @@ GameObject:
   - component: {fileID: 908467788}
   - component: {fileID: 908467787}
   - component: {fileID: 908467791}
+  - component: {fileID: 908467792}
   m_Layer: 5
   m_Name: IntroCanvas
   m_TagString: Untagged
@@ -3633,6 +3634,25 @@ MonoBehaviour:
   text2: {fileID: 0}
   text3: {fileID: 0}
   soundStart: {fileID: 0}
+--- !u!114 &908467792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908467786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7951c64acb0fa62458bf30a60089fe2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 0
+  m_CheckFor2DOcclusion: 0
+  m_CheckFor3DOcclusion: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RaycastTriggerInteraction: 1
 --- !u!1 &977635265
 GameObject:
   m_ObjectHideFlags: 0
@@ -3690,7 +3710,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977635265}
   m_LocalRotation: {x: -0, y: -0.7071069, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: -1.4710795, y: 1.0346453, z: 2.5200796}
+  m_LocalPosition: {x: 0, y: 1, z: 2.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5261,7 +5281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5403598913657128200, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5403598915293591578, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
       propertyPath: m_Name

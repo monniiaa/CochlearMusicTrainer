@@ -61,12 +61,14 @@ public class PitchIdentification : LevelManager
             {
                 if (j != i)
                 {
+                    
                     while (  speakers[i].note > speakers[j].note - interval && speakers[i].note < speakers[j].note + interval)
                     {
                         int rand= Random.Range(lowestNote, highestNote);
                         speakers[i].note = rand;
                         speakers[i].SetNote(rand);
                     }
+                    
                 }
             }
             if (speakers[i].note > highestSpeaker.note)
@@ -97,7 +99,7 @@ public class PitchIdentification : LevelManager
         switch (difficulty)
         {
             case Difficulty.Easy:
-                SetPitchDifference(10, 20, 6);
+                SetPitchDifference(5, 25, 6);
                 break;
             case Difficulty.Medium:
                 SetPitchDifference(5, 25, 3);

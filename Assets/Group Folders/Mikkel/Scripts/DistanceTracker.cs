@@ -5,10 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.InputSystem;
 
 public class DistanceTracker : MonoBehaviour
-{
-    public Transform object1;
-    public Transform object2;
-    
+{  
     public delegate void Distance();
     public event Distance distanceEvent;
  
@@ -23,7 +20,7 @@ public class DistanceTracker : MonoBehaviour
 
     private void OnDisable()
     {
-        
+        controller.selectAction.action.performed -= Grippressed;
     }
 
     private void Grippressed(InputAction.CallbackContext ctx)

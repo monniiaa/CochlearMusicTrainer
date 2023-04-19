@@ -28,10 +28,14 @@ public class ConfirmInstrumentSeparation : MonoBehaviour
 
     private void OnDisable()
     {
-        foreach (var interactableInstrument in _interactableInstruments)
+        if(_interactableInstruments != null)
         {
-            interactableInstrument.Button.onClick.RemoveListener(OnConfirmHearing);
+            foreach (var interactableInstrument in _interactableInstruments)
+            {
+                interactableInstrument.Button.onClick.RemoveListener(OnConfirmHearing);
+            }
         }
+        
         _finishButton.onClick.RemoveListener(OnFinishButtonPressed);
         finishButtonHolder.SetActive(false);
     }

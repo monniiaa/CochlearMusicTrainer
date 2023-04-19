@@ -10,19 +10,9 @@ public class randomizeSoundLocation : MonoBehaviour
     public float height = 10f;
     public const int MaxSpeakers = 3;
     private int spawnedSpeaker;
-
+    [SerializeField]
     private GameObject player;
     private GameObject prefabInstance;
-
-    void Start()
-    {
-        player = GameObject.FindWithTag("Player");
-    }
-
-    void Update()
-    {
-        
-    }
 
     public GameObject SpawnSpeaker(GameObject prefab)
     {

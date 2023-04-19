@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class SoundLocalizationManager : MonoBehaviour
 {
@@ -40,7 +41,7 @@ public class SoundLocalizationManager : MonoBehaviour
     public GameObject FeedbackTwo;
     public GameObject FeedbackThree;
    
-    void Start()
+    void Awake()
     {
         _xrRayInteractor = FindObjectOfType<XRRayInteractor>();
         gameData = DataManager.ReadJson(path);
@@ -50,12 +51,19 @@ public class SoundLocalizationManager : MonoBehaviour
         meshRenderer.enabled = false;
         speakerAnimator.enabled = false;
         distanceTracker = GameObject.FindObjectOfType<DistanceTracker>();
-        StartNewRound();//maybe
 
     }
     private void OnEnable()
     {
         distanceTracker.distanceEvent += EndRound;
+        StartNewRound();//maybe
+    }
+
+    private void OnDisable()
+    {
+        gameIsOver = false;
+        currentRound = 0;
+        distanceTracker.distanceEvent -= EndRound;
     }
 
     private void EndRound()
@@ -82,9 +90,9 @@ public class SoundLocalizationManager : MonoBehaviour
         Debug.Log("Score: " + CurrentScore);
         if (currentRound > maxRounds)
         {
-            speaker.GetComponent<DeletusMaximus>().Destroy();
+            if (!speaker.IsDestroyed()) speaker.GetComponent<DeletusMaximus>().Destroy();
             gameIsOver = true;
-            Debug.Log("Game over");
+            InstrumentSeparation.Instance.EndGame();
             switch (CurrentScore)
             {
                 case 0:
@@ -115,7 +123,7 @@ public class SoundLocalizationManager : MonoBehaviour
 
     private void RespawnSpeaker()
     {
-        speaker.GetComponent<DeletusMaximus>().Destroy();
+        if(!speaker.IsDestroyed()) speaker.GetComponent<DeletusMaximus>().Destroy();
         speaker = speakerspawner.SpawnSpeaker(prefab);
         if (CurrentLevel < 3)
         {
