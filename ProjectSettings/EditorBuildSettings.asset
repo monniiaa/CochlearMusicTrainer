@@ -36,7 +36,7 @@ EditorBuildSettings:
     path: Assets/FinalScenes/Scenes/Hub.unity
     guid: 715cbc63edd59f24f990e2c99078c54b
   - enabled: 1
-    path: Assets/FinalScenes/Scenes/InstrumentIdentification.unity
+    path: Assets/FinalScenes/Scenes/InstrumentIdentification - Introduction.unity
     guid: 48154928f07d3f94a97a8d47cdf51443
   - enabled: 1
     path: Assets/FinalScenes/Scenes/InstrumentSeperation.unity
