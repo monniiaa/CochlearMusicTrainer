@@ -13,12 +13,15 @@ public class PitchIdentification : LevelManager
     public GameObject speakerPrefab;
     public Vector3[] initialPositions;
     [SerializeField]
-    Canvas endOfRoundCanvas;
+
     Speaker[] speakers;
     public GameObject[] starAnimation = new GameObject[4];
+    public InstrumentSeparation ModeManager;
 
-    private void Start()
+
+    private void Awake()
     {
+        ModeManager = InstrumentSeparation.Instance;
         gameplayAudio = GetComponent<AudioSource>();
         path = "PitchIdentification";
         gameData =  DataManager.ReadJson(path);
@@ -28,7 +31,6 @@ public class PitchIdentification : LevelManager
         SetMode();
         speakers = GameObject.FindObjectsOfType<Speaker>();
         initialPositions = new Vector3[speakers.Length];
-        endOfRoundCanvas.gameObject.SetActive(false);
         for( int i = 0; i < speakers.Length;i++)
         {
             initialPositions[i] = speakers[i].transform.position;
@@ -36,29 +38,38 @@ public class PitchIdentification : LevelManager
         StartRound();
     }
     
+    public void RestartLevel()
+    {
+        currentLevel--;
+        round = 1;
+        foreach (Speaker s in speakers)
+        {
+            s.gameObject.SetActive(true);
+        }
+        StartRound();
+    }
 
-    public void SetPitchDifference(int minfrequency, int maxfrequency, int intervalFrequency)
+    public void SetPitchDifference(int lowestNote, int highestNote , int interval)
     {
         highestSpeaker = speakers[0];
         for (int i = 0; i < speakers.Length; i++)
         {
-            int randFrequency = Random.Range(minfrequency, maxfrequency);
-            speakers[i].frequency1 = randFrequency;
-            speakers[i].frequency2 = randFrequency;
+            int randNote = Random.Range(lowestNote, highestNote);
+            speakers[i].note = randNote;
+            speakers[i].SetNote(randNote);
             for (int j = 0; j < speakers.Length;j++)
             {
                 if (j != i)
                 {
-                    while ( speakers[i].frequency1 + (intervalFrequency/2) > speakers[j].frequency1 &&
-                        speakers[i].frequency1 - (intervalFrequency /2) < speakers[j].frequency1 )
+                    while (  speakers[i].note > speakers[j].note - interval && speakers[i].note < speakers[j].note + interval)
                     {
-                        int rand= Random.Range(minfrequency, maxfrequency);
-                        speakers[i].frequency1 = rand;
-                        speakers[i].frequency2 = rand;
+                        int rand= Random.Range(lowestNote, highestNote);
+                        speakers[i].note = rand;
+                        speakers[i].SetNote(rand);
                     }
                 }
             }
-            if (speakers[i].frequency1 > highestSpeaker.frequency1)
+            if (speakers[i].note > highestSpeaker.note)
             {
                 highestSpeaker = speakers[i];
             }
@@ -86,17 +97,29 @@ public class PitchIdentification : LevelManager
         switch (difficulty)
         {
             case Difficulty.Easy:
-                SetPitchDifference(700, 4000, 2000 - gameData.level * 20);
+                SetPitchDifference(10, 20, 6);
                 break;
             case Difficulty.Medium:
-                SetPitchDifference(300, 1500, 1000 - gameData.level * 20);
+                SetPitchDifference(5, 25, 3);
                 break;
             case Difficulty.Hard:
-                SetPitchDifference(100, 900, 400 - gameData.level * 20);
+                SetPitchDifference(0, 30, 1);
                 break;
             default:
                 break;
         }
+    }
+
+    IEnumerator End()
+    {
+        yield return new WaitForSeconds(0.7f);
+        foreach (Speaker s in speakers)
+        {
+            s.gameObject.SetActive(false);
+        }
+        ModeManager.EndGame();
+        //TODO: SHOW STAR RESULT
+
     }
 
     public override void SetRoundFunctionality()
@@ -108,15 +131,12 @@ public class PitchIdentification : LevelManager
         }
         else
         {
-            foreach (Speaker s in speakers)
-            {
-                s.DestroySpeaker();
-            }
+            StartCoroutine(End());
             currentLevel++;
             gameData.level = currentLevel;
             DataManager.SaveDataToJson(gameData, path);
-            endOfRoundCanvas.gameObject.SetActive(true);
-            starAnimation[currentScore].gameObject.SetActive(true);
+
+            
         }
     }
 
@@ -125,7 +145,7 @@ public class PitchIdentification : LevelManager
 
         foreach (Speaker s in speakers)
         {
-            s.ResetFrequency();
+            s.ResetCurrentNote();
             s.DestroyAnimation();
         }
     }

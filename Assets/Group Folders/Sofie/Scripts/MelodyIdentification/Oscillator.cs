@@ -4,50 +4,35 @@ using UnityEngine;
 
 public class Oscillator : MonoBehaviour
 {
-    public double frequency = 440.0;
-    private double increment;
-    private double phase;
-    private double sampling_frequency = 48000.0;
 
-    private float gain = 0;
-    private float volume = 0.05f;
-    public float[] frequencies { get; private set; }
-    private int thisFreq;
-    public int startFreq { get; private set; }
+    public AudioClip[] notes;
+    public AudioSource source;
+    public int startNote;
+    public int currentNote;
+    public AudioClip currentClip;
+
+    public Material mat;
+
+    public Animator animator;
 
 
     private void Awake()
     {
-        frequencies = new float[14];
-        frequencies[0] = 523.25f;
-        frequencies[1] = 587.33f;
-        frequencies[2] = 659.25f;
-        frequencies[3] = 698.46f;
-        frequencies[4] = 783.99f;
-        frequencies[5] = 880.00f;
-        frequencies[6] = 987.77f;
-
-        frequencies[7] = 1046.50f;
-        frequencies[8] = 1174.66f;
-        frequencies[9] = 1318.51f;
-        frequencies[10] = 1396.91f;
-        frequencies[11] = 1567.98f;
-        frequencies[12] = 1760.00f;
-        frequencies[13] = 1975.53f;
+        source = GetComponent<AudioSource>();
 
     }
 
 
     public void CreateStartNote()
     {
-        int rand = Random.Range(0, frequencies.Length);
-        startFreq = rand;
+        int rand = Random.Range(0, notes.Length);
+        startNote = rand;
         
     }
 
     public void CreateStartNote(int i)
     {
-        startFreq = i;
+        startNote = i;
     }
     public void PlayMelody()
     {
@@ -58,54 +43,33 @@ public class Oscillator : MonoBehaviour
 
     IEnumerator PlaySequence(int interval, int length, float noteTime)
     {
-        thisFreq = startFreq;
+        currentNote = startNote;
+        currentClip = notes[currentNote];
         int i = 0;
         do
         {
-            if(thisFreq >= 7)
-            {
-                volume = 0.025f;
-            }
-            frequency = frequencies[thisFreq];
-            thisFreq += interval;
-            thisFreq = thisFreq % frequencies.Length;
+            currentClip = notes[currentNote];
+            Debug.Log(currentClip.name);
+            source.PlayOneShot(currentClip);
+            currentNote += interval;
+            currentNote = currentNote % notes.Length;
             i++;
             yield return new WaitForSeconds(noteTime);
 
         } while (i < length);
 
-        SetNotePlaying(false);
+        source.Stop();
     }
 
-    public void SetNotePlaying(bool on)
+    public void SetPickedState(bool state)
     {
-        if (on)
-        {
-            gain = volume;
-        } 
-        else
-        {
-            gain = 0;
-        }
+        animator.SetBool("Picked", state);
     }
 
-    private void OnAudioFilterRead(float[] data, int channels)
+    public void DestroyAnimation()
     {
-        increment = frequency * 2.0 * Mathf.PI / sampling_frequency;
+        animator.SetTrigger("Destroy");
 
-        for (int i =0;i<data.Length;i+= channels)
-        {
-            phase += increment;
-            data[i] = (float)(gain * Mathf.Sin((float)phase));
-
-            if(channels == 2)
-            {
-                data[i + 1] = data[i];
-            }
-            if(phase > (Mathf.PI * 2))
-            {
-                phase = 0.0;
-            }
-        }
     }
+
 }

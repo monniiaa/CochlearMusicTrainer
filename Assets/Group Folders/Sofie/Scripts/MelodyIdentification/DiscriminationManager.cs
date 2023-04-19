@@ -12,22 +12,34 @@ public class DiscriminationManager : LevelManager
     private Oscillator originalMelody;
 
     private Oscillator pickedMelody;
-    public Canvas endOfLevelCanvas;
+    public InstrumentSeparation ModeManager;
     public GameObject[] starAnimation = new GameObject[4];
+
+    
+
+
 
     private void Start()
     {
+        ModeManager = InstrumentSeparation.Instance;
         melodies = GameObject.FindObjectsOfType<Oscillator>();
         path = "PitchDiscrimination";
-        //   SetDifficultyChanges();
-        // SetRoundFunctionality();
         StartRound();
         gameData = DataManager.ReadJson(path);
         currentLevel = gameData.level;
         SetDifficultyChanges();
-        endOfLevelCanvas.gameObject.SetActive(false);
     }
 
+    public void RestartLevel()
+    {
+        currentLevel--;
+        round = 1;
+        foreach (Oscillator osc in melodies)
+        {
+            osc.gameObject.SetActive(true);
+        }
+        StartRound();
+    }
     
     public void SetOriginalMelody()
     {
@@ -49,7 +61,7 @@ public class DiscriminationManager : LevelManager
             rand = Random.Range(0, melodies.Length);
         } while (melodies[rand].CompareTag("Original"));
 
-        melodies[rand].CreateStartNote(originalMelody.startFreq);
+        melodies[rand].CreateStartNote(originalMelody.startNote);
         melodies[rand].gameObject.tag = "Equivalent";
     }
 
@@ -62,8 +74,8 @@ public class DiscriminationManager : LevelManager
                 do
                 {
                     melody.CreateStartNote();
-                } while (melody.startFreq < originalMelody.startFreq + intervalDistance && melody.startFreq > originalMelody.startFreq - intervalDistance
-                && melody.startFreq <= (originalMelody.startFreq + intervalDistance) % originalMelody.frequencies.Length);
+                } while (melody.startNote < originalMelody.startNote + intervalDistance && melody.startNote > originalMelody.startNote - intervalDistance
+                && melody.startNote <= (originalMelody.startNote + intervalDistance) % originalMelody.notes.Length);
             }
         }
     }
@@ -74,15 +86,15 @@ public class DiscriminationManager : LevelManager
         {
             case Difficulty.Easy:
                 levelInterval = Random.Range(3, 5);
-                levelSequenceLength = Random.Range(1, 3);
+                levelSequenceLength = Random.Range(2, 4);
                 break;
             case Difficulty.Medium:
                 levelInterval = Random.Range(1, 2);
-                levelSequenceLength = Random.Range(2, 4);
+                levelSequenceLength = Random.Range(3, 5);
                 break;
             case Difficulty.Hard:
                 levelInterval = Random.Range(1, 2);
-                levelSequenceLength = Random.Range(2, 4);
+                levelSequenceLength = Random.Range(3, 6);
                 break;
         }
         intervalDistance = Random.Range(0, 2);
@@ -95,10 +107,13 @@ public class DiscriminationManager : LevelManager
     }
     protected override void EndRound()
     {
-        if (pickedMelody.startFreq == originalMelody.startFreq)
+        foreach (Oscillator osc in melodies)
         {
-            Debug.Log(pickedMelody.name + pickedMelody.startFreq);
-            Debug.Log(originalMelody.name + originalMelody.startFreq);
+            osc.DestroyAnimation();
+            
+        }
+        if (pickedMelody.startNote == originalMelody.startNote)
+        {
             gameplayAudio.PlayOneShot(sucessAudio);
             pickedMelody.GetComponent<MeshRenderer>().material = sucessMaterial;
             currentScore++;
@@ -116,6 +131,7 @@ public class DiscriminationManager : LevelManager
 
     protected override void StartRound()
     {
+        StartCoroutine(test());
         SetDifficultyChanges();
         SetOriginalMelody();
         SetEquivalentMelody();
@@ -123,6 +139,26 @@ public class DiscriminationManager : LevelManager
 
     }
 
+    IEnumerator test()
+    {
+        yield return new WaitForSeconds(0.7f);
+        foreach (Oscillator osc in melodies)
+        {
+            osc.GetComponent<MeshRenderer>().material = osc.mat;
+        }
+    }
+
+    IEnumerator End()
+    {
+        yield return new WaitForSeconds(0.7f);
+        foreach (Oscillator osc in melodies)
+        {
+            osc.gameObject.SetActive(false);
+        }
+        ModeManager.EndGame();
+        //TODO: SHOW STAR RESULT
+
+    }
     public override void SetRoundFunctionality()
     {
         round++;
@@ -133,11 +169,10 @@ public class DiscriminationManager : LevelManager
         }
         else
         {
+           StartCoroutine(End());
            currentLevel++;
            gameData.level = currentLevel;
            DataManager.SaveDataToJson(gameData, path);
-           endOfLevelCanvas.gameObject.SetActive(true);
-            starAnimation[currentScore].SetActive(true);
         }
     }
 }
