@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class JsonManager : MonoBehaviour
 {
+    private static string _path;
     private static JsonManager _instance;   
     public static JsonManager Instance
     {
@@ -24,19 +25,16 @@ public class JsonManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-    }
-    
-    void Start()
-    {
-        WriteDataToFile<SoundLocalizationDataContainer>(new SoundLocalizationDataContainer(10, 1));
-        WriteDataToFile<SoundLocalizationDataContainer>(new SoundLocalizationDataContainer(12, 1));
-        WriteDataToFile<SoundLocalizationDataContainer>(new SoundLocalizationDataContainer(10, 1));
-        WriteDataToFile<SoundLocalizationDataContainer>(new SoundLocalizationDataContainer(10, 90));
+#if UNITY_EDITOR
+        _path = Application.dataPath + "\\TestDataFiles\\";
+#elif PLATFORM_ANDROID
+        _path = Application.persistentDataPath;
+#endif
     }
 
     public static void WriteDataToFile<T>(AbstractDataContainer dataContainer) where T : AbstractDataContainer
     {
-        string fullPath = Application.dataPath + "\\TestDataFiles\\" + dataContainer.Path;
+        string fullPath = _path + dataContainer.Path;
         if(!Directory.Exists(fullPath)) Directory.CreateDirectory(Path.GetDirectoryName(fullPath) ?? throw new InvalidOperationException());
 
         DataContainerList<T> dataContainerList = new DataContainerList<T>();;
@@ -51,5 +49,12 @@ public class JsonManager : MonoBehaviour
         {
             stream.Write(new UTF8Encoding(true).GetBytes(dataContainerList.ToJson()));
         }
+    }
+
+    public static List<T> ReadDataFromFile<T>() where T : AbstractDataContainer
+    {
+        string fullPath = _path + ((T) Activator.CreateInstance(typeof(T))).Path;
+        if (!File.Exists(fullPath)) return null;
+        return JsonUtility.FromJson<DataContainerList<T>>(File.ReadAllText(fullPath)).DataList;
     }
 }

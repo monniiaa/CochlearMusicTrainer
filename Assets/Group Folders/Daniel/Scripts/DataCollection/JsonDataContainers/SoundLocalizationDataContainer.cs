@@ -7,7 +7,7 @@ using UnityEngine;
 public class SoundLocalizationDataContainer : AbstractDataContainer
 {
     public override string Path => "\\SoundLocalization\\sound_localization_data.json";
-    
+
     public float distance;
     public float hello;
 

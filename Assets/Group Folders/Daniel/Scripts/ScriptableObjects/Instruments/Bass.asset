@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc8c8f9013d1b974f8b8d46e9a410cb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e4b8fe175747614da7e5a461b9580ec, type: 3}
   m_Name: Bass
   m_EditorClassIdentifier: 
-  instrumentData: {fileID: 11400000, guid: 2df420635b78b824885cda95709b6e83, type: 2}
-  audioClip: {fileID: 8300000, guid: 89c5db85a71ebe347aa20e673dc1e731, type: 3}
+  instrument: 10
+  instrumentFamily: 2
+  instrumentPrefab: {fileID: 3053057996953965694, guid: 19d151509fb18fa49ba43cfffc9e24c0, type: 3}

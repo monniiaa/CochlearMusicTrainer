@@ -16,9 +16,10 @@ public enum Instrument
     Cello,
     Piano,
     SnareDrum,
-    Vocals
+    Vocals,
+    Bass,
+    Other
 }
-
 
 public enum InstrumentFamily
 {
@@ -31,16 +32,17 @@ public enum InstrumentFamily
 
 public class InstrumentSpawner : MonoBehaviour
 {
-    [SerializeField] private SongData songData;
+    [SerializeField] private SongData[] songs;
     [SerializeField] private GameObject grabbablePrefab;
     [SerializeField] private GameObject soundSourcePrefab;
     [SerializeField] private GameObject confirmUIPrefab;
     private GameObject[] _spawnPoints;
     private AudioClip[] _audioClip;
-    private GameObject[] grabbableInstruments;
+    private GameObject[] _grabbableInstruments;
 
     private void Awake()
     {
+        songs = Resources.LoadAll<SongData>("Songs");
         _spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
     }
 
@@ -51,25 +53,29 @@ public class InstrumentSpawner : MonoBehaviour
 
     public void SpawnInstruments()
     {
-        grabbableInstruments = new GameObject[songData.stems.Length];
+        SongData randomSong = songs[Random.Range(0, songs.Length)];
+        _grabbableInstruments = new GameObject[randomSong.stems.Length];
+        
         for (int i = 0; i < _spawnPoints.Length; i++)
         {
-            grabbableInstruments[i] = Instantiate(grabbablePrefab);
-            GameObject confirmUI = Instantiate(confirmUIPrefab, grabbableInstruments[i].transform);
-            GameObject instrument = Instantiate(songData.stems[i].instrumentData.instrumentPrefab, grabbableInstruments[i].transform);
-            GameObject soundSource = Instantiate(soundSourcePrefab, grabbableInstruments[i].transform);
+            _grabbableInstruments[i] = Instantiate(grabbablePrefab);
+            GameObject confirmUI = Instantiate(confirmUIPrefab, _grabbableInstruments[i].transform);
+            GameObject instrument = Instantiate(randomSong.stems[i].instrumentData.instrumentPrefab, _grabbableInstruments[i].transform);
+            GameObject soundSource = Instantiate(soundSourcePrefab, _grabbableInstruments[i].transform);
             GameObject attachmentPoint = new GameObject("AttachmentPoint");
-            grabbableInstruments[i].AddComponent<InteractableInstrument>();
-            attachmentPoint.transform.SetParent(grabbableInstruments[i].transform);
-            BoxCollider instrumentHolderCollider = grabbableInstruments[i].GetComponent<BoxCollider>();
+            _grabbableInstruments[i].AddComponent<InteractableInstrument>();
+            attachmentPoint.transform.SetParent(_grabbableInstruments[i].transform);
+            BoxCollider instrumentHolderCollider = _grabbableInstruments[i].GetComponent<BoxCollider>();
             Bounds instrumentBounds = instrument.GetComponent<MeshRenderer>().bounds;
             instrumentHolderCollider.size = instrumentBounds.size;
             instrumentHolderCollider.center = instrumentBounds.center;
             attachmentPoint.transform.position = instrumentHolderCollider.center;
             confirmUI.transform.position = new Vector3(0, instrumentBounds.max.y + 0.1f, 0);
-            grabbableInstruments[i].transform.position = _spawnPoints[i].transform.position;
+            _grabbableInstruments[i].transform.position = _spawnPoints[i].transform.position;
+            
             AudioSource audioSource = soundSource.GetComponent<AudioSource>();
-            audioSource.clip = songData.stems[i].audioClip;
+            audioSource.clip = randomSong.stems[i].audioClip;
+            audioSource.timeSamples += audioSource.clip.samples/2; // Start halfway through the clip
             audioSource.gameObject.SetActive(true);
         }
         
@@ -86,7 +92,7 @@ public class InstrumentSpawner : MonoBehaviour
 
     private void OnDisable()
     {
-        foreach (var grabbableInstrument in grabbableInstruments)
+        foreach (var grabbableInstrument in _grabbableInstruments)
         {
             Destroy(grabbableInstrument);
         }

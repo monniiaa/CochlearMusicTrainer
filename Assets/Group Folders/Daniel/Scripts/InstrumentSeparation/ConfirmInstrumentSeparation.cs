@@ -9,20 +9,21 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class ConfirmInstrumentSeparation : MonoBehaviour
 {
     [SerializeField]
-    private GameObject finishButton;
+    private GameObject finishButtonHolder;
     private InteractableInstrument[] _interactableInstruments;
     private InstrumentSeparation _instrumentSeparation;
-    private XRSimpleInteractable _buttonPokeInteractable;
+    private Button _finishButton;
 
     private void Awake()
     {
         _instrumentSeparation = InstrumentSeparation.Instance;
-        _buttonPokeInteractable = finishButton.GetComponentInChildren<XRSimpleInteractable>();
+        _finishButton = finishButtonHolder.GetComponentInChildren<Button>();
     }
 
     private void OnEnable()
     {
         StartCoroutine(WaitForInstruments());
+        finishButtonHolder.SetActive(false);
     }
 
     private void OnDisable()
@@ -31,22 +32,22 @@ public class ConfirmInstrumentSeparation : MonoBehaviour
         {
             interactableInstrument.Button.onClick.RemoveListener(OnConfirmHearing);
         }
-        _buttonPokeInteractable.selectEntered.RemoveListener(OnPokableButtonPressed);
-        finishButton.SetActive(false);
+        _finishButton.onClick.RemoveListener(OnFinishButtonPressed);
+        finishButtonHolder.SetActive(false);
     }
 
     private void OnConfirmHearing()
     {
         if (IsMissingSelections())
         {
-            finishButton.SetActive(false);
+            finishButtonHolder.SetActive(false);
             return;
         }
         
-        finishButton.SetActive(true);
+        finishButtonHolder.SetActive(true);
     }
 
-    private void OnPokableButtonPressed(SelectEnterEventArgs args)
+    private void OnFinishButtonPressed()
     {
         _instrumentSeparation.EndGame();
     }
@@ -63,6 +64,6 @@ public class ConfirmInstrumentSeparation : MonoBehaviour
             interactableInstrument.Button.onClick.AddListener(OnConfirmHearing);
         }
 
-        _buttonPokeInteractable.selectEntered.AddListener(OnPokableButtonPressed);
+        _finishButton.onClick.AddListener(OnFinishButtonPressed);
     }
 }

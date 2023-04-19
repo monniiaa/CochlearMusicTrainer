@@ -27,6 +27,7 @@ public class SceneTransitionManager : MonoBehaviour
         }
 
         operation.allowSceneActivation = true;
-        
     }
+    
+    
 }
