@@ -6,6 +6,7 @@ using TMPro;
 public class IntroExplanation : MonoBehaviour
 {
     public TMP_Text text1, text2, text3;
+    public GameObject canvas;
     //In order to call the method from PlayRandomSound, there needs to be a reference to the script, which is declared here. 
     public PlayRandomSound soundStart;
 
@@ -29,6 +30,7 @@ public class IntroExplanation : MonoBehaviour
             }
             else if (text3.IsActive())
             {
+                canvas.SetActive(false);
                 text3.gameObject.SetActive(false);
                 soundStart.Round();
                 soundStart.time = Time.deltaTime;

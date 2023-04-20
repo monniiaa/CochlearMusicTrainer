@@ -39,6 +39,7 @@ public class InstrumentIntroduction : MonoBehaviour
 
     public void StartGame()
     {
+        //Change back to 6!!
         SceneManager.LoadScene(6);
     }
 }

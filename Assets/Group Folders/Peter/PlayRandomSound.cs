@@ -22,7 +22,9 @@ public class PlayRandomSound : MonoBehaviour
     public float points;
     private bool isCorrect = false;
     private GameObject currentInstrument;
-    [SerializeField] private TMP_Text firstInstrument, secondInstrument, thirdInstrument;
+    //[SerializeField] private TMP_Text firstInstrument, secondInstrument, thirdInstrument;
+    [SerializeField] private GameObject oneStar, twoStar, threeStar, noStar;
+    [SerializeField] private GameObject resultCanvas;
     private List<int> errorCount = new List<int>();
     private List<float> timerCount = new List<float>();
 
@@ -75,20 +77,36 @@ public class PlayRandomSound : MonoBehaviour
     {
         time += Time.deltaTime;
         //SelectInstrument();
-
     }
 
     private void EndFeedback()
     {
         //UI implementation, with text files showing which instruments were played
-        firstInstrument.text = objectsPlayed[0];
+        /*firstInstrument.text = objectsPlayed[0];
         firstInstrument.gameObject.SetActive(true);
         secondInstrument.text = objectsPlayed[1];
         secondInstrument.gameObject.SetActive(true);
         thirdInstrument.text = objectsPlayed[2];
         //testing below
         //thirdInstrument.text = points.ToString();
-        thirdInstrument.gameObject.SetActive(true);
+        thirdInstrument.gameObject.SetActive(true);*/
+        resultCanvas.SetActive(true);
+        switch (errorCount.Count)
+        {
+            case 3:
+                noStar.SetActive(true);
+                break;
+            case 2:
+                oneStar.SetActive(true);
+                break;
+            case 1:
+                twoStar.SetActive(true);
+                break;
+            default:
+                threeStar.SetActive(true);
+            break;
+
+        }
     }
 
     public void StopRound(InputAction.CallbackContext ctx)
@@ -209,7 +227,7 @@ public class PlayRandomSound : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+   private void OnEnable()
     {
         XRinput.action.performed += StopRound;
     }

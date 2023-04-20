@@ -7480,6 +7480,7 @@ MonoBehaviour:
   text1: {fileID: 387485859}
   text2: {fileID: 458648182}
   text3: {fileID: 1794246282}
+  canvas: {fileID: 0}
   soundStart: {fileID: 0}
 --- !u!1 &920874117
 GameObject:
@@ -13343,9 +13344,11 @@ MonoBehaviour:
   difficulty: 3
   time: 0
   points: 0
-  firstInstrument: {fileID: 1664008174}
-  secondInstrument: {fileID: 523273964}
-  thirdInstrument: {fileID: 222030322}
+  oneStar: {fileID: 0}
+  twoStar: {fileID: 0}
+  threeStar: {fileID: 0}
+  noStar: {fileID: 0}
+  resultCanvas: {fileID: 0}
   camera: {fileID: 3221912668148908498}
   XRinput: {fileID: 1033673095452181857, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!4 &1568146439
@@ -18088,7 +18091,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1790305723868431423}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
@@ -19041,37 +19044,13 @@ MonoBehaviour:
       m_Calls: []
   gripPressed:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1568146438}
-        m_TargetAssemblyTypeName: PlayRandomSound, Assembly-CSharp
-        m_MethodName: Triggered
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   joystickReleased:
     m_PersistentCalls:
       m_Calls: []
   joystickNorthPressed:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1568146438}
-        m_TargetAssemblyTypeName: PlayRandomSound, Assembly-CSharp
-        m_MethodName: StopRound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   joystickSouthPressed:
     m_PersistentCalls:
       m_Calls: []
@@ -21250,7 +21229,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4064166307373288589}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
@@ -23722,7 +23701,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6256994059463638925}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
@@ -25336,7 +25315,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3323232255237239357}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
