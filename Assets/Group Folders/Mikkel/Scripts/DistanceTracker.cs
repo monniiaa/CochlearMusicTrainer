@@ -15,15 +15,15 @@ public class DistanceTracker : MonoBehaviour
 
     private void OnEnable()
     {
-        controller.selectAction.action.performed += Grippressed;
+        controller.activateAction.action.performed += TriggerPressed;
     }
 
     private void OnDisable()
     {
-        controller.selectAction.action.performed -= Grippressed;
+        controller.activateAction.action.performed -= TriggerPressed;
     }
 
-    private void Grippressed(InputAction.CallbackContext ctx)
+    private void TriggerPressed(InputAction.CallbackContext ctx)
     {
         GameObject speaker = GameObject.FindGameObjectWithTag("InteractablePrefabTag");
          // Log distance to console with 2 decimal places

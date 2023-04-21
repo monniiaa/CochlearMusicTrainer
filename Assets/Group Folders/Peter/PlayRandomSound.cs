@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Collections;
+using UnityEngine;
 using UnityEngine;
 using TMPro;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -22,12 +24,15 @@ public class PlayRandomSound : MonoBehaviour
     public float points;
     private bool isCorrect = false;
     private GameObject currentInstrument;
-    [SerializeField] private TMP_Text firstInstrument, secondInstrument, thirdInstrument;
+    //[SerializeField] private TMP_Text firstInstrument, secondInstrument, thirdInstrument;
+    [SerializeField] private GameObject oneStar, twoStar, threeStar, noStar;
+    [SerializeField] private GameObject resultCanvas;
     private List<int> errorCount = new List<int>();
     private List<float> timerCount = new List<float>();
 
     //VR interaction variables
-    OutlineManager outline;
+    [SerializeField]
+    private OutlineManager outline;
 
     RaycastHit hit;
     RaycastHit previousHit;
@@ -37,7 +42,6 @@ public class PlayRandomSound : MonoBehaviour
 
     private void Awake()
     {
-        outline = FindObjectOfType<OutlineManager>();
         int numParents = difficulty;
         List<int> pickedFamily = new List<int>();
         for (int i = 0; i < numParents; i++)
@@ -66,33 +70,45 @@ public class PlayRandomSound : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-
-    }
-
     private void Update()
     {
         time += Time.deltaTime;
         //SelectInstrument();
-
     }
 
     private void EndFeedback()
     {
         //UI implementation, with text files showing which instruments were played
-        firstInstrument.text = objectsPlayed[0];
+        /*firstInstrument.text = objectsPlayed[0];
         firstInstrument.gameObject.SetActive(true);
         secondInstrument.text = objectsPlayed[1];
         secondInstrument.gameObject.SetActive(true);
         thirdInstrument.text = objectsPlayed[2];
         //testing below
         //thirdInstrument.text = points.ToString();
-        thirdInstrument.gameObject.SetActive(true);
+        thirdInstrument.gameObject.SetActive(true);*/
+        resultCanvas.SetActive(true);
+        switch (errorCount.Count)
+        {
+            case 3:
+                noStar.SetActive(true);
+                break;
+            case 2:
+                oneStar.SetActive(true);
+                break;
+            case 1:
+                twoStar.SetActive(true);
+                break;
+            default:
+                threeStar.SetActive(true);
+            break;
+
+        }
     }
 
     public void StopRound(InputAction.CallbackContext ctx)
     {
+            outline.ClearAllSelections();
             StopMusic();
             if (round1 == false)
             {
@@ -197,9 +213,18 @@ public class PlayRandomSound : MonoBehaviour
 
     public void Triggered()
     {
-        //Debug.Log("Instrument " + currentInstrument);
-        //Debug.Log("Outline " + outline);
-        if (currentInstrument.Equals (outline.selected))
+        StartCoroutine(WaitForSelection());
+    }
+
+    private void OnEnable()
+    {
+        XRinput.action.performed += StopRound;
+    }
+
+    private IEnumerator WaitForSelection()
+    {
+        yield return new WaitForEndOfFrame();
+        if (currentInstrument.name.Equals(outline.selected.name))
         {
             isCorrect = true;
         }
@@ -207,11 +232,7 @@ public class PlayRandomSound : MonoBehaviour
         {
             isCorrect = false;
         }
-    }
-
-    private void OnEnable()
-    {
-        XRinput.action.performed += StopRound;
+        Debug.Log("Correct: " + isCorrect);
     }
 
 }

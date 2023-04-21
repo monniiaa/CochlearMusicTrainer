@@ -1297,7 +1297,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Inds\xE6t tekst"
+  m_text: "\xD8velsen g\xE5r ud p\xE5 at f\xF8lge lyden med din h\xF8relse og skyde
+    der hvor du tror lyden kommer fra. Du skyder med den forreste knap p\xE5 h\xF8jre
+    controller."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
   m_sharedMaterial: {fileID: -8816214507793482341, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
