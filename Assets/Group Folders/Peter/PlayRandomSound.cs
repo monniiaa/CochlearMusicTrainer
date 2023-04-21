@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Collections;
+using UnityEngine;
 using UnityEngine;
 using TMPro;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -29,7 +31,8 @@ public class PlayRandomSound : MonoBehaviour
     private List<float> timerCount = new List<float>();
 
     //VR interaction variables
-    OutlineManager outline;
+    [SerializeField]
+    private OutlineManager outline;
 
     RaycastHit hit;
     RaycastHit previousHit;
@@ -39,7 +42,6 @@ public class PlayRandomSound : MonoBehaviour
 
     private void Awake()
     {
-        outline = FindObjectOfType<OutlineManager>();
         int numParents = difficulty;
         List<int> pickedFamily = new List<int>();
         for (int i = 0; i < numParents; i++)
@@ -66,11 +68,6 @@ public class PlayRandomSound : MonoBehaviour
         {
             obj.SetActive(true);
         }
-    }
-
-    private void Start()
-    {
-
     }
 
     private void Update()
@@ -111,6 +108,7 @@ public class PlayRandomSound : MonoBehaviour
 
     public void StopRound(InputAction.CallbackContext ctx)
     {
+            outline.ClearAllSelections();
             StopMusic();
             if (round1 == false)
             {
@@ -215,9 +213,18 @@ public class PlayRandomSound : MonoBehaviour
 
     public void Triggered()
     {
-        //Debug.Log("Instrument " + currentInstrument);
-        //Debug.Log("Outline " + outline);
-        if (currentInstrument.Equals (outline.selected))
+        StartCoroutine(WaitForSelection());
+    }
+
+    private void OnEnable()
+    {
+        XRinput.action.performed += StopRound;
+    }
+
+    private IEnumerator WaitForSelection()
+    {
+        yield return new WaitForEndOfFrame();
+        if (currentInstrument.name.Equals(outline.selected.name))
         {
             isCorrect = true;
         }
@@ -225,11 +232,7 @@ public class PlayRandomSound : MonoBehaviour
         {
             isCorrect = false;
         }
-    }
-
-   private void OnEnable()
-    {
-        XRinput.action.performed += StopRound;
+        Debug.Log("Correct: " + isCorrect);
     }
 
 }

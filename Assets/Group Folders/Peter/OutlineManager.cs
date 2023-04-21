@@ -29,6 +29,15 @@ public class OutlineManager : MonoBehaviour
         }
     }
 
+    public void ClearAllSelections()
+    {
+        selected = null;
+        foreach (SelectionOutline seloutline in outlines)
+        {
+            seloutline.outline.enabled = false;
+        }
+    }
+
     private void Math(GameObject selectedObj)
     {
         foreach (SelectionOutline seloutline in outlines)
