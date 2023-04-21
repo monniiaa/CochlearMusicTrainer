@@ -4575,7 +4575,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\xD8velsen g\xE5r ud p\xE5 at du skal flytte nogle instrumenter rundt
     indtil du kan h\xF8re instrumentet. Du bekr\xE6fter at du kan h\xF8re instrumentet
-    ved at klikke p\xE5 knappen over instrumentet."
+    ved at klikke p\xE5 knappen over instrumentet. Du kan tage instrumentet t\xE6ttere
+    p\xE5 dig med joysticked."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
   m_sharedMaterial: {fileID: -8816214507793482341, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
@@ -4602,10 +4603,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 52
+  m_fontSize: 43.4
   m_fontSizeBase: 52
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -4638,7 +4639,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: -78.23312}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5031,6 +5032,10 @@ PrefabInstance:
     - target: {fileID: 5403598915293591581, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
       propertyPath: m_Camera
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5403598915293591582, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6907154212609549704, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
       propertyPath: m_IsActive

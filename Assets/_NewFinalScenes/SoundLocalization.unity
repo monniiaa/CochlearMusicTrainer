@@ -1710,10 +1710,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba3c48819b043914e8fb1b777cccf0c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistanceToPlayer: 2.01
-  roomSize: 3.81
-  height: 0.54
-  player: {fileID: 1562352079431763971}
+  minDistanceToPlayer: 1.7
+  roomSize: 2.78
+  height: 0.5
+  player: {fileID: 3221912667562352838}
 --- !u!4 &1662117887
 Transform:
   m_ObjectHideFlags: 0
