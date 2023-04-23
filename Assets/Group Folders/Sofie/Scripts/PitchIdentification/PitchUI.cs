@@ -12,11 +12,8 @@ public class PitchUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        contineButton.onClick.AddListener(loadMenuScene);
+
     }
 
-    public void loadMenuScene()
-    {
-        SceneManager.LoadScene("Menu");
-    }
+
 }

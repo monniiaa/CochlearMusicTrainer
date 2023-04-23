@@ -35,12 +35,18 @@ public class PitchIdentification : LevelManager
         {
             initialPositions[i] = speakers[i].transform.position;
         }
+
+        foreach (GameObject star in starAnimation )
+        {
+            star.gameObject.SetActive(false);
+        }
         StartRound();
     }
     
     public void RestartLevel()
     {
         currentLevel--;
+        currentScore = 0;
         round = 1;
         foreach (Speaker s in speakers)
         {
@@ -120,8 +126,22 @@ public class PitchIdentification : LevelManager
             s.gameObject.SetActive(false);
         }
         ModeManager.EndGame();
-        //TODO: SHOW STAR RESULT
-
+        switch ((currentScore)) 
+        {   
+            case 1 :
+                starAnimation[1].SetActive(true);
+                break;
+            case 2:
+                starAnimation[2].SetActive(true);
+                break;
+            case 3:
+                starAnimation[3].SetActive(true);
+                break;
+            default:   
+                starAnimation[0].SetActive(true);
+                break;
+        }
+        
     }
 
     public override void SetRoundFunctionality()

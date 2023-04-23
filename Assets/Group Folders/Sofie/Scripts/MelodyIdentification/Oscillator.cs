@@ -34,6 +34,12 @@ public class Oscillator : MonoBehaviour
     {
         startNote = i;
     }
+    
+    public void StopMelody()
+    {
+        StopAllCoroutines();
+        source.Stop();
+    }
     public void PlayMelody()
     {
         StartCoroutine(PlaySequence(DiscriminationManager.levelInterval, DiscriminationManager.levelSequenceLength, DiscriminationManager.levelNoteTime));

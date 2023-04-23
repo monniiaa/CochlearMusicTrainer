@@ -14,11 +14,7 @@ public class DiscriminationManager : LevelManager
     private Oscillator pickedMelody;
     public InstrumentSeparation ModeManager;
     public GameObject[] starAnimation = new GameObject[4];
-
     
-
-
-
     private void Start()
     {
         ModeManager = InstrumentSeparation.Instance;
@@ -28,12 +24,20 @@ public class DiscriminationManager : LevelManager
         gameData = DataManager.ReadJson(path);
         currentLevel = gameData.level;
         SetDifficultyChanges();
+        foreach (GameObject star in starAnimation)
+        {
+            star.gameObject.SetActive(false);
+        }
+        {
+            
+        }
     }
 
     public void RestartLevel()
     {
         currentLevel--;
         round = 1;
+        currentScore = 0;
         foreach (Oscillator osc in melodies)
         {
             osc.gameObject.SetActive(true);
@@ -156,7 +160,21 @@ public class DiscriminationManager : LevelManager
             osc.gameObject.SetActive(false);
         }
         ModeManager.EndGame();
-        //TODO: SHOW STAR RESULT
+        switch ((currentScore)) 
+        {   
+            case 1 :
+                starAnimation[1].SetActive(true);
+                break;
+            case 2:
+                starAnimation[2].SetActive(true);
+                break;
+            case 3:
+                starAnimation[3].SetActive(true);
+                break;
+            default:   
+                starAnimation[0].SetActive(true);
+                break;
+        }
 
     }
     public override void SetRoundFunctionality()

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.10063326, g: 0.28698754, b: 0.5346657, a: 1}
+  m_IndirectSpecularColor: {r: 0.10117787, g: 0.2880348, b: 0.5371327, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1904,6 +1904,11 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &590382888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6907154212609549704, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
+  m_PrefabInstance: {fileID: 1499616693}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &612082539
 GameObject:
   m_ObjectHideFlags: 0
@@ -3535,7 +3540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &908467787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3671,7 +3676,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &977635266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3698,10 +3703,10 @@ MonoBehaviour:
   initialPositions: []
   speakers: []
   starAnimation:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 590382888}
+  - {fileID: 1662652523}
+  - {fileID: 1878256556}
+  - {fileID: 1572085207}
   ModeManager: {fileID: 0}
 --- !u!4 &977635267
 Transform:
@@ -5338,7 +5343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5403598915293591578, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5403598915293591580, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
       propertyPath: m_Pivot.x
@@ -5428,11 +5433,24 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5403598915293591582, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907154212609549704, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
 --- !u!1 &1499616694 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5403598915293591578, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
+  m_PrefabInstance: {fileID: 1499616693}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1572085207 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7036393416588790369, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
   m_PrefabInstance: {fileID: 1499616693}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1585694049
@@ -5570,6 +5588,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1585694049}
   m_CullTransparentMesh: 1
+--- !u!1 &1662652523 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4210058681095820697, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
+  m_PrefabInstance: {fileID: 1499616693}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1721178717
 GameObject:
   m_ObjectHideFlags: 0
@@ -6289,6 +6312,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1878256556 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4004059894898066771, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
+  m_PrefabInstance: {fileID: 1499616693}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1896467228
 GameObject:
   m_ObjectHideFlags: 0
