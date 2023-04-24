@@ -12112,6 +12112,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4210058681095820697, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5403598913645839835, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
       propertyPath: m_text
       value: 'Hovedmenu
