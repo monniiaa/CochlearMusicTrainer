@@ -21,6 +21,7 @@ TagManager:
   - SpawnPoint
   - Original
   - Equivalent
+  - Start
   layers:
   - Default
   - TransparentFX

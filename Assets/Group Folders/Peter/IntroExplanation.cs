@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class IntroExplanation : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class IntroExplanation : MonoBehaviour
     public GameObject canvas;
     //In order to call the method from PlayRandomSound, there needs to be a reference to the script, which is declared here. 
     public PlayRandomSound soundStart;
+    public TMP_Text startButton;
 
     private void Start()
     {
@@ -27,8 +29,10 @@ public class IntroExplanation : MonoBehaviour
             {
                 text2.gameObject.SetActive(false);
                 text3.gameObject.SetActive(true);
-            }
-            else if (text3.IsActive())
+            //GameObject.Find("IntroButton").GetComponentInChildren<Text>().text = "Begynd Spil";
+            startButton.text = "Start";
+        }
+        else if (text3.IsActive())
             {
                 canvas.SetActive(false);
                 text3.gameObject.SetActive(false);
