@@ -13317,7 +13317,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Der vil v\xE6re 3 runder, hvor du skal v\xE6lge et instrument, og s\xE5
-    slutte hver runde ved at trykke p\xE5 knappen i midten af rummet. "
+    slutte hver runde ved at trykke A-knappen p\xE5 din h\xF8jre controller. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
   m_sharedMaterial: {fileID: -8816214507793482341, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
