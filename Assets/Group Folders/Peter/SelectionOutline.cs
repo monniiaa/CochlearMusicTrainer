@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class SelectionOutline : MonoBehaviour
 {
     public Outline outline;
     public GameObject selected;
     private OutlineManager manager;
+    private XRSimpleInteractable interactable;
     public delegate void outlineChanged(GameObject gameObject);
     public event outlineChanged OnOutlineChange;
 
@@ -15,11 +17,23 @@ public class SelectionOutline : MonoBehaviour
     {
         manager = FindObjectOfType<OutlineManager>();
         outline = GetComponent<Outline>();
+        interactable = GetComponent<XRSimpleInteractable>();
     }
 
-   public void SetOutline()
+    private void OnEnable()
     {
+        interactable.selectEntered.AddListener(SetOutline);
+    }
+
+    private void OnDisable()
+    {
+        interactable.selectEntered.RemoveListener(SetOutline);
+    }
+
+    public void SetOutline(SelectEnterEventArgs args)
+    {
+        Debug.Log("It is working");
         outline.enabled = !outline.enabled;
-        OnOutlineChange.Invoke(gameObject);
+        OnOutlineChange?.Invoke(gameObject);
     }
 }

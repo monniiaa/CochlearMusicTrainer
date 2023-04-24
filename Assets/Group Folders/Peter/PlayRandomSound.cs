@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
-using UnityEngine;
-using TMPro;
-using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.InputSystem;
 
 public class PlayRandomSound : MonoBehaviour
@@ -12,7 +9,7 @@ public class PlayRandomSound : MonoBehaviour
     public int difficulty = 1; // the difficulty level (1-3)
 
     //Variables in charge of getting the child objects and their audiosources
-    private List<GameObject> selectedObjects = new List<GameObject>(); // list of selected child objects
+    public List<GameObject> selectedObjects = new List<GameObject>(); // list of selected child objects
     private List<string> objectsPlayed = new List<string>();
     private AudioSource[] allAudioSources;
 
@@ -64,10 +61,8 @@ public class PlayRandomSound : MonoBehaviour
             selectedObjects.Add(child);
         }
         //Debug.Log(selectedObjects.Count);
-        foreach (GameObject obj in selectedObjects)
-        {
-            obj.SetActive(true);
-        }
+        
+        
     }
 
     private void Update()
@@ -108,8 +103,8 @@ public class PlayRandomSound : MonoBehaviour
 
     public void StopRound(InputAction.CallbackContext ctx)
     {
-            outline.ClearAllSelections();
-            StopMusic();
+        outline.ClearAllSelections();
+        StopMusic();
             if (round1 == false)
             {
                 timer1 = time;
@@ -213,7 +208,15 @@ public class PlayRandomSound : MonoBehaviour
 
     public void Triggered()
     {
-        StartCoroutine(WaitForSelection());
+        if (outline.selected == null || currentInstrument == null) return;
+        if (currentInstrument.name.Equals(outline.selected.name))
+        {
+            isCorrect = true;
+        }
+        else
+        {
+            isCorrect = false;
+        }
     }
 
     private void OnEnable()
@@ -224,15 +227,7 @@ public class PlayRandomSound : MonoBehaviour
     private IEnumerator WaitForSelection()
     {
         yield return new WaitForEndOfFrame();
-        if (currentInstrument.name.Equals(outline.selected.name))
-        {
-            isCorrect = true;
-        }
-        else
-        {
-            isCorrect = false;
-        }
-        Debug.Log("Correct: " + isCorrect);
+        
     }
 
 }

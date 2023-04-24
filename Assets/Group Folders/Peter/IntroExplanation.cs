@@ -31,14 +31,19 @@ public class IntroExplanation : MonoBehaviour
                 text3.gameObject.SetActive(true);
             //GameObject.Find("IntroButton").GetComponentInChildren<Text>().text = "Begynd Spil";
             startButton.text = "Start";
-        }
-        else if (text3.IsActive())
+            }
+            else if (text3.IsActive())
             {
                 canvas.SetActive(false);
                 text3.gameObject.SetActive(false);
+                foreach (GameObject obj in soundStart.selectedObjects)
+                {
+                    obj.SetActive(true);
+                }
                 soundStart.Round();
                 soundStart.time = Time.deltaTime;
                 Debug.Log(soundStart.time);
+                
             }
     }
 }

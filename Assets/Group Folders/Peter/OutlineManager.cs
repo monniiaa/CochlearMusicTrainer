@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using QFSW.QC;
 using UnityEngine;
 
 public class OutlineManager : MonoBehaviour
@@ -10,7 +11,7 @@ public class OutlineManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        outlines = FindObjectsOfType<SelectionOutline>();
+        outlines = FindObjectsOfType<SelectionOutline>(true);
         Debug.Log(outlines.Length);
     }
 
@@ -31,9 +32,11 @@ public class OutlineManager : MonoBehaviour
 
     public void ClearAllSelections()
     {
+        Debug.Log("Cleared all selections");
         selected = null;
         foreach (SelectionOutline seloutline in outlines)
         {
+            if (seloutline.outline == null) continue;
             seloutline.outline.enabled = false;
         }
     }
@@ -42,9 +45,11 @@ public class OutlineManager : MonoBehaviour
     {
         foreach (SelectionOutline seloutline in outlines)
         {
+            if (seloutline.outline == null) continue;
             if (selectedObj == seloutline.gameObject)
             {
                 selected = selectedObj;
+                Debug.Log(selected.name + " is now selected");
                 continue;
             }
             seloutline.outline.enabled = false;
