@@ -1298,7 +1298,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\xD8velsen g\xE5r ud p\xE5 at f\xF8lge lyden med din h\xF8relse og skyde
-    der hvor du tror lyden kommer fra. Du skyder med den forreste knap p\xE5 h\xF8jre
+    der hvor du tror lyden kommer fra. Du skyder med aftr\xE6kker-knappen p\xE5 h\xF8jre
     controller."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
