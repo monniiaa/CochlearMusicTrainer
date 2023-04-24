@@ -43,7 +43,6 @@ public class Oscillator : MonoBehaviour
     public void PlayMelody()
     {
         StartCoroutine(PlaySequence(DiscriminationManager.levelInterval, DiscriminationManager.levelSequenceLength, DiscriminationManager.levelNoteTime));
-      //  StartCoroutine(PlaySequence(2,4,0.4f));
     }
 
 
@@ -55,7 +54,6 @@ public class Oscillator : MonoBehaviour
         do
         {
             currentClip = notes[currentNote];
-            Debug.Log(currentClip.name);
             source.PlayOneShot(currentClip);
             currentNote += interval;
             currentNote = currentNote % notes.Length;

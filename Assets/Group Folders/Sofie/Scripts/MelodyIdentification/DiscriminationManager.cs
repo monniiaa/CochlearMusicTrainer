@@ -160,6 +160,7 @@ public class DiscriminationManager : LevelManager
             osc.gameObject.SetActive(false);
         }
         ModeManager.EndGame();
+        Debug.Log(currentScore);
         switch ((currentScore)) 
         {   
             case 1 :
