@@ -14,4 +14,9 @@ public class IdentificationSceneNav : MonoBehaviour
     {
         SceneManager.LoadScene(3);
     }
+
+    public void BeginIdentification()
+    {
+        SceneManager.LoadScene(3);
+    }
 }
