@@ -19,6 +19,8 @@ public class SoundLocalizationManager : MonoBehaviour
     private string path = "SoundLocalization";
     GameData gameData;
     private XRRayInteractor _xrRayInteractor;
+    
+   
 
 
     private bool gameIsOver = false;
@@ -141,7 +143,7 @@ public class SoundLocalizationManager : MonoBehaviour
         speakerAnimator = speaker.GetComponentInChildren<Animator>();
         speakerAnimator.enabled = false;
     }
-
+ 
 
 
     public bool CheckRayHit()
