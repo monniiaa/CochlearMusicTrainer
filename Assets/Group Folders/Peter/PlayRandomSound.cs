@@ -13,7 +13,11 @@ public class PlayRandomSound : MonoBehaviour
     private List<string> objectsPlayed = new List<string>();
     private AudioSource[] allAudioSources;
 
+    //Round related variables
     private bool round1 = false, round2 = false, round3 = false;
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip correctClip;
+    [SerializeField] private AudioClip incorrectClip;
 
     //Scoring variables
     public float time;
@@ -39,6 +43,7 @@ public class PlayRandomSound : MonoBehaviour
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         int numParents = difficulty;
         List<int> pickedFamily = new List<int>();
         for (int i = 0; i < numParents; i++)
@@ -118,6 +123,7 @@ public class PlayRandomSound : MonoBehaviour
                 {
                     errorCount.Add(1);
                 }
+                RoundFinishAudio();
                 Round();
                 time = 0;
                 isCorrect = false;
@@ -135,7 +141,8 @@ public class PlayRandomSound : MonoBehaviour
                 {
                     errorCount.Add(1);
                 }
-                Round();
+            RoundFinishAudio();
+            Round();
                 time = 0;
             }
             else if (round3 == false)
@@ -151,7 +158,8 @@ public class PlayRandomSound : MonoBehaviour
                 {
                     errorCount.Add(1);
                 }
-                EndFeedback();
+            RoundFinishAudio();
+            EndFeedback();
                 Debug.Log(errorCount.Count);
             }
             else if (round3 == true)
@@ -230,4 +238,15 @@ public class PlayRandomSound : MonoBehaviour
         
     }
 
+    private void RoundFinishAudio()
+    {
+        if (isCorrect)
+        {
+            audioSource.clip = correctClip;
+        }
+        else
+        {
+            audioSource.clip = incorrectClip;
+        }
+    }
 }
