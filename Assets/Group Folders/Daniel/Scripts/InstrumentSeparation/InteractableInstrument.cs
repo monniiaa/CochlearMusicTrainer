@@ -42,7 +42,9 @@ public class InteractableInstrument : MonoBehaviour
 
     private void Start()
     {
-        Button.image.color = Color.gray;
+        // Button.image.color = Color.gray;
+        //i need to change the sprite of the button to a checkmark or something
+        Button.image.sprite = Resources.Load<Sprite>("ButtonSprites/KnapBaggrund");
         _buttonText.text = DefaultText;
     }
 
@@ -79,7 +81,10 @@ public class InteractableInstrument : MonoBehaviour
         HasClickedOnce = true;
         CanBeHeard = !CanBeHeard;
         _buttonText.text = (CanBeHeard) ? HearingText : CannotHearText;
-        Button.image.color = (CanBeHeard) ? new Color(0, 100, 0) : new Color(128, 0, 0);
+        // Button.image.color = (CanBeHeard) ? new Color(0, 100, 0) : new Color(128, 0, 0);
+        Button.image.sprite = Resources.Load<Sprite>(CanBeHeard ? "ButtonSprites/GrønKnap" : "ButtonSprites/ForkertKnap");
+        _buttonText.color = new Color(254, 250, 224);
+
     }
 
     private void ToggleOutline() => _outline.enabled = !_outline.enabled;
