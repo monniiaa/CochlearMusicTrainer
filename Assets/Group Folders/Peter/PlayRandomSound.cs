@@ -124,7 +124,7 @@ public class PlayRandomSound : MonoBehaviour
                     errorCount.Add(1);
                 }
                 RoundFinishAudio();
-                Round();
+            StartCoroutine(WaitForFeedback(audioSource));
                 time = 0;
                 isCorrect = false;
             }
@@ -142,8 +142,8 @@ public class PlayRandomSound : MonoBehaviour
                     errorCount.Add(1);
                 }
             RoundFinishAudio();
-            Round();
-                time = 0;
+            StartCoroutine(WaitForFeedback(audioSource));
+            time = 0;
             }
             else if (round3 == false)
             {
@@ -186,6 +186,12 @@ public class PlayRandomSound : MonoBehaviour
             audioSource.clip = randomClip;
             audioSource.Play();
         }
+    }
+
+    private IEnumerator WaitForFeedback(AudioSource audio)
+    {
+        yield return new WaitUntil(()=>audio.isPlaying);
+        Round();
     }
 
     private void SelectInstrument()
@@ -248,5 +254,6 @@ public class PlayRandomSound : MonoBehaviour
         {
             audioSource.clip = incorrectClip;
         }
+        audioSource.Play();
     }
 }

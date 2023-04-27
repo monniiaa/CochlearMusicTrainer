@@ -13,6 +13,16 @@ public class InstrumentPlaySound : MonoBehaviour
 
     public void PlaySound()
     {
+        AudioSource[] audioSources = FindObjectsOfType<AudioSource>();
+
+        foreach (AudioSource audioSource in audioSources)
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+        }
+
         audioSource.Play();
     }
 }
