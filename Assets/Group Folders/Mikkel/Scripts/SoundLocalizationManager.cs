@@ -18,7 +18,7 @@ public class SoundLocalizationManager : MonoBehaviour
     private int CurrentScore;           
     private string path = "SoundLocalization";
     GameData gameData;
-    private XRRayInteractor _xrRayInteractor;
+    public XRRayInteractor _xrRayInteractor;
     
    
 
@@ -75,6 +75,7 @@ public class SoundLocalizationManager : MonoBehaviour
 
         if(CheckRayHit())
         {
+
             speakerAnimator.enabled = true;
             CurrentScore++;
         }
