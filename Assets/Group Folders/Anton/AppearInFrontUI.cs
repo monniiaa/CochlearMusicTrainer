@@ -15,11 +15,12 @@ public class AppearInFrontUI : MonoBehaviour
 
     void Update()
     {
+        /*
             if (movingCanvas.activeSelf)
             {
                 movingCanvas.transform.position = playerHead.position + new Vector3(playerHead.forward.x, 0, playerHead.forward.z).normalized * distanceFromPlayer;
             }
-        
+        */
 
         movingCanvas.transform.LookAt(new Vector3(playerHead.position.x, movingCanvas.transform.position.y, playerHead.position.z));
         movingCanvas.transform.forward *= -1;
