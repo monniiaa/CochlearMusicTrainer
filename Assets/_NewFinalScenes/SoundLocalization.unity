@@ -333,41 +333,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 417472910}
-  - component: {fileID: 417472909}
+  - component: {fileID: 417472911}
   m_Layer: 0
   m_Name: UI Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &417472909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 417472908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b0808e41af8d5a488a002030d74f205, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menu: {fileID: 415506549}
-  head: {fileID: 3221912668148908503}
-  spawnDistance: 2
-  showMenuButton:
-    m_UseReference: 0
-    m_Action:
-      m_Name: Show Menu Button
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: b4ab1666-2c73-4a9a-80f0-a13e76664ced
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
+  m_IsActive: 0
 --- !u!4 &417472910
 Transform:
   m_ObjectHideFlags: 0
@@ -384,6 +357,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &417472911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417472908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e22d20031f6f0384db2ad2805122eccf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingCanvas: {fileID: 415506549}
+  playerHead: {fileID: 3221912668148908503}
+  distanceFromPlayer: 2
 --- !u!1 &436398832
 GameObject:
   m_ObjectHideFlags: 0
@@ -1561,7 +1549,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5403598915293591578, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5403598915293591580, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
       propertyPath: m_Pivot.x
@@ -1718,7 +1706,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   game: {fileID: 1662117885}
   instructions: {fileID: 908467786}
-  endGameResults: {fileID: 415506549}
+  endGameResults: {fileID: 417472908}
 --- !u!4 &1626254998
 Transform:
   m_ObjectHideFlags: 0
