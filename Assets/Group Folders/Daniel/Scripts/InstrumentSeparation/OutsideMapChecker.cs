@@ -34,6 +34,7 @@ public class OutsideMapChecker : MonoBehaviour
                 if (!m_allowedBounds.bounds.Contains(interactable.Key.transform.position))
                 {
                     interactable.Key.gameObject.transform.position = interactable.Value;
+                    interactable.Key.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 }
             }
             yield return waitTime;
