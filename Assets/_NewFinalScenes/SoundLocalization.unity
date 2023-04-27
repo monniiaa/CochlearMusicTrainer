@@ -324,6 +324,66 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5403598915293591578, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
   m_PrefabInstance: {fileID: 1499616693}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &417472908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 417472910}
+  - component: {fileID: 417472909}
+  m_Layer: 0
+  m_Name: UI Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &417472909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417472908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b0808e41af8d5a488a002030d74f205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menu: {fileID: 415506549}
+  head: {fileID: 3221912668148908503}
+  spawnDistance: 2
+  showMenuButton:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Show Menu Button
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: b4ab1666-2c73-4a9a-80f0-a13e76664ced
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+--- !u!4 &417472910
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417472908}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1499616698}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &436398832
 GameObject:
   m_ObjectHideFlags: 0
@@ -1381,7 +1441,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 417472910}
     m_Modifications:
     - target: {fileID: 283744284549735419, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
       propertyPath: m_Colors.m_PressedColor.b
@@ -1513,7 +1573,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5403598915293591580, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5403598915293591580, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1569,7 +1629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5403598915293591580, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5403598915293591580, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1622,6 +1682,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6907154212609549704, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
   m_PrefabInstance: {fileID: 1499616693}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &1499616698 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5403598915293591580, guid: 28e0d94444fe51b42a936cb21d9670f9, type: 3}
+  m_PrefabInstance: {fileID: 1499616693}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1626254996
 GameObject:
   m_ObjectHideFlags: 0
@@ -1667,7 +1732,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1655603681 stripped
 MonoBehaviour:
@@ -1743,6 +1808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 8969580668940092037, guid: 4ce26379d368d2d4cab4aaa80ab26bfd, type: 3}
   speaker: {fileID: 8969580668940092037, guid: 4ce26379d368d2d4cab4aaa80ab26bfd, type: 3}
+  _xrRayInteractor: {fileID: 0}
   distanceTracker: {fileID: 8808924322889256069}
   speakerspawner: {fileID: 1662117886}
   speakerAnimator: {fileID: 0}
@@ -4690,7 +4756,7 @@ Transform:
   - {fileID: 3221912667414361685}
   - {fileID: 3221912667562352833}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8808924322889256069
 MonoBehaviour:
