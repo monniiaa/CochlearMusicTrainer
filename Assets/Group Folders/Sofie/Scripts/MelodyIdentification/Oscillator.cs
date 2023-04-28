@@ -14,7 +14,9 @@ public class Oscillator : MonoBehaviour
     public Material mat;
 
     public Animator animator;
+    private Coroutine _coroutine;
 
+    private float startVolume = 1;
 
     private void Awake()
     {
@@ -37,8 +39,9 @@ public class Oscillator : MonoBehaviour
     
     public void StopMelody()
     {
-        StopAllCoroutines();
-        source.Stop();
+        _coroutine = StartCoroutine(FadeOut(2f));
+        
+        
     }
     public void PlayMelody()
     {
@@ -46,8 +49,13 @@ public class Oscillator : MonoBehaviour
     }
 
 
-    IEnumerator PlaySequence(int interval, int length, float noteTime)
+    private IEnumerator PlaySequence(int interval, int length, float noteTime)
     {
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+            source.volume = startVolume;
+        }
         currentNote = startNote;
         currentClip = notes[currentNote];
         int i = 0;
@@ -75,5 +83,17 @@ public class Oscillator : MonoBehaviour
         animator.SetTrigger("Destroy");
 
     }
+    public IEnumerator FadeOut(float FadeTime)
+    {
 
+        while (source.volume > 0)
+        {
+            source.volume -= startVolume * Time.deltaTime / FadeTime;
+
+            yield return null;
+        }
+
+        source.Stop();
+        source.volume = startVolume;
+    }
 }
