@@ -18,7 +18,11 @@ public static class DataManager
     {
         string json = JsonUtility.ToJson(data);
         string filePath;
+#if UNITY_EDITOR
         filePath = Application.dataPath + "/MiniGameData/" + minigame + "/ScoreData.json";
+#elif PLATFORM_ANDROID
+        filePath = Application.persistentDataPath + "/MiniGameData/" + minigame + "/ScoreData.json";
+#endif
         StreamWriter writer = new StreamWriter(filePath);
 
         writer.Write(json);
@@ -29,7 +33,11 @@ public static class DataManager
     {
         string filePath;
 
+#if UNITY_EDITOR
         filePath = Application.dataPath + "/MiniGameData/" + minigame + "/ScoreData.json";
+#elif PLATFORM_ANDROID
+        filePath = Application.persistentDataPath + "/MiniGameData/" + minigame + "/ScoreData.json";
+#endif
 
         if (!File.Exists(filePath))
         {

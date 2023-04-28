@@ -9,6 +9,7 @@ public class PitchIdentification : LevelManager
 
     private Speaker highestSpeaker;
     private bool correctPick;
+    private GameDataManager _gameDataManager;
 
     public GameObject speakerPrefab;
     public Vector3[] initialPositions;
@@ -21,12 +22,14 @@ public class PitchIdentification : LevelManager
 
     private void Awake()
     {
+        _gameDataManager = GameDataManager.Instance;
         ModeManager = InstrumentSeparation.Instance;
+
         gameplayAudio = GetComponent<AudioSource>();
         path = "PitchIdentification";
         gameData =  DataManager.ReadJson(path);
 
-        currentLevel = gameData.level;
+        currentLevel = (_gameDataManager.currentLevel == 0) ? 1 : _gameDataManager.currentLevel;
         Debug.Log("Level: " +currentLevel);
         SetMode();
         speakers = GameObject.FindObjectsOfType<Speaker>();
@@ -36,7 +39,7 @@ public class PitchIdentification : LevelManager
             initialPositions[i] = speakers[i].transform.position;
         }
 
-        foreach (GameObject star in starAnimation )
+        foreach (GameObject star in starAnimation)
         {
             star.gameObject.SetActive(false);
         }
@@ -45,7 +48,6 @@ public class PitchIdentification : LevelManager
     
     public void RestartLevel()
     {
-        currentLevel--;
         currentScore = 0;
         round = 1;
         foreach (Speaker s in speakers)
@@ -55,7 +57,7 @@ public class PitchIdentification : LevelManager
         StartRound();
     }
 
-    private void SetPitchDifference(int lowestNote, int highestNote , int interval)
+    public void SetPitchDifference(int lowestNote, int highestNote , int interval)
     {
         highestSpeaker = speakers[0];
         for (int i = 0; i < speakers.Length; i++)
@@ -67,13 +69,15 @@ public class PitchIdentification : LevelManager
             {
                 if (j != i)
                 {
-                    while (speakers[i].note > speakers[j].note - interval &&
-                           speakers[i].note < speakers[j].note + interval)
+                    
+                    while (  speakers[i].note > speakers[j].note - interval 
+                    && speakers[i].note < speakers[j].note + interval)
                     {
-                        int rand = Random.Range(lowestNote, highestNote);
+                        int rand= Random.Range(lowestNote, highestNote);
                         speakers[i].note = rand;
                         speakers[i].SetNote(rand);
                     }
+                    
                 }
             }
             if (speakers[i].note > highestSpeaker.note)
@@ -85,11 +89,11 @@ public class PitchIdentification : LevelManager
     public void SpeakerPicked(Speaker speaker)
     {
         EndRound();
-        if (speaker== highestSpeaker) {
+        if (speaker == highestSpeaker) {
             gameplayAudio.PlayOneShot(sucessAudio);
             speaker.GetComponent<MeshRenderer>().material = sucessMaterial;
             currentScore += 1;
-            gameData.levelScore[currentLevel-1] = currentScore;
+            //gameData.levelScore[currentLevel-1] = currentScore;
 
         } else if (speaker!= highestSpeaker)
         {
@@ -125,6 +129,9 @@ public class PitchIdentification : LevelManager
             s.gameObject.SetActive(false);
         }
         ModeManager.EndGame();
+        Debug.Log("Current Score: " + currentScore);
+        ShowStar(currentScore);
+        /*
         switch ((currentScore)) 
         {   
             case 1 :
@@ -140,7 +147,20 @@ public class PitchIdentification : LevelManager
                 starAnimation[0].SetActive(true);
                 break;
         }
-        
+        */
+    }
+
+    private void ShowStar(int score)
+    {
+        for (int i = 0; i < starAnimation.Length; i++)
+        {
+            if(i == score) 
+            {
+                starAnimation[i].SetActive(true);
+                continue;
+            }
+            starAnimation[i].SetActive(false);
+        }
     }
 
     public override void SetRoundFunctionality()
@@ -153,11 +173,15 @@ public class PitchIdentification : LevelManager
         else
         {
             StartCoroutine(End());
-            currentLevel++;
-            gameData.level = currentLevel;
-            DataManager.SaveDataToJson(gameData, path);
-
-            
+            if(currentLevel == gameData.level)
+            {
+                gameData.level += 1;
+            }          
+            if(gameData.levelScore[currentLevel - 1] < currentScore)
+            {
+                    gameData.levelScore[currentLevel - 1] = currentScore;
+            }
+            DataManager.SaveDataToJson(gameData, path);  
         }
     }
 

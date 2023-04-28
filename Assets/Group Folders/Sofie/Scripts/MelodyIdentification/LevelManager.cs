@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class LevelManager : MonoBehaviour
 {
-    protected int currentLevel;
+    protected int currentLevel = 1;
     protected int currentScore;
     protected Difficulty difficulty;
 

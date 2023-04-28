@@ -14,15 +14,21 @@ public class DiscriminationManager : LevelManager
     private Oscillator pickedMelody;
     public InstrumentSeparation ModeManager;
     public GameObject[] starAnimation = new GameObject[4];
+    private GameDataManager _gameDataManager;
     
+    private void Awake() 
+    {
+        _gameDataManager = GameDataManager.Instance;
+    }
+
     private void Start()
     {
+        currentLevel = (_gameDataManager.currentLevel == 0) ? 1 : _gameDataManager.currentLevel;
         ModeManager = InstrumentSeparation.Instance;
         melodies = GameObject.FindObjectsOfType<Oscillator>();
         path = "PitchDiscrimination";
         StartRound();
         gameData = DataManager.ReadJson(path);
-        currentLevel = gameData.level;
         SetDifficultyChanges();
         foreach (GameObject star in starAnimation)
         {
@@ -35,7 +41,6 @@ public class DiscriminationManager : LevelManager
 
     public void RestartLevel()
     {
-        currentLevel--;
         round = 1;
         currentScore = 0;
         foreach (Oscillator osc in melodies)
@@ -121,7 +126,7 @@ public class DiscriminationManager : LevelManager
             gameplayAudio.PlayOneShot(sucessAudio);
             pickedMelody.GetComponent<MeshRenderer>().material = sucessMaterial;
             currentScore++;
-            gameData.levelScore[currentLevel - 1] = currentScore;
+            //gameData.levelScore[currentLevel - 1] = currentScore;
             pickedMelody.tag = "Untagged";
             pickedMelody = null;
         }
@@ -160,7 +165,8 @@ public class DiscriminationManager : LevelManager
             osc.gameObject.SetActive(false);
         }
         ModeManager.EndGame();
-        Debug.Log(currentScore);
+        ShowStar(currentScore);
+        /*
         switch ((currentScore)) 
         {   
             case 1 :
@@ -176,8 +182,22 @@ public class DiscriminationManager : LevelManager
                 starAnimation[0].SetActive(true);
                 break;
         }
-
+        */
     }
+
+    private void ShowStar(int score)
+    {
+        for (int i = 0; i < starAnimation.Length; i++)
+        {
+            if(i == score) 
+            {
+                starAnimation[i].SetActive(true);
+                continue;
+            }
+            starAnimation[i].SetActive(false);
+        }
+    }
+
     public override void SetRoundFunctionality()
     {
         round++;
@@ -189,8 +209,16 @@ public class DiscriminationManager : LevelManager
         else
         {
            StartCoroutine(End());
-           currentLevel++;
-           gameData.level = currentLevel;
+           if(currentLevel == gameData.level)
+           {
+                gameData.level += 1;
+           }           
+
+           if(gameData.levelScore[currentLevel - 1] < currentScore)
+           {
+                gameData.levelScore[currentLevel - 1] = currentScore;
+           }
+
            DataManager.SaveDataToJson(gameData, path);
         }
     }
