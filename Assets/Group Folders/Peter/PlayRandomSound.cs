@@ -6,7 +6,10 @@ using UnityEngine.InputSystem;
 public class PlayRandomSound : MonoBehaviour
 {
     public Transform[] parentObjects; // array of parent objects to select from
-    public int difficulty = 1; // the difficulty level (1-3)
+    public GameData gameData;
+    public Difficulty difficulty; // the difficulty level (1-3)
+    public string path;
+    public int currentLevel;
 
     //Variables in charge of getting the child objects and their audiosources
     public List<GameObject> selectedObjects = new List<GameObject>(); // list of selected child objects
@@ -44,7 +47,11 @@ public class PlayRandomSound : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        int numParents = difficulty;
+        path = "InstrumentIdentification";
+        gameData = DataManager.ReadJson(path);
+        currentLevel = gameData.level;
+        SetDifficulty();
+        int numParents = SetDifficultyChanges();
         List<int> pickedFamily = new List<int>();
         for (int i = 0; i < numParents; i++)
         {
@@ -76,6 +83,41 @@ public class PlayRandomSound : MonoBehaviour
         //SelectInstrument();
     }
 
+    private int SetDifficultyChanges()
+    {
+        switch (difficulty)
+        {
+            case Difficulty.Easy:
+                return 1;
+                break;
+            case Difficulty.Medium:
+                return 2;
+                break;
+            case Difficulty.Hard:
+                return 3;
+                break;
+            default:
+                return 1;
+        }
+    }
+    
+    protected void SetDifficulty()
+    {
+        if (currentLevel <= 3)
+        {
+            difficulty = Difficulty.Easy;
+        }
+        else if (currentLevel > 3 && currentLevel <= 6)
+        {
+            difficulty = Difficulty.Medium;
+        }
+        else if (currentLevel > 6)
+        {
+            difficulty = Difficulty.Hard;
+        }
+    }
+    
+    
     private void EndFeedback()
     {
         //UI implementation, with text files showing which instruments were played
@@ -158,7 +200,11 @@ public class PlayRandomSound : MonoBehaviour
                 {
                     errorCount.Add(1);
                 }
-            RoundFinishAudio();
+
+                currentLevel++;
+                gameData.level = currentLevel;
+                DataManager.SaveDataToJson(gameData, path);
+                RoundFinishAudio();
             EndFeedback();
                 Debug.Log(errorCount.Count);
             }
