@@ -32,6 +32,13 @@ public class JsonManager : MonoBehaviour
 #endif
     }
 
+    private void Start() {
+        foreach (var item in ReadDataFromFile<InstrumentSeparationGameData>())
+        {
+            Debug.Log(item.distances.Length); 
+        }
+    }
+
     public static void WriteDataToFile<T>(AbstractDataContainer dataContainer) where T : AbstractDataContainer
     {
         string fullPath = _path + dataContainer.Path;
@@ -40,7 +47,7 @@ public class JsonManager : MonoBehaviour
         DataContainerList<T> dataContainerList = new DataContainerList<T>();;
         if (File.Exists(fullPath))
         {
-            dataContainerList = JsonUtility.FromJson<DataContainerList<T>>(File.ReadAllText(fullPath));
+            dataContainerList = JsonUtility.FromJson<DataContainerList<T>>(File.ReadAllText(fullPath)) ?? new DataContainerList<T>();
         }
 
         dataContainerList.DataList.Add((T) dataContainer);
@@ -53,7 +60,7 @@ public class JsonManager : MonoBehaviour
 
     public static List<T> ReadDataFromFile<T>() where T : AbstractDataContainer
     {
-        string fullPath = _path + ((T) Activator.CreateInstance(typeof(T))).Path;
+        string fullPath = _path + Activator.CreateInstance<T>().Path;
         if (!File.Exists(fullPath)) return null;
         return JsonUtility.FromJson<DataContainerList<T>>(File.ReadAllText(fullPath)).DataList;
     }

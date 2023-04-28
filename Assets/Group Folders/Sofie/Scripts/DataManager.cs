@@ -17,18 +17,20 @@ public static class DataManager
     public static void SaveDataToJson(GameData data, string minigame)
     {
         string json = JsonUtility.ToJson(data);
-
-        string filePath = Application.dataPath + "/MiniGameData/" + minigame + "/ScoreData.json";
+        string filePath;
+        filePath = Application.dataPath + "/MiniGameData/" + minigame + "/ScoreData.json";
         StreamWriter writer = new StreamWriter(filePath);
 
         writer.Write(json);
         writer.Close();
-
     }
 
     public static GameData ReadJson(string minigame)
     {
-        string filePath = Application.dataPath + "/MiniGameData/" + minigame + "/ScoreData.json";
+        string filePath;
+
+        filePath = Application.dataPath + "/MiniGameData/" + minigame + "/ScoreData.json";
+
         if (!File.Exists(filePath))
         {
             Debug.Log("exists");

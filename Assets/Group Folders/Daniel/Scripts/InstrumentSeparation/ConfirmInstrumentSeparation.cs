@@ -13,6 +13,8 @@ public class ConfirmInstrumentSeparation : MonoBehaviour
     private InteractableInstrument[] _interactableInstruments;
     private InstrumentSeparation _instrumentSeparation;
     private Button _finishButton;
+    private GameData _gameData;
+    private int _currentLevel;
 
     private void Awake()
     {
@@ -53,6 +55,12 @@ public class ConfirmInstrumentSeparation : MonoBehaviour
 
     private void OnFinishButtonPressed()
     {
+        JsonManager.WriteDataToFile<InstrumentSeparationGameData>(new InstrumentSeparationGameData(_interactableInstruments.Select(obj => Vector3.Distance(obj.transform.position, Camera.main.transform.position)).ToArray()));
+        _gameData = DataManager.ReadJson("InstrumentSeparation");
+        _gameData.level += 1;
+        _gameData.levelScore = new int[1] { 3 };
+        DataManager.SaveDataToJson(_gameData, "InstrumentSeparation");
+            
         _instrumentSeparation.EndGame();
     }
 

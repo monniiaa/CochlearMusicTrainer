@@ -5,6 +5,6 @@ using UnityEngine;
 [Serializable]
 public class DataContainerList<T> where T: AbstractDataContainer
 {
-    public List<T> DataList;
-    public string ToJson() => JsonUtility.ToJson(this, true);
+    public List<T> DataList = new List<T>();
+    public string ToJson() => JsonUtility.ToJson(this, false);
 }

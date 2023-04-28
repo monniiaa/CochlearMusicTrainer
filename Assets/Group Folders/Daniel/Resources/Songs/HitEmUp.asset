@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f0494509f551a64f81b6e5218754fb5, type: 3}
+  m_Name: HitEmUp
+  m_EditorClassIdentifier: 
+  stems:
+  - {fileID: 11400000, guid: ac1a1d499ceaf3b4f92bdd274d893bf9, type: 2}
+  - {fileID: 11400000, guid: b1035be92cd7abf48bd33d2a67d268ff, type: 2}
+  - {fileID: 11400000, guid: f67b77d74f05b3c429d1bd41a0aebe05, type: 2}
+  - {fileID: 11400000, guid: 08addc8c5de7392479cbc9c0b4c7226f, type: 2}

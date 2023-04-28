@@ -36,9 +36,12 @@ public class InstrumentSpawner : MonoBehaviour
     [SerializeField] private GameObject grabbablePrefab;
     [SerializeField] private GameObject soundSourcePrefab;
     [SerializeField] private GameObject confirmUIPrefab;
+    private GameData _gameData;
     private GameObject[] _spawnPoints;
     private AudioClip[] _audioClip;
     private GameObject[] _grabbableInstruments;
+    private bool hasPlayed;
+    private const string dataPath = "InstrumentSeparation";
 
     private void Awake()
     {
@@ -48,60 +51,64 @@ public class InstrumentSpawner : MonoBehaviour
 
     private void OnEnable()
     {
+        _gameData = DataManager.ReadJson(dataPath);
         SpawnInstruments();
     }
 
     public void SpawnInstruments()
     {
-        Random.InitState((int)DateTime.Now.Ticks);
-        SongData randomSong = songs[Random.Range(0, songs.Length)];
-        _grabbableInstruments = new GameObject[randomSong.stems.Length];
+        if(hasPlayed) _gameData.level--;
+        DataManager.SaveDataToJson(_gameData, dataPath);
 
-        foreach (var stem in randomSong.stems)
-        {
-            
-        }
+        int songIndex = _gameData.level - 1;
+        if(songIndex > songs.Length - 1) songIndex = songs.Length - 1;
+        SongData song = songs[songIndex];
+        _grabbableInstruments = new GameObject[song.stems.Length];
+
         
         for (int i = 0; i < _spawnPoints.Length; i++)
         {
             _grabbableInstruments[i] = Instantiate(grabbablePrefab);
             GameObject confirmUI = Instantiate(confirmUIPrefab, _grabbableInstruments[i].transform);
-            GameObject instrument = Instantiate(randomSong.stems[i].instrumentData.instrumentPrefab, _grabbableInstruments[i].transform);
+            GameObject instrument = Instantiate(song.stems[i].instrumentData.instrumentPrefab, _grabbableInstruments[i].transform);
             GameObject soundSource = Instantiate(soundSourcePrefab, _grabbableInstruments[i].transform);
             GameObject attachmentPoint = new GameObject("AttachmentPoint");
+
             _grabbableInstruments[i].AddComponent<InteractableInstrument>();
             attachmentPoint.transform.SetParent(_grabbableInstruments[i].transform);
+
             BoxCollider instrumentHolderCollider = _grabbableInstruments[i].GetComponent<BoxCollider>();
             Bounds instrumentBounds = instrument.GetComponent<MeshRenderer>().bounds;
+            Debug.Log($"{song.stems[i].instrumentData.instrumentPrefab.name}: {instrumentBounds.size.magnitude}");
+            if(instrumentBounds.size.magnitude <= 0.2f) 
+            {
+                instrument.transform.localScale = new Vector3(2f, 2f, 2f);
+                instrumentBounds = instrument.GetComponent<MeshRenderer>().bounds;
+            }
             instrumentHolderCollider.size = instrumentBounds.size;
             instrumentHolderCollider.center = instrumentBounds.center;
+            
             attachmentPoint.transform.position = instrumentHolderCollider.center;
-            confirmUI.transform.position = new Vector3(0, instrumentBounds.max.y + 0.1f, 0);
+
+            confirmUI.transform.position = new Vector3(0, instrumentBounds.max.y * _grabbableInstruments[i].transform.localScale.y + 0.1f, 0);
             _grabbableInstruments[i].transform.position = _spawnPoints[i].transform.position;
             
             AudioSource audioSource = soundSource.GetComponent<AudioSource>();
-            audioSource.clip = randomSong.stems[i].audioClip;
+            audioSource.clip = song.stems[i].audioClip;
+
             audioSource.timeSamples += audioSource.clip.samples/2; // Start halfway through the clip
             audioSource.gameObject.SetActive(true);
         }
-        
-        
-        /*
-        foreach (var spawnPoint in _spawnPoints)
-        {
-            GameObject[] instruments = GetRandomInstrumentFamily();
-            GameObject spawnedInstrument = Instantiate(GetRandomInstrument(instruments));
-            spawnedInstrument.transform.position = spawnPoint.transform.position;
-        }
-        */
     }
 
     private void OnDisable()
     {
+        if(_grabbableInstruments == null) return;
         foreach (var grabbableInstrument in _grabbableInstruments)
         {
             Destroy(grabbableInstrument);
         }
+        hasPlayed = true;
     }
 
     private GameObject GetRandomInstrument(IReadOnlyList<GameObject> instruments) => instruments[Random.Range(0, instruments.Count)];

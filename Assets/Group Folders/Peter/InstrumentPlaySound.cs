@@ -5,6 +5,12 @@ using UnityEngine;
 public class InstrumentPlaySound : MonoBehaviour
 {
     AudioSource audioSource;
+    private AudioSource[] audioSources;
+
+    private void Awake() 
+    {
+        audioSources = FindObjectsOfType<AudioSource>();
+    }
 
     void Start()
     {
@@ -13,8 +19,6 @@ public class InstrumentPlaySound : MonoBehaviour
 
     public void PlaySound()
     {
-        AudioSource[] audioSources = FindObjectsOfType<AudioSource>();
-
         foreach (AudioSource audioSource in audioSources)
         {
             if (audioSource.isPlaying)
