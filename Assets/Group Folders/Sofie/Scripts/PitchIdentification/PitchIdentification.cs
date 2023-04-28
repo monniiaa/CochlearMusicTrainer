@@ -55,7 +55,7 @@ public class PitchIdentification : LevelManager
         StartRound();
     }
 
-    public void SetPitchDifference(int lowestNote, int highestNote , int interval)
+    private void SetPitchDifference(int lowestNote, int highestNote , int interval)
     {
         highestSpeaker = speakers[0];
         for (int i = 0; i < speakers.Length; i++)
@@ -67,14 +67,13 @@ public class PitchIdentification : LevelManager
             {
                 if (j != i)
                 {
-                    
-                    while (  speakers[i].note > speakers[j].note - interval && speakers[i].note < speakers[j].note + interval)
+                    while (speakers[i].note > speakers[j].note - interval &&
+                           speakers[i].note < speakers[j].note + interval)
                     {
-                        int rand= Random.Range(lowestNote, highestNote);
+                        int rand = Random.Range(lowestNote, highestNote);
                         speakers[i].note = rand;
                         speakers[i].SetNote(rand);
                     }
-                    
                 }
             }
             if (speakers[i].note > highestSpeaker.note)
