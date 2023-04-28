@@ -7417,6 +7417,7 @@ GameObject:
   - component: {fileID: 908467788}
   - component: {fileID: 908467787}
   - component: {fileID: 908467791}
+  - component: {fileID: 908467792}
   m_Layer: 5
   m_Name: IntroCanvas
   m_TagString: Untagged
@@ -7524,6 +7525,25 @@ MonoBehaviour:
   canvas: {fileID: 908467786}
   soundStart: {fileID: 1568146438}
   startButton: {fileID: 1124737083}
+--- !u!114 &908467792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908467786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7951c64acb0fa62458bf30a60089fe2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 0
+  m_CheckFor2DOcclusion: 0
+  m_CheckFor3DOcclusion: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RaycastTriggerInteraction: 1
 --- !u!1 &920874117
 GameObject:
   m_ObjectHideFlags: 0
@@ -13432,6 +13452,8 @@ MonoBehaviour:
   - {fileID: 483210030}
   - {fileID: 104945098}
   difficulty: 3
+  path: 
+  currentLevel: 0
   selectedObjects: []
   correctClip: {fileID: 8300000, guid: ea0f76d774091e142827b46eb6d8c7ed, type: 3}
   incorrectClip: {fileID: 8300000, guid: 0b7c310af99f03b4c805ab4cbe146447, type: 3}
