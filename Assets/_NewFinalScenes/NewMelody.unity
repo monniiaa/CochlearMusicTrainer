@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.10063326, g: 0.28698754, b: 0.5346657, a: 1}
+  m_IndirectSpecularColor: {r: 0.10117787, g: 0.2880348, b: 0.5371327, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2966,7 +2966,7 @@ MonoBehaviour:
   - {fileID: 1817680654}
   gameplayAudio: {fileID: 359671772}
   sucessAudio: {fileID: 8300000, guid: ea0f76d774091e142827b46eb6d8c7ed, type: 3}
-  failAudio: {fileID: 8300000, guid: 57c175dc8fbf1234eb3c342c3f9dd18c, type: 3}
+  failAudio: {fileID: 8300000, guid: 0b7c310af99f03b4c805ab4cbe146447, type: 3}
   sucessMaterial: {fileID: 2100000, guid: fb847fd6576585b458a3df6b689bb9f3, type: 2}
   failMaterial: {fileID: 2100000, guid: 87ea833d2a6e34941a80d129f36c062c, type: 2}
   LevelAlreadyCompleted: 0
