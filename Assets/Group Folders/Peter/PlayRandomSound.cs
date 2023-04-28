@@ -7,7 +7,7 @@ public class PlayRandomSound : MonoBehaviour
 {
     public Transform[] parentObjects; // array of parent objects to select from
     public GameData gameData;
-    public Difficulty difficulty; // the difficulty level (1-3)
+    public int difficulty = 1;
     public string path;
     public int currentLevel;
 
@@ -50,8 +50,8 @@ public class PlayRandomSound : MonoBehaviour
         path = "InstrumentIdentification";
         gameData = DataManager.ReadJson(path);
         currentLevel = gameData.level;
-        SetDifficulty();
-        int numParents = SetDifficultyChanges();
+
+        int numParents = difficulty;
         List<int> pickedFamily = new List<int>();
         for (int i = 0; i < numParents; i++)
         {
@@ -83,41 +83,6 @@ public class PlayRandomSound : MonoBehaviour
         //SelectInstrument();
     }
 
-    private int SetDifficultyChanges()
-    {
-        switch (difficulty)
-        {
-            case Difficulty.Easy:
-                return 1;
-                break;
-            case Difficulty.Medium:
-                return 2;
-                break;
-            case Difficulty.Hard:
-                return 3;
-                break;
-            default:
-                return 1;
-        }
-    }
-    
-    protected void SetDifficulty()
-    {
-        if (currentLevel <= 3)
-        {
-            difficulty = Difficulty.Easy;
-        }
-        else if (currentLevel > 3 && currentLevel <= 6)
-        {
-            difficulty = Difficulty.Medium;
-        }
-        else if (currentLevel > 6)
-        {
-            difficulty = Difficulty.Hard;
-        }
-    }
-    
-    
     private void EndFeedback()
     {
         //UI implementation, with text files showing which instruments were played
