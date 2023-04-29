@@ -31,6 +31,7 @@ public static class DataManager
 
     public static GameData ReadJson(string minigame)
     {
+        GameData data = CreateGameData(10, 0, 1);
         string filePath;
 
 #if UNITY_EDITOR
@@ -41,9 +42,11 @@ public static class DataManager
 
         if (!File.Exists(filePath))
         {
-            Debug.Log("exists");
+            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
             FileStream streamfile = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
             streamfile.Close();
+
+            SaveDataToJson(data, minigame);
         }
         StreamReader reader = new StreamReader(filePath);
         string json = reader.ReadToEnd();
@@ -52,12 +55,10 @@ public static class DataManager
         string jsonData = File.ReadAllText(filePath);
         if (jsonData != string.Empty)
         {
-            GameData data = JsonUtility.FromJson<GameData>(json);
-            return data;
+            data = JsonUtility.FromJson<GameData>(json);
         }
-        GameData newData = CreateGameData(10, 0, 1);
-        SaveDataToJson(newData, minigame);
-        return newData;
+        
+        return data;
     }
 }
 
