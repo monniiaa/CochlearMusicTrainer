@@ -1763,10 +1763,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba3c48819b043914e8fb1b777cccf0c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistanceToPlayer: 2.42
-  roomSize: 5.3
+  minDistanceToPlayer: 4
+  roomSize: 8
   height: 0.5
-  player: {fileID: 3221912667562352838}
+  player: {fileID: 3221912668148908502}
 --- !u!4 &1662117887
 Transform:
   m_ObjectHideFlags: 0
@@ -1800,10 +1800,11 @@ MonoBehaviour:
   distanceTracker: {fileID: 8808924322889256069}
   speakerspawner: {fileID: 1662117886}
   speakerAnimator: {fileID: 0}
-  FeedbackZero: {fileID: 1499616697}
-  FeedbackOne: {fileID: 1499616696}
-  FeedbackTwo: {fileID: 1499616695}
-  FeedbackThree: {fileID: 1499616694}
+  starAnimation:
+  - {fileID: 1499616697}
+  - {fileID: 1499616696}
+  - {fileID: 1499616695}
+  - {fileID: 1499616694}
 --- !u!1 &1721178717
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class randomizeSoundLocation : MonoBehaviour
     [SerializeField]
     private GameObject player;
     private GameObject prefabInstance;
+    private Vector3 previousPosition;
 
     public GameObject SpawnSpeaker(GameObject prefab)
     {
@@ -23,7 +24,11 @@ public class randomizeSoundLocation : MonoBehaviour
                 float randomZ = Random.Range(-roomSize / 2f, roomSize / 2f);
                 float randomY = Random.Range(-height / 2, height / 2);
                 randomPoint = new Vector3(randomX, randomY, randomZ) + transform.position;
-            } while (Vector3.Distance(randomPoint, player.transform.position) < minDistanceToPlayer && Vector3.Distance(randomPoint, player.transform.position) < minDistanceToPlayer);
+            } while (Vector3.Distance(randomPoint, player.transform.position) < minDistanceToPlayer 
+            && Vector3.Distance(randomPoint, player.transform.position) < minDistanceToPlayer
+            && Vector3.Distance(randomPoint, previousPosition) > roomSize / 2f);
+
+            previousPosition = randomPoint;
 
             return Instantiate(prefab, randomPoint, Quaternion.identity);
     }

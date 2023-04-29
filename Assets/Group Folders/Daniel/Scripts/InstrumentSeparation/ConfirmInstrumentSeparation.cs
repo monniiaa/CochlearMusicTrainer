@@ -10,6 +10,7 @@ public class ConfirmInstrumentSeparation : MonoBehaviour
 {
     [SerializeField]
     private GameObject finishButtonHolder;
+    private InstrumentSpawner _instrumentSpawner;
     private InteractableInstrument[] _interactableInstruments;
     private InstrumentSeparation _instrumentSeparation;
     private Button _finishButton;
@@ -18,13 +19,23 @@ public class ConfirmInstrumentSeparation : MonoBehaviour
 
     private void Awake()
     {
+        _instrumentSpawner = FindObjectOfType<InstrumentSpawner>();
+        _gameData = DataManager.ReadJson("InstrumentSeparation");
+        _currentLevel = (GameDataManager.Instance.currentLevel == 0) ? 1 : GameDataManager.Instance.currentLevel;
         _instrumentSeparation = InstrumentSeparation.Instance;
         _finishButton = finishButtonHolder.GetComponentInChildren<Button>();
     }
 
     private void OnEnable()
     {
-        StartCoroutine(WaitForInstruments());
+        _interactableInstruments = _instrumentSpawner.SpawnInstruments().Select(obj => obj.GetComponent<InteractableInstrument>()).ToArray();
+        
+        foreach (var interactableInstrument in _interactableInstruments)
+        {
+            interactableInstrument.Button.onClick.AddListener(OnConfirmHearing);
+        }
+        
+        _finishButton.onClick.AddListener(OnFinishButtonPressed);
         finishButtonHolder.SetActive(false);
     }
 
@@ -56,9 +67,11 @@ public class ConfirmInstrumentSeparation : MonoBehaviour
     private void OnFinishButtonPressed()
     {
         JsonManager.WriteDataToFile<InstrumentSeparationGameData>(new InstrumentSeparationGameData(_interactableInstruments.Select(obj => Vector3.Distance(obj.transform.position, Camera.main.transform.position)).ToArray()));
-        _gameData = DataManager.ReadJson("InstrumentSeparation");
-        _gameData.level += 1;
-        _gameData.levelScore = new int[1] { 3 };
+        if(_currentLevel == _gameData.level)
+        {
+            _gameData.level += 1;
+        }
+        _gameData.levelScore[_currentLevel - 1] = 3;
         DataManager.SaveDataToJson(_gameData, "InstrumentSeparation");
             
         _instrumentSeparation.EndGame();
@@ -69,13 +82,7 @@ public class ConfirmInstrumentSeparation : MonoBehaviour
     private IEnumerator WaitForInstruments()
     {
         yield return new WaitForEndOfFrame();
-        _interactableInstruments = FindObjectsOfType<InteractableInstrument>();
         
-        foreach (var interactableInstrument in _interactableInstruments)
-        {
-            interactableInstrument.Button.onClick.AddListener(OnConfirmHearing);
-        }
-
-        _finishButton.onClick.AddListener(OnFinishButtonPressed);
+        
     }
 }

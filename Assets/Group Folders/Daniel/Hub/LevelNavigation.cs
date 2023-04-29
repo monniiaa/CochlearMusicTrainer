@@ -5,14 +5,17 @@ using UnityEngine.UI;
 
 public class LevelNavigation : MonoBehaviour
 {
+    [SerializeField] private int sceneIndex;
     [SerializeField] private string path;
     [SerializeField] private UIMenu uiMenu;
+    private SceneTransitionManager sceneTransitionManager;
     private GameDataManager gameDataManager;
     private GameData gameData;
     private Button[] buttons;
     private Level[] levels;
     private void Awake() 
     {
+        sceneTransitionManager = FindObjectOfType<SceneTransitionManager>();
         gameData = DataManager.ReadJson(path);
         gameDataManager = GameDataManager.Instance;
         buttons = GetComponentsInChildren<Button>();
@@ -36,7 +39,6 @@ public class LevelNavigation : MonoBehaviour
         {
             int value = i + 1;
             buttons[i].onClick.AddListener(delegate { SetCurrentLevel(value); });
-
         }
     }
 
@@ -51,6 +53,11 @@ public class LevelNavigation : MonoBehaviour
 
     private void SetCurrentLevel(int level)
     {
+        if(level > gameData.level)
+        {
+            return;
+        }
         gameDataManager.currentLevel = level;
+        sceneTransitionManager.GoToSceneAsync(sceneIndex);
     }
 }

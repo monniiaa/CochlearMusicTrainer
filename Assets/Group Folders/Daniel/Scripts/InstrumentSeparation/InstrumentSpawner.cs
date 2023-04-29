@@ -40,31 +40,23 @@ public class InstrumentSpawner : MonoBehaviour
     private GameObject[] _spawnPoints;
     private AudioClip[] _audioClip;
     private GameObject[] _grabbableInstruments;
-    private bool hasPlayed;
     private const string dataPath = "InstrumentSeparation";
 
     private void Awake()
     {
-        songs = Resources.LoadAll<SongData>("Songs");
+        _gameData = DataManager.ReadJson(dataPath);
         _spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
     }
 
-    private void OnEnable()
+    public GameObject[] SpawnInstruments()
     {
-        _gameData = DataManager.ReadJson(dataPath);
-        SpawnInstruments();
-    }
-
-    public void SpawnInstruments()
-    {
-        if(hasPlayed) _gameData.level--;
-        DataManager.SaveDataToJson(_gameData, dataPath);
-
         int songIndex = _gameData.level - 1;
-        if(songIndex > songs.Length - 1) songIndex = songs.Length - 1;
+        songIndex = Mathf.Clamp(songIndex, 0, songs.Length - 1);
+        Debug.Log($"Song index: {songIndex}");
+        Debug.Log($"Songs: {songs.Length}");
         SongData song = songs[songIndex];
         _grabbableInstruments = new GameObject[song.stems.Length];
-
+        
         
         for (int i = 0; i < _spawnPoints.Length; i++)
         {
@@ -79,7 +71,6 @@ public class InstrumentSpawner : MonoBehaviour
 
             BoxCollider instrumentHolderCollider = _grabbableInstruments[i].GetComponent<BoxCollider>();
             Bounds instrumentBounds = instrument.GetComponent<MeshRenderer>().bounds;
-            Debug.Log($"{song.stems[i].instrumentData.instrumentPrefab.name}: {instrumentBounds.size.magnitude}");
             if(instrumentBounds.size.magnitude <= 0.2f) 
             {
                 instrument.transform.localScale = new Vector3(2f, 2f, 2f);
@@ -99,6 +90,8 @@ public class InstrumentSpawner : MonoBehaviour
             audioSource.timeSamples += audioSource.clip.samples/2; // Start halfway through the clip
             audioSource.gameObject.SetActive(true);
         }
+        
+        return _grabbableInstruments;
     }
 
     private void OnDisable()
@@ -108,17 +101,8 @@ public class InstrumentSpawner : MonoBehaviour
         {
             Destroy(grabbableInstrument);
         }
-        hasPlayed = true;
     }
-
-    private GameObject GetRandomInstrument(IReadOnlyList<GameObject> instruments) => instruments[Random.Range(0, instruments.Count)];
-
-    private GameObject[] GetRandomInstrumentFamily()
-    {
-        int randomInstrumentFamily = Random.Range(0, Enum.GetValues(typeof(InstrumentFamily)).Length);
-        return Resources.LoadAll<GameObject>($"Instruments/{((InstrumentFamily) randomInstrumentFamily).ToString()}");
-    }
-
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         GameObject[] spawners = GameObject.FindGameObjectsWithTag("SpawnPoint");
@@ -129,3 +113,4 @@ public class InstrumentSpawner : MonoBehaviour
         }
     }
 }
+#endif

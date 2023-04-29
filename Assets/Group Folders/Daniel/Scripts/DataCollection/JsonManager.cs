@@ -32,13 +32,6 @@ public class JsonManager : MonoBehaviour
 #endif
     }
 
-    private void Start() {
-        foreach (var item in ReadDataFromFile<InstrumentSeparationGameData>())
-        {
-            Debug.Log(item.distances.Length); 
-        }
-    }
-
     public static void WriteDataToFile<T>(AbstractDataContainer dataContainer) where T : AbstractDataContainer
     {
         string fullPath = _path + dataContainer.Path;

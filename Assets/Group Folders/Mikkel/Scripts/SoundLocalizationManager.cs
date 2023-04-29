@@ -20,7 +20,7 @@ public class SoundLocalizationManager : MonoBehaviour
     GameData gameData;
     public XRRayInteractor _xrRayInteractor;
     
-   
+    private GameDataManager gameDataManager;
 
 
     private bool gameIsOver = false;
@@ -37,17 +37,14 @@ public class SoundLocalizationManager : MonoBehaviour
     private MeshRenderer meshRenderer;
 
     public Animator speakerAnimator;
-
-    public GameObject FeedbackZero;
-    public GameObject FeedbackOne;
-    public GameObject FeedbackTwo;
-    public GameObject FeedbackThree;
+    public GameObject[] starAnimation;
    
     void Awake()
     {
+        gameDataManager = GameDataManager.Instance;
         _xrRayInteractor = FindObjectOfType<XRRayInteractor>();
         gameData = DataManager.ReadJson(path);
-        CurrentLevel = gameData.level;
+        CurrentLevel = (gameDataManager.currentLevel == 0) ? 1 : gameDataManager.currentLevel;
         meshRenderer = speaker.GetComponentInChildren<MeshRenderer>();
         speakerAnimator = speaker.GetComponentInChildren<Animator>();
         meshRenderer.enabled = false;
@@ -57,15 +54,17 @@ public class SoundLocalizationManager : MonoBehaviour
     }
     private void OnEnable()
     {
+        CurrentScore = 0;
         distanceTracker.distanceEvent += EndRound;
         StartNewRound();//maybe
+        
     }
 
     private void OnDisable()
     {
         gameIsOver = false;
-        currentRound = 0;
         distanceTracker.distanceEvent -= EndRound;
+        currentRound = 0;
     }
 
     private void EndRound()
@@ -75,27 +74,37 @@ public class SoundLocalizationManager : MonoBehaviour
 
         if(CheckRayHit())
         {
-
             speakerAnimator.enabled = true;
             CurrentScore++;
+            Debug.Log("CurrentScore: " + CurrentScore);
         }
 
         meshRenderer.enabled = true;
 
         waitForTarget = StartCoroutine(WaitForVisibleShootingDisc());
-       
     }
 
     private void StartNewRound() //maybe
     {
         currentRound++;
-        Debug.Log("Round: " + currentRound);
-        Debug.Log("Score: " + CurrentScore);
         if (currentRound > maxRounds)
         {
             if (!speaker.IsDestroyed()) speaker.GetComponent<DeletusMaximus>().Destroy();
             gameIsOver = true;
             InstrumentSeparation.Instance.EndGame();
+            if(CurrentLevel == gameData.level)
+            {
+                gameData.level++;
+            }
+            if(CurrentScore > gameData.levelScore[CurrentLevel - 1])
+            {
+                gameData.levelScore[CurrentLevel - 1] = CurrentScore;
+            }
+            
+            DataManager.SaveDataToJson(gameData, path);
+            ShowStars(CurrentScore);
+            return;
+            /*
             switch (CurrentScore)
             {
                 case 0:
@@ -117,16 +126,27 @@ public class SoundLocalizationManager : MonoBehaviour
                 default:
                     return;
             }
+            */
         }
-        Debug.Log( currentRound > maxRounds);
-        Debug.Log("Spawn");
         RespawnSpeaker();
         
     }
 
+    private void ShowStars(int score)
+    {
+        for (int i = 0; i < starAnimation.Length; i++)
+        {
+            if(i == score) 
+            {
+                starAnimation[i].SetActive(true);
+                continue;
+            }
+            starAnimation[i].SetActive(false);
+        }
+    }
+
     private void RespawnSpeaker()
     {
-        if(!speaker.IsDestroyed()) speaker.GetComponent<DeletusMaximus>().Destroy();
         speaker = speakerspawner.SpawnSpeaker(prefab);
         if (CurrentLevel < 3)
         {
@@ -162,7 +182,7 @@ public class SoundLocalizationManager : MonoBehaviour
         meshRenderer.enabled = false;
         speakerAnimator.enabled = false;
         waitForTarget = null;
-        
+        if(!speaker.IsDestroyed()) speaker.GetComponent<DeletusMaximus>().Destroy();
         StartNewRound();
     }
 }

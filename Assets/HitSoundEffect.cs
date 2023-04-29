@@ -42,7 +42,6 @@ public class HitSoundEffect : MonoBehaviour
 
     private void OnRay(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Hello");
         Ray ray = new Ray(playerRayInteractior.rayOriginTransform.position, playerRayInteractior.rayOriginTransform.forward);
         if(_sphereCollider.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
         {
@@ -52,7 +51,7 @@ public class HitSoundEffect : MonoBehaviour
         {
             audioSource.clip = speakerMissSound;
         }
-        
+        audioSource.loop = false;
         audioSource.Play();
     }
 }
