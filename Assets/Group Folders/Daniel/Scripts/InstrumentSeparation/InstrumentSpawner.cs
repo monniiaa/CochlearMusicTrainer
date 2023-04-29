@@ -56,8 +56,8 @@ public class InstrumentSpawner : MonoBehaviour
         Debug.Log($"Songs: {songs.Length}");
         SongData song = songs[songIndex];
         _grabbableInstruments = new GameObject[song.stems.Length];
-        
-        
+
+
         for (int i = 0; i < _spawnPoints.Length; i++)
         {
             _grabbableInstruments[i] = Instantiate(grabbablePrefab);
@@ -71,32 +71,32 @@ public class InstrumentSpawner : MonoBehaviour
 
             BoxCollider instrumentHolderCollider = _grabbableInstruments[i].GetComponent<BoxCollider>();
             Bounds instrumentBounds = instrument.GetComponent<MeshRenderer>().bounds;
-            if(instrumentBounds.size.magnitude <= 0.2f) 
+            if (instrumentBounds.size.magnitude <= 0.2f)
             {
                 instrument.transform.localScale = new Vector3(2f, 2f, 2f);
                 instrumentBounds = instrument.GetComponent<MeshRenderer>().bounds;
             }
             instrumentHolderCollider.size = instrumentBounds.size;
             instrumentHolderCollider.center = instrumentBounds.center;
-            
+
             attachmentPoint.transform.position = instrumentHolderCollider.center;
 
             confirmUI.transform.position = new Vector3(0, instrumentBounds.max.y * _grabbableInstruments[i].transform.localScale.y + 0.1f, 0);
             _grabbableInstruments[i].transform.position = _spawnPoints[i].transform.position;
-            
+
             AudioSource audioSource = soundSource.GetComponent<AudioSource>();
             audioSource.clip = song.stems[i].audioClip;
 
-            audioSource.timeSamples += audioSource.clip.samples/2; // Start halfway through the clip
+            audioSource.timeSamples += audioSource.clip.samples / 2; // Start halfway through the clip
             audioSource.gameObject.SetActive(true);
         }
-        
+
         return _grabbableInstruments;
     }
 
     private void OnDisable()
     {
-        if(_grabbableInstruments == null) return;
+        if (_grabbableInstruments == null) return;
         foreach (var grabbableInstrument in _grabbableInstruments)
         {
             Destroy(grabbableInstrument);
@@ -112,5 +112,5 @@ public class InstrumentSpawner : MonoBehaviour
             Gizmos.DrawSphere(spawner.transform.position, 0.1f);
         }
     }
-}
 #endif
+}
