@@ -52,11 +52,12 @@ public class InstrumentSpawner : MonoBehaviour
     {
         int songIndex = _gameData.level - 1;
         songIndex = Mathf.Clamp(songIndex, 0, songs.Length - 1);
-        Debug.Log($"Song index: {songIndex}");
-        Debug.Log($"Songs: {songs.Length}");
         SongData song = songs[songIndex];
         _grabbableInstruments = new GameObject[song.stems.Length];
+        int startTimeSeconds = (int) ((song.startTime.x * 60) + song.startTime.y);
+        int endTimeSeconds = (int) ((song.endTime.x * 60) + song.endTime.y);
 
+        AudioSource[] audioSources = new AudioSource[song.stems.Length];
 
         for (int i = 0; i < _spawnPoints.Length; i++)
         {
@@ -84,12 +85,15 @@ public class InstrumentSpawner : MonoBehaviour
             confirmUI.transform.position = new Vector3(0, instrumentBounds.max.y * _grabbableInstruments[i].transform.localScale.y + 0.1f, 0);
             _grabbableInstruments[i].transform.position = _spawnPoints[i].transform.position;
 
-            AudioSource audioSource = soundSource.GetComponent<AudioSource>();
-            audioSource.clip = song.stems[i].audioClip;
-
-            audioSource.timeSamples += audioSource.clip.samples / 2; // Start halfway through the clip
-            audioSource.gameObject.SetActive(true);
+            audioSources[i] = soundSource.GetComponent<AudioSource>();
+            audioSources[i].clip = song.stems[i].audioClip;
+            audioSources[i].timeSamples = startTimeSeconds * audioSources[i].clip.frequency;
+            audioSources[i].gameObject.SetActive(true);
         }
+
+        StopAllCoroutines();
+        StartCoroutine(CheckForSongEnd(audioSources, startTimeSeconds, endTimeSeconds));
+
 
         return _grabbableInstruments;
     }
@@ -102,6 +106,32 @@ public class InstrumentSpawner : MonoBehaviour
             Destroy(grabbableInstrument);
         }
     }
+
+    IEnumerator CheckForSongEnd(AudioSource[] audioSources, int startTimeSeconds, int endTimeSeconds)
+    {
+        while (true)
+        {
+            
+            if (audioSources[0].timeSamples >= endTimeSeconds * audioSources[0].clip.frequency)
+            {
+                foreach (var audioSource in audioSources)
+                {
+                    audioSource.mute = true;
+                    audioSource.timeSamples = startTimeSeconds * audioSource.clip.frequency;
+                }
+
+                yield return new WaitForSeconds(1.5f);
+
+                foreach (var audioSource in audioSources)
+                {
+                    audioSource.mute = false;
+                }
+            }
+            
+            yield return null;
+        }
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
