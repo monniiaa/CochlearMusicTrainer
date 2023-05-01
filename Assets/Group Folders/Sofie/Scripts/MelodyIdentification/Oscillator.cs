@@ -29,17 +29,18 @@ public class Oscillator : MonoBehaviour
     {
         int rand = Random.Range(0, notes.Length);
         startNote = rand;
-        
+        currentClip = notes[startNote];
     }
 
     public void CreateStartNote(int i)
     {
         startNote = i;
+        currentClip = notes[startNote];
     }
     
     public void StopMelody()
     {
-        _coroutine = StartCoroutine(FadeOut(2f));
+        _coroutine = StartCoroutine(FadeOut(0.5f));
         
         
     }

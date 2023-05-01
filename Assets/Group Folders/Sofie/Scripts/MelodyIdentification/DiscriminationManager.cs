@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class DiscriminationManager : LevelManager
 {
@@ -15,6 +16,7 @@ public class DiscriminationManager : LevelManager
     public InstrumentSeparation ModeManager;
     public GameObject[] starAnimation = new GameObject[4];
     private GameDataManager _gameDataManager;
+    private DateTime startTime;
     
     private void Awake() 
     {
@@ -33,9 +35,6 @@ public class DiscriminationManager : LevelManager
         foreach (GameObject star in starAnimation)
         {
             star.gameObject.SetActive(false);
-        }
-        {
-            
         }
     }
 
@@ -67,7 +66,7 @@ public class DiscriminationManager : LevelManager
         int rand;
         do
         {
-            rand = Random.Range(0, melodies.Length);
+            rand = UnityEngine.Random.Range(0, melodies.Length);
         } while (melodies[rand].CompareTag("Original"));
 
         melodies[rand].CreateStartNote(originalMelody.startNote);
@@ -94,19 +93,19 @@ public class DiscriminationManager : LevelManager
         switch (difficulty)
         {
             case Difficulty.Easy:
-                levelInterval = Random.Range(3, 5);
-                levelSequenceLength = Random.Range(2, 4);
+                levelInterval = UnityEngine.Random.Range(3, 5);
+                levelSequenceLength = UnityEngine.Random.Range(2, 4);
                 break;
             case Difficulty.Medium:
-                levelInterval = Random.Range(1, 2);
-                levelSequenceLength = Random.Range(3, 5);
+                levelInterval = UnityEngine.Random.Range(1, 2);
+                levelSequenceLength = UnityEngine.Random.Range(3, 5);
                 break;
             case Difficulty.Hard:
-                levelInterval = Random.Range(1, 2);
-                levelSequenceLength = Random.Range(3, 6);
+                levelInterval = UnityEngine.Random.Range(1, 2);
+                levelSequenceLength = UnityEngine.Random.Range(3, 6);
                 break;
         }
-        intervalDistance = Random.Range(0, 2);
+        intervalDistance = UnityEngine.Random.Range(0, 2);
         levelNoteTime = 0.4f;
     }
 
@@ -116,6 +115,17 @@ public class DiscriminationManager : LevelManager
     }
     protected override void EndRound()
     {
+        JsonManager.WriteDataToFile<MelodyIdentificationGameData>(
+            new MelodyIdentificationGameData(
+                startTime,
+                DateTime.Now - startTime,
+                originalMelody.currentClip.name,
+                pickedMelody.currentClip.name,
+                originalMelody.startNote == pickedMelody.startNote,
+                new string[] { melodies[0].currentClip.name, melodies[1].currentClip.name, melodies[2].currentClip.name },
+                currentLevel,
+                round
+            ));
         foreach (Oscillator osc in melodies)
         {
             osc.DestroyAnimation();
@@ -126,7 +136,6 @@ public class DiscriminationManager : LevelManager
             gameplayAudio.PlayOneShot(sucessAudio);
             pickedMelody.GetComponent<MeshRenderer>().material = sucessMaterial;
             currentScore++;
-            //gameData.levelScore[currentLevel - 1] = currentScore;
             pickedMelody.tag = "Untagged";
             pickedMelody = null;
         }
@@ -145,7 +154,7 @@ public class DiscriminationManager : LevelManager
         SetOriginalMelody();
         SetEquivalentMelody();
         SetDissimilarMelodies();
-
+        startTime = DateTime.Now;
     }
 
     IEnumerator test()
@@ -166,23 +175,6 @@ public class DiscriminationManager : LevelManager
         }
         ModeManager.EndGame();
         ShowStar(currentScore);
-        /*
-        switch ((currentScore)) 
-        {   
-            case 1 :
-                starAnimation[1].SetActive(true);
-                break;
-            case 2:
-                starAnimation[2].SetActive(true);
-                break;
-            case 3:
-                starAnimation[3].SetActive(true);
-                break;
-            default:   
-                starAnimation[0].SetActive(true);
-                break;
-        }
-        */
     }
 
     private void ShowStar(int score)
@@ -200,8 +192,8 @@ public class DiscriminationManager : LevelManager
 
     public override void SetRoundFunctionality()
     {
-        round++;
         EndRound();
+        round++;
        if(round < 4)
         {
             StartRound();

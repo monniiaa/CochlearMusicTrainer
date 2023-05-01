@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PitchIdentification : LevelManager
 {
@@ -18,6 +19,7 @@ public class PitchIdentification : LevelManager
     Speaker[] speakers;
     public GameObject[] starAnimation = new GameObject[4];
     public InstrumentSeparation ModeManager;
+    private DateTime startTime;
 
 
     private void Awake()
@@ -62,7 +64,7 @@ public class PitchIdentification : LevelManager
         highestSpeaker = speakers[0];
         for (int i = 0; i < speakers.Length; i++)
         {
-            int randNote = Random.Range(lowestNote, highestNote);
+            int randNote = UnityEngine.Random.Range(lowestNote, highestNote);
             speakers[i].note = randNote;
             speakers[i].SetNote(randNote);
             for (int j = 0; j < speakers.Length;j++)
@@ -73,7 +75,7 @@ public class PitchIdentification : LevelManager
                     while (  speakers[i].note > speakers[j].note - interval 
                     && speakers[i].note < speakers[j].note + interval)
                     {
-                        int rand= Random.Range(lowestNote, highestNote);
+                        int rand= UnityEngine.Random.Range(lowestNote, highestNote);
                         speakers[i].note = rand;
                         speakers[i].SetNote(rand);
                     }
@@ -88,12 +90,23 @@ public class PitchIdentification : LevelManager
     }
     public void SpeakerPicked(Speaker speaker)
     {
+        JsonManager.WriteDataToFile<PitchIdentificationGameData>(
+            new PitchIdentificationGameData(
+                DateTime.Now,
+                DateTime.Now - startTime,
+                speaker.currentClip.name,
+                highestSpeaker.currentClip.name,
+                speaker == highestSpeaker,
+                new string[] { speakers[0].currentClip.name, speakers[1].currentClip.name},
+                currentLevel,
+                round
+            )
+        );
         EndRound();
         if (speaker == highestSpeaker) {
             gameplayAudio.PlayOneShot(sucessAudio);
             speaker.GetComponent<MeshRenderer>().material = sucessMaterial;
             currentScore += 1;
-            //gameData.levelScore[currentLevel-1] = currentScore;
 
         } else if (speaker!= highestSpeaker)
         {
@@ -181,6 +194,7 @@ public class PitchIdentification : LevelManager
 
     protected override void StartRound()
     {
+        startTime = DateTime.Now;
         foreach (Speaker speaker in speakers)
         {
             speaker.SetPickedState(false);

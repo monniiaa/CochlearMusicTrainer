@@ -6,24 +6,27 @@ using System;
 [Serializable]
 public class PitchIdentificationGameData : AbstractDataContainer
 {
-    public override string Path => "\\InstrumentIdentification\\instrument_identification_game_data.json";
+    public override string Path => "\\PitchIdentification\\pitch_identification_data.json";
     
     public string time;
     public string timeTakenToChooseSpeaker;
-    public int chosenNote;
-    public int correctNote;
+    public string chosenNote;
+    public string correctNote;
+    public bool wasCorrect;
     public string[] noteOptions;
     public int level;
     public int round;
 
-    public PitchIdentificationGameData(DateTime time, TimeSpan timeTakenToChooseSpeaker, int chosenNote, int correctNote, string[] noteOptions, int level)
+    public PitchIdentificationGameData(DateTime time, TimeSpan timeTakenToChooseSpeaker, string chosenNote, string correctNote, bool wasCorrect, string[] noteOptions, int level, int round)
     {
-        this.time = time.ToString("dd/MM/yy H:mm:ss");
-        this.timeTakenToChooseSpeaker = timeTakenToChooseSpeaker.ToString("H:mm:ss");
+        this.time = time.ToString("dd/MM/yyyy HH:mm:ss");
+        this.timeTakenToChooseSpeaker = timeTakenToChooseSpeaker.ToString("h'h 'm'm 's's'");;
         this.chosenNote = chosenNote;
         this.correctNote = correctNote;
+        this.wasCorrect = wasCorrect;
         this.noteOptions = noteOptions;
         this.level = level;
+        this.round = round;
     }
 
 }
