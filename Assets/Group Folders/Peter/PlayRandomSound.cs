@@ -27,7 +27,7 @@ public class PlayRandomSound : MonoBehaviour
     private float timer1, timer2, timer3;
     public float points;
     private bool isCorrect = false;
-    private GameObject currentInstrument;
+    public GameObject currentInstrument;
     //[SerializeField] private TMP_Text firstInstrument, secondInstrument, thirdInstrument;
     [SerializeField] private GameObject oneStar, twoStar, threeStar, noStar;
     [SerializeField] private GameObject resultCanvas;
@@ -35,14 +35,13 @@ public class PlayRandomSound : MonoBehaviour
     private List<float> timerCount = new List<float>();
 
     //VR interaction variables
-    [SerializeField]
-    private OutlineManager outline;
+    [SerializeField] private OutlineManager outline;
 
     RaycastHit hit;
     RaycastHit previousHit;
     public Camera camera;
 
-    public InputActionReference XRinput;
+    //public InputActionReference XRinput;
 
     private void Awake()
     {
@@ -68,32 +67,22 @@ public class PlayRandomSound : MonoBehaviour
             // select a random child object from the parent object and add it to the list
             int numChildren = parent.childCount;
             int randomChildIndex = Random.Range(0, numChildren);
-            //Debug.Log("children" + randomChildIndex);
             GameObject child = parent.GetChild(randomChildIndex).gameObject;
             selectedObjects.Add(child);
         }
-        //Debug.Log(selectedObjects.Count);
-        
-        
     }
 
     private void Update()
     {
         time += Time.deltaTime;
-        //SelectInstrument();
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            StopRound();
+        }
     }
 
     private void EndFeedback()
     {
-        //UI implementation, with text files showing which instruments were played
-        /*firstInstrument.text = objectsPlayed[0];
-        firstInstrument.gameObject.SetActive(true);
-        secondInstrument.text = objectsPlayed[1];
-        secondInstrument.gameObject.SetActive(true);
-        thirdInstrument.text = objectsPlayed[2];
-        //testing below
-        //thirdInstrument.text = points.ToString();
-        thirdInstrument.gameObject.SetActive(true);*/
         resultCanvas.SetActive(true);
         switch (errorCount.Count)
         {
@@ -113,7 +102,7 @@ public class PlayRandomSound : MonoBehaviour
         }
     }
 
-    public void StopRound(InputAction.CallbackContext ctx)
+    public void StopRound()
     {
         outline.ClearAllSelections();
         StopMusic();
@@ -171,7 +160,6 @@ public class PlayRandomSound : MonoBehaviour
                 DataManager.SaveDataToJson(gameData, path);
                 RoundFinishAudio();
             EndFeedback();
-                Debug.Log(errorCount.Count);
             }
             else if (round3 == true)
             {
@@ -185,7 +173,6 @@ public class PlayRandomSound : MonoBehaviour
         int selectedIndex = Random.Range(0, selectedObjects.Count);
         GameObject selectedObject = selectedObjects[selectedIndex];
         string folderName = selectedObject.name + "Track"; // assume the sound folder is named after the child object
-        Debug.Log(folderName);
         AudioClip[] clips = Resources.LoadAll<AudioClip>(folderName);
         if (clips != null && clips.Length > 0)
         {
@@ -193,6 +180,7 @@ public class PlayRandomSound : MonoBehaviour
             AudioSource audioSource = selectedObject.GetComponent<AudioSource>();
             selectedObject.tag = "playing";
             currentInstrument = selectedObject;
+            Debug.Log(currentInstrument.name);
             objectsPlayed.Add(selectedObject.ToString());
             audioSource.clip = randomClip;
             audioSource.Play();
@@ -205,23 +193,6 @@ public class PlayRandomSound : MonoBehaviour
         Round();
     }
 
-    private void SelectInstrument()
-    {
-        //Possibly outdated method here, from testing stage
-        previousHit = hit;
-        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit))
-        {
-            if (hit.collider.gameObject.tag == "playing")
-            {
-                if (Input.GetMouseButton(0))
-                {
-                    isCorrect = true;
-                }
-            }
-        }
-    }
-
     private void StopMusic()
     {
         allAudioSources = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
@@ -231,10 +202,10 @@ public class PlayRandomSound : MonoBehaviour
         }
     }
 
-    public void Triggered()
+    public void Triggered(GameObject instrument)
     {
-        if (outline.selected == null || currentInstrument == null) return;
-        if (currentInstrument.name.Equals(outline.selected.name))
+        //if (outline.selected == null || currentInstrument == null) return;
+        if (currentInstrument.name == instrument.name)
         {
             isCorrect = true;
         }
@@ -246,7 +217,7 @@ public class PlayRandomSound : MonoBehaviour
 
     private void OnEnable()
     {
-        XRinput.action.performed += StopRound;
+        //XRinput.action.performed += StopRound;
     }
 
     private IEnumerator WaitForSelection()
