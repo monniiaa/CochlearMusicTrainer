@@ -17,3 +17,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b1035be92cd7abf48bd33d2a67d268ff, type: 2}
   - {fileID: 11400000, guid: f67b77d74f05b3c429d1bd41a0aebe05, type: 2}
   - {fileID: 11400000, guid: 08addc8c5de7392479cbc9c0b4c7226f, type: 2}
+  startTime: {x: 1, y: 30}
+  endTime: {x: 1, y: 40}

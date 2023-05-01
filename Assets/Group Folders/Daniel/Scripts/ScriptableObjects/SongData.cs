@@ -6,4 +6,6 @@ using UnityEngine;
 public class SongData : ScriptableObject
 {
     public SongStem[] stems;
+    public Vector2 startTime;
+    public Vector2 endTime;
 }
