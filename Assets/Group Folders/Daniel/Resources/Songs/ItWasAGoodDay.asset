@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f0494509f551a64f81b6e5218754fb5, type: 3}
+  m_Name: ItWasAGoodDay
+  m_EditorClassIdentifier: 
+  stems:
+  - {fileID: 11400000, guid: 5cbf8e40788aa5547bf4c80b7182576c, type: 2}
+  - {fileID: 11400000, guid: 4fa549d672e5b4049940ae3e076cef1b, type: 2}
+  - {fileID: 11400000, guid: 297706967a005f14fbabd37577594e24, type: 2}
+  - {fileID: 11400000, guid: 5f79e88d7b6eb224eadd96a4d1e490b1, type: 2}
+  startTime: {x: 1, y: 30}
+  endTime: {x: 1, y: 40}
