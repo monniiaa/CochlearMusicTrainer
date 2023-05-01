@@ -66,15 +66,40 @@ public class ConfirmInstrumentSeparation : MonoBehaviour
 
     private void OnFinishButtonPressed()
     {
-        JsonManager.WriteDataToFile<InstrumentSeparationGameData>(new InstrumentSeparationGameData(_interactableInstruments.Select(obj => Vector3.Distance(obj.transform.position, Camera.main.transform.position)).ToArray()));
         if(_currentLevel == _gameData.level)
         {
             _gameData.level += 1;
         }
         _gameData.levelScore[_currentLevel - 1] = 3;
         DataManager.SaveDataToJson(_gameData, "InstrumentSeparation");
-            
+#region DataCollection
+        List<SeparatedInstrumentData> separatedInstrumentData = new List<SeparatedInstrumentData>();
+        for (int i = 0; i < _interactableInstruments.Length; i++)
+        {
+            separatedInstrumentData.Add(
+                new SeparatedInstrumentData( 
+                    _interactableInstruments[i].gameObject.name,
+                    _interactableInstruments[i].CanBeHeard,
+                    Vector3.Distance(Camera.main.transform.position, _interactableInstruments[i].transform.position),
+                    new List<OtherInstrumentDistances>(
+                        _interactableInstruments.Select(
+                            otherInstrumentDistance => new OtherInstrumentDistances(
+                                otherInstrumentDistance.gameObject.name,
+                                Vector3.Distance(_interactableInstruments[i].transform.position, otherInstrumentDistance.transform.position)
+                                )
+                            )
+                        )
+                    ));
+        }
+        JsonManager.WriteDataToFile<InstrumentSeparationGameData>(
+            new InstrumentSeparationGameData(
+                _instrumentSpawner.chosenSong.songName, 
+                _currentLevel,
+                separatedInstrumentData
+            ));
+
         _instrumentSeparation.EndGame();
+#endregion
     }
 
     private bool IsMissingSelections() => _interactableInstruments.Any(i => !i.HasClickedOnce);

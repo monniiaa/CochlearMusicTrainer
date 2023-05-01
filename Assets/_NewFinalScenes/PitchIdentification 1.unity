@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.10063326, g: 0.28698754, b: 0.5346657, a: 1}
+  m_IndirectSpecularColor: {r: 0.10139937, g: 0.2892555, b: 0.5375916, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -926,6 +926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b9044851854ed4b8aaf08133c5c458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minigame: Pitch Identification
   game: {fileID: 977635265}
   instructions: {fileID: 908467786}
   endGameResults: {fileID: 1499616694}

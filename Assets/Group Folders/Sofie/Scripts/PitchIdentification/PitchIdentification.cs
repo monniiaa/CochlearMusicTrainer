@@ -123,6 +123,7 @@ public class PitchIdentification : LevelManager
 
     IEnumerator End()
     {
+
         yield return new WaitForSeconds(0.7f);
         foreach (Speaker s in speakers)
         {
@@ -131,23 +132,6 @@ public class PitchIdentification : LevelManager
         ModeManager.EndGame();
         Debug.Log("Current Score: " + currentScore);
         ShowStar(currentScore);
-        /*
-        switch ((currentScore)) 
-        {   
-            case 1 :
-                starAnimation[1].SetActive(true);
-                break;
-            case 2:
-                starAnimation[2].SetActive(true);
-                break;
-            case 3:
-                starAnimation[3].SetActive(true);
-                break;
-            default:   
-                starAnimation[0].SetActive(true);
-                break;
-        }
-        */
     }
 
     private void ShowStar(int score)

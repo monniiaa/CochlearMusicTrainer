@@ -40,6 +40,7 @@ public class InstrumentSpawner : MonoBehaviour
     private GameObject[] _spawnPoints;
     private AudioClip[] _audioClip;
     private GameObject[] _grabbableInstruments;
+    public SongData chosenSong;
     private const string dataPath = "InstrumentSeparation";
 
     private void Awake()
@@ -53,6 +54,7 @@ public class InstrumentSpawner : MonoBehaviour
         int songIndex = _gameData.level - 1;
         songIndex = Mathf.Clamp(songIndex, 0, songs.Length - 1);
         SongData song = songs[songIndex];
+        chosenSong = song;
         _grabbableInstruments = new GameObject[song.stems.Length];
         int startTimeSeconds = (int) ((song.startTime.x * 60) + song.startTime.y);
         int endTimeSeconds = (int) ((song.endTime.x * 60) + song.endTime.y);
@@ -62,6 +64,7 @@ public class InstrumentSpawner : MonoBehaviour
         for (int i = 0; i < _spawnPoints.Length; i++)
         {
             _grabbableInstruments[i] = Instantiate(grabbablePrefab);
+            _grabbableInstruments[i].gameObject.name = song.stems[i].instrumentData.instrument.ToString();
             GameObject confirmUI = Instantiate(confirmUIPrefab, _grabbableInstruments[i].transform);
             GameObject instrument = Instantiate(song.stems[i].instrumentData.instrumentPrefab, _grabbableInstruments[i].transform);
             GameObject soundSource = Instantiate(soundSourcePrefab, _grabbableInstruments[i].transform);
@@ -101,6 +104,7 @@ public class InstrumentSpawner : MonoBehaviour
     private void OnDisable()
     {
         if (_grabbableInstruments == null) return;
+
         foreach (var grabbableInstrument in _grabbableInstruments)
         {
             Destroy(grabbableInstrument);

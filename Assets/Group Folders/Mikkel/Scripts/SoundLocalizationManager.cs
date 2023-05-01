@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using System.Linq;
 using Unity.VisualScripting;
+using System;
 
 public class SoundLocalizationManager : MonoBehaviour
 {
@@ -76,15 +77,19 @@ public class SoundLocalizationManager : MonoBehaviour
         {
             speakerAnimator.enabled = true;
             CurrentScore++;
-            Debug.Log("CurrentScore: " + CurrentScore);
         }
 
         meshRenderer.enabled = true;
-
+        JsonManager.WriteDataToFile<SoundLocalizationDataContainer>(
+            new SoundLocalizationDataContainer(DateTime.Now, 
+            speakerAnimator.enabled, 
+            Vector3.Distance(Camera.main.transform.position, speaker.transform.position), 
+            Vector3.Angle(Camera.main.transform.forward, speaker.transform.position - Camera.main.transform.position),
+            CurrentLevel));
         waitForTarget = StartCoroutine(WaitForVisibleShootingDisc());
     }
 
-    private void StartNewRound() //maybe
+    private void StartNewRound()
     {
         currentRound++;
         if (currentRound > maxRounds)
@@ -104,29 +109,6 @@ public class SoundLocalizationManager : MonoBehaviour
             DataManager.SaveDataToJson(gameData, path);
             ShowStars(CurrentScore);
             return;
-            /*
-            switch (CurrentScore)
-            {
-                case 0:
-                    FeedbackZero.SetActive(true);
-                    FeedbackZero.GetComponent<Animator>().enabled = true;
-                    return;
-                case 1:
-                    FeedbackOne.SetActive(true);
-                    FeedbackOne.GetComponent<Animator>().enabled = true;
-                    return;
-                case 2:
-                    FeedbackTwo.SetActive(true);
-                    FeedbackTwo.GetComponent<Animator>().enabled = true;
-                    return;
-                case 3:
-                    FeedbackThree.SetActive(true);
-                    FeedbackThree.GetComponent<Animator>().enabled = true;
-                    return;
-                default:
-                    return;
-            }
-            */
         }
         RespawnSpeaker();
         
