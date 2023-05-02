@@ -38,7 +38,6 @@ public class InstrumentSeparation : MonoBehaviour
 
     public void ShowInstructions()
     {
-        _startTime = DateTime.Now;
         instructions.SetActive(true);
         endGameResults.SetActive(false);
         game.SetActive(false);
@@ -54,11 +53,20 @@ public class InstrumentSeparation : MonoBehaviour
 
     public void EndGame()
     {
-        _endTime = DateTime.Now;
-        JsonManager.WriteDataToFile<PlayTimeData>(new PlayTimeData(minigame, _startTime.ToString("dd/MM/yy H:mm:ss"), _endTime.ToString("dd/MM/yy H:mm:ss")));
         hasPlayed = true;
         instructions.SetActive(false);
         game.SetActive(false);
         endGameResults.SetActive(true);
+    }
+
+    private void OnEnable() 
+    {
+        _startTime = DateTime.Now;
+    }
+
+    private void OnDisable() 
+    {
+        _endTime = DateTime.Now;
+        JsonManager.WriteDataToFile<PlayTimeData>(new PlayTimeData(minigame, DateTime.Now, _endTime - _startTime));
     }
 }

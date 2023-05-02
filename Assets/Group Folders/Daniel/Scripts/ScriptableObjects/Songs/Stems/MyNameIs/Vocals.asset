@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Vocals
   m_EditorClassIdentifier: 
   instrumentData: {fileID: 11400000, guid: 9e4bf650d59248e4f9dc81573c6bdb8d, type: 2}
-  audioClip: {fileID: 8300000, guid: 8ed6f1082d076c74a800b2560eec62d7, type: 3}
+  audioClip: {fileID: 8300000, guid: ade70d47f30631442b65309cfac82921, type: 3}

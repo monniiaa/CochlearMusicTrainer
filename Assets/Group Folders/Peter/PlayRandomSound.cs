@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
+using System.Linq;
 
 public class PlayRandomSound : MonoBehaviour
 {
@@ -40,15 +42,22 @@ public class PlayRandomSound : MonoBehaviour
     RaycastHit hit;
     RaycastHit previousHit;
     public Camera camera;
+    private int selectedObjectIndex;
+    private GameDataManager gameDataManager;
+    private int currentScore;
+    private DateTime startTime;
+    private DateTime startPlayTime;
+    private string chosenInstrument;
 
     //public InputActionReference XRinput;
 
     private void Awake()
     {
+        gameDataManager = GameDataManager.Instance;
         audioSource = GetComponent<AudioSource>();
         path = "InstrumentIdentification";
         gameData = DataManager.ReadJson(path);
-        currentLevel = gameData.level;
+        currentLevel = (gameDataManager.currentLevel == 0) ? 1 : gameDataManager.currentLevel;
 
         int numParents = difficulty;
         List<int> pickedFamily = new List<int>();
@@ -58,7 +67,7 @@ public class PlayRandomSound : MonoBehaviour
 
             do
             {
-                randomIndex = Random.Range(0, parentObjects.Length);
+                randomIndex = UnityEngine.Random.Range(0, parentObjects.Length);
             }
             while (pickedFamily.Contains(randomIndex));
             
@@ -66,7 +75,7 @@ public class PlayRandomSound : MonoBehaviour
             Transform parent = parentObjects[randomIndex];
             // select a random child object from the parent object and add it to the list
             int numChildren = parent.childCount;
-            int randomChildIndex = Random.Range(0, numChildren);
+            int randomChildIndex = UnityEngine.Random.Range(0, numChildren);
             GameObject child = parent.GetChild(randomChildIndex).gameObject;
             selectedObjects.Add(child);
         }
@@ -108,30 +117,34 @@ public class PlayRandomSound : MonoBehaviour
         StopMusic();
             if (round1 == false)
             {
+                WriteDataToJson(DateTime.Now, DateTime.Now - startTime, chosenInstrument, 
+                currentInstrument.name, isCorrect, selectedObjects.Select(obj => obj.name).ToArray(), currentLevel, 1);
                 timer1 = time;
                 timerCount.Add(timer1);
                 round1 = true;
                 if (isCorrect)
                 {
-                    points += 50;
+                    currentScore++;
                 }
                 else
                 {
                     errorCount.Add(1);
                 }
                 RoundFinishAudio();
-            StartCoroutine(WaitForFeedback(audioSource));
+                StartCoroutine(WaitForFeedback(audioSource));
                 time = 0;
                 isCorrect = false;
             }
             else if (round2 == false)
             {
+                WriteDataToJson(DateTime.Now, DateTime.Now - startTime, chosenInstrument, 
+                currentInstrument.name, isCorrect, selectedObjects.Select(obj => obj.name).ToArray(), currentLevel, 2);
                 timer2 = time;
                 timerCount.Add(timer2);
                 round2 = true;
                 if (isCorrect)
                 {
-                    points += 50;
+                    currentScore++;
                 }
                 else
                 {
@@ -143,40 +156,63 @@ public class PlayRandomSound : MonoBehaviour
             }
             else if (round3 == false)
             {
+                WriteDataToJson(DateTime.Now, DateTime.Now - startTime, chosenInstrument, 
+                currentInstrument.name, isCorrect, selectedObjects.Select(obj => obj.name).ToArray(), currentLevel, 3);
                 timer3 = time;
                 timerCount.Add(timer3);
                 round3 = true;
                 if (isCorrect)
                 {
-                    points += 50;
+                    currentScore++;
                 }
                 else
                 {
                     errorCount.Add(1);
                 }
-
-                currentLevel++;
-                gameData.level = currentLevel;
+                JsonManager.WriteDataToFile<ScoreData>(new ScoreData("Instrument Identification", DateTime.Now, currentScore, currentLevel));
+                if(currentLevel == gameData.level) gameData.level++;
+                if(currentScore > gameData.levelScore[currentLevel - 1])
+                {
+                    gameData.levelScore[currentLevel - 1] = currentScore;
+                }
                 DataManager.SaveDataToJson(gameData, path);
                 RoundFinishAudio();
-            EndFeedback();
+                selectedObjectIndex = 0;
+                EndFeedback();
             }
             else if (round3 == true)
             {
+                
                 Debug.Log("training over");
             }
+    }
+
+    private void WriteDataToJson(DateTime time, TimeSpan timeTakenToChooseInstrument, string chosenInstrument, string correctInstrument, bool wasCorrect, string[] instrumentOptions, int level, int round)
+    {
+        JsonManager.WriteDataToFile<InstrumentIdentificationGameData>(
+            new InstrumentIdentificationGameData(
+                time, 
+                timeTakenToChooseInstrument, 
+                chosenInstrument, 
+                correctInstrument, 
+                wasCorrect, 
+                instrumentOptions, 
+                level, 
+                round
+            )
+        );
     }
 
     public void Round()
     {
         // randomly select one of the selected child objects and play a random sound from its associated sound folder
-        int selectedIndex = Random.Range(0, selectedObjects.Count);
-        GameObject selectedObject = selectedObjects[selectedIndex];
+        //int selectedIndex = Random.Range(0, selectedObjects.Count);
+        GameObject selectedObject = selectedObjects[selectedObjectIndex];
         string folderName = selectedObject.name + "Track"; // assume the sound folder is named after the child object
         AudioClip[] clips = Resources.LoadAll<AudioClip>(folderName);
         if (clips != null && clips.Length > 0)
         {
-            AudioClip randomClip = clips[Random.Range(0, clips.Length)];
+            AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
             AudioSource audioSource = selectedObject.GetComponent<AudioSource>();
             selectedObject.tag = "playing";
             currentInstrument = selectedObject;
@@ -185,11 +221,13 @@ public class PlayRandomSound : MonoBehaviour
             audioSource.clip = randomClip;
             audioSource.Play();
         }
+        selectedObjectIndex++;
+        startTime = DateTime.Now;
     }
 
     private IEnumerator WaitForFeedback(AudioSource audio)
     {
-        yield return new WaitUntil(()=>audio.isPlaying);
+        yield return new WaitWhile(() => audio.isPlaying);
         Round();
     }
 
@@ -204,6 +242,7 @@ public class PlayRandomSound : MonoBehaviour
 
     public void Triggered(GameObject instrument)
     {
+        chosenInstrument = instrument.name;
         //if (outline.selected == null || currentInstrument == null) return;
         if (currentInstrument.name == instrument.name)
         {
@@ -217,6 +256,7 @@ public class PlayRandomSound : MonoBehaviour
 
     private void OnEnable()
     {
+        startPlayTime = DateTime.Now;
         //XRinput.action.performed += StopRound;
     }
 
@@ -237,5 +277,10 @@ public class PlayRandomSound : MonoBehaviour
             audioSource.clip = incorrectClip;
         }
         audioSource.Play();
+    }
+
+    private void OnDisable() 
+    {
+        JsonManager.WriteDataToFile<PlayTimeData>(new PlayTimeData("Instrument Identification", DateTime.Now, DateTime.Now - startPlayTime));
     }
 }

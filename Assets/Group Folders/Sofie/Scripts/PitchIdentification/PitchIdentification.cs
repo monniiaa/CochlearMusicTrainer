@@ -136,7 +136,7 @@ public class PitchIdentification : LevelManager
 
     IEnumerator End()
     {
-
+        JsonManager.WriteDataToFile<ScoreData>(new ScoreData("Pitch Identification", DateTime.Now, currentScore, currentLevel));
         yield return new WaitForSeconds(0.7f);
         foreach (Speaker s in speakers)
         {

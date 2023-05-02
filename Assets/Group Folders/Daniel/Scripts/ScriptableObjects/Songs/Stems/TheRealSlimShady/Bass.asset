@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Bass
   m_EditorClassIdentifier: 
   instrumentData: {fileID: 11400000, guid: 2df420635b78b824885cda95709b6e83, type: 2}
-  audioClip: {fileID: 8300000, guid: 999e9ffea6370be42b72e7a76f621229, type: 3}
+  audioClip: {fileID: 8300000, guid: 7f5d699cb12e24c499856f9ff5d1dee2, type: 3}

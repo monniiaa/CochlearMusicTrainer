@@ -42,16 +42,18 @@ public class InstrumentSpawner : MonoBehaviour
     private GameObject[] _grabbableInstruments;
     public SongData chosenSong;
     private const string dataPath = "InstrumentSeparation";
+    private GameDataManager _gameDataManager;
 
     private void Awake()
     {
+        _gameDataManager = GameDataManager.Instance;
         _gameData = DataManager.ReadJson(dataPath);
         _spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
     }
 
     public GameObject[] SpawnInstruments()
     {
-        int songIndex = _gameData.level - 1;
+        int songIndex = _gameDataManager.currentLevel - 1;
         songIndex = Mathf.Clamp(songIndex, 0, songs.Length - 1);
         SongData song = songs[songIndex];
         chosenSong = song;

@@ -73,6 +73,8 @@ public class ConfirmInstrumentSeparation : MonoBehaviour
         _gameData.levelScore[_currentLevel - 1] = 3;
         DataManager.SaveDataToJson(_gameData, "InstrumentSeparation");
 #region DataCollection
+        JsonManager.WriteDataToFile<ScoreData>(new ScoreData("Instrument Separation", DateTime.Now, 3, _currentLevel));
+
         List<SeparatedInstrumentData> separatedInstrumentData = new List<SeparatedInstrumentData>();
         for (int i = 0; i < _interactableInstruments.Length; i++)
         {

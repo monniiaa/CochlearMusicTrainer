@@ -28,7 +28,7 @@ public class JsonManager : MonoBehaviour
 #if UNITY_EDITOR
         _path = Application.dataPath + "\\TestDataFiles\\";
 #elif PLATFORM_ANDROID
-        _path = Application.persistentDataPath;
+        _path = Application.persistentDataPath + "\\TestDataFiles\\";
 #endif
     }
 

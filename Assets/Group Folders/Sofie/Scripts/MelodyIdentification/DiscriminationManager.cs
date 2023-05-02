@@ -126,6 +126,7 @@ public class DiscriminationManager : LevelManager
                 currentLevel,
                 round
             ));
+        
         foreach (Oscillator osc in melodies)
         {
             osc.DestroyAnimation();
@@ -168,6 +169,7 @@ public class DiscriminationManager : LevelManager
 
     IEnumerator End()
     {
+        JsonManager.WriteDataToFile<ScoreData>(new ScoreData("Melody Identification", DateTime.Now, currentScore, currentLevel));
         yield return new WaitForSeconds(0.7f);
         foreach (Oscillator osc in melodies)
         {

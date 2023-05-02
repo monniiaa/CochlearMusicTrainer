@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f0494509f551a64f81b6e5218754fb5, type: 3}
   m_Name: TheRealSlimShady
   m_EditorClassIdentifier: 
+  songName: The Real Slim Shady - Eminem
   stems:
   - {fileID: 11400000, guid: 6a3a394758e030e4b9dea0158b798fa7, type: 2}
   - {fileID: 11400000, guid: 6f00d67bac484ef498d58a28a7adbbd2, type: 2}
   - {fileID: 11400000, guid: ca8f1e511bdb14f4b8d0c44207028573, type: 2}
   - {fileID: 11400000, guid: 64c42c2e7223528459b57fc2da6ec118, type: 2}
   startTime: {x: 1, y: 30}
-  endTime: {x: 1, y: 40}
+  endTime: {x: 2, y: 40}

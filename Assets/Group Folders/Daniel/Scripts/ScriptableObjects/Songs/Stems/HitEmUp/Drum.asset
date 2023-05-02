@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Drum
   m_EditorClassIdentifier: 
   instrumentData: {fileID: 11400000, guid: e47f4c76e863f1b41be8e0b62409f1c0, type: 2}
-  audioClip: {fileID: 8300000, guid: d1a8257bb02152b4289bf259c835ed71, type: 3}
+  audioClip: {fileID: 8300000, guid: 736853114c9dc5949b0ad990e83328e8, type: 3}

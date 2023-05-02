@@ -39,6 +39,7 @@ public class SoundLocalizationManager : MonoBehaviour
 
     public Animator speakerAnimator;
     public GameObject[] starAnimation;
+    private DateTime startTime;
    
     void Awake()
     {
@@ -81,21 +82,26 @@ public class SoundLocalizationManager : MonoBehaviour
 
         meshRenderer.enabled = true;
         JsonManager.WriteDataToFile<SoundLocalizationDataContainer>(
-            new SoundLocalizationDataContainer(DateTime.Now, 
+            new SoundLocalizationDataContainer(
+            DateTime.Now, 
+            DateTime.Now - startTime,
             speakerAnimator.enabled, 
             Vector3.Distance(Camera.main.transform.position, speaker.transform.position), 
-            Vector3.Angle(Camera.main.transform.forward, speaker.transform.position - Camera.main.transform.position),
-            CurrentLevel));
+            Vector3.Angle( _xrRayInteractor.rayOriginTransform.forward, speaker.transform.position - _xrRayInteractor.rayOriginTransform.position),
+            CurrentLevel,
+            currentRound));
         waitForTarget = StartCoroutine(WaitForVisibleShootingDisc());
     }
 
     private void StartNewRound()
     {
+        startTime = DateTime.Now;
         currentRound++;
         if (currentRound > maxRounds)
         {
             if (!speaker.IsDestroyed()) speaker.GetComponent<DeletusMaximus>().Destroy();
             gameIsOver = true;
+            JsonManager.WriteDataToFile<ScoreData>(new ScoreData("Sound Localization", DateTime.Now, CurrentScore, CurrentLevel));
             InstrumentSeparation.Instance.EndGame();
             if(CurrentLevel == gameData.level)
             {

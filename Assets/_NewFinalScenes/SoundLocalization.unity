@@ -1764,9 +1764,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba3c48819b043914e8fb1b777cccf0c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistanceToPlayer: 4
-  roomSize: 8
-  height: 0.5
+  minDistanceToPlayer: 3
+  roomSize: 5
+  height: 1
+  visualizeRandomness: 0
   player: {fileID: 3221912668148908502}
 --- !u!4 &1662117887
 Transform:

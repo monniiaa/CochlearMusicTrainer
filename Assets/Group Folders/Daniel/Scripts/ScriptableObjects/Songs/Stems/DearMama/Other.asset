@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Other
   m_EditorClassIdentifier: 
   instrumentData: {fileID: 11400000, guid: 8014322c08674a64b9b7f206feaca75c, type: 2}
-  audioClip: {fileID: 8300000, guid: 5f86fd829ca4f14449eb44f0a3f36cc2, type: 3}
+  audioClip: {fileID: 8300000, guid: ecccbac4c0c2e374db3113357625771a, type: 3}

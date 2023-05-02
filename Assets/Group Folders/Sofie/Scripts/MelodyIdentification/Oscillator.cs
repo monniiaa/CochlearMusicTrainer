@@ -40,9 +40,8 @@ public class Oscillator : MonoBehaviour
     
     public void StopMelody()
     {
-        _coroutine = StartCoroutine(FadeOut(0.5f));
-        
-        
+        source.Stop();
+        StopAllCoroutines();
     }
     public void PlayMelody()
     {
@@ -52,11 +51,6 @@ public class Oscillator : MonoBehaviour
 
     private IEnumerator PlaySequence(int interval, int length, float noteTime)
     {
-        if (_coroutine != null)
-        {
-            StopCoroutine(_coroutine);
-            source.volume = startVolume;
-        }
         currentNote = startNote;
         currentClip = notes[currentNote];
         int i = 0;

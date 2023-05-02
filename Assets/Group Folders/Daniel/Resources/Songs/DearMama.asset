@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f0494509f551a64f81b6e5218754fb5, type: 3}
   m_Name: DearMama
   m_EditorClassIdentifier: 
+  songName: Dear Mama - 2Pac
   stems:
   - {fileID: 11400000, guid: 1a3ea54adca372149b5b84bc28c95534, type: 2}
   - {fileID: 11400000, guid: dd5fe85cfea704244ac9edc40c7ea497, type: 2}
   - {fileID: 11400000, guid: f36c56d24154a044abb055a251a186a6, type: 2}
   - {fileID: 11400000, guid: 5bf568b1500d95d42b1a662f5335b73d, type: 2}
   startTime: {x: 1, y: 30}
-  endTime: {x: 1, y: 40}
+  endTime: {x: 2, y: 40}
