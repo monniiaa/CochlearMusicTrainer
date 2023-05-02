@@ -7184,8 +7184,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Velkommen til Instrument Identifikation\nForm\xE5let med dette modul er
-    at identificere hvilket instrument der spiller musik"
+  m_text: "Form\xE5let med dette modul er at identificere hvilket instrument der
+    spiller musik"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
   m_sharedMaterial: {fileID: -8816214507793482341, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
