@@ -6,7 +6,7 @@ using System;
 [Serializable]
 public class PitchIdentificationGameData : AbstractDataContainer
 {
-    public override string Path => "\\PitchIdentification\\pitch_identification_data.json";
+    public override string Path => "/PitchIdentification/pitch_identification_data.json";
     
     public string time;
     public string timeTakenToChooseSpeaker;

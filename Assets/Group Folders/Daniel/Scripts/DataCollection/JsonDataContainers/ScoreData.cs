@@ -3,7 +3,7 @@ using System;
 [Serializable]
 public class ScoreData : AbstractDataContainer
 {
-    public override string Path => "\\ScoreData\\score_data.json";
+    public override string Path => "/ScoreData/score_data.json";
 
     public string minigame;
     public string time;

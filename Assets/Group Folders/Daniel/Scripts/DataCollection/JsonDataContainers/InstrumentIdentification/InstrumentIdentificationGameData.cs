@@ -3,7 +3,7 @@ using System;
 [Serializable]
 public class InstrumentIdentificationGameData : AbstractDataContainer
 {
-    public override string Path => "\\InstrumentIdentification\\instrument_identification_data.json";
+    public override string Path => "/InstrumentIdentification/instrument_identification_data.json";
 
     public string time;
     public string timeTakenToChooseInstrument;

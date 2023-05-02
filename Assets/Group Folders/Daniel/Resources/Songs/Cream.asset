@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f0494509f551a64f81b6e5218754fb5, type: 3}
-  m_Name: StillDRE
+  m_Name: Cream
   m_EditorClassIdentifier: 
-  songName: Still DRE - DRE ft. Snoop Dogg
+  songName: Cream - Wu Tang
   stems:
-  - {fileID: 11400000, guid: f535bf5ddd433ea4782bbf7f9de705e7, type: 2}
-  - {fileID: 11400000, guid: 984094baca0c2484080ecd25cdfd7d08, type: 2}
-  - {fileID: 11400000, guid: 1d52801d80dd01c4fa8f0f17e55d81d5, type: 2}
-  - {fileID: 11400000, guid: 1a7dd81e1410f954094e36696de4228e, type: 2}
+  - {fileID: 11400000, guid: ae41dd8c53b251c4286411c0afe6812d, type: 2}
+  - {fileID: 11400000, guid: f53f794aeed67f2428ee4356983518e4, type: 2}
+  - {fileID: 11400000, guid: 7c8f884d80bcfd84b9f9fdf18c909330, type: 2}
+  - {fileID: 11400000, guid: 18e72f37c6b39164a88936f2dc83311c, type: 2}
   startTime: {x: 1, y: 30}
-  endTime: {x: 2, y: 40}
+  endTime: {x: 1, y: 40}

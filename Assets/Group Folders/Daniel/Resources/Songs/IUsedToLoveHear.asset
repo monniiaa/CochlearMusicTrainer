@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f0494509f551a64f81b6e5218754fb5, type: 3}
-  m_Name: StillDRE
+  m_Name: IUsedToLoveHear
   m_EditorClassIdentifier: 
-  songName: Still DRE - DRE ft. Snoop Dogg
+  songName: I Used To Love Her - Common Sense
   stems:
-  - {fileID: 11400000, guid: f535bf5ddd433ea4782bbf7f9de705e7, type: 2}
-  - {fileID: 11400000, guid: 984094baca0c2484080ecd25cdfd7d08, type: 2}
-  - {fileID: 11400000, guid: 1d52801d80dd01c4fa8f0f17e55d81d5, type: 2}
-  - {fileID: 11400000, guid: 1a7dd81e1410f954094e36696de4228e, type: 2}
+  - {fileID: 11400000, guid: 98e814b060e9cf44d82eb215480a82be, type: 2}
+  - {fileID: 11400000, guid: f7bf1f25cc512dd4aa0272c2cf4be23c, type: 2}
+  - {fileID: 11400000, guid: 25c51463586ccc549b765bf099126232, type: 2}
+  - {fileID: 11400000, guid: f7f3f99911c303342b72954a962fc7d7, type: 2}
   startTime: {x: 1, y: 30}
   endTime: {x: 2, y: 40}

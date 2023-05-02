@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class SoundLocalizationDataContainer : AbstractDataContainer
 {
-    public override string Path => "\\SoundLocalization\\sound_localization_data.json";
+    public override string Path => "/SoundLocalization/sound_localization_data.json";
     public bool wasHit;
     public string timeTakenToGuess;
     public string time;

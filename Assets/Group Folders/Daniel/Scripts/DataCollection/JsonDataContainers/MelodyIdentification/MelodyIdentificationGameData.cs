@@ -5,7 +5,7 @@ using System;
 [Serializable]
 public class MelodyIdentificationGameData : AbstractDataContainer
 {
-    public override string Path => "\\MelodyIdentification\\melody_identification_data.json";
+    public override string Path => "/MelodyIdentification/melody_identification_data.json";
 
     public string time;
     public string timeTakenToChooseSpeaker;

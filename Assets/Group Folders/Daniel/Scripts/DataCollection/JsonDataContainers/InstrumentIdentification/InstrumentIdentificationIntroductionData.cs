@@ -6,7 +6,7 @@ using System;
 [Serializable]
 public class InstrumentIdentificationIntroductionData : AbstractDataContainer
 {
-    public override string Path => "\\InstrumentIdentification\\instrument_identification_introduction_data.json";
+    public override string Path => "/InstrumentIdentification/instrument_identification_introduction_data.json";
     public TimeSpan timeTakenToComplete;
     public string[] playedInstruments;
 

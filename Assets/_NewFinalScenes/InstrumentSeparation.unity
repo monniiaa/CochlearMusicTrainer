@@ -1832,6 +1832,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5fe19b926084b734694df4b9e416122e, type: 2}
   - {fileID: 11400000, guid: a7a50324a12dce14b81c51152d3b8e2f, type: 2}
   - {fileID: 11400000, guid: 32344270793bae44fa85cc31f00e981d, type: 2}
+  - {fileID: 11400000, guid: 4d93fb6b667033948bfedaf285a4b145, type: 2}
+  - {fileID: 11400000, guid: 8965f25a2ac6da848839b4323f9a4e25, type: 2}
+  - {fileID: 11400000, guid: 506fadf445dd48d4baef1367beb0fcf0, type: 2}
   grabbablePrefab: {fileID: 1739544549193973369, guid: 8f086ee1ce1272242bbf2dbc472f2889, type: 3}
   soundSourcePrefab: {fileID: 1419888145068830189, guid: 944b8928435fbe84198e57925476ba86, type: 3}
   confirmUIPrefab: {fileID: 5978604411222079854, guid: 89e43ced2b909d844a6c7ca51b89486a, type: 3}

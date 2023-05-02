@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [Serializable]
 public class InstrumentSeparationGameData : AbstractDataContainer
 {
-    public override string Path => "\\InstrumentSeparation\\instrument_separation_game_data.json";
+    public override string Path => "/InstrumentSeparation/instrument_separation_game_data.json";
 
 
     public string musicPlayed;
