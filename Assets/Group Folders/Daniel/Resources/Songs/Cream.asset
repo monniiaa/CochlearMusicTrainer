@@ -19,4 +19,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7c8f884d80bcfd84b9f9fdf18c909330, type: 2}
   - {fileID: 11400000, guid: 18e72f37c6b39164a88936f2dc83311c, type: 2}
   startTime: {x: 1, y: 30}
-  endTime: {x: 1, y: 40}
+  endTime: {x: 2, y: 40}

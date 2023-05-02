@@ -26,15 +26,17 @@ public class JsonManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 #if UNITY_EDITOR
-        _path = Application.dataPath + "\\TestDataFiles\\";
+        _path = Application.dataPath + "/TestDataFiles/";
 #elif PLATFORM_ANDROID
-        _path = Application.persistentDataPath + "\\TestDataFiles\\";
+        _path = Application.persistentDataPath + "/TestDataFiles";
 #endif
     }
 
     public static void WriteDataToFile<T>(AbstractDataContainer dataContainer) where T : AbstractDataContainer
     {
+        
         string fullPath = _path + dataContainer.Path;
+        Debug.Log("Writing data to file on path: " + fullPath);
         if(!Directory.Exists(fullPath)) Directory.CreateDirectory(Path.GetDirectoryName(fullPath) ?? throw new InvalidOperationException());
 
         DataContainerList<T> dataContainerList = new DataContainerList<T>();;
