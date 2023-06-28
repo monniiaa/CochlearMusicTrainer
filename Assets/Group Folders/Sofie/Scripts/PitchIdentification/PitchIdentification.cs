@@ -17,7 +17,6 @@ public class PitchIdentification : LevelManager
     [SerializeField]
 
     Speaker[] speakers;
-    public GameObject[] starAnimation = new GameObject[4];
     public InstrumentSeparation ModeManager;
     private DateTime startTime;
 
@@ -32,7 +31,6 @@ public class PitchIdentification : LevelManager
         gameData =  DataManager.ReadJson(path);
 
         currentLevel = (_gameDataManager.currentLevel == 0) ? 1 : _gameDataManager.currentLevel;
-        Debug.Log("Level: " +currentLevel);
         SetMode();
         speakers = GameObject.FindObjectsOfType<Speaker>();
         initialPositions = new Vector3[speakers.Length];
@@ -48,7 +46,7 @@ public class PitchIdentification : LevelManager
         StartRound();
     }
     
-    public void RestartLevel()
+    protected override void RestartLevel()
     {
         currentScore = 0;
         round = 1;
@@ -143,21 +141,7 @@ public class PitchIdentification : LevelManager
             s.gameObject.SetActive(false);
         }
         ModeManager.EndGame();
-        Debug.Log("Current Score: " + currentScore);
         ShowStar(currentScore);
-    }
-
-    private void ShowStar(int score)
-    {
-        for (int i = 0; i < starAnimation.Length; i++)
-        {
-            if(i == score) 
-            {
-                starAnimation[i].SetActive(true);
-                continue;
-            }
-            starAnimation[i].SetActive(false);
-        }
     }
 
     public override void SetRoundFunctionality()
@@ -184,7 +168,6 @@ public class PitchIdentification : LevelManager
 
     protected override void EndRound()
     {
-
         foreach (Speaker s in speakers)
         {
             s.ResetCurrentNote();

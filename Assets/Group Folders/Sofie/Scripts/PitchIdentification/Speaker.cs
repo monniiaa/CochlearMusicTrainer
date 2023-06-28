@@ -5,9 +5,7 @@ using UnityEngine;
 public class Speaker : MonoBehaviour
 {
     public Animator animator;
-
-
-
+    
     public AudioClip[] notes;
     AudioSource audioSource;
     public AudioClip currentClip;
@@ -55,7 +53,6 @@ public class Speaker : MonoBehaviour
     public void DestroyAnimation()
     {
         animator.SetTrigger("Destroy");
-
     }
 
     public void DestroySpeaker()

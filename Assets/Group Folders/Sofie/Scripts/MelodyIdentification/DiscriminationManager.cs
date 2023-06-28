@@ -14,7 +14,6 @@ public class DiscriminationManager : LevelManager
 
     private Oscillator pickedMelody;
     public InstrumentSeparation ModeManager;
-    public GameObject[] starAnimation = new GameObject[4];
     private GameDataManager _gameDataManager;
     private DateTime startTime;
     
@@ -38,7 +37,7 @@ public class DiscriminationManager : LevelManager
         }
     }
 
-    public void RestartLevel()
+    protected override void RestartLevel()
     {
         round = 1;
         currentScore = 0;

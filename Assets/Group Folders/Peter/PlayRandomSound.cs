@@ -216,7 +216,6 @@ public class PlayRandomSound : MonoBehaviour
             AudioSource audioSource = selectedObject.GetComponent<AudioSource>();
             selectedObject.tag = "playing";
             currentInstrument = selectedObject;
-            Debug.Log(currentInstrument.name);
             objectsPlayed.Add(selectedObject.ToString());
             audioSource.clip = randomClip;
             audioSource.Play();

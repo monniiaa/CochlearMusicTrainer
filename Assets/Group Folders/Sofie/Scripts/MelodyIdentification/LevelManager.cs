@@ -27,6 +27,8 @@ public abstract class LevelManager : MonoBehaviour
     [SerializeField]
     protected Material failMaterial;
     public bool LevelAlreadyCompleted = false;
+    
+    public GameObject[] starAnimation = new GameObject[4];
 
     private void Start()
     {
@@ -57,6 +59,20 @@ public abstract class LevelManager : MonoBehaviour
             modes[2].SetActive(false);
         }
     }
+    
+    protected void ShowStar(int score)
+    {
+        for (int i = 0; i < starAnimation.Length; i++)
+        {
+            if(i == score) 
+            {
+                starAnimation[i].SetActive(true);
+                continue;
+            }
+            starAnimation[i].SetActive(false);
+        }
+    }
+
 
     protected abstract void SetDifficultyChanges();
 
@@ -64,4 +80,6 @@ public abstract class LevelManager : MonoBehaviour
 
     protected abstract void EndRound();
     protected abstract void StartRound();
+
+    protected abstract void RestartLevel();
 }
