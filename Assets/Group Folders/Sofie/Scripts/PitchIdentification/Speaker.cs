@@ -31,6 +31,7 @@ public class Speaker : MonoBehaviour
     public void SetNote(int clip)
     {
         currentClip = notes[clip];
+        Debug.Log(notes[clip].name);
     }
     public void PlayClip()
     {

@@ -55,8 +55,8 @@ public abstract class LevelManager : MonoBehaviour
         {
             difficulty = Difficulty.Hard;
             modes[0].SetActive(false);
-            modes[1].SetActive(true);
-            modes[2].SetActive(false);
+            modes[1].SetActive(false);
+            modes[2].SetActive(true);
         }
     }
     

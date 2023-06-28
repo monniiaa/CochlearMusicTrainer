@@ -23,6 +23,7 @@ public class PitchIdentification : LevelManager
 
     private void Awake()
     {
+        
         _gameDataManager = GameDataManager.Instance;
         ModeManager = InstrumentSeparation.Instance;
 
@@ -42,6 +43,11 @@ public class PitchIdentification : LevelManager
         foreach (GameObject star in starAnimation)
         {
             star.gameObject.SetActive(false);
+        }
+
+        foreach (Speaker speaker in speakers)
+        {
+            speaker.SetPickedState(false);
         }
         StartRound();
     }
@@ -69,15 +75,12 @@ public class PitchIdentification : LevelManager
             {
                 if (j != i)
                 {
-                    
-                    while (  speakers[i].note > speakers[j].note - interval 
-                    && speakers[i].note < speakers[j].note + interval)
                     {
-                        int rand= UnityEngine.Random.Range(lowestNote, highestNote);
+                        int rand= UnityEngine.Random.Range(randNote - interval, randNote + interval);
+
                         speakers[i].note = rand;
                         speakers[i].SetNote(rand);
                     }
-                    
                 }
             }
             if (speakers[i].note > highestSpeaker.note)
@@ -116,20 +119,9 @@ public class PitchIdentification : LevelManager
 
     protected override void SetDifficultyChanges()
     {
-        switch (difficulty)
-        {
-            case Difficulty.Easy:
-                SetPitchDifference(5, 25, 6);
-                break;
-            case Difficulty.Medium:
-                SetPitchDifference(5, 25, 3);
-                break;
-            case Difficulty.Hard:
-                SetPitchDifference(0, 30, 1);
-                break;
-            default:
-                break;
-        }
+        
+        SetPitchDifference(11-currentLevel, 19+currentLevel,10-currentLevel);
+ 
     }
 
     IEnumerator End()

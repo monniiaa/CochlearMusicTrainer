@@ -15,6 +15,8 @@ public class UIMenu : MonoBehaviour
     private Image[] levelImages;
     [SerializeField]
     private GameObject[] levelInfo;
+    [SerializeField]
+    private int maxLevel = 10;
 
     [SerializeField]
     private Sprite activeLevelImage;
@@ -38,7 +40,8 @@ public class UIMenu : MonoBehaviour
 
     public void ActivateLevels(int level)
     {
-        for (int i = 0; i < level; i++)
+        level = (level == 0) ? 1 : level;
+            for (int i = 0; i < level; i++)
         {
             levelsText[i].text = (i+1).ToString();
             levelImages[i].sprite = activeLevelImage;
