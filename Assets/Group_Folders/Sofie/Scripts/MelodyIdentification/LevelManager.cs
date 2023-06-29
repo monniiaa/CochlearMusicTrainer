@@ -6,6 +6,7 @@ public abstract class LevelManager : MonoBehaviour
 {
     protected int currentLevel = 1;
     protected int currentScore;
+    protected int maxLevel = 10;
     protected Difficulty difficulty;
 
     [SerializeField]

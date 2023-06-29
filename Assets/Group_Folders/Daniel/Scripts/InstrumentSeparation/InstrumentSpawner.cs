@@ -21,14 +21,14 @@ public enum Instrument
     Other
 }
 
-public enum InstrumentFamily
-{
-    Woodwind = 0,
-    Brass = 1,
-    String = 2,
-    PitchedPercussion = 3,
-    Other = 4
-}
+//public enum InstrumentFamily
+//{
+//    Woodwind = 0,
+//    Brass = 1,
+//    String = 2,
+//    PitchedPercussion = 3,
+//    Other = 4
+//}
 
 public class InstrumentSpawner : MonoBehaviour
 {

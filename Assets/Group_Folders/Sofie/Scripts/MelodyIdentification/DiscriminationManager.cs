@@ -204,7 +204,7 @@ public class DiscriminationManager : LevelManager
            StartCoroutine(End());
            if(currentLevel == gameData.level)
            {
-                gameData.level += 1;
+               gameData.level = (currentLevel == maxLevel) ? gameData.level : currentLevel + 1;
            }           
 
            if(gameData.levelScore[currentLevel - 1] < currentScore)

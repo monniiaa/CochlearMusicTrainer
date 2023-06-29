@@ -20046,6 +20046,7 @@ MonoBehaviour:
   - {fileID: 1497699706}
   - {fileID: 1994106290}
   - {fileID: 302139975}
+  maxLevel: 10
   activeLevelImage: {fileID: 21300000, guid: 4f667107a304705428282bd56fc7f02c, type: 3}
   lockedLevelImage: {fileID: 21300000, guid: c3d8d5ffc7a207247ad0696273d199b3, type: 3}
   activeStar: {fileID: 154470004296293148, guid: b1864ca6f1a0b2845b6e9f3123d5916b, type: 3}
@@ -26424,6 +26425,7 @@ MonoBehaviour:
   - {fileID: 1908080259}
   - {fileID: 1653764269}
   - {fileID: 807222014}
+  maxLevel: 10
   activeLevelImage: {fileID: 21300000, guid: 4f667107a304705428282bd56fc7f02c, type: 3}
   lockedLevelImage: {fileID: 21300000, guid: c3d8d5ffc7a207247ad0696273d199b3, type: 3}
   activeStar: {fileID: 154470004296293148, guid: b1864ca6f1a0b2845b6e9f3123d5916b, type: 3}
@@ -26690,6 +26692,7 @@ MonoBehaviour:
   - {fileID: 1514572258}
   - {fileID: 1090366540}
   - {fileID: 1927973671}
+  maxLevel: 10
   activeLevelImage: {fileID: 21300000, guid: 4f667107a304705428282bd56fc7f02c, type: 3}
   lockedLevelImage: {fileID: 21300000, guid: c3d8d5ffc7a207247ad0696273d199b3, type: 3}
   activeStar: {fileID: 154470004296293148, guid: b1864ca6f1a0b2845b6e9f3123d5916b, type: 3}
@@ -28653,7 +28656,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1037570073
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28722,6 +28725,7 @@ MonoBehaviour:
   - {fileID: 158155143}
   - {fileID: 2071473613}
   - {fileID: 606509861}
+  maxLevel: 10
   activeLevelImage: {fileID: 21300000, guid: 4f667107a304705428282bd56fc7f02c, type: 3}
   lockedLevelImage: {fileID: 21300000, guid: c3d8d5ffc7a207247ad0696273d199b3, type: 3}
   activeStar: {fileID: 154470004296293148, guid: b1864ca6f1a0b2845b6e9f3123d5916b, type: 3}
@@ -46001,6 +46005,7 @@ MonoBehaviour:
   - {fileID: 1735367798}
   - {fileID: 697947282}
   - {fileID: 1248244111}
+  maxLevel: 10
   activeLevelImage: {fileID: 21300000, guid: 4f667107a304705428282bd56fc7f02c, type: 3}
   lockedLevelImage: {fileID: 21300000, guid: c3d8d5ffc7a207247ad0696273d199b3, type: 3}
   activeStar: {fileID: 154470004296293148, guid: b1864ca6f1a0b2845b6e9f3123d5916b, type: 3}

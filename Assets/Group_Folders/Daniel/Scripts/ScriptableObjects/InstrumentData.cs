@@ -6,6 +6,6 @@ using UnityEngine;
 public class InstrumentData : ScriptableObject
 {
     public Instrument instrument;
-    public InstrumentFamily instrumentFamily;
+    //public InstrumentFamily instrumentFamily;
     public GameObject instrumentPrefab;
 }

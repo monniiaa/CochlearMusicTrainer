@@ -12,25 +12,25 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Group Folders/Daniel/Scenes/Movement/HandTrackingTeleportation.unity
+    path: Assets/Group_Folders/Daniel/Scenes/Movement/HandTrackingTeleportation.unity
     guid: 4d039d46299e23e4e98da99013ec50d0
   - enabled: 0
-    path: Assets/Group Folders/Sofie/Scenes/ConceptScene.unity
+    path: Assets/Group_Folders/Sofie/Scenes/ConceptScene.unity
     guid: 09bf7c397dfd8894598ece8977427267
   - enabled: 0
-    path: Assets/Group Folders/Peter/PeterDrumFreePlay.unity
+    path: Assets/Group_Folders/Peter/PeterDrumFreePlay.unity
     guid: 455063f1815344815a245aeaecc54a98
   - enabled: 0
-    path: Assets/Group Folders/Sofie/Scenes/Menu.unity
+    path: Assets/Group_Folders/Sofie/Scenes/Menu.unity
     guid: 7e32db92745e5354d88f129e231a80dc
   - enabled: 0
-    path: Assets/Group Folders/Sofie/Scenes/PitchIdentification.unity
+    path: Assets/Group_Folders/Sofie/Scenes/PitchIdentification.unity
     guid: 2fffb9d6288b4954599f344e2a5ec072
   - enabled: 0
-    path: Assets/Group Folders/Peter/InstrumentIntro.unity
+    path: Assets/Group_Folders/Peter/InstrumentIntro.unity
     guid: c6a16fd1ff3f541bab79ec8029eb19da
   - enabled: 0
-    path: Assets/Group Folders/Peter/TrainingEnvironmentTest.unity
+    path: Assets/Group_Folders/Peter/TrainingEnvironmentTest.unity
     guid: 2de4999831d304ac69828f27693cdb7f
   - enabled: 0
     path: Assets/FinalScenes/Scenes/Hub.unity

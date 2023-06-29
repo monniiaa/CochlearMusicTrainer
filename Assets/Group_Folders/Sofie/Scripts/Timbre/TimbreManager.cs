@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Random = UnityEngine.Random;
 
 public class TimbreManager : LevelManager
 {
@@ -10,6 +11,9 @@ public class TimbreManager : LevelManager
     private GameDataManager _gameDataManager;
     private DateTime startTime;
     public InstrumentSeparation ModeManager;
+
+    [SerializeField] private GameObject[] instrumentFamilies;
+    
     void Awake()
     {
         _gameDataManager = GameDataManager.Instance;
@@ -49,6 +53,18 @@ public class TimbreManager : LevelManager
         
     }
 
+    private void SetInstrumentsPlaying(int numberOfInstruments, bool sameFamily)
+    {
+        int randFamily = Random.Range(0, instrumentFamilies.Length);
+        GameObject[] instruments = instrumentFamilies[randFamily].GetComponent<Family>().instruments;
+        
+        int randInstrument = Random.Range(0, instruments.Length);
+        GameObject pickedInstrument = instruments[randInstrument];
+        pickedInstrument.GetComponent<InstrumentBehavior>().SetClip(0);
+        pickedInstrument.GetComponent<InstrumentBehavior>().PlayClip();
+        
+    }
+    
     protected override void RestartLevel()
     {
         currentScore = 0;

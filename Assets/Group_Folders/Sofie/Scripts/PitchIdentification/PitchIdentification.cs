@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using Mono.CSharp;
 
 public class PitchIdentification : LevelManager
 {
@@ -63,32 +64,78 @@ public class PitchIdentification : LevelManager
         StartRound();
     }
 
-    public void SetPitchDifference(int lowestNote, int highestNote , int interval)
+    public void SetPitchDifference( int interval)
     {
         highestSpeaker = speakers[0];
-        for (int i = 0; i < speakers.Length; i++)
+        if (speakers.Length > 2)
         {
-            int randNote = UnityEngine.Random.Range(lowestNote, highestNote);
-            speakers[i].note = randNote;
-            speakers[i].SetNote(randNote);
-            for (int j = 0; j < speakers.Length;j++)
+            for (int i = 0; i < speakers.Length; i++)
             {
-                if (j != i)
-                {
-                    {
-                        int rand= UnityEngine.Random.Range(randNote - interval, randNote + interval);
+                int randNote = UnityEngine.Random.Range(0, speakers[i].notes.Length);
+                speakers[i].note = randNote;
+                speakers[i].SetNote(randNote);
 
-                        speakers[i].note = rand;
-                        speakers[i].SetNote(rand);
+                for (int j = 0; j < speakers.Length; j++)
+                {
+                    if (j != i)
+                    {
+                        {
+                            do
+                            {
+                                int upperbound = Mathf.Min(randNote + interval, speakers[j].notes.Length- 1);
+                                int lowerBound = randNote - interval;
+                                if (lowerBound < 0)
+                                {
+                                    lowerBound = speakers[j].notes.Length + lowerBound;
+
+                                }
+                                int rand = UnityEngine.Random.Range(lowerBound, upperbound);
+                                speakers[j].note = rand;
+                                speakers[j].SetNote(rand);
+                            } while (speakers[i].note != speakers[j].note);
+                        }
                     }
                 }
+                if (speakers[i].note > highestSpeaker.note)
+                {
+                    highestSpeaker = speakers[i];
+                }
             }
-            if (speakers[i].note > highestSpeaker.note)
+
+        }
+        else
+        {
+            int randnote = UnityEngine.Random.Range(0, speakers[0].notes.Length);
+            speakers[0].note = randnote;
+            speakers[0].SetNote(randnote);
+
+            int rand = UnityEngine.Random.Range(0, 2);
+
+            if (rand == 1)
             {
-                highestSpeaker = speakers[i];
+                int note = (randnote + interval) % speakers[1].notes.Length;
+                speakers[1].note = note;
+                speakers[1].SetNote(note);
+            }
+            else
+            {
+                int note = randnote - interval;
+                if (note < 0)
+                {
+                    Debug.Log(note);
+                    note = speakers[1].notes.Length + note;
+                }
+                speakers[1].note = note;
+                speakers[1].SetNote(note);
+            }
+
+            if (speakers[1].note > speakers[0].note)
+            {
+                highestSpeaker = speakers[1];
             }
         }
     }
+
     public void SpeakerPicked(Speaker speaker)
     {
         JsonManager.WriteDataToFile<PitchIdentificationGameData>(
@@ -119,9 +166,19 @@ public class PitchIdentification : LevelManager
 
     protected override void SetDifficultyChanges()
     {
-        
-        SetPitchDifference(11-currentLevel, 19+currentLevel,10-currentLevel);
- 
+        switch (difficulty)
+        {
+            case Difficulty.Easy:
+                SetPitchDifference( 10 - currentLevel);
+                break;
+            case Difficulty.Medium:
+                SetPitchDifference( 7-currentLevel);
+                break;
+            case Difficulty.Hard:
+                SetPitchDifference( 1);
+                break;
+        }
+
     }
 
     IEnumerator End()
@@ -148,7 +205,7 @@ public class PitchIdentification : LevelManager
             StartCoroutine(End());
             if(currentLevel == gameData.level)
             {
-                gameData.level += 1;
+                gameData.level = (currentLevel == maxLevel) ? gameData.level : currentLevel + 1;
             }          
             if(gameData.levelScore[currentLevel - 1] < currentScore)
             {

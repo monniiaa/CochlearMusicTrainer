@@ -7,7 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 [RequireComponent(typeof(XRBaseInteractable))]
 public class InteractableInstrument : MonoBehaviour
 {
-    public InstrumentFamily instrumentFamily;
+   // public InstrumentFamily instrumentFamily;
     public bool CanBeHeard { get; private set; }
     public bool HasClickedOnce { get; private set; }
     private XRRayInteractor _interactor;

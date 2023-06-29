@@ -40,8 +40,7 @@ public class UIMenu : MonoBehaviour
 
     public void ActivateLevels(int level)
     {
-        level = (level == 0) ? 1 : level;
-            for (int i = 0; i < level; i++)
+        for (int i = 0; i < level; i++)
         {
             levelsText[i].text = (i+1).ToString();
             levelImages[i].sprite = activeLevelImage;
