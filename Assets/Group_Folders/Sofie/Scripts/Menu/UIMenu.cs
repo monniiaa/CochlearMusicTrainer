@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,8 +39,12 @@ public class UIMenu : MonoBehaviour
     [SerializeField]
     private Sprite gradientDot;
 
+    public int activeLevels;
+
+
     public void ActivateLevels(int level)
     {
+        activeLevels = level;
         for (int i = 0; i < level; i++)
         {
             levelsText[i].text = (i+1).ToString();
@@ -73,7 +78,7 @@ public class UIMenu : MonoBehaviour
 
         }
     }
-
+    
     public void LoadScene(string scenename)
     {
         SceneManager.LoadScene(scenename);

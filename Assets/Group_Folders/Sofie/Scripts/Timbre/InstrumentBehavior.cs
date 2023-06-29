@@ -7,18 +7,16 @@ public class InstrumentBehavior : MonoBehaviour
 {
     public Animator animator;
 
-    private AudioSource audioSource;
+    public AudioSource audioSource;
     [SerializeField]
     private ParticleSystem particleNotes;
-
-    public AudioClip[] songs;
+    
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         audioSource = GetComponent<AudioSource>();
         audioSource.playOnAwake = false;
         audioSource.spatialBlend = 0; 
-        audioSource.Stop();
         animator = GetComponent<Animator>();
         if (particleNotes != null)
         {
@@ -49,15 +47,16 @@ public class InstrumentBehavior : MonoBehaviour
         animator.SetTrigger("Destroy");
     }
 
-    public void PlayClip()
+    public void Play()
     {
         audioSource.PlayOneShot(audioSource.clip);
+        Debug.Log("Playing " + audioSource.clip.name);
     }
-    public void SetClip(int clip)
+    public void SetClip(int clip = 0)
     {
         string folderName = gameObject.name + "Track"; // assume the sound folder is named after the child object
-        AudioClip[] clips = Resources.LoadAll<AudioClip>(folderName);
-        if (clips != null && clips.Length > 0)
+        AudioClip[] clips = Resources.LoadAll<AudioClip>(folderName);   
+        if ( clips.Length > 0)
         {
             if (clip < 0 || clip > clips.Length)
             {

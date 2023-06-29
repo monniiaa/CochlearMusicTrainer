@@ -19,7 +19,6 @@ public class UIManager : MonoBehaviour
         if (showMenuButton.action.WasPressedThisFrame())
         {
             ActivateDeactivateMenu();
-            Debug.Log("Menu Pressed!");
 
             if (menu.activeSelf)
             {

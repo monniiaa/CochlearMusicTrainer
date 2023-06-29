@@ -9,7 +9,7 @@ public class PitchBoard : MonoBehaviour
     public string path = "PitchIdentification";
     GameData levelData;
 
-    void Start()
+    void Awake()
     {
         levelData = DataManager.ReadJson(path);
 

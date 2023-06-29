@@ -12,13 +12,16 @@ public class LevelNavigation : MonoBehaviour
     private GameDataManager gameDataManager;
     private GameData gameData;
     private Button[] buttons;
+    [SerializeField]
     private Level[] levels;
+    private MenuButton[] menuButtons;
     private void Awake() 
     {
         sceneTransitionManager = FindObjectOfType<SceneTransitionManager>();
         gameData = DataManager.ReadJson(path);
         gameDataManager = GameDataManager.Instance;
         buttons = GetComponentsInChildren<Button>();
+        menuButtons = GetComponentsInChildren<MenuButton>();
         levels = GetComponentsInChildren<Level>(true);
     }
 
@@ -57,6 +60,13 @@ public class LevelNavigation : MonoBehaviour
         {
             return;
         }
+        menuButtons[level - 1].SelectInteraction();
+        StartCoroutine(WaitForFeedback(0.5f, level));
+    }
+    
+    IEnumerator WaitForFeedback(float time, int level)
+    {
+        yield return new WaitForSeconds(time);
         gameDataManager.currentLevel = level;
         sceneTransitionManager.GoToSceneAsync(sceneIndex);
     }
