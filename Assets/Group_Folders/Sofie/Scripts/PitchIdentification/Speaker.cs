@@ -64,4 +64,15 @@ public class Speaker : MonoBehaviour
         yield return new WaitForSeconds(0.7f);
         Destroy(this.gameObject);
     }
+
+    public void SwitchMaterial(Material mat1, Material mat2)
+    {
+        StartCoroutine(MaterialSwitch(mat1, mat2));
+    }
+    IEnumerator MaterialSwitch(Material mat1, Material mat2)
+    {
+        GetComponent<MeshRenderer>().material = mat1;
+        yield return new WaitForSeconds(0.7f);
+        GetComponent<MeshRenderer>().material = mat2;
+    }
 }

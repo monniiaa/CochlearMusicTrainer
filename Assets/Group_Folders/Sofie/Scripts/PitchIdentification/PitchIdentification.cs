@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using Mono.CSharp;
+using Unity.VisualScripting;
 
 public class PitchIdentification : LevelManager
 {
@@ -20,8 +21,11 @@ public class PitchIdentification : LevelManager
     Speaker[] speakers;
     public InstrumentSeparation ModeManager;
     private DateTime startTime;
+    [SerializeField]
     private Timer timer;
     private bool OutOfTime = false;
+    [SerializeField] private Material material;
+    private float timerStart;
 
 
     private void Awake()
@@ -53,22 +57,39 @@ public class PitchIdentification : LevelManager
             speaker.SetPickedState(false);
         }
         StartRound();
+        
+    }
+
+    private void Start()
+    {
+        timer.timeLeft = timerStart;
+        timer.StartCoroutine(timer.Reset());
     }
 
     private void Update()
     {
         if (difficulty == Difficulty.Hard)
         {
-            if (timer.timeLeft <= 0 && !OutOfTime )
+            if (timer.timeLeft <= 0)
             {
+                foreach (Speaker s in speakers)
+                {
+                    s.SwitchMaterial(failMaterial, material);
+                }
+
+                if (round < 4)
+                {
+                    gameplayAudio.PlayOneShot(failAudio);
+                }
                 EndRound();
-                SetRoundFunctionality();
                 OutOfTime = true;
-                timer.timeLeft = 10;
+                SetRoundFunctionality();
+                
             }
         }
-
     }
+    
+
 
     protected override void RestartLevel()
     {
@@ -161,17 +182,17 @@ public class PitchIdentification : LevelManager
     public void SpeakerPicked(Speaker speaker)
     {
         JsonManager.WriteDataToFile<PitchIdentificationGameData>(
-            new PitchIdentificationGameData(
-                DateTime.Now,
-                DateTime.Now - startTime,
-                speaker.currentClip.name,
-                highestSpeaker.currentClip.name,
-                speaker == highestSpeaker,
-                new string[] { speakers[0].currentClip.name, speakers[1].currentClip.name},
-                currentLevel,
-                round
-            )
-        );
+                new PitchIdentificationGameData(
+                    DateTime.Now,
+                    DateTime.Now - startTime,
+                    speaker.currentClip.name,
+                    highestSpeaker.currentClip.name,
+                    speaker == highestSpeaker,
+                    new string[] { speakers[0].currentClip.name, speakers[1].currentClip.name },
+                    currentLevel,
+                    round
+                )
+            );
         EndRound();
         if (speaker == highestSpeaker) {
             gameplayAudio.PlayOneShot(sucessAudio);
@@ -183,7 +204,6 @@ public class PitchIdentification : LevelManager
             gameplayAudio.PlayOneShot(failAudio);
             speaker.GetComponent<MeshRenderer>().material = failMaterial;
         }
-       
     }
     
     
@@ -193,15 +213,20 @@ public class PitchIdentification : LevelManager
         switch (difficulty)
         {
             case Difficulty.Easy:
+                
                 SetPitchDifference( 10 - currentLevel);
                 break;
             case Difficulty.Medium:
                 SetPitchDifference( 7-currentLevel);
+                timer = FindObjectOfType<Timer>(true);
+                timer.gameObject.SetActive(true);
+                timerStart = 15-currentLevel;
                 break;
             case Difficulty.Hard:
                 SetPitchDifference( 1);
                 timer = FindObjectOfType<Timer>(true);
                 timer.gameObject.SetActive(true);
+                timerStart = 15-currentLevel;
                 break;
         }
 
@@ -209,7 +234,7 @@ public class PitchIdentification : LevelManager
 
     IEnumerator End()
     {
-        JsonManager.WriteDataToFile<ScoreData>(new ScoreData("Pitch Identification", DateTime.Now, currentScore, currentLevel));
+       JsonManager.WriteDataToFile<ScoreData>(new ScoreData("Pitch Identification", DateTime.Now, currentScore, currentLevel));
         yield return new WaitForSeconds(0.7f);
         foreach (Speaker s in speakers)
         {
@@ -253,10 +278,12 @@ public class PitchIdentification : LevelManager
 
     protected override void StartRound()
     {
+        OutOfTime = false;
         startTime = DateTime.Now;
-        if (timer != null)
+        if (timer != null && round != 1)
         {
-            timer.timeLeft = 10;
+            timer.timeLeft = timerStart;
+            timer.StartCoroutine(timer.Reset());
         }
         foreach (Speaker speaker in speakers)
         {
