@@ -45,14 +45,14 @@ public abstract class LevelManager : MonoBehaviour
             modes[1].SetActive(false);
             modes[2].SetActive(false);
         }
-        else if (currentLevel > 3 && currentLevel <= 6)
+        else if (currentLevel > 3 && currentLevel <= 4)
         {
             difficulty = Difficulty.Medium;
             modes[0].SetActive(false);
             modes[1].SetActive(true);
             modes[2].SetActive(false);
         }
-        else if (currentLevel > 6)
+        else if (currentLevel > 4)
         {
             difficulty = Difficulty.Hard;
             modes[0].SetActive(false);

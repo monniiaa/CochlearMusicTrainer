@@ -20,6 +20,8 @@ public class PitchIdentification : LevelManager
     Speaker[] speakers;
     public InstrumentSeparation ModeManager;
     private DateTime startTime;
+    private Timer timer;
+    private bool OutOfTime = false;
 
 
     private void Awake()
@@ -52,7 +54,22 @@ public class PitchIdentification : LevelManager
         }
         StartRound();
     }
-    
+
+    private void Update()
+    {
+        if (difficulty == Difficulty.Hard)
+        {
+            if (timer.timeLeft <= 0 && !OutOfTime )
+            {
+                EndRound();
+                SetRoundFunctionality();
+                OutOfTime = true;
+                timer.timeLeft = 10;
+            }
+        }
+
+    }
+
     protected override void RestartLevel()
     {
         currentScore = 0;
@@ -71,28 +88,32 @@ public class PitchIdentification : LevelManager
         {
             for (int i = 0; i < speakers.Length; i++)
             {
-                int randNote = UnityEngine.Random.Range(0, speakers[i].notes.Length);
+                int randNote = UnityEngine.Random.Range(0, speakers[0].notes.Length);
                 speakers[i].note = randNote;
                 speakers[i].SetNote(randNote);
-
                 for (int j = 0; j < speakers.Length; j++)
                 {
                     if (j != i)
                     {
                         {
-                            do
+                            while (speakers[i].note == speakers[j].note)
                             {
-                                int upperbound = Mathf.Min(randNote + interval, speakers[j].notes.Length- 1);
+                                int upperbound = Mathf.Min(randNote + interval, speakers[i].notes.Length- 1);
                                 int lowerBound = randNote - interval;
+                                int rand;
                                 if (lowerBound < 0)
                                 {
-                                    lowerBound = speakers[j].notes.Length + lowerBound;
-
+                                    
+                                    lowerBound = speakers[i].notes.Length + lowerBound;
+                                    if (lowerBound > upperbound)
+                                    {
+                                        (upperbound, lowerBound) = (lowerBound, upperbound);
+                                    }
                                 }
-                                int rand = UnityEngine.Random.Range(lowerBound, upperbound);
-                                speakers[j].note = rand;
-                                speakers[j].SetNote(rand);
-                            } while (speakers[i].note != speakers[j].note);
+                                rand = UnityEngine.Random.Range(lowerBound, upperbound);
+                                speakers[i].note = rand;
+                                speakers[i].SetNote(rand);
+                            } 
                         }
                     }
                 }
@@ -100,10 +121,11 @@ public class PitchIdentification : LevelManager
                 {
                     highestSpeaker = speakers[i];
                 }
+                Debug.Log("speaker " + i +" note: " + speakers[i].note);
+                Debug.Log("Highest speaker note: " + highestSpeaker.note);
             }
-
         }
-        else
+        else if (speakers.Length == 2)
         {
             int randnote = UnityEngine.Random.Range(0, speakers[0].notes.Length);
             speakers[0].note = randnote;
@@ -163,6 +185,8 @@ public class PitchIdentification : LevelManager
         }
        
     }
+    
+    
 
     protected override void SetDifficultyChanges()
     {
@@ -176,6 +200,8 @@ public class PitchIdentification : LevelManager
                 break;
             case Difficulty.Hard:
                 SetPitchDifference( 1);
+                timer = FindObjectOfType<Timer>(true);
+                timer.gameObject.SetActive(true);
                 break;
         }
 
@@ -199,6 +225,7 @@ public class PitchIdentification : LevelManager
         if (round < 4)
         {
             StartRound();
+            OutOfTime = false;
         }
         else
         {
@@ -227,6 +254,10 @@ public class PitchIdentification : LevelManager
     protected override void StartRound()
     {
         startTime = DateTime.Now;
+        if (timer != null)
+        {
+            timer.timeLeft = 10;
+        }
         foreach (Speaker speaker in speakers)
         {
             speaker.SetPickedState(false);

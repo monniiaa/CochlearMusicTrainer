@@ -16,6 +16,8 @@ public class UISounds : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.playOnAwake = false;
         audioSource.spatialBlend = 0;
+        hoverSounds = Resources.LoadAll<AudioClip>("PopSounds");
+        selectSound = Resources.Load<AudioClip>("SelectSound/pop2");
         
     }
 
