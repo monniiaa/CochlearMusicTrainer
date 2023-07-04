@@ -2718,7 +2718,6 @@ GameObject:
   - component: {fileID: 908467789}
   - component: {fileID: 908467788}
   - component: {fileID: 908467787}
-  - component: {fileID: 908467791}
   - component: {fileID: 908467792}
   m_Layer: 5
   m_Name: IntroCanvas
@@ -2809,24 +2808,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 1.35}
   m_SizeDelta: {x: 1200, y: 900}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &908467791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 908467786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6985b96c6ce9e4d38879451ffdef0b6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text1: {fileID: 0}
-  text2: {fileID: 0}
-  text3: {fileID: 0}
-  canvas: {fileID: 0}
-  soundStart: {fileID: 0}
-  startButton: {fileID: 0}
 --- !u!114 &908467792
 MonoBehaviour:
   m_ObjectHideFlags: 0

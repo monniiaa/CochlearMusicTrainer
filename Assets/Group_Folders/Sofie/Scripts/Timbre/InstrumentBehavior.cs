@@ -6,7 +6,7 @@ using UnityEngine;
 public class InstrumentBehavior : MonoBehaviour
 {
     public Animator animator;
-
+    public string name;
     public AudioSource audioSource;
     [SerializeField]
     private ParticleSystem particleNotes;
@@ -42,9 +42,9 @@ public class InstrumentBehavior : MonoBehaviour
         }
     }
     
-    public void DestroyAnimation()
+    public void DestroyAnimation(bool destroy)
     {
-        animator.SetTrigger("Destroy");
+        animator.SetBool("Destroyed", destroy);
     }
     
     public void CorrectAnimation(bool correct)
@@ -55,7 +55,6 @@ public class InstrumentBehavior : MonoBehaviour
     public void Play()
     {
         audioSource.PlayOneShot(audioSource.clip);
-        Debug.Log("Playing " + audioSource.clip.name);
     }
     public void SetClip(int clip = 0)
     {
@@ -79,9 +78,4 @@ public class InstrumentBehavior : MonoBehaviour
         audioSource.Stop();
     }
     
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -117,8 +117,7 @@ public class PlayRandomSound : MonoBehaviour
         StopMusic();
             if (round1 == false)
             {
-                WriteDataToJson(DateTime.Now, DateTime.Now - startTime, chosenInstrument, 
-                currentInstrument.name, isCorrect, selectedObjects.Select(obj => obj.name).ToArray(), currentLevel, 1);
+                
                 timer1 = time;
                 timerCount.Add(timer1);
                 round1 = true;
@@ -137,8 +136,7 @@ public class PlayRandomSound : MonoBehaviour
             }
             else if (round2 == false)
             {
-                WriteDataToJson(DateTime.Now, DateTime.Now - startTime, chosenInstrument, 
-                currentInstrument.name, isCorrect, selectedObjects.Select(obj => obj.name).ToArray(), currentLevel, 2);
+
                 timer2 = time;
                 timerCount.Add(timer2);
                 round2 = true;
@@ -156,8 +154,6 @@ public class PlayRandomSound : MonoBehaviour
             }
             else if (round3 == false)
             {
-                WriteDataToJson(DateTime.Now, DateTime.Now - startTime, chosenInstrument, 
-                currentInstrument.name, isCorrect, selectedObjects.Select(obj => obj.name).ToArray(), currentLevel, 3);
                 timer3 = time;
                 timerCount.Add(timer3);
                 round3 = true;
@@ -186,22 +182,7 @@ public class PlayRandomSound : MonoBehaviour
                 Debug.Log("training over");
             }
     }
-
-    private void WriteDataToJson(DateTime time, TimeSpan timeTakenToChooseInstrument, string chosenInstrument, string correctInstrument, bool wasCorrect, string[] instrumentOptions, int level, int round)
-    {
-        JsonManager.WriteDataToFile<InstrumentIdentificationGameData>(
-            new InstrumentIdentificationGameData(
-                time, 
-                timeTakenToChooseInstrument, 
-                chosenInstrument, 
-                correctInstrument, 
-                wasCorrect, 
-                instrumentOptions, 
-                level, 
-                round
-            )
-        );
-    }
+    
 
     public void Round()
     {
