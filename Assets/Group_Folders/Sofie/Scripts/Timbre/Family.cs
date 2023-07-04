@@ -8,16 +8,20 @@ public class Family : MonoBehaviour
     public FamilyType familyType;
     public List<GameObject> instruments;
 
-    [SerializeField] private List<GameObject> _instruments;
-
+    [SerializeField] private GameObject[] _instruments;
+    
     public void ResetInstrumentsInFamily()
     {
-        instruments = _instruments;
+        instruments.Clear();
+        for(int i = 0; i < _instruments.Length  ; i++)
+        {
+            instruments.Add(_instruments[i]);
+        }
     }
 
     private void Awake()
     {
-        ResetInstrumentsInFamily();
+       ResetInstrumentsInFamily();
     }
 }
 

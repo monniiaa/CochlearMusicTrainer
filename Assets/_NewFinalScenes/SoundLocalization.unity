@@ -1828,6 +1828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 8969580668940092037, guid: 4ce26379d368d2d4cab4aaa80ab26bfd, type: 3}
   speaker: {fileID: 8969580668940092037, guid: 4ce26379d368d2d4cab4aaa80ab26bfd, type: 3}
+  transparentTarget: {fileID: 1332369757814104637, guid: 248b2885a107f6f42bba1b6ac1eb51c9, type: 3}
   _xrRayInteractor: {fileID: 0}
   distanceTracker: {fileID: 8808924322889256069}
   speakerspawner: {fileID: 1662117886}

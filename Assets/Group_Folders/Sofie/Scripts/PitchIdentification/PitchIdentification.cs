@@ -70,6 +70,7 @@ public class PitchIdentification : LevelManager
     {
         if (difficulty == Difficulty.Hard)
         {
+            Debug.Log(timer.timeLeft);
             if (timer.timeLeft <= 0)
             {
                 foreach (Speaker s in speakers)
@@ -100,6 +101,9 @@ public class PitchIdentification : LevelManager
             s.gameObject.SetActive(true);
         }
         StartRound();
+        timer.timeLeft = timerStart;
+        timer.StartCoroutine(timer.Reset());
+        
     }
 
     public void SetPitchDifference( int interval)
@@ -218,9 +222,6 @@ public class PitchIdentification : LevelManager
                 break;
             case Difficulty.Medium:
                 SetPitchDifference( 7-currentLevel);
-                timer = FindObjectOfType<Timer>(true);
-                timer.gameObject.SetActive(true);
-                timerStart = 15-currentLevel;
                 break;
             case Difficulty.Hard:
                 SetPitchDifference( 1);

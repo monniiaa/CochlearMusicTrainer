@@ -18,6 +18,7 @@ public class Timer : MonoBehaviour
     Animator animator;
 
     private bool play = false;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class Timer : MonoBehaviour
         play = true;
         timetTxt.color = OGColor;
         timetTxt.enabled = false;
+        _audioSource.Stop();
         yield return new WaitForSeconds(1f);
         animator.SetBool("StartPopUp", true);
         timetTxt.enabled = true;
@@ -57,8 +59,7 @@ public class Timer : MonoBehaviour
             {
                 timeLeft -= Time.deltaTime;
                 UpdateTimer(timeLeft);
-            }
-            else
+            }else
             {
                 timeLeft = 0;
                 timerOn = false;

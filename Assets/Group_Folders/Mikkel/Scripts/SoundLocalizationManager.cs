@@ -11,7 +11,7 @@ public class SoundLocalizationManager : MonoBehaviour
     [SerializeField]
     private GameObject prefab;
     public GameObject speaker;
-
+    [SerializeField] private GameObject transparentTarget;
     private int currentRound = 0;
     private int maxRounds = 3;
 
@@ -135,7 +135,22 @@ public class SoundLocalizationManager : MonoBehaviour
 
     private void RespawnSpeaker()
     {
-        speaker = speakerspawner.SpawnSpeaker(prefab);
+        
+        if (CurrentLevel == 1)
+        {
+            if(currentRound == 1)
+            {
+                speaker = speakerspawner.SpawnSpeaker(prefab);
+            }
+            else
+            {
+                speaker = speakerspawner.SpawnSpeaker(transparentTarget);
+            }
+        }
+        else
+        {
+            speaker = speakerspawner.SpawnSpeaker(prefab);
+        }
         if (CurrentLevel < 3)
         {
             speaker.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
@@ -147,8 +162,12 @@ public class SoundLocalizationManager : MonoBehaviour
         {
             speaker.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         }
-        meshRenderer = speaker.GetComponentInChildren<MeshRenderer>();
-        meshRenderer.enabled = false;
+
+        if (currentRound > 1)
+        {
+            meshRenderer = speaker.GetComponentInChildren<MeshRenderer>();
+            meshRenderer.enabled = false;
+        }
         speakerAnimator = speaker.GetComponentInChildren<Animator>();
         speakerAnimator.enabled = false;
     }

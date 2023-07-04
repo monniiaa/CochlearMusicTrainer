@@ -46,6 +46,11 @@ public class InstrumentBehavior : MonoBehaviour
     {
         animator.SetTrigger("Destroy");
     }
+    
+    public void CorrectAnimation(bool correct)
+    {
+        animator.SetBool("Correct", correct);
+    }
 
     public void Play()
     {

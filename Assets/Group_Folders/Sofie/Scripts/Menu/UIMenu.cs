@@ -56,11 +56,13 @@ public class UIMenu : MonoBehaviour
 
     public void ActivateDots(int level)
     {
+        
         for (int i = 0; i < (level - 1) * 3; i++)
         {
             levelDots[i].sprite = unlockedDot;
 
         }
+        if(level == maxLevel) return;
         levelDots[(level - 1) * 3].sprite = unlockedDot;
         levelDots[((level - 1) * 3) + 1].sprite = gradientDot;
     }
