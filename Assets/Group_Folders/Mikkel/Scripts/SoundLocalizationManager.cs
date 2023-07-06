@@ -11,7 +11,7 @@ public class SoundLocalizationManager : MonoBehaviour
     [SerializeField]
     private GameObject prefab;
     public GameObject speaker;
-    [SerializeField] private GameObject transparentTarget;
+
     private int currentRound = 0;
     private int maxRounds = 3;
 
@@ -40,6 +40,8 @@ public class SoundLocalizationManager : MonoBehaviour
     public Animator speakerAnimator;
     public GameObject[] starAnimation;
     private DateTime startTime;
+    private AlphaChange _alphaChange;
+    [SerializeField] RuntimeAnimatorController animatorcontroller;
    
     void Awake()
     {
@@ -52,7 +54,7 @@ public class SoundLocalizationManager : MonoBehaviour
         meshRenderer.enabled = false;
         speakerAnimator.enabled = false;
         distanceTracker = GameObject.FindObjectOfType<DistanceTracker>();
-
+        _alphaChange = GetComponent<AlphaChange>();
     }
     private void OnEnable()
     {
@@ -60,6 +62,12 @@ public class SoundLocalizationManager : MonoBehaviour
         distanceTracker.distanceEvent += EndRound;
         StartNewRound();//maybe
         
+    }
+
+    private void ResetScore()
+    {
+        currentRound = 0;
+        CurrentScore = 0;
     }
 
     private void OnDisable()
@@ -76,6 +84,7 @@ public class SoundLocalizationManager : MonoBehaviour
 
         if(CheckRayHit())
         {
+            speaker.GetComponentInChildren<TargetLookAt>().enabled = false;
             speakerAnimator.enabled = true;
             CurrentScore++;
         }
@@ -114,6 +123,7 @@ public class SoundLocalizationManager : MonoBehaviour
             
             DataManager.SaveDataToJson(gameData, path);
             ShowStars(CurrentScore);
+            ResetScore();
             return;
         }
         RespawnSpeaker();
@@ -135,22 +145,8 @@ public class SoundLocalizationManager : MonoBehaviour
 
     private void RespawnSpeaker()
     {
+        speaker = speakerspawner.SpawnSpeaker(prefab);
         
-        if (CurrentLevel == 1)
-        {
-            if(currentRound == 1)
-            {
-                speaker = speakerspawner.SpawnSpeaker(prefab);
-            }
-            else
-            {
-                speaker = speakerspawner.SpawnSpeaker(transparentTarget);
-            }
-        }
-        else
-        {
-            speaker = speakerspawner.SpawnSpeaker(prefab);
-        }
         if (CurrentLevel < 3)
         {
             speaker.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
@@ -162,13 +158,25 @@ public class SoundLocalizationManager : MonoBehaviour
         {
             speaker.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         }
-
-        if (currentRound > 1)
+        meshRenderer = speaker.GetComponentInChildren<MeshRenderer>();
+        if (CurrentLevel != 4)
         {
-            meshRenderer = speaker.GetComponentInChildren<MeshRenderer>();
             meshRenderer.enabled = false;
         }
+        else
+        {
+            meshRenderer.enabled = true;
+            if (currentRound == 2)
+            {
+                _alphaChange.MakeTransparent(speaker.GetComponentInChildren<Renderer>(), 0.5f);
+            } else if (currentRound == 3)
+            {
+                _alphaChange.MakeTransparent(speaker.GetComponentInChildren<Renderer>(), 0.1f);
+            }
+            
+        }
         speakerAnimator = speaker.GetComponentInChildren<Animator>();
+        speakerAnimator.runtimeAnimatorController = animatorcontroller;
         speakerAnimator.enabled = false;
     }
  

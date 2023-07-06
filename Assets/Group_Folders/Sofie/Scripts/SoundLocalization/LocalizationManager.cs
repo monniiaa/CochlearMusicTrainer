@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Oculus.Interaction.Input;
 using Unity.VisualScripting;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -10,8 +11,7 @@ public class LocalizationManager : LevelManager
 {
     [SerializeField]
     public GameObject easyTargetPrefab;
-
-    [SerializeField] private GameObject targetPrefab;
+    
     private MeshRenderer targetMesh;
     private bool transparent = false;
 
@@ -30,7 +30,7 @@ public class LocalizationManager : LevelManager
     public XRRayInteractor _xrRayInteractor;
 
     private randomizeSoundLocation speakerSpawner;
-
+    [SerializeField] RuntimeAnimatorController animatorcontroller;
     private InstrumentSeparation modeManager;
     private AlphaChange _alphaChange;
     private void Awake()
@@ -135,6 +135,10 @@ public class LocalizationManager : LevelManager
     private void SpawnSpeakers()
     {
         easyModeTargets = speakerSpawner.SpawnSpeakers(easyModeTargetAmount,1f, easyTargetPrefab);
+        foreach (GameObject target in easyModeTargets)
+        {
+            target.GetComponent<Animator>().runtimeAnimatorController = animatorcontroller;
+        }
         int randomIndex = UnityEngine.Random.Range(0, easyModeTargets.Count);
         easyModeTargets[randomIndex].GetComponent<AudioSource>().clip = targetSound;
         easyModeTargets[randomIndex].GetComponent<AudioSource>().Play();
@@ -165,31 +169,10 @@ public class LocalizationManager : LevelManager
         {
             StartCoroutine(ResetEasyModeTargets());
         }
-        else
-        {
-            if (CheckRayHit())
-            {
-                gameplayAudio.PlayOneShot(sucessAudio);
-                targetPrefab.GetComponent<TargetAnimationHandler>().SetCorrectState(true);
-                currentScore++;
-            }
-            else
-            {
-                gameplayAudio.PlayOneShot(failAudio);
-                targetPrefab.GetComponent<TargetAnimationHandler>().TriggerDestroyState();
-            }
 
-            StartCoroutine(ResetTarget());
-        }
+        
     }
-
-    private IEnumerator ResetTarget()
-    {
-        yield return new WaitForSeconds(1f);
-        targetPrefab.GetComponent<TargetAnimationHandler>().TriggerDestroyState();
-        yield return new WaitForSeconds(0.5f);
-        targetPrefab.GetComponent<DeletusMaximus>().Destroy();
-    }
+    
 
     IEnumerator ResetEasyModeTargets()
     {

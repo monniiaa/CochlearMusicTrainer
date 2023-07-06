@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 199839598}
   - component: {fileID: 199839597}
   - component: {fileID: 199839596}
+  - component: {fileID: 199839600}
   m_Layer: 0
   m_Name: Medium
   m_TagString: Untagged
@@ -219,15 +220,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 8969580668940092037, guid: 4ce26379d368d2d4cab4aaa80ab26bfd, type: 3}
   speaker: {fileID: 8969580668940092037, guid: 4ce26379d368d2d4cab4aaa80ab26bfd, type: 3}
-  _xrRayInteractor: {fileID: 0}
-  distanceTracker: {fileID: 0}
-  speakerspawner: {fileID: 0}
+  _xrRayInteractor: {fileID: 3221912668906926007}
+  distanceTracker: {fileID: 8808924322889256069}
+  speakerspawner: {fileID: 199839599}
   speakerAnimator: {fileID: 0}
   starAnimation:
   - {fileID: 1499616697}
   - {fileID: 1499616696}
   - {fileID: 1499616695}
   - {fileID: 1499616694}
+  animatorcontroller: {fileID: 9100000, guid: e43b96172745b0c44acab69755dafdc6, type: 2}
 --- !u!82 &199839597
 AudioSource:
   m_ObjectHideFlags: 0
@@ -360,9 +362,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDistanceToPlayer: 3
   roomSize: 4.5
-  height: 1
+  height: 0.25
   visualizeRandomness: 0
   player: {fileID: 3221912668148908502}
+--- !u!114 &199839600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199839594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b52b8b6e38bef6046b352b45aa79baed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material:
+  - {fileID: 2100000, guid: 1b9dc368c129f1946af907be9ddade18, type: 2}
+  - {fileID: 2100000, guid: 68df6502e10a64db6ba7a62f43e42bae, type: 2}
+  - {fileID: 2100000, guid: 8ca6226a3dd034c17bb50601e507b8a3, type: 2}
+  - {fileID: 2100000, guid: da073feb97ffa406da09b80d22ff9033, type: 2}
+  originalColor:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &242196759
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,10 +1110,10 @@ MonoBehaviour:
   - {fileID: 1499616695}
   - {fileID: 1499616694}
   easyTargetPrefab: {fileID: 5332161721586996810, guid: a891113a2e11eac49a02aabf586922cb, type: 3}
-  targetPrefab: {fileID: 5586749739691666946, guid: 49361dae61dd60b4f997f5fdd9bf8307, type: 3}
   easyModeTargets: []
   distanceTracker: {fileID: 0}
   _xrRayInteractor: {fileID: 0}
+  animatorcontroller: {fileID: 0}
 --- !u!114 &666802335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2518,10 +2542,10 @@ MonoBehaviour:
   - {fileID: 1499616695}
   - {fileID: 1499616694}
   easyTargetPrefab: {fileID: 5332161721586996810, guid: a891113a2e11eac49a02aabf586922cb, type: 3}
-  targetPrefab: {fileID: 5586749739691666946, guid: 49361dae61dd60b4f997f5fdd9bf8307, type: 3}
   easyModeTargets: []
   distanceTracker: {fileID: 0}
   _xrRayInteractor: {fileID: 0}
+  animatorcontroller: {fileID: 9100000, guid: 8e2ccc462e8ac614b90e1e611bb4b0fd, type: 2}
 --- !u!1 &1721178717
 GameObject:
   m_ObjectHideFlags: 0
