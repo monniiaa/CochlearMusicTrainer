@@ -22,6 +22,7 @@ TagManager:
   - Original
   - Equivalent
   - Start
+  - Target
   layers:
   - Default
   - TransparentFX

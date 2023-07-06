@@ -41,6 +41,7 @@ public abstract class LevelManager : MonoBehaviour
         if (currentLevel <= 3)
         {
             difficulty = Difficulty.Easy;
+            if (modes.Length < 3) return;
             modes[0].SetActive(true);
             modes[1].SetActive(false);
             modes[2].SetActive(false);
@@ -48,6 +49,7 @@ public abstract class LevelManager : MonoBehaviour
         else if (currentLevel > 3 && currentLevel <= 6)
         {
             difficulty = Difficulty.Medium;
+            if (modes.Length < 3) return;
             modes[0].SetActive(false);
             modes[1].SetActive(true);
             modes[2].SetActive(false);
@@ -55,6 +57,7 @@ public abstract class LevelManager : MonoBehaviour
         else if (currentLevel > 6)
         {
             difficulty = Difficulty.Hard;
+            if (modes.Length < 3) return;
             modes[0].SetActive(false);
             modes[1].SetActive(false);
             modes[2].SetActive(true);

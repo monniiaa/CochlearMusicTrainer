@@ -146,8 +146,6 @@ public class PitchIdentification : LevelManager
                 {
                     highestSpeaker = speakers[i];
                 }
-                Debug.Log("speaker " + i +" note: " + speakers[i].note);
-                Debug.Log("Highest speaker note: " + highestSpeaker.note);
             }
         }
         else if (speakers.Length == 2)

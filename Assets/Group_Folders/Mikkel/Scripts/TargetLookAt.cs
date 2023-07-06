@@ -16,7 +16,8 @@ public class TargetLookAt : MonoBehaviour
         transform.LookAt(target.position);
         Vector3 rot = transform.eulerAngles;
         rot.x = 0;
-        rot.z = 0;
+        rot.y = transform.eulerAngles.y + 90;
+        rot.z = 90;
         transform.eulerAngles = rot;
 
     }
