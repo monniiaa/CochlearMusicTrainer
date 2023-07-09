@@ -27,6 +27,7 @@ public class PitchIdentification : LevelManager
     [SerializeField] private Material material;
     private float timerStart;
 
+    private bool SongsMode = false;
 
     private void Awake()
     {

@@ -33,7 +33,7 @@ public class SoundLocalizationManager : MonoBehaviour
     private static float distanceTreshold = 10;
     [SerializeField]
     randomizeSoundLocation speakerspawner;
-    private XRInteractorLineVisual _interactorLine;
+    [SerializeField] private XRInteractorLineVisual _interactorLine;
 
     private MeshRenderer meshRenderer;
 

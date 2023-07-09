@@ -5,12 +5,12 @@ using UnityEngine;
 public class TargetAnimationHandler : MonoBehaviour
 {
     private Animator animator;
-    private LocalizationManager localizationManager;
+    private SoundLocalization soundLocalization;
     
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        localizationManager = FindObjectOfType<LocalizationManager>();
+        soundLocalization = FindObjectOfType<SoundLocalization>();
     }
 
     public void SetPickedState(bool picked)
@@ -25,7 +25,7 @@ public class TargetAnimationHandler : MonoBehaviour
 
     public void Picked()
     {
-        localizationManager.PickTarget(this.gameObject);
+        soundLocalization.PickTarget(this.gameObject);
         
     }
 

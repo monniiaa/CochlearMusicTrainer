@@ -23,6 +23,14 @@ TagManager:
   - Equivalent
   - Start
   - Target
+  - BrassFamily
+  - Brass
+  - WoodwindFamily
+  - Woodwind
+  - PercussionFamily
+  - Percussion
+  - StringsFamily
+  - Strings
   layers:
   - Default
   - TransparentFX

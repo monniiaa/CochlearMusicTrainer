@@ -647,6 +647,7 @@ MonoBehaviour:
   name: Klaver
   audioSource: {fileID: 17021640}
   particleNotes: {fileID: 1974630882}
+  clips: []
 --- !u!1 &37333787
 GameObject:
   m_ObjectHideFlags: 0
@@ -7098,6 +7099,7 @@ MonoBehaviour:
   name: Klarinet
   audioSource: {fileID: 181242124}
   particleNotes: {fileID: 1050604029}
+  clips: []
 --- !u!1 &195428857
 GameObject:
   m_ObjectHideFlags: 0
@@ -18771,6 +18773,7 @@ MonoBehaviour:
   name: Trombone
   audioSource: {fileID: 712280341}
   particleNotes: {fileID: 1368554620}
+  clips: []
 --- !u!82 &712280341
 AudioSource:
   m_ObjectHideFlags: 0
@@ -19119,6 +19122,7 @@ MonoBehaviour:
   name: Cello
   audioSource: {fileID: 739279959}
   particleNotes: {fileID: 1101122710}
+  clips: []
 --- !u!95 &739279962
 Animator:
   serializedVersion: 4
@@ -34673,11 +34677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3380f1f909cb16841b92b616d1fbfc01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  familyType: 0
   instruments: []
-  _instruments:
-  - {fileID: 1620210700}
-  - {fileID: 739279957}
 --- !u!1 &1151707230
 GameObject:
   m_ObjectHideFlags: 0
@@ -41742,10 +41742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3380f1f909cb16841b92b616d1fbfc01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  familyType: 3
   instruments: []
-  _instruments:
-  - {fileID: 17021633}
 --- !u!1 &1573919573
 GameObject:
   m_ObjectHideFlags: 0
@@ -41925,6 +41922,7 @@ MonoBehaviour:
   name: Violin
   audioSource: {fileID: 1620210708}
   particleNotes: {fileID: 446776616}
+  clips: []
 --- !u!95 &1620210703
 Animator:
   serializedVersion: 4
@@ -42333,11 +42331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3380f1f909cb16841b92b616d1fbfc01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  familyType: 2
   instruments: []
-  _instruments:
-  - {fileID: 1677338160}
-  - {fileID: 712280335}
 --- !u!1 &1677338160
 GameObject:
   m_ObjectHideFlags: 0
@@ -42413,6 +42407,7 @@ MonoBehaviour:
   name: Trompet
   audioSource: {fileID: 1677338168}
   particleNotes: {fileID: 558121974}
+  clips: []
 --- !u!95 &1677338163
 Animator:
   serializedVersion: 4
@@ -43051,7 +43046,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4330304317014141480, guid: 5ff981cea274f9646a07b54036b5f261, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ff981cea274f9646a07b54036b5f261, type: 3}
@@ -43284,12 +43279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3380f1f909cb16841b92b616d1fbfc01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  familyType: 1
   instruments: []
-  _instruments:
-  - {fileID: 1953464901}
-  - {fileID: 2092907359}
-  - {fileID: 181242116}
 --- !u!224 &1901232634 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5978604411222079853, guid: 89e43ced2b909d844a6c7ca51b89486a, type: 3}
@@ -43498,6 +43488,7 @@ MonoBehaviour:
   name: "Fl\xF8jte"
   audioSource: {fileID: 1953464903}
   particleNotes: {fileID: 1084293208}
+  clips: []
 --- !u!95 &1953464907
 Animator:
   serializedVersion: 4
@@ -49967,6 +49958,7 @@ MonoBehaviour:
   name: Saxofon
   audioSource: {fileID: 2092907365}
   particleNotes: {fileID: 115651795}
+  clips: []
 --- !u!23 &2092907367
 MeshRenderer:
   m_ObjectHideFlags: 0

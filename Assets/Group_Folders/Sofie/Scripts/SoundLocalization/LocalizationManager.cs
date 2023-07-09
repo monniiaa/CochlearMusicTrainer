@@ -32,7 +32,7 @@ public class LocalizationManager : LevelManager
     private randomizeSoundLocation speakerSpawner;
     [SerializeField] RuntimeAnimatorController animatorcontroller;
     private InstrumentSeparation modeManager;
-    private AlphaChange _alphaChange;
+
     private void Awake()
     {
         path = "SoundLocalization";
@@ -44,7 +44,6 @@ public class LocalizationManager : LevelManager
         speakerSpawner = GameObject.FindObjectOfType<randomizeSoundLocation>();
         targetSound = Resources.Load<AudioClip>("SoundLocalization/TargetSound");
         
-        _alphaChange = GetComponent<AlphaChange>();
         
         modeManager = InstrumentSeparation.Instance;
         SetMode();
@@ -173,7 +172,6 @@ public class LocalizationManager : LevelManager
         
     }
     
-
     IEnumerator ResetEasyModeTargets()
     {
         yield return new WaitForSeconds(1f);

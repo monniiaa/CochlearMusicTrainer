@@ -26,7 +26,7 @@ public class TimbreManager : LevelManager
     [SerializeField] private TextMeshProUGUI instructionText;
     private bool wasCorrect;
     private int wrongAnswer;
-    private List<InstrumentBehavior> previousCombination = new List<InstrumentBehavior>();
+    private List<GameObject> previousCombination = new List<GameObject>();
 
     void Awake()
     {
@@ -38,14 +38,13 @@ public class TimbreManager : LevelManager
         gameData = DataManager.ReadJson(path);
 
         currentLevel = (_gameDataManager.currentLevel == 0) ? 1 : _gameDataManager.currentLevel;
-        Debug.Log(currentLevel);
+
         SetMode();
         CorrectInstrumentsCanvas.gameObject.SetActive(false);
         foreach (GameObject star in starAnimation)
         {
             star.gameObject.SetActive(false);
         }
-        instrumentFamilies = new GameObject[4];
     }
 
     private void StartingInstructions()
@@ -71,14 +70,19 @@ public class TimbreManager : LevelManager
 
     private void Start()
     {
+        instrumentFamilies = new GameObject[4];
         instrumentFamilies[0] = GameObject.Find("Brass");
         instrumentFamilies[1] = GameObject.Find("Woodwind");
         instrumentFamilies[2] = GameObject.Find("Percussion");
         instrumentFamilies[3] = GameObject.Find("Strings");
-        StartRound();
-        
+        StartCoroutine(WaitForStart());
     }
 
+    IEnumerator WaitForStart()
+    {
+        yield return new WaitForSeconds(1f);
+        StartRound();
+    }
     public void InstrumentPicked(InstrumentBehavior instrument)
     {
         if (guesses > 0)
@@ -123,7 +127,7 @@ public class TimbreManager : LevelManager
                 }
                 break;
             case Difficulty.Medium:
-                int randMedium = UnityEngine.Random.Range(2, 4);
+                int randMedium = UnityEngine.Random.Range(2, 3);
                 PlayPickedInstruments(SetInstrumentsPlaying(randMedium));
                 guesses = instrumentsPlaying.Count;
                 break;
@@ -180,7 +184,7 @@ public class TimbreManager : LevelManager
     {
         StopPlayingInstrument();
         previousCombination.Clear();
-        previousCombination = instrumentsPlaying;
+        previousCombination = instrumentsPlaying.Select(x => x.gameObject).ToList();
         instrumentsPlaying.Clear();
     }
     
@@ -231,7 +235,6 @@ public class TimbreManager : LevelManager
 
     protected override void StartRound()
     {
-        Debug.Log(round);
         for (int i = 0; i < instrumentFamilies.Length; i++)
         {
             foreach (GameObject instrument in instrumentFamilies[i].GetComponent<Family>().instruments)
@@ -255,25 +258,32 @@ public class TimbreManager : LevelManager
     /// <param name="sameFamily">Should instruments from the same family spawn?</param>
     private List<InstrumentBehavior> SetInstrumentsPlaying(int numberOfInstruments, bool sameFamily =false)
     {
-        List<GameObject> pickedFamily = new List<GameObject>();
-        int rand = Random.Range(0, instrumentFamilies.Length);
-        pickedFamily.Add(instrumentFamilies[rand]);
-
-        List<InstrumentBehavior> pickedInstruments = new List<InstrumentBehavior>();
+        GameObject fam;
+        InstrumentBehavior pickedInstrument1;
+        int rand;
+        int randI;
+        do
+        {
+            rand = Random.Range(0, instrumentFamilies.Length);
+            fam = instrumentFamilies[rand];
+            randI = Random.Range(0, fam.GetComponent<Family>().instruments.Count);
+            pickedInstrument1 = fam.GetComponent<Family>().instruments[randI].GetComponent<InstrumentBehavior>();
+        }while (previousCombination.Contains(pickedInstrument1.gameObject));
         
-        int randI = Random.Range(0, pickedFamily[0].GetComponent<Family>().instruments.Count);
-        pickedInstruments.Add(pickedFamily[0].GetComponent<Family>().instruments[randI].GetComponent<InstrumentBehavior>());
-        pickedFamily[0].GetComponent<Family>().instruments.RemoveAt(randI);
+        
+        List<InstrumentBehavior> pickedInstruments = new List<InstrumentBehavior>();
+        List<GameObject> pickedFamily = new List<GameObject>();
+        pickedInstruments.Add(pickedInstrument1);
+        pickedFamily.Add(fam);
+        
         if (sameFamily)
         {
-            for (int i = 1; i < numberOfInstruments ; i++)
+            for (int i = 1; pickedInstruments.Count < numberOfInstruments ; i++)
             {
                 if (pickedFamily[0].GetComponent<Family>().instruments.Count != 0)
                 {
                     int randInstrument = Random.Range(0, pickedFamily[0].GetComponent<Family>().instruments.Count);
-                    pickedInstruments.Add(pickedFamily[0].GetComponent<Family>().instruments[randInstrument].GetComponent<InstrumentBehavior>());
-                    pickedFamily[0].GetComponent<Family>().instruments.RemoveAt(randInstrument);
-
+                    if(!pickedInstruments.Contains(pickedFamily[0].GetComponent<Family>().instruments[randInstrument].GetComponent<InstrumentBehavior>())) pickedInstruments.Add(pickedFamily[0].GetComponent<Family>().instruments[randInstrument].GetComponent<InstrumentBehavior>());
                 }
                 else
                 {
@@ -288,51 +298,41 @@ public class TimbreManager : LevelManager
                     pickedFamily.Add(pickedInstrument);
                     
                     int randInstrument = Random.Range(0, pickedFamily[pickedFamily.Count - 1].GetComponent<Family>().instruments.Count);
-                    pickedInstruments.Add(pickedFamily[pickedFamily.Count - 1 ].GetComponent<Family>().instruments[randInstrument].GetComponent<InstrumentBehavior>());
-                    pickedFamily[pickedFamily.Count -1].GetComponent<Family>().instruments.RemoveAt(randInstrument);
+                    if(!pickedInstruments.Contains(pickedFamily[pickedFamily.Count - 1 ].GetComponent<Family>().instruments[randInstrument].GetComponent<InstrumentBehavior>()))pickedInstruments.Add(pickedFamily[pickedFamily.Count - 1 ].GetComponent<Family>().instruments[randInstrument].GetComponent<InstrumentBehavior>());
                 }
             }
         }
         else
         {
-            for (int i = 1; i < numberOfInstruments; i++)
+            for (int i = 1; pickedInstruments.Count < numberOfInstruments; i++)
             {
                 int randFamily;
-                GameObject pickedInstrument;
+                GameObject fam1;
                 do
                 {
                     randFamily = Random.Range(0, instrumentFamilies.Length);
-                    pickedInstrument= instrumentFamilies[randFamily];
-                } while (pickedFamily.Contains(instrumentFamilies[randFamily]));
+                    fam1= instrumentFamilies[randFamily];
+                } while (pickedFamily.Contains(instrumentFamilies[randFamily]) && previousCombination.Contains(instrumentFamilies[randFamily]));
 
-                pickedFamily.Add(pickedInstrument);
+                pickedFamily.Add(fam1);
                     
                 int randInstrument = Random.Range(0, pickedFamily[pickedFamily.Count -1 ].GetComponent<Family>().instruments.Count);
-                pickedInstruments.Add(pickedFamily[pickedFamily.Count - 1].GetComponent<Family>().instruments[randInstrument].GetComponent<InstrumentBehavior>());
-                pickedFamily[pickedFamily.Count -1].GetComponent<Family>().instruments.RemoveAt(randInstrument);
+                if(!pickedInstruments.Contains(pickedFamily[pickedFamily.Count - 1].GetComponent<Family>().instruments[randInstrument].GetComponent<InstrumentBehavior>()))pickedInstruments.Add(pickedFamily[pickedFamily.Count - 1].GetComponent<Family>().instruments[randInstrument].GetComponent<InstrumentBehavior>());
             }
         }
-        foreach (GameObject family in pickedFamily)
-        {
-            family.GetComponent<Family>().ResetInstrumentsInFamily();
-        }
 
-        if (pickedInstruments == previousCombination)
-        {
-            return SetInstrumentsPlaying(pickedInstruments.Count, sameFamily);
-            
-        }
         return pickedInstruments;
     }
 
 
 private void PlayPickedInstruments(List<InstrumentBehavior> instrumentsToPlay)
     {
-        foreach (InstrumentBehavior instrument in instrumentsToPlay)
+        int roundClip = Random.Range(0,6);
+        for(int i = 0; i < instrumentsToPlay.Count;i++)
         {
-            instrument.SetClip();
-            instrument.Play();
-            instrumentsPlaying.Add(instrument);
+            instrumentsToPlay[i].SetClip(roundClip);
+            instrumentsToPlay[i].Play();
+            instrumentsPlaying.Add(instrumentsToPlay[i]);
         }
     }
 
