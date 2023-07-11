@@ -43,7 +43,7 @@ public class BadgeManager : MonoBehaviour
             {
                 badgeImage.sprite = goldBadge;
             }
-            else if (count >= 1)
+            else if (count >= 1  && gameData.levelScore[9] > 0)
             {
                 badgeImage.sprite = silverBadge;
             }

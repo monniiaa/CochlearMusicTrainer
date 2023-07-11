@@ -186,18 +186,6 @@ public class PitchIdentification : LevelManager
 
     public void SpeakerPicked(Speaker speaker)
     {
-        JsonManager.WriteDataToFile<PitchIdentificationGameData>(
-                new PitchIdentificationGameData(
-                    DateTime.Now,
-                    DateTime.Now - startTime,
-                    speaker.currentClip.name,
-                    highestSpeaker.currentClip.name,
-                    speaker == highestSpeaker,
-                    new string[] { speakers[0].currentClip.name, speakers[1].currentClip.name },
-                    currentLevel,
-                    round
-                )
-            );
         EndRound();
         if (speaker == highestSpeaker) {
             gameplayAudio.PlayOneShot(sucessAudio);
@@ -248,14 +236,15 @@ public class PitchIdentification : LevelManager
                     SetPitchDifference( 12-currentLevel, 1);
                     timer = FindObjectOfType<Timer>(true);
                     timer.gameObject.SetActive(true);
-                    timerStart = 15 - currentLevel;
+                    if(currentLevel == 7) timerStart = 10;
+                    else if (currentLevel == 8) timerStart = 8;
+                    else if (currentLevel == 9) timerStart = 6;
                 }
                 else
                 {
                     melodySpeakers = GameObject.FindObjectsOfType<MelodySpeaker>();
                     SetRoundInstrumentVersions();
                 }
-
                 break;
         }
 
