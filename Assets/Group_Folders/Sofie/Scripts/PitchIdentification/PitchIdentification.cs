@@ -131,7 +131,7 @@ public class PitchIdentification : LevelManager
         
     }
 
-    public void SetPitchDifference( int upperInterval)
+    public void SetPitchDifference( int upperInterval, int lowerinterval)
     {
         highestSpeaker = speakers[0];
         int randnote = UnityEngine.Random.Range(0, speakers[0].notes.Length);
@@ -150,7 +150,7 @@ public class PitchIdentification : LevelManager
                     int note;
                     do
                     {
-                        randInterval = UnityEngine.Random.Range(1, upperInterval);
+                        randInterval = UnityEngine.Random.Range(lowerinterval, upperInterval);
                         note = (randnote + randInterval) % speakers[1].notes.Length;
                         speakers[i].note = note;
                         speakers[i].SetNote(note);
@@ -164,7 +164,7 @@ public class PitchIdentification : LevelManager
 
                     do
                     {
-                        randInterval = UnityEngine.Random.Range(1, upperInterval);
+                        randInterval = UnityEngine.Random.Range(lowerinterval, upperInterval);
                         note = randnote - randInterval;
                         if (note < 0)
                         {
@@ -221,7 +221,7 @@ public class PitchIdentification : LevelManager
                 if (currentLevel <= 2)
                 {
                     speakers = GameObject.FindObjectsOfType<Speaker>();
-                    SetPitchDifference( 10 - currentLevel);
+                    SetPitchDifference( 10 , 6- currentLevel);
                 }
                 else if (currentLevel == 3)
                 {
@@ -238,17 +238,17 @@ public class PitchIdentification : LevelManager
                 else
                 {
                     speakers = GameObject.FindObjectsOfType<Speaker>();
-                    SetPitchDifference( 10);
+                    SetPitchDifference( 11-currentLevel, 1);
                 }
                 break;
             case Difficulty.Hard:
                 if (currentLevel <= 9)
                 {
                     speakers = GameObject.FindObjectsOfType<Speaker>();
-                    SetPitchDifference( 10);
+                    SetPitchDifference( 11-currentLevel, 1);
                     timer = FindObjectOfType<Timer>(true);
                     timer.gameObject.SetActive(true);
-                    timerStart = 30-currentLevel;
+                    timerStart = 15 - currentLevel;
                 }
                 else
                 {
