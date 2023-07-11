@@ -4119,6 +4119,7 @@ GameObject:
   - component: {fileID: 908467788}
   - component: {fileID: 908467787}
   - component: {fileID: 908467792}
+  - component: {fileID: 908467793}
   m_Layer: 5
   m_Name: IntroCanvas
   m_TagString: Untagged
@@ -4227,6 +4228,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
+--- !u!114 &908467793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908467786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bda7d74222bcb764780ef259e641d2b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pitchText: {fileID: 1431551468}
 --- !u!1 &977635265
 GameObject:
   m_ObjectHideFlags: 0
@@ -7083,8 +7097,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Din opgave er at v\xE6lge den h\xF8jtaler der spiller den mest h\xF8jfrekvente
-    tone"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}
   m_sharedMaterial: {fileID: -8816214507793482341, guid: e4008643c5c6e1e469b8b57f12c5b729, type: 2}

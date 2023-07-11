@@ -245,7 +245,7 @@ public class PitchIdentification : LevelManager
                 if (currentLevel <= 9)
                 {
                     speakers = GameObject.FindObjectsOfType<Speaker>();
-                    SetPitchDifference( 11-currentLevel, 1);
+                    SetPitchDifference( 12-currentLevel, 1);
                     timer = FindObjectOfType<Timer>(true);
                     timer.gameObject.SetActive(true);
                     timerStart = 15 - currentLevel;
