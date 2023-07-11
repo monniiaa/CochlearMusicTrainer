@@ -5,7 +5,7 @@ using UnityEngine;
 public class Speaker : MonoBehaviour
 {
     public Animator animator;
-    
+    private Material OGMat;
     public AudioClip[] notes;
     AudioSource audioSource;
     public AudioClip currentClip;
@@ -19,7 +19,12 @@ public class Speaker : MonoBehaviour
         audioSource.Stop(); //avoids audiosource from starting to play automatically
         animator = GetComponent<Animator>();
         SetPickedState(false);
+        OGMat = GetComponent<MeshRenderer>().material;
 
+    }
+    public void ResetMat()
+    {
+        GetComponent<MeshRenderer>().material = OGMat;
     }
 
     public void ResetCurrentNote()

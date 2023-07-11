@@ -6,7 +6,7 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    public float timeLeft;
+    public float timeLeft = 10f;
 
     public bool timerOn = false;
     [SerializeField]
@@ -39,7 +39,6 @@ public class Timer : MonoBehaviour
 
     public IEnumerator Reset()
     {
-        
         play = true;
         timetTxt.color = OGColor;
         timetTxt.enabled = false;
