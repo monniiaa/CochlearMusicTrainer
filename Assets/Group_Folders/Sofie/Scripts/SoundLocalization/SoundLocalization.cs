@@ -310,7 +310,7 @@ public class SoundLocalization : LevelManager
     
     IEnumerator ResetEasyModeTargets()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < easyModeTargets.Count; i++)
         {
             easyModeTargets[i].GetComponent<AudioSource>().Stop();
@@ -327,7 +327,7 @@ public class SoundLocalization : LevelManager
 
     IEnumerator WaitBeforStaring()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         StartRound();
     }
     protected override void StartRound()

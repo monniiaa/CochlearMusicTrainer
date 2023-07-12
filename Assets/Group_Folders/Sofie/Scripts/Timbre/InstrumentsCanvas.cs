@@ -17,21 +17,27 @@ public class InstrumentsCanvas : MonoBehaviour
         star.SetActive(false);
     }
 
-    public void SetCorrectInstrumentsText(List<InstrumentBehavior> instrumentsPlaying, bool correct)
+    public void SetCorrectInstrumentsText(List<InstrumentBehavior> instrumentsPlaying, bool correct, bool numberofinstrumentsmode)
     {
-        if (instrumentsPlaying.Count > 1)
+        if (!numberofinstrumentsmode)
         {
-            titleText.text = "De korrekte instrumenter var";
+            if (instrumentsPlaying.Count > 1)
+            {
+                titleText.text = "De korrekte instrumenter var";
+            }
+            else if (instrumentsPlaying.Count == 1)
+            {
+                titleText.text = "Det korrekte instrument var";
+            }
         }
-        else if (instrumentsPlaying.Count == 1)
+        else
         {
-            titleText.text = "Det korrekte instrument var";
+            titleText.text = "Antallet af instrumenter var " + instrumentsPlaying.Count.ToString(); ;
         }
         for (int i = 0; i < instrumentsPlaying.Count; i++)
         {
             correctInstrumentsText[i].text = instrumentsPlaying[i].name;
         }
-
         if (correct)
         {
             star.SetActive(true);

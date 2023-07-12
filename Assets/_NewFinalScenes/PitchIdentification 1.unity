@@ -428,19 +428,7 @@ MonoBehaviour:
         m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 126295983}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_material
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: c682ffd83eceb5e4e89830e97291db1c, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -497,11 +485,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!23 &126295983 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2657427166238719069, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
-  m_PrefabInstance: {fileID: 126295975}
-  m_PrefabAsset: {fileID: 0}
 --- !u!82 &126295984
 AudioSource:
   m_ObjectHideFlags: 0
@@ -863,11 +846,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2657427166238719064, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
   m_PrefabInstance: {fileID: 253422822}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &253422825 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2657427166238719069, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
-  m_PrefabInstance: {fileID: 253422822}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &253422826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1016,19 +994,7 @@ MonoBehaviour:
         m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 253422825}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_material
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: c682ffd83eceb5e4e89830e97291db1c, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -1826,11 +1792,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2657427166238719064, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
   m_PrefabInstance: {fileID: 657567577}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &657567580 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2657427166238719069, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
-  m_PrefabInstance: {fileID: 657567577}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &657567581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2023,19 +1984,7 @@ MonoBehaviour:
         m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 657567580}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_material
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: c682ffd83eceb5e4e89830e97291db1c, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -2313,11 +2262,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2657427166238719064, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
   m_PrefabInstance: {fileID: 718943607}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &718943610 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2657427166238719069, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
-  m_PrefabInstance: {fileID: 718943607}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &718943611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2498,19 +2442,7 @@ MonoBehaviour:
         m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 718943610}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_material
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: c682ffd83eceb5e4e89830e97291db1c, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -2900,19 +2832,7 @@ MonoBehaviour:
         m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 790721574}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_material
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: c682ffd83eceb5e4e89830e97291db1c, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -3034,11 +2954,6 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!23 &790721574 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2657427166238719069, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
-  m_PrefabInstance: {fileID: 190614452}
-  m_PrefabAsset: {fileID: 0}
 --- !u!82 &790721575
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3889,19 +3804,7 @@ MonoBehaviour:
         m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 898642883}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_material
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: c682ffd83eceb5e4e89830e97291db1c, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -4005,11 +3908,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!23 &898642883 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2657427166238719069, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
-  m_PrefabInstance: {fileID: 898642875}
-  m_PrefabAsset: {fileID: 0}
 --- !u!82 &898642884
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5062,11 +4960,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2657427166238719064, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
   m_PrefabInstance: {fileID: 1300400175}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &1300400178 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2657427166238719069, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
-  m_PrefabInstance: {fileID: 1300400175}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1300400179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5227,19 +5120,7 @@ MonoBehaviour:
         m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1300400178}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_material
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: c682ffd83eceb5e4e89830e97291db1c, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -5827,19 +5708,7 @@ MonoBehaviour:
         m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1376545673}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_material
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: c682ffd83eceb5e4e89830e97291db1c, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -5896,11 +5765,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!23 &1376545673 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2657427166238719069, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
-  m_PrefabInstance: {fileID: 1489936853}
-  m_PrefabAsset: {fileID: 0}
 --- !u!82 &1376545674
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6202,11 +6066,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2657427166238719064, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
   m_PrefabInstance: {fileID: 1417732050}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &1417732053 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2657427166238719069, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
-  m_PrefabInstance: {fileID: 1417732050}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1417732054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6414,19 +6273,7 @@ MonoBehaviour:
         m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1417732053}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_material
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: c682ffd83eceb5e4e89830e97291db1c, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -6677,11 +6524,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2657427166238719064, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
   m_PrefabInstance: {fileID: 1420896758}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &1420896761 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2657427166238719069, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
-  m_PrefabInstance: {fileID: 1420896758}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1420896762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6874,19 +6716,7 @@ MonoBehaviour:
         m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1420896761}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_material
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: c682ffd83eceb5e4e89830e97291db1c, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -7765,11 +7595,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2657427166238719064, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
   m_PrefabInstance: {fileID: 1590985892}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &1590985895 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2657427166238719069, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
-  m_PrefabInstance: {fileID: 1590985892}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1590985896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7930,19 +7755,7 @@ MonoBehaviour:
         m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1590985895}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_material
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: c682ffd83eceb5e4e89830e97291db1c, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -8240,11 +8053,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2657427166238719064, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
   m_PrefabInstance: {fileID: 1594653230}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &1594653233 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2657427166238719069, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
-  m_PrefabInstance: {fileID: 1594653230}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1594653234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8405,19 +8213,7 @@ MonoBehaviour:
         m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1594653233}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_material
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: c682ffd83eceb5e4e89830e97291db1c, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -9220,19 +9016,7 @@ MonoBehaviour:
         m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1874387803}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_material
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: c682ffd83eceb5e4e89830e97291db1c, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -9289,11 +9073,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!23 &1874387803 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2657427166238719069, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
-  m_PrefabInstance: {fileID: 1874387795}
-  m_PrefabAsset: {fileID: 0}
 --- !u!82 &1874387804
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9749,11 +9528,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2657427166238719064, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
   m_PrefabInstance: {fileID: 2100616823}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &2100616826 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2657427166238719069, guid: fee1e5317b68a9e47a8ef01b852aab7e, type: 3}
-  m_PrefabInstance: {fileID: 2100616823}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2100616827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9934,19 +9708,7 @@ MonoBehaviour:
         m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2100616826}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_material
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: c682ffd83eceb5e4e89830e97291db1c, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Activated:
     m_PersistentCalls:
       m_Calls: []

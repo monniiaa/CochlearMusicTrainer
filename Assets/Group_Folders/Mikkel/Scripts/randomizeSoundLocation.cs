@@ -44,7 +44,6 @@ public class randomizeSoundLocation : MonoBehaviour
     public List<GameObject> SpawnSpeakers(int num, float minDistanceBetweenSpeakers, GameObject prefab)
     {
         List<Vector3> spawnPoints = GenerateRandomSpawnPoints(num, minDistanceBetweenSpeakers);
-        Debug.Log("Spawnpoints: " + spawnPoints.Count);
         List<GameObject> speakers = new List<GameObject>();
         for (int i = 0; i < spawnPoints.Count; i++)
         {

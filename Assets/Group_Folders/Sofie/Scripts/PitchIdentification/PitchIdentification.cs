@@ -279,7 +279,7 @@ public class PitchIdentification : LevelManager
         round++;
         if (round < 4)
         {
-            StartRound();
+            StartCoroutine(WaitBeforeStart());
             OutOfTime = false;
         }
         else
@@ -300,12 +300,19 @@ public class PitchIdentification : LevelManager
 
     protected override void EndRound()
     {
+        StartCoroutine(EndAnimation());
+    }
+
+    IEnumerator EndAnimation()
+    {
+        yield return new WaitForSeconds(0.5f);
         if (!SongsMode)
         {
             foreach (Speaker s in speakers)
             {
                 s.ResetCurrentNote();
                 s.DestroyAnimation();
+                s.ResetMat();
             }
         }
         else
@@ -314,6 +321,7 @@ public class PitchIdentification : LevelManager
             {
                 speaker.currentClip = null;
                 speaker.DestroyAnimation();
+                speaker.GetComponent<MeshRenderer>().material = speaker.mat;
             }
         }
     }
@@ -344,6 +352,13 @@ public class PitchIdentification : LevelManager
             }
         }
     }
+
+    IEnumerator WaitBeforeStart()
+    {
+        yield return new WaitForSeconds(0.5f);
+        StartRound();
+    }
+    
 
     private void SetRoundInstrumentVersions()
     {

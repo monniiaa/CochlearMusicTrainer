@@ -61,8 +61,13 @@ public class InstrumentBehavior : MonoBehaviour
         animator.SetBool("Correct", correct);
     }
 
+    public void PlayClip(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
+    }
     public void Play()
     {
+        Debug.Log("Playing");
         audioSource.Play();
     }
     public void SetClip(int clip = 0)
@@ -71,6 +76,11 @@ public class InstrumentBehavior : MonoBehaviour
         {
             audioSource.clip = clips[clip];
         }
+    }
+
+    public AudioClip GetClip(int clip)
+    {
+        return clips[clip];
     }
 
     public void StopAudio()
