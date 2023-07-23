@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Oscillator : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class Oscillator : MonoBehaviour
     private Coroutine _coroutine;
 
     private float startVolume = 1;
+    public string direction;
 
     private void Awake()
     {
@@ -24,6 +27,71 @@ public class Oscillator : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        ChooseRandomMelodyDirection();
+    }
+
+
+    public void ChooseRandomMelodyDirection()
+    {
+        CreateStartNote();
+        int rand = Random.Range(0, 2);
+        if (rand == 0)
+        {
+            StartCoroutine(PlayUpgoingMelody(4,1f,3));
+        }
+        else
+        {
+            StartCoroutine(PlayDowngoingMelody(4,1f,3));
+        }
+    }
+    IEnumerator PlayUpgoingMelody(int interval, float noteTime, int length)
+    {
+        direction = "Upgoing";
+        while(startNote + interval * length > notes.Length)
+        {
+            CreateStartNote();
+        }
+        currentNote = startNote;
+        currentClip = notes[currentNote];
+        int i = 0;
+        do
+        {
+            currentClip = notes[currentNote];
+            source.PlayOneShot(currentClip);
+            currentNote += interval;
+            i++;
+            yield return new WaitForSeconds(noteTime);
+
+        } while (i < length && currentNote < notes.Length);
+
+        source.Stop();
+    }
+
+    IEnumerator PlayDowngoingMelody(int interval, float noteTime, int length)
+    {
+        direction = "Downgoing";
+        while(startNote + interval * length > notes.Length)
+        {
+            CreateStartNote();
+        }
+        currentNote = startNote;
+        currentClip = notes[currentNote];
+        int i = 0;
+        do
+        {
+            currentClip = notes[currentNote];
+            source.PlayOneShot(currentClip);
+            currentNote -= interval;
+            i++;
+            Debug.Log(currentClip.name);
+            yield return new WaitForSeconds(noteTime);
+
+        } while (i < length && currentNote < notes.Length);
+
+        source.Stop();
+    }
 
     public void CreateStartNote()
     {

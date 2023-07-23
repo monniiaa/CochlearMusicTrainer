@@ -14,8 +14,7 @@ public class PitchIdentification : LevelManager
     private Speaker highestSpeaker;
     private bool correctPick;
     private GameDataManager _gameDataManager;
-
-    public GameObject speakerPrefab;
+    
     public Vector3[] initialPositions;
     [SerializeField]
     Speaker[] speakers;
@@ -37,14 +36,17 @@ public class PitchIdentification : LevelManager
         pitchModes = new List<GameObject>();
         _gameDataManager = GameDataManager.Instance;
         ModeManager = InstrumentSeparation.Instance;
-
-        gameplayAudio = GetComponent<AudioSource>();
+        
         path = "PitchIdentification";
         gameData =  DataManager.ReadJson(path);
-
         currentLevel = (_gameDataManager.currentLevel == 0) ? 1 : _gameDataManager.currentLevel;
+
+        gameplayAudio = GetComponent<AudioSource>();
+        
         SetMode();
+        
         initialPositions = new Vector3[speakers.Length];
+        
         for( int i = 0; i < speakers.Length;i++)
         {
             initialPositions[i] = speakers[i].transform.position;
@@ -58,8 +60,15 @@ public class PitchIdentification : LevelManager
     }
 
     private void Start()
-    {       
-        
+    {
+        SetPitchMode();
+        StartRound();
+        timer.timeLeft = timerStart;
+        if(currentLevel > 6 && currentLevel < 10) timer.StartCoroutine(timer.Reset());
+    }
+
+    private void SetPitchMode()
+    {
         pitchModes.Add(GameObject.Find("ToneMode"));
         pitchModes.Add( GameObject.Find("SongsMode"));
         if (currentLevel <= 2 || currentLevel > 4 && currentLevel < 10)
@@ -73,10 +82,6 @@ public class PitchIdentification : LevelManager
             pitchModes[0].gameObject.SetActive(false);
             pitchModes[1].gameObject.SetActive(true);
         }
-        
-        StartRound();
-        timer.timeLeft = timerStart;
-        if(currentLevel > 6 && currentLevel < 10) timer.StartCoroutine(timer.Reset());
     }
 
     private void Update()
@@ -104,8 +109,6 @@ public class PitchIdentification : LevelManager
         }
     }
     
-
-
     protected override void RestartLevel()
     {
         currentScore = 0;
@@ -186,6 +189,17 @@ public class PitchIdentification : LevelManager
 
     public void SpeakerPicked(Speaker speaker)
     {
+        JsonManager.WriteDataToFile<PitchIdentificationGameData>(
+            new PitchIdentificationGameData(
+                DateTime.Now, 
+                DateTime.Now -startTime,
+                speaker.currentClip.name,
+                highestSpeaker.currentClip.name,
+                highestSpeaker.currentClip.name == speaker.currentClip.name,
+                currentLevel,
+                currentScore
+            ));
+        
         EndRound();
         if (speaker == highestSpeaker) {
             gameplayAudio.PlayOneShot(sucessAudio);
@@ -199,8 +213,6 @@ public class PitchIdentification : LevelManager
         }
     }
     
-    
-
     protected override void SetDifficultyChanges()
     {
         switch (difficulty)
@@ -389,6 +401,17 @@ public class PitchIdentification : LevelManager
     
     public void PickInstrumentSpeaker(MelodySpeaker melodyspeaker)
     {
+        MelodySpeaker highest = GameObject.FindWithTag("HighestSpeaker").GetComponent<MelodySpeaker>();
+        JsonManager.WriteDataToFile<PitchIdentificationGameData>(
+            new PitchIdentificationGameData(
+                DateTime.Now,
+                DateTime.Now - startTime,
+                melodyspeaker.GetComponent<AudioSource>().clip.name,
+                highest.GetComponent<AudioSource>().clip.name,
+                highest.GetComponent<AudioSource>().clip.name == melodyspeaker.GetComponent<AudioSource>().clip.name,
+                currentLevel,
+                currentScore
+            ));
         if (melodyspeaker.CompareTag("HighestSpeaker"))
         {
             gameplayAudio.PlayOneShot(sucessAudio);

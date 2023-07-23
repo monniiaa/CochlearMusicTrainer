@@ -10,21 +10,19 @@ public class PitchIdentificationGameData : AbstractDataContainer
     
     public string time;
     public string timeTakenToChooseSpeaker;
-    public string chosenNote;
-    public string correctNote;
+    public string chosenClip;
+    public string correctClip;
     public bool wasCorrect;
-    public string[] noteOptions;
     public int level;
     public int round;
 
-    public PitchIdentificationGameData(DateTime time, TimeSpan timeTakenToChooseSpeaker, string chosenNote, string correctNote, bool wasCorrect, string[] noteOptions, int level, int round)
+    public PitchIdentificationGameData(DateTime time, TimeSpan timeTakenToChooseSpeaker, string chosenClip, string correctClip, bool wasCorrect, int level, int round)
     {
         this.time = time.ToString("dd/MM/yyyy HH:mm:ss");
         this.timeTakenToChooseSpeaker = timeTakenToChooseSpeaker.ToString("h'h 'm'm 's's'");;
-        this.chosenNote = chosenNote;
-        this.correctNote = correctNote;
+        this.chosenClip = chosenClip;
+        this.correctClip = correctClip;
         this.wasCorrect = wasCorrect;
-        this.noteOptions = noteOptions;
         this.level = level;
         this.round = round;
     }

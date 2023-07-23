@@ -15,6 +15,10 @@ public class SoundLocalizationDataContainer : AbstractDataContainer
     public int level;
     public int round;
 
+    public bool correctTarget;
+    public int amountOfTargets;
+
+
     public SoundLocalizationDataContainer(DateTime time, TimeSpan timeTakenToGuess, bool wasHit, float distanceFromPlayer, float angleFromRay, int level, int round)
     {
         this.wasHit = wasHit;
@@ -25,6 +29,18 @@ public class SoundLocalizationDataContainer : AbstractDataContainer
         this.level = level;
         this.round = round;
     }
+    
+    public SoundLocalizationDataContainer(DateTime time, TimeSpan timeTakenToGuess, bool correctTarget, int amountOfTargets, int level, int round)
+    {
+        this.correctTarget = correctTarget;
+        this.timeTakenToGuess = timeTakenToGuess.ToString("h'h 'm'm 's's'");
+        this.time = time.ToString("dd/MM/yyyy HH:mm:ss");
+        this.amountOfTargets = amountOfTargets;
+        this.level = level;
+        this.round = round;
+        
+    }
+    
 }
 
 

@@ -154,7 +154,7 @@ public class TimbreManager : LevelManager
         }
         
     }
-    private void WriteDataToJson(DateTime time, TimeSpan timeTakenToChooseInstrument, string chosenInstrument, bool correctInstrument, bool sameFamily, int level, int round)
+    private void WriteDataToJson(DateTime time, TimeSpan timeTakenToChooseInstrument, string chosenInstrument, bool correctInstrument, int level, int round)
     {
         JsonManager.WriteDataToFile<InstrumentIdentificationGameData>(
             new InstrumentIdentificationGameData(
@@ -162,7 +162,7 @@ public class TimbreManager : LevelManager
                 timeTakenToChooseInstrument,
                 chosenInstrument,
                 correctInstrument,
-                sameFamily,
+
                 level,
                 round
             )

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PitchDiscrimination : LevelManager
 {
-    private MelodySpeaker[] melodies;
+    [SerializeField] MelodySpeaker[] melodies;
     public static int sequenceLength { get; private set; }
     private MelodySpeaker originalMelody;
 
@@ -17,29 +17,98 @@ public class PitchDiscrimination : LevelManager
     private DateTime startTime;
 
     private List<AudioClip> melodiesForRound;
-    
+
+    [SerializeField] GameObject[] easyModes;
+
+    private bool melodicContourMode = false;
+
+    private Oscillator directionSpeaker;
+
+    [SerializeField] private CheckMelodyDirection upgoingDirection;
+    [SerializeField] private CheckMelodyDirection downgoingDirection;
     private void Awake() 
     {
+        currentLevel = 3;
         _gameDataManager = GameDataManager.Instance;
         melodySounds = MelodySounds.Instance;
+
         SetMode();
+    }
+
+    private void OnEnable()
+    {
+        currentLevel = 3;
+        if (currentLevel == 3)
+        {
+            upgoingDirection.contourRoundCorrectEvent += CorrectAnswer;
+            downgoingDirection.contourRoundCorrectEvent += CorrectAnswer;
+        
+            upgoingDirection.contourRoundIncorrectEvent += WrongAnswer;
+            downgoingDirection.contourRoundIncorrectEvent += WrongAnswer;
+        }
     }
 
     private void Start()
     {
         currentLevel = (_gameDataManager.currentLevel == 0) ? 1 : _gameDataManager.currentLevel;
+        currentLevel = 3;
         ModeManager = InstrumentSeparation.Instance;
-        melodies = GameObject.FindObjectsOfType<MelodySpeaker>();
         path = "PitchDiscrimination";
-        Debug.Log(difficulty);
-        originalMelody = GameObject.FindWithTag("Original").GetComponent<MelodySpeaker>();
-        
-        StartRound();
         gameData = DataManager.ReadJson(path);
+        if (currentLevel <= 2 || currentLevel > 3)
+        {
+            easyModes[0].SetActive(true);
+            easyModes[1].SetActive(false);
+            melodicContourMode = false;
+        } else if (currentLevel == 3)
+        {
+            melodicContourMode = true;
+            easyModes[0].SetActive(false);
+            easyModes[1].SetActive(true);
+            GameObject.FindWithTag("Original").GetComponent<MelodySpeaker>().gameObject.SetActive(false);
+            
+        }
+        StartRound();
 
         foreach (GameObject star in starAnimation)
         {
             star.gameObject.SetActive(false);
+        }
+    }
+
+    private void WrongAnswer(Oscillator speaker)
+    {
+        Debug.Log("InCorrect, Starting new round");
+        speaker.GetComponent<MeshRenderer>().material = failMaterial;
+        speaker.GetComponent<Animator>().SetBool("Destroy", true);
+        gameplayAudio.PlayOneShot(failAudio);
+        currentScore++;
+
+        SetRoundFunctionality();
+    }
+
+    private void CorrectAnswer(Oscillator speaker)
+    {
+        Debug.Log(" Correct, Starting new round");
+        speaker.GetComponent<MeshRenderer>().material = sucessMaterial;
+        speaker.GetComponent<Animator>().SetBool("Destroy", true);
+        gameplayAudio.PlayOneShot(sucessAudio);
+
+        
+        SetRoundFunctionality();
+    }
+
+    
+    
+    private void OnDisable()
+    {
+        if (melodicContourMode)
+        {
+            upgoingDirection.contourRoundCorrectEvent -= CorrectAnswer;
+            downgoingDirection.contourRoundCorrectEvent -= CorrectAnswer;
+        
+            upgoingDirection.contourRoundIncorrectEvent -= WrongAnswer;
+            downgoingDirection.contourRoundIncorrectEvent -= WrongAnswer;
         }
     }
 
@@ -58,6 +127,7 @@ public class PitchDiscrimination : LevelManager
     {
         int rand = UnityEngine.Random.Range(0, melodiesForRound.Count);
         originalMelody.currentClip = melodiesForRound[rand];
+        Debug.Log(originalMelody.currentClip.name);
         originalMelody.SetClip(originalMelody.currentClip);
         melodiesForRound.RemoveAt(rand);
             
@@ -91,11 +161,25 @@ public class PitchDiscrimination : LevelManager
     }
     protected override void SetDifficultyChanges()
     {
+        if (!melodicContourMode)
+        {
+            melodies = GameObject.FindObjectsOfType<MelodySpeaker>();
+            originalMelody = GameObject.FindWithTag("Original").GetComponent<MelodySpeaker>();
+        }
         switch (difficulty)
         {
             case Difficulty.Easy:
-                sequenceLength = UnityEngine.Random.Range(2, 4);
-                melodiesForRound = melodySounds.LoadRandomEasyMelodyPair(sequenceLength);
+                if (currentLevel <= 2)
+                {
+                    melodicContourMode = false;
+                    sequenceLength = UnityEngine.Random.Range(2, 4);
+                    melodiesForRound = melodySounds.LoadRandomEasyMelodyPair(sequenceLength);
+                }
+                else
+                {
+                    melodicContourMode = true;
+                    directionSpeaker  = GameObject.FindObjectOfType<Oscillator>();
+                }
                 break;
             case Difficulty.Medium:
                 sequenceLength = UnityEngine.Random.Range(3, 5);
@@ -114,7 +198,7 @@ public class PitchDiscrimination : LevelManager
     }
     protected override void EndRound()
     {
-        JsonManager.WriteDataToFile<MelodyIdentificationGameData>(
+        /*JsonManager.WriteDataToFile<MelodyIdentificationGameData>(
             new MelodyIdentificationGameData(
                 startTime,
                 DateTime.Now - startTime,
@@ -124,37 +208,54 @@ public class PitchDiscrimination : LevelManager
                 new string[] { melodies[0].currentClip.name, melodies[1].currentClip.name, melodies[2].currentClip.name },
                 currentLevel,
                 round
-            ));
-        melodiesForRound.Clear();
-        foreach (MelodySpeaker speaker in melodies)
+            ));*/
+        if (!melodicContourMode)
         {
-            speaker.DestroyAnimation();
+            melodiesForRound.Clear();
+            foreach (MelodySpeaker speaker in melodies)
+            {
+                speaker.DestroyAnimation();
             
+            }
+            if (pickedMelody.currentClip.name == originalMelody.currentClip.name)
+            {
+                gameplayAudio.PlayOneShot(sucessAudio);
+                pickedMelody.GetComponent<MeshRenderer>().material = sucessMaterial;
+                currentScore++;
+                pickedMelody.tag = "Untagged";
+                pickedMelody = null;
+            }
+            else 
+            {
+                gameplayAudio.PlayOneShot(failAudio);
+                pickedMelody.GetComponent<MeshRenderer>().material = failMaterial;
+                pickedMelody = null;
+            }
         }
-        if (pickedMelody.currentClip.name == originalMelody.currentClip.name)
-        {
-            gameplayAudio.PlayOneShot(sucessAudio);
-            pickedMelody.GetComponent<MeshRenderer>().material = sucessMaterial;
-            currentScore++;
-            pickedMelody.tag = "Untagged";
-            pickedMelody = null;
-        }
-        else 
-        {
-            gameplayAudio.PlayOneShot(failAudio);
-            pickedMelody.GetComponent<MeshRenderer>().material = failMaterial;
-            pickedMelody = null;
-        }
+
     }
 
     protected override void StartRound()
     {
-        StartCoroutine(test());
         SetDifficultyChanges();
-        SetOriginalMelody();
-        SetEquivalentMelody();
-        SetDissimilarMelody();
+        if (!melodicContourMode)
+        {
+            StartCoroutine(test());
+            SetOriginalMelody();
+            SetEquivalentMelody();
+            SetDissimilarMelody();
+        } else
+        {
+            NewMelodicContour();
+        }
+
         startTime = DateTime.Now;
+    }
+
+    private void NewMelodicContour()
+    {
+        StartCoroutine(directionSpeaker.GetComponent<DirectionMelody>().StartReset());
+        directionSpeaker.ChooseRandomMelodyDirection();
     }
 
     IEnumerator test()

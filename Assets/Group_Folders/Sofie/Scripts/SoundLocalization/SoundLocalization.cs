@@ -39,6 +39,8 @@ public class SoundLocalization : LevelManager
     [SerializeField] RuntimeAnimatorController animatorcontrollerEasy;
     private InstrumentSeparation modeManager;
 
+    private bool correctTarget = false;
+
     private void Awake()
     {
         round = 0;
@@ -250,8 +252,10 @@ public class SoundLocalization : LevelManager
 
     public void PickTarget(GameObject target)
     {
+        
         if (target.GetComponent<AudioSource>().clip != null)
         {
+            correctTarget = true;
             target.GetComponent<AudioSource>().Stop();
             currentScore++;
             gameplayAudio.PlayOneShot(sucessAudio);
@@ -260,6 +264,7 @@ public class SoundLocalization : LevelManager
         }
         else
         {
+            correctTarget = false;
             gameplayAudio.PlayOneShot(failAudio);
             target.GetComponent<TargetAnimationHandler>().TriggerDestroyState();
         }
@@ -272,7 +277,16 @@ public class SoundLocalization : LevelManager
         if (difficulty == Difficulty.Easy)
         {
             StartCoroutine(ResetEasyModeTargets());
-        } if (difficulty == Difficulty.Medium || difficulty == Difficulty.Hard)
+            JsonManager.WriteDataToFile<SoundLocalizationDataContainer>(
+                new SoundLocalizationDataContainer(
+                    DateTime.Now, 
+                    DateTime.Now - startTime,
+                    correctTarget,
+                    easyModeTargetAmount,
+                    currentLevel,
+                    currentScore));
+            
+        } else if (difficulty == Difficulty.Medium || difficulty == Difficulty.Hard)
         {
             if (gameIsOver) return;
             if (waitForTarget != null) return;
