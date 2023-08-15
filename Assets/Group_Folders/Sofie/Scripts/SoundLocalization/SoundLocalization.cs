@@ -370,9 +370,15 @@ public class SoundLocalization : LevelManager
 
             if (CheckRayHit())
             {
+                speakerAnimator.GetComponent<AudioSource>().Stop();
                 speakerAnimator.GetComponentInChildren<TargetLookAt>().enabled = false;
                 speakerAnimator.enabled = true;
                 currentScore++;
+                gameplayAudio.PlayOneShot(sucessAudio);
+            }
+            else
+            {
+                gameplayAudio.PlayOneShot(failAudio);
             }
 
             JsonManager.WriteDataToFile<SoundLocalizationDataContainer>(
