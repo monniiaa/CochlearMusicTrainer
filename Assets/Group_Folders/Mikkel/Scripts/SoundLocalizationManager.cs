@@ -90,8 +90,8 @@ public class SoundLocalizationManager : MonoBehaviour
         }
 
         meshRenderer.enabled = true;
-        JsonManager.WriteDataToFile<SoundLocalizationDataContainer>(
-            new SoundLocalizationDataContainer(
+        JsonManager.WriteDataToFile<SoundLocalizationMediumDataContainer>(
+            new SoundLocalizationMediumDataContainer(
             DateTime.Now, 
             DateTime.Now - startTime,
             speakerAnimator.enabled, 

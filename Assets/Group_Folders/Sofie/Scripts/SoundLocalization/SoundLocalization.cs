@@ -52,13 +52,12 @@ public class SoundLocalization : LevelManager
 
     private void Awake()
     {
-        round = 0;
+        round = 1;
         path = "SoundLocalization";
         gameDataManager = GameDataManager.Instance;
         _xrRayInteractor = FindObjectOfType<XRRayInteractor>();
         gameData = DataManager.ReadJson(path);
         currentLevel = (gameDataManager.currentLevel == 0) ? 1 : gameDataManager.currentLevel;
-        currentLevel = 7;
         distanceTracker = GameObject.FindObjectOfType<DistanceTracker>();
         speakerSpawner = GameObject.FindObjectOfType<randomizeSoundLocation>();
         targetSound = Resources.Load<AudioClip>("SoundLocalization/TargetSound");
@@ -82,6 +81,7 @@ public class SoundLocalization : LevelManager
         {
             star.gameObject.SetActive(false);
         }
+        StartRound();
     }
     
     private void OnEnable()
@@ -91,8 +91,6 @@ public class SoundLocalization : LevelManager
         {
             distanceTracker.distanceEvent += EndRound;
         }
-        SetRoundFunctionality();
-
     }
     
     private void OnDisable()
@@ -109,6 +107,7 @@ public class SoundLocalization : LevelManager
 
     protected override void SetDifficultyChanges()
     {
+        startTime = DateTime.Now;
         switch (difficulty)
         {
             case Difficulty.Easy:
@@ -182,77 +181,34 @@ public class SoundLocalization : LevelManager
 
     public override void SetRoundFunctionality()
     {
+
         round++;
         if (round < 4 && difficulty == Difficulty.Easy)
         {
-            EndRound();
             StartCoroutine(WaitBeforStaring());
         }
-        else if (difficulty == Difficulty.Medium)
+        else if ( round < 4 && difficulty == Difficulty.Medium || difficulty == Difficulty.Hard)
         {
+            Debug.Log("starting");
             StartRound();
             startTime = DateTime.Now;
-                if (round >= 4)
-                {
-                    if (!mediumHardSpeaker.IsDestroyed()) mediumHardSpeaker.GetComponent<DeletusMaximus>().Destroy();
-                    gameIsOver = true;
-                    JsonManager.WriteDataToFile<ScoreData>(new ScoreData("Sound Localization", DateTime.Now,
-                        currentScore, currentLevel));
-                    modeManager.EndGame();
-                    ShowStar(currentScore);
-                    
-                    if (currentLevel == gameData.level)
-                    {
-                        gameData.level = (currentLevel == maxLevel) ? gameData.level : currentLevel + 1;
-                    }
-
-                    if (gameData.levelScore[currentLevel - 1] < currentScore)
-                    {
-                        gameData.levelScore[currentLevel - 1] = currentScore;
-                    }
-                    DataManager.SaveDataToJson(gameData, path);
-                }
-        } else if (difficulty == Difficulty.Hard)
-        {
-            if (round < 4)
-            {
-                            StartRound();
-                            startTime = DateTime.Now;
-            }
-            if (round >= 4)
-            {
-                modeManager.EndGame();
-                ShowStar(currentScore);
-                if (currentLevel == gameData.level)
-                {
-                    gameData.level = (currentLevel == maxLevel) ? gameData.level : currentLevel + 1;
-                }
-
-                if (gameData.levelScore[currentLevel - 1] < currentScore)
-                {
-                    gameData.levelScore[currentLevel - 1] = currentScore;
-                }
-                DataManager.SaveDataToJson(gameData, path);
-            }
         }
         if (round >= 4)
         {
-            if (difficulty == Difficulty.Easy)
-            {
-                JsonManager.WriteDataToFile<ScoreData>(new ScoreData("Sound Localization", DateTime.Now,
+            JsonManager.WriteDataToFile<ScoreData>(new ScoreData("Sound Localization", DateTime.Now,
                     currentScore, currentLevel));
-                StartCoroutine(End());
-            }
+            StartCoroutine(End());
+            
             if (currentLevel == gameData.level)
-                {
-                    gameData.level = (currentLevel == maxLevel) ? gameData.level : currentLevel + 1;
-                }
+            {
+                gameData.level = (currentLevel == maxLevel) ? gameData.level : currentLevel + 1;
+            }
 
-                if (gameData.levelScore[currentLevel - 1] < currentScore)
-                {
-                    gameData.levelScore[currentLevel - 1] = currentScore;
-                }
-                DataManager.SaveDataToJson(gameData, path);
+            if (gameData.levelScore[currentLevel - 1] < currentScore)
+            {
+                gameData.levelScore[currentLevel - 1] = currentScore;
+            }
+            DataManager.SaveDataToJson(gameData, path);
         }
     }
     
@@ -345,6 +301,7 @@ public class SoundLocalization : LevelManager
             gameplayAudio.PlayOneShot(failAudio);
             target.GetComponent<TargetAnimationHandler>().TriggerDestroyState();
         }
+        EndRound();
         SetRoundFunctionality();
     }
     
@@ -361,16 +318,18 @@ public class SoundLocalization : LevelManager
                     correctTarget,
                     easyModeTargetAmount,
                     currentLevel,
-                    currentScore));
+                    round));
             
         } else if (difficulty == Difficulty.Medium )
         {
             if (gameIsOver) return;
             if (waitForTarget != null) return;
 
+            speakerAnimator.gameObject.GetComponent<AudioSource>().Stop();
+            speakerAnimator.gameObject.GetComponent<AudioSource>().loop = false;
+            
             if (CheckRayHit())
             {
-                speakerAnimator.GetComponent<AudioSource>().Stop();
                 speakerAnimator.GetComponentInChildren<TargetLookAt>().enabled = false;
                 speakerAnimator.enabled = true;
                 currentScore++;
@@ -381,8 +340,8 @@ public class SoundLocalization : LevelManager
                 gameplayAudio.PlayOneShot(failAudio);
             }
 
-            JsonManager.WriteDataToFile<SoundLocalizationDataContainer>(
-                new SoundLocalizationDataContainer(
+            JsonManager.WriteDataToFile<SoundLocalizationMediumDataContainer>(
+                new SoundLocalizationMediumDataContainer(
                     DateTime.Now, 
                     DateTime.Now - startTime,
                     speakerAnimator.enabled, 
@@ -394,6 +353,7 @@ public class SoundLocalization : LevelManager
             waitForTarget = StartCoroutine(WaitForVisibleShootingDisc());
         } else if (difficulty == Difficulty.Hard)
         {
+            if(waitForTarget != null) return;
             instrumentToLocate.GetComponentInChildren<MeshRenderer>().enabled = true;
             
                 instrumentToLocate.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = true;
@@ -407,10 +367,7 @@ public class SoundLocalization : LevelManager
                 {
                     instrumentToLocate.GetComponent<PianoLookAt>().enabled = false;
                 }
-                
-                    instrumentToLocate.GetComponentInChildren<Animator>().enabled = true;
-                
-
+                instrumentToLocate.GetComponentInChildren<Animator>().enabled = true;
                 gameplayAudio.PlayOneShot(sucessAudio);
                 currentScore++;
             }
@@ -418,6 +375,16 @@ public class SoundLocalization : LevelManager
             {
                 gameplayAudio.PlayOneShot(failAudio);
             }
+            JsonManager.WriteDataToFile<SoundLocalizationHardDataContainer>(
+                new SoundLocalizationHardDataContainer(
+                    instrumentToLocate.GetComponentInChildren<Animator>().enabled,
+                    DateTime.Now, 
+                    DateTime.Now - startTime,
+                    instrumentToLocate.name,
+                    Vector3.Distance(Camera.main.transform.position, mediumHardSpeaker.transform.position), 
+                    Vector3.Angle( _xrRayInteractor.rayOriginTransform.forward, mediumHardSpeaker.transform.position - _xrRayInteractor.rayOriginTransform.position),
+                    currentLevel,
+                    round));
             instrumentNameUI.SetText("");
             instrumentToLocate.layer = 0;
             foreach (GameObject instrument in pickedInstruments)
@@ -426,7 +393,7 @@ public class SoundLocalization : LevelManager
                 
             }
 
-            StartCoroutine(WaitForInstrumentRound());
+            waitForTarget = StartCoroutine(WaitForInstrumentRound());
         }
     }
 
@@ -438,6 +405,7 @@ public class SoundLocalization : LevelManager
              instrument.GetComponent<DeletusMaximus>().Destroy(); 
         }
 
+        waitForTarget = null;
         SetRoundFunctionality();
     }
     
