@@ -15,8 +15,9 @@ public class PitchIdentificationGameData : AbstractDataContainer
     public bool wasCorrect;
     public int level;
     public int round;
+    public string[] clipOptions;
 
-    public PitchIdentificationGameData(DateTime time, TimeSpan timeTakenToChooseSpeaker, string chosenClip, string correctClip, bool wasCorrect, int level, int round)
+    public PitchIdentificationGameData(DateTime time, TimeSpan timeTakenToChooseSpeaker, string chosenClip, string correctClip, bool wasCorrect, int level, int round, string[] clipOptions)
     {
         this.time = time.ToString("dd/MM/yyyy HH:mm:ss");
         this.timeTakenToChooseSpeaker = timeTakenToChooseSpeaker.ToString("h'h 'm'm 's's'");;
@@ -25,6 +26,7 @@ public class PitchIdentificationGameData : AbstractDataContainer
         this.wasCorrect = wasCorrect;
         this.level = level;
         this.round = round;
+        this.clipOptions = clipOptions;
     }
 
 }

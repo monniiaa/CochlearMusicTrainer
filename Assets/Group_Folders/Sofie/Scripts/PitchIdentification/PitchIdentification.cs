@@ -189,15 +189,22 @@ public class PitchIdentification : LevelManager
 
     public void SpeakerPicked(Speaker speaker)
     {
+        string[] options = new string[speakers.Length];
+        for(int i =0 ; i < speakers.Length; i++)
+        {
+            options[i] = speakers[i].currentClip.name;
+        }
+
         JsonManager.WriteDataToFile<PitchIdentificationGameData>(
             new PitchIdentificationGameData(
-                DateTime.Now, 
-                DateTime.Now -startTime,
+                DateTime.Now,
+                DateTime.Now - startTime,
                 speaker.currentClip.name,
                 highestSpeaker.currentClip.name,
                 highestSpeaker.currentClip.name == speaker.currentClip.name,
                 currentLevel,
-                currentScore
+                round,
+                options
             ));
         
         EndRound();
@@ -402,6 +409,11 @@ public class PitchIdentification : LevelManager
     public void PickInstrumentSpeaker(MelodySpeaker melodyspeaker)
     {
         MelodySpeaker highest = GameObject.FindWithTag("HighestSpeaker").GetComponent<MelodySpeaker>();
+        string[] options = new string[melodySpeakers.Length];
+        for(int i =0 ; i < melodySpeakers.Length; i++)
+        {
+            options[i] = melodySpeakers[i].GetComponent<AudioSource>().clip.name;
+        }
         JsonManager.WriteDataToFile<PitchIdentificationGameData>(
             new PitchIdentificationGameData(
                 DateTime.Now,
@@ -410,7 +422,8 @@ public class PitchIdentification : LevelManager
                 highest.GetComponent<AudioSource>().clip.name,
                 highest.GetComponent<AudioSource>().clip.name == melodyspeaker.GetComponent<AudioSource>().clip.name,
                 currentLevel,
-                currentScore
+                round,
+                options
             ));
         if (melodyspeaker.CompareTag("HighestSpeaker"))
         {

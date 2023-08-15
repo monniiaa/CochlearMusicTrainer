@@ -32,6 +32,8 @@ public class TimbreManager : LevelManager
     private int roundClip;
     bool haptics = false;
 
+    private List<GameObject> instumentsGuessed = new List<GameObject>();
+
     void Awake()
     {
         _gameDataManager = GameDataManager.Instance;
@@ -42,7 +44,6 @@ public class TimbreManager : LevelManager
         gameData = DataManager.ReadJson(path);
 
         currentLevel = (_gameDataManager.currentLevel == 0) ? 1 : _gameDataManager.currentLevel;
-        currentLevel = 7;
 
         SetMode();
         if(currentLevel <=2)
@@ -101,6 +102,7 @@ public class TimbreManager : LevelManager
     }
     public void InstrumentPicked(InstrumentBehavior instrument)
     {
+        instumentsGuessed.Add(instrument.gameObject);
         if (guesses > 0)
         {
             guesses--;
@@ -183,20 +185,6 @@ public class TimbreManager : LevelManager
         }
         
     }
-    private void WriteDataToJson(DateTime time, TimeSpan timeTakenToChooseInstrument, string chosenInstrument, bool correctInstrument, int level, int round)
-    {
-        JsonManager.WriteDataToFile<InstrumentIdentificationGameData>(
-            new InstrumentIdentificationGameData(
-                time,
-                timeTakenToChooseInstrument,
-                chosenInstrument,
-                correctInstrument,
-
-                level,
-                round
-            )
-        );
-    }
     public override void SetRoundFunctionality()
     {
         if (numberOfInstrumentsMode)
@@ -208,7 +196,6 @@ public class TimbreManager : LevelManager
         {
             StartRound();
         }
-
     }
 
     public void CanvasEnd()
@@ -218,15 +205,39 @@ public class TimbreManager : LevelManager
     }
     protected override void EndRound()
     {
+        string[] choosenInstruments = new string[instumentsGuessed.Count];
+        string[] correctInstruments = new string[instrumentsPlaying.Count];
+        for(int i = 0; i < instumentsGuessed.Count; i++)
+        {
+            choosenInstruments[i] = instumentsGuessed[i].GetComponent<InstrumentBehavior>().name;
+        }
+        for(int i = 0; i < instrumentsPlaying.Count; i++)
+        {
+            correctInstruments[i] = instrumentsPlaying[i].name;
+        }
+        JsonManager.WriteDataToFile<InstrumentIdentificationGameData>(
+            new InstrumentIdentificationGameData(
+                DateTime.Now, 
+                DateTime.Now - startTime,
+                choosenInstruments,
+                correctInstruments,
+                wasCorrect,
+                currentLevel,
+                round
+            )
+        );
         StopPlayingInstrument();
         previousCombination.Clear();
         previousCombination = instrumentsPlaying.Select(x => x.gameObject).ToList();
         instrumentsPlaying.Clear();
+        instumentsGuessed.Clear();
+        wasCorrect = false;
     }
     
 
     public void End()
     {
+        EndRound();
         if(currentLevel == gameData.level)
         {
             gameData.level = (currentLevel == maxLevel) ? gameData.level : currentLevel + 1;
@@ -279,7 +290,6 @@ public class TimbreManager : LevelManager
 
         if(wasCorrect) currentScore++;
         CorrectInstrumentsCanvas.SetCorrectInstrumentsText(instrumentsPlaying, wasCorrect , numberOfInstrumentsMode);
-        wasCorrect = false;
 
     }
     

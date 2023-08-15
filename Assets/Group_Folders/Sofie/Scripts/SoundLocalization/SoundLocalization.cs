@@ -58,7 +58,7 @@ public class SoundLocalization : LevelManager
         _xrRayInteractor = FindObjectOfType<XRRayInteractor>();
         gameData = DataManager.ReadJson(path);
         currentLevel = (gameDataManager.currentLevel == 0) ? 1 : gameDataManager.currentLevel;
-        currentLevel = 4;
+        currentLevel = 7;
         distanceTracker = GameObject.FindObjectOfType<DistanceTracker>();
         speakerSpawner = GameObject.FindObjectOfType<randomizeSoundLocation>();
         targetSound = Resources.Load<AudioClip>("SoundLocalization/TargetSound");
