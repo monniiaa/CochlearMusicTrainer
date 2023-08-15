@@ -18,6 +18,7 @@
  * limitations under the License.
  */
 
+using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -30,6 +31,12 @@ namespace Oculus.Interaction.Samples
 
         [SerializeField]
         private Transform _target;
+
+        private void Awake()
+        {
+            _toRotate = transform;
+            _target = FindObjectOfType<Camera>().transform;
+        }
 
         protected virtual void Start()
         {

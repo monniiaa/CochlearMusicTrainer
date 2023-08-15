@@ -15,8 +15,7 @@ public class CheckMelodyDirection : MonoBehaviour
     public ContourRoundIncorrect contourRoundIncorrectEvent;
     
     public string direction;
-    public FinishButton finishButton;
-    public Oscillator speaker;
+
     
     public Material successMat;
     public Material failMat;
@@ -25,18 +24,9 @@ public class CheckMelodyDirection : MonoBehaviour
     {
         direction = gameObject.name;
     }
+    
 
-    private void OnEnable()
-    {
-        finishButton.finishedEvent += OnFinished;
-    }
-
-    private void OnDisable()
-    {
-        finishButton.finishedEvent -= OnFinished;
-    }
-
-    private void OnFinished()
+    private void OnFinished(Oscillator speaker)
     {
         if(speaker!= null)
             if (speaker.direction == direction)
@@ -49,18 +39,7 @@ public class CheckMelodyDirection : MonoBehaviour
             }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        finishButton.gameObject.SetActive(true);
-        if(other.gameObject.GetComponent<Oscillator>() != null)
-            speaker = other.gameObject.GetComponent<Oscillator>();
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        finishButton.gameObject.SetActive(false);
-        speaker = null;
-    }
+    
     
     
 }

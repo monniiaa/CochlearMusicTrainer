@@ -43,7 +43,7 @@ public class randomizeSoundLocation : MonoBehaviour
 
     public List<GameObject> SpawnSpeakers(int num, float minDistanceBetweenSpeakers, GameObject prefab)
     {
-        List<Vector3> spawnPoints = GenerateRandomSpawnPoints(num, minDistanceBetweenSpeakers);
+        List<Vector3> spawnPoints = GenerateRandomSpawnPoints(num, minDistanceBetweenSpeakers, Camera.main.transform.position);
         List<GameObject> speakers = new List<GameObject>();
         for (int i = 0; i < spawnPoints.Count; i++)
         {
@@ -52,13 +52,25 @@ public class randomizeSoundLocation : MonoBehaviour
 
         return speakers;
     }
+    
+    public List<GameObject> SpawnInstruments( float minDistanceBetween, GameObject[] prefabs)
+    {
+        List<Vector3> spawnPoints = GenerateRandomSpawnPoints(prefabs.Length, minDistanceBetween, new Vector3(0,0.1f,0));
+        List<GameObject> speakers = new List<GameObject>();
+        for (int i = 0; i < spawnPoints.Count; i++)
+        {
+            speakers.Add(Instantiate(prefabs[i], spawnPoints[i], Quaternion.identity));
+        }
 
-    private List<Vector3> GenerateRandomSpawnPoints(int numberOfPoints, float minDistance)
+        return speakers;
+    }
+
+    private List<Vector3> GenerateRandomSpawnPoints(int numberOfPoints, float minDistance, Vector3 StartingBound)
     {
         List<Vector3> spawnPoints = new List<Vector3>();
-        Bounds innerBounds = new Bounds(Camera.main.transform.position,
+        Bounds innerBounds = new Bounds(StartingBound,
             new Vector3(minDistanceToPlayer, height, minDistanceToPlayer));
-        Bounds outerBounds = new Bounds(Camera.main.transform.position, new Vector3(roomSize, height, roomSize));
+        Bounds outerBounds = new Bounds(StartingBound, new Vector3(roomSize, height, roomSize));
 
         for (int i = 0; i < numberOfPoints; i++)
         {
@@ -99,9 +111,8 @@ public class randomizeSoundLocation : MonoBehaviour
 
 
 
-
-#if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
+    
+    private void OnDrawGizmos()
     {
         
         Gizmos.DrawWireCube(transform.position, Vector3.one * minDistanceToPlayer);
@@ -121,5 +132,5 @@ public class randomizeSoundLocation : MonoBehaviour
         Gizmos.DrawWireCube(innerBounds.center, innerBounds.size);
         Gizmos.DrawWireCube(outerBounds.center, outerBounds.size);
     }
-#endif
+
 }

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Oculus.Interaction.Input;
+using Oculus.Interaction.Samples;
 using Unity.VisualScripting;
 using UnityEngine.XR.Interaction.Toolkit;
+using Random = UnityEngine.Random;
 
 public class SoundLocalization : LevelManager
 {
@@ -40,6 +42,13 @@ public class SoundLocalization : LevelManager
     private InstrumentSeparation modeManager;
 
     private bool correctTarget = false;
+    
+    private RandomInstrumentPicker randomInstrumentPicker;
+    private randomizeSoundLocation randomizeSoundLocation;
+    private List<GameObject> pickedInstruments;
+    private GameObject instrumentToLocate;
+    
+    private InstrumentNameUI instrumentNameUI;
 
     private void Awake()
     {
@@ -49,9 +58,15 @@ public class SoundLocalization : LevelManager
         _xrRayInteractor = FindObjectOfType<XRRayInteractor>();
         gameData = DataManager.ReadJson(path);
         currentLevel = (gameDataManager.currentLevel == 0) ? 1 : gameDataManager.currentLevel;
+        currentLevel = 4;
         distanceTracker = GameObject.FindObjectOfType<DistanceTracker>();
         speakerSpawner = GameObject.FindObjectOfType<randomizeSoundLocation>();
         targetSound = Resources.Load<AudioClip>("SoundLocalization/TargetSound");
+        
+        randomInstrumentPicker = GetComponent<RandomInstrumentPicker>();
+        randomizeSoundLocation = GetComponent<randomizeSoundLocation>();
+        instrumentNameUI = GameObject.FindObjectOfType<InstrumentNameUI>();
+        instrumentNameUI.gameObject.SetActive(false);
         
         meshRenderer = mediumHardSpeaker.GetComponentInChildren<MeshRenderer>();
         speakerAnimator = mediumHardSpeaker.GetComponentInChildren<Animator>();
@@ -124,11 +139,45 @@ public class SoundLocalization : LevelManager
             case Difficulty.Hard:
                 _interactorLine.stopLineAtFirstRaycastHit = false;
                 _interactorLine.snapEndpointIfAvailable = false;
-                speakerSpawner.height = 1f;
-                mediumHardTargetPrefab.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-                RespawnSpeaker();
+                instrumentNameUI.gameObject.SetActive(true);
+                if (currentLevel == 7)
+                {
+                    SpawnInstruments(2);
+                }
+                else if (currentLevel == 8)
+                {
+                    
+                    SpawnInstruments(UnityEngine.Random.Range(2,4));
+                }
+                else
+                {
+                    SpawnInstruments(UnityEngine.Random.Range(2,6));
+                }
+
                 break;
         }
+    }
+
+    private void SpawnInstruments(int amount)
+    {
+        pickedInstruments = randomInstrumentPicker.PickedInstruments(amount);
+        int rand = Random.Range(0, 6); //amount of audioclips
+        foreach (GameObject instrument in pickedInstruments)
+        {
+            instrument.GetComponentInChildren<RandomInstrumentAudio>().SetClip(rand);
+            
+        }
+        pickedInstruments = speakerSpawner.SpawnInstruments(3, pickedInstruments.ToArray());
+        SetInstrumentToLocate();
+    }
+    
+    private void SetInstrumentToLocate()
+    {
+        int rand = Random.Range(0, pickedInstruments.Count);
+        instrumentToLocate = pickedInstruments[rand];
+        instrumentToLocate.layer = 6;
+        instrumentToLocate.GetComponentInChildren<MeshRenderer>().enabled = false;
+        instrumentNameUI.SetText("Find: " + instrumentToLocate.GetComponentInChildren<InstrumentName>().name);
     }
 
     public override void SetRoundFunctionality()
@@ -139,12 +188,10 @@ public class SoundLocalization : LevelManager
             EndRound();
             StartCoroutine(WaitBeforStaring());
         }
-        else if (difficulty == Difficulty.Medium || difficulty == Difficulty.Hard)
+        else if (difficulty == Difficulty.Medium)
         {
-
             StartRound();
-            
-                startTime = DateTime.Now;
+            startTime = DateTime.Now;
                 if (round >= 4)
                 {
                     if (!mediumHardSpeaker.IsDestroyed()) mediumHardSpeaker.GetComponent<DeletusMaximus>().Destroy();
@@ -165,6 +212,28 @@ public class SoundLocalization : LevelManager
                     }
                     DataManager.SaveDataToJson(gameData, path);
                 }
+        } else if (difficulty == Difficulty.Hard)
+        {
+            if (round < 4)
+            {
+                            StartRound();
+                            startTime = DateTime.Now;
+            }
+            if (round >= 4)
+            {
+                modeManager.EndGame();
+                ShowStar(currentScore);
+                if (currentLevel == gameData.level)
+                {
+                    gameData.level = (currentLevel == maxLevel) ? gameData.level : currentLevel + 1;
+                }
+
+                if (gameData.levelScore[currentLevel - 1] < currentScore)
+                {
+                    gameData.levelScore[currentLevel - 1] = currentScore;
+                }
+                DataManager.SaveDataToJson(gameData, path);
+            }
         }
         if (round >= 4)
         {
@@ -225,6 +294,14 @@ public class SoundLocalization : LevelManager
         return Physics.Raycast(ray, Mathf.Infinity, LayerMask.GetMask("ShootingDisc"));
     }
 
+    public bool CheckInstrumentHit()
+    {
+        List<Collider> colliders = new List<Collider>();
+        RaycastHit[] results = new RaycastHit[1];
+        Ray ray = new Ray(_xrRayInteractor.rayOriginTransform.position, _xrRayInteractor.rayOriginTransform.forward);
+
+        return Physics.Raycast(ray, Mathf.Infinity, LayerMask.GetMask("Instrument"));
+    }
 
     IEnumerator End()
     {
@@ -286,7 +363,7 @@ public class SoundLocalization : LevelManager
                     currentLevel,
                     currentScore));
             
-        } else if (difficulty == Difficulty.Medium || difficulty == Difficulty.Hard)
+        } else if (difficulty == Difficulty.Medium )
         {
             if (gameIsOver) return;
             if (waitForTarget != null) return;
@@ -297,6 +374,7 @@ public class SoundLocalization : LevelManager
                 speakerAnimator.enabled = true;
                 currentScore++;
             }
+
             JsonManager.WriteDataToFile<SoundLocalizationDataContainer>(
                 new SoundLocalizationDataContainer(
                     DateTime.Now, 
@@ -308,7 +386,53 @@ public class SoundLocalization : LevelManager
                     round));
             meshRenderer.enabled = true;
             waitForTarget = StartCoroutine(WaitForVisibleShootingDisc());
+        } else if (difficulty == Difficulty.Hard)
+        {
+            instrumentToLocate.GetComponentInChildren<MeshRenderer>().enabled = true;
+            
+                instrumentToLocate.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = true;
+            
+            if (CheckInstrumentHit())
+            {
+                if(instrumentToLocate.GetComponent<LookAtTarget>() != null)
+                {
+                    instrumentToLocate.GetComponent<LookAtTarget>().enabled = false; 
+                } else if( instrumentToLocate.GetComponent<PianoLookAt>() != null)
+                {
+                    instrumentToLocate.GetComponent<PianoLookAt>().enabled = false;
+                }
+                
+                    instrumentToLocate.GetComponentInChildren<Animator>().enabled = true;
+                
+
+                gameplayAudio.PlayOneShot(sucessAudio);
+                currentScore++;
+            }
+            else
+            {
+                gameplayAudio.PlayOneShot(failAudio);
+            }
+            instrumentNameUI.SetText("");
+            instrumentToLocate.layer = 0;
+            foreach (GameObject instrument in pickedInstruments)
+            {
+                instrument.GetComponentInChildren<AudioSource>().Stop();
+                
+            }
+
+            StartCoroutine(WaitForInstrumentRound());
         }
+    }
+
+    IEnumerator WaitForInstrumentRound()
+    {
+        yield return new WaitForSeconds(2.5f);
+        foreach (GameObject instrument in pickedInstruments)
+        {
+             instrument.GetComponent<DeletusMaximus>().Destroy(); 
+        }
+
+        SetRoundFunctionality();
     }
     
     IEnumerator WaitForVisibleShootingDisc()

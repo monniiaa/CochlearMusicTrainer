@@ -33,46 +33,46 @@ EditorBuildSettings:
     path: Assets/Group_Folders/Peter/TrainingEnvironmentTest.unity
     guid: 2de4999831d304ac69828f27693cdb7f
   - enabled: 0
-    path: Assets/FinalScenes/Scenes/Hub.unity
+    path: Assets/Group_Folders/FinalScenes/Scenes/Hub.unity
     guid: 715cbc63edd59f24f990e2c99078c54b
   - enabled: 0
-    path: Assets/FinalScenes/Scenes/InstrumentIdentification - Introduction.unity
+    path: Assets/Group_Folders/FinalScenes/Scenes/InstrumentIdentification - Introduction.unity
     guid: 48154928f07d3f94a97a8d47cdf51443
   - enabled: 0
-    path: Assets/FinalScenes/Scenes/InstrumentSeperation.unity
+    path: Assets/Group_Folders/FinalScenes/Scenes/InstrumentSeperation.unity
     guid: 3df83493ec100e14b96fd0b5b89a5487
   - enabled: 0
-    path: Assets/FinalScenes/Scenes/MelodyIdentification.unity
+    path: Assets/Group_Folders/FinalScenes/Scenes/MelodyIdentification.unity
     guid: ce0e220937e6a124097a9fc133111dd5
   - enabled: 0
-    path: Assets/FinalScenes/Scenes/PitchIdentification.unity
+    path: Assets/Group_Folders/FinalScenes/Scenes/PitchIdentification.unity
     guid: eceb3c1d5dcdf9d48ae2d4cda5bef4fd
   - enabled: 0
-    path: Assets/FinalScenes/Scenes/SoundLocalization.unity
+    path: Assets/Group_Folders/FinalScenes/Scenes/SoundLocalization.unity
     guid: 69d8ea22791a5544a87b5e8c55e08342
   - enabled: 0
-    path: Assets/FinalScenes/Scenes/TrainingEnvironmentTest.unity
+    path: Assets/Group_Folders/FinalScenes/Scenes/TrainingEnvironmentTest.unity
     guid: af635143e71c97f47abf0e44c3a8c722
   - enabled: 1
-    path: Assets/_NewFinalScenes/Hub.unity
+    path: Assets/FinalScenes/Hub.unity
     guid: 60d98ad6fc0cea143b07efb961abac7b
   - enabled: 1
-    path: Assets/_NewFinalScenes/PitchIdentification 1.unity
+    path: Assets/FinalScenes/PitchIdentification 1.unity
     guid: d9e79cffadb735041856a93e32c754da
   - enabled: 1
-    path: Assets/_NewFinalScenes/InstrumentIdentification - Introduction.unity
+    path: Assets/FinalScenes/InstrumentIdentification - Introduction.unity
     guid: 5e2378bce3e36734d9adde3b11abef9b
   - enabled: 1
-    path: Assets/_NewFinalScenes/InstrumentIdentification.unity
+    path: Assets/FinalScenes/InstrumentIdentification.unity
     guid: 7b5c630c84c1273459f68ccd9a547556
   - enabled: 1
-    path: Assets/_NewFinalScenes/InstrumentSeparation.unity
+    path: Assets/Group_Folders/Sofie/Scenes/InstrumentSeparation.unity
     guid: 53185866d76394b43a93b9d12884d128
   - enabled: 1
-    path: Assets/_NewFinalScenes/NewMelody.unity
+    path: Assets/FinalScenes/NewMelody.unity
     guid: ea976dc494605df4fb0ca2bb3b877009
   - enabled: 1
-    path: Assets/_NewFinalScenes/SoundLocalization.unity
+    path: Assets/FinalScenes/SoundLocalization.unity
     guid: f339684e24222704487571718d01796b
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 597b89b649d512843aa161a2a00b82c1, type: 2}

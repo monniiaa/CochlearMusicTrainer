@@ -25,7 +25,7 @@ public class InstrumentBehavior : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         audioSource.playOnAwake = false;
-        audioSource.spatialBlend = 0; 
+        audioSource.spatialBlend = 0;
         animator = GetComponent<Animator>();
         if (particleNotes != null)
         {
@@ -67,7 +67,6 @@ public class InstrumentBehavior : MonoBehaviour
     }
     public void Play()
     {
-        Debug.Log("Playing");
         audioSource.Play();
     }
     public void SetClip(int clip = 0)

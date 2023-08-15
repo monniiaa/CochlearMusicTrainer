@@ -29,6 +29,8 @@ public class TimbreManager : LevelManager
     private List<GameObject> previousCombination = new List<GameObject>();
     [SerializeField] private Canvas amountOfInstrumentsCanvas;
     [SerializeField] private GameObject[] easyModes = new GameObject[2];
+    private int roundClip;
+    bool haptics = false;
 
     void Awake()
     {
@@ -40,6 +42,7 @@ public class TimbreManager : LevelManager
         gameData = DataManager.ReadJson(path);
 
         currentLevel = (_gameDataManager.currentLevel == 0) ? 1 : _gameDataManager.currentLevel;
+        currentLevel = 7;
 
         SetMode();
         if(currentLevel <=2)
@@ -127,28 +130,54 @@ public class TimbreManager : LevelManager
         {
             case Difficulty.Easy:
                 sameFamily = false;
-                List<InstrumentBehavior> instruments = SetInstrumentsPlaying(1);
-                    PlayPickedInstruments(instruments);
-                    guesses = instrumentsPlaying.Count;
+                int amount;
+                List<InstrumentBehavior> instruments;
+                if (currentLevel == 1)
+                {
+                    amount = 1;
 
+                }
+                else
+                {
+                    amount = UnityEngine.Random.Range(1, 3);
+                }
+                instruments = SetInstrumentsPlaying(amount);
+                PlayPickedInstrumentsSound(instruments);
+                guesses = instrumentsPlaying.Count;
                 break;
             case Difficulty.Medium:
                 numberOfInstrumentsMode = true;
                 int randMedium;
-                if (currentLevel == 4)
-                {
-                    randMedium = UnityEngine.Random.Range(1, 3);
-                }
-                else
-                {
-                    randMedium = UnityEngine.Random.Range(1, 4);
-                }
-                PlayPickedInstruments(SetInstrumentsPlaying(randMedium));
+                randMedium = UnityEngine.Random.Range(1, 4);
+                PlayPickedInstrumentsSound(SetInstrumentsPlaying(randMedium));
                 break;
             case Difficulty.Hard:
-                sameFamily = true;
-                int randHard = UnityEngine.Random.Range(2, 4);
-                PlayPickedInstruments(SetInstrumentsPlaying(randHard, sameFamily));
+                if (currentLevel == 7)
+                {
+                    haptics = true;
+                    amount = 2;
+                    instruments = SetInstrumentsPlaying(amount);
+                    PlayPickedInstrumentsSound(instruments);
+                    int rand = Random.Range(0, amount);
+                    InstrumentBehavior temp = instrumentsPlaying[rand];
+                    instrumentsPlaying.Clear();
+                    instrumentsPlaying.Add(temp);
+                    PlayPickedInstrumentHaptics(instrumentsPlaying[0].gameObject.GetComponent<HapticsBehavior>());
+                    guesses = 1;
+                }
+                if (currentLevel == 10)
+                {
+                    //HapticsOnly = true;
+                    amount = 1;
+                    instruments = SetInstrumentsPlaying(amount);
+                    instrumentsPlaying = instruments;
+                    PlayPickedInstrumentHaptics(instruments[0].gameObject.GetComponent<HapticsBehavior>());
+                    guesses = amount;
+                }
+                
+              //  sameFamily = true;
+              //  int randHard = UnityEngine.Random.Range(2, 4);
+              //  PlayPickedInstrumentsSound(SetInstrumentsPlaying(randHard, sameFamily));
                 guesses = instrumentsPlaying.Count;
                 break;
         }
@@ -230,6 +259,12 @@ public class TimbreManager : LevelManager
 
     IEnumerator ShowCorrectAnswer()
     {
+        InstrumentBehavior[] temp = GameObject.FindObjectsOfType<InstrumentBehavior>();
+        foreach (InstrumentBehavior instrument in temp)
+        {
+            instrument.StopAudio();
+            instrument.GetComponent<HapticsBehavior>().StopHaptics();
+        }
         instructionText.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
         CorrectInstrumentsCanvas.gameObject.SetActive(true);
@@ -313,9 +348,9 @@ public class TimbreManager : LevelManager
             return pickedInstruments;
     }
     
-private void PlayPickedInstruments(List<InstrumentBehavior> instrumentsToPlay)
-    {
-        int roundClip = Random.Range(0,6);
+private void PlayPickedInstrumentsSound(List<InstrumentBehavior> instrumentsToPlay)
+{
+    roundClip = 0; //Random.Range(0,6);
         for(int i = 0; i < instrumentsToPlay.Count;i++)
         {
             AudioClip clip = instrumentsToPlay[i].GetClip(roundClip);
@@ -323,6 +358,11 @@ private void PlayPickedInstruments(List<InstrumentBehavior> instrumentsToPlay)
             instrumentsPlaying.Add(instrumentsToPlay[i]);
         }
     }
+
+private void PlayPickedInstrumentHaptics(HapticsBehavior hapticsToPlay)
+{
+    hapticsToPlay.PlayHapticsClip(roundClip);
+}
 
 private void StopPlayingInstrument()
 {
