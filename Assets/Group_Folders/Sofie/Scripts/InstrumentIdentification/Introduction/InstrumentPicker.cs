@@ -76,7 +76,7 @@ public class InstrumentPicker : MonoBehaviour
 
     public void PlayPickedInstrumentsSound()
     {
-        roundClip = 0; //Random.Range(0,6);
+        roundClip = Random.Range(0,6);
         for (int i = 0; i < instrumentsPlayingSound.Count; i++)
         {
             AudioClip clip = instrumentsPlayingSound[i].GetClip(roundClip);
@@ -110,7 +110,11 @@ public class InstrumentPicker : MonoBehaviour
             instrumentPlayingHaptics = pickedInstrument;
         }
     }
-    
+
+    public void SetRoundClip(int index)
+    {
+        roundClip = index;
+    }
     public void PlayPickedInstrumentHaptics()
     {
         instrumentPlayingHaptics.PlayHapticsClip(roundClip);

@@ -14,7 +14,7 @@ public class HapticsBehavior : MonoBehaviour
 
     private void Awake()
     {
-        folderName = "NewHaptics/" + gameObject.name; // assume the sound folder is named after the child object
+        folderName = "HapticsXR/" + gameObject.name + "_Haptics"; // assume the sound folder is named after the child object
         instrumentClips = Resources.LoadAll<HapticClip>(folderName);
     }
 

@@ -28,6 +28,7 @@ public class BadgeManager : MonoBehaviour
 
     private void SetBadge()
     {
+        Debug.Log(path + ": " + gameData.level);
         if (gameData.level == 10)
         {
             int count = 0;

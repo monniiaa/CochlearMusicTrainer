@@ -24,11 +24,13 @@ public class InstrumentHaptics : MonoBehaviour
 
     private void OnEnable()
     {
+        if(vibrationAndSoundHandler != null)
         vibrationAndSoundHandler.VibrationEvent += ShouldPlay;
     }
 
     private void OnDisable()
     {
+        if(vibrationAndSoundHandler != null)
         vibrationAndSoundHandler.VibrationEvent -= ShouldPlay;
     }
 

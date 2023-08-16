@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using Unity.VisualScripting;
 using Random = UnityEngine.Random;
+
 using TMPro;
 public class TimbreManager : LevelManager
 {
@@ -23,12 +24,12 @@ public class TimbreManager : LevelManager
     
     [SerializeField] private Canvas amountOfInstrumentsCanvas;
     [SerializeField] private GameObject[] easyModes = new GameObject[2];
-
+    [SerializeField] private GameObject[] mediumModes = new GameObject[2];
     bool haptics = false;
 
     private InstrumentPicker instrumentPicker;
 
-    private List<GameObject> instumentsGuessed = new List<GameObject>();
+    private List<InstrumentBehavior> instumentsGuessed = new List<InstrumentBehavior>();
 
     void Awake()
     {
@@ -42,15 +43,26 @@ public class TimbreManager : LevelManager
 
         currentLevel = (_gameDataManager.currentLevel == 0) ? 1 : _gameDataManager.currentLevel;
         SetMode();
-        if(currentLevel <=2)
+        if(currentLevel <2)
         {
             easyModes[0].SetActive(true);
             easyModes[1].SetActive(false);
         }
-        else if(currentLevel == 3)
+        else if(currentLevel >= 2 && currentLevel <= 3)
         {
             easyModes[1].SetActive(true);
             easyModes[0].SetActive(false);
+        }
+
+        if (currentLevel == 4)
+        {
+            mediumModes[0].SetActive(true);
+            mediumModes[1].SetActive(false);
+        }
+        else if(currentLevel == 5 || currentLevel == 6)
+        {
+            mediumModes[0].SetActive(false);
+            mediumModes[1].SetActive(true);
         }
         CorrectInstrumentsCanvas.gameObject.SetActive(false);
         foreach (GameObject star in starAnimation)
@@ -100,7 +112,7 @@ public class TimbreManager : LevelManager
     
     public void InstrumentPicked(GameObject instrument)
     {
-        instumentsGuessed.Add(instrument);
+        instumentsGuessed.Add(instrument.GetComponent<InstrumentBehavior>());
         if (guesses > 0)
         {
             guesses--;
@@ -122,16 +134,25 @@ public class TimbreManager : LevelManager
                 if (instrumentPicker.instrumentPlayingHaptics == guess)
                 {
                     CorrectAnswer(instrument.GetComponent<InstrumentBehavior>());
+                    wasCorrect = true;
                 }
                 else
                 {
                     WrongAnswer(instrument.GetComponent<InstrumentBehavior>());
+                    wasCorrect = false;
                 }
             }
 
         }
         if (guesses == 0)
         {
+            if (!haptics)
+            {
+                var areEquivalent = (instumentsGuessed.Count == instrumentPicker.instrumentsPlayingSound.Count) && !instumentsGuessed.Except(instrumentPicker.instrumentsPlayingSound).Any();
+                    if(areEquivalent) wasCorrect = true;
+                    else wasCorrect = false;
+                    Debug.Log(areEquivalent);
+            }
             StartCoroutine(ShowCorrectAnswer());
         }
     }
@@ -141,13 +162,11 @@ public class TimbreManager : LevelManager
         gameplayAudio.PlayOneShot(sucessAudio);
         soundAndAnimation.CorrectAnimation(true);
         soundAndAnimation.DestroyAnimation(true);
-        wasCorrect = true;
     }
 
     private void WrongAnswer(InstrumentBehavior soundAndAnimation)
     {
         gameplayAudio.PlayOneShot(failAudio);
-        wasCorrect = false;
         soundAndAnimation.DestroyAnimation(true);
     }
     protected override void SetDifficultyChanges()
@@ -156,46 +175,77 @@ public class TimbreManager : LevelManager
         {
             case Difficulty.Easy:
                 int amount;
-                List<InstrumentBehavior> instruments;
-                if (currentLevel == 1) amount = 1;
+                if (currentLevel < 3) amount = 1;
                 else amount = UnityEngine.Random.Range(1, 3);
-                instrumentPicker.PickInstrumentsPlayingSound(amount);
-                instrumentPicker.PlayPickedInstrumentsSound();
-                guesses = amount;
+                SoundOnlyMode(amount);
                 break;
             case Difficulty.Medium:
-                numberOfInstrumentsMode = true;
                 int randMedium;
-                randMedium = UnityEngine.Random.Range(1, 4);
-                instrumentPicker.PickInstrumentsPlayingSound(randMedium);
-                instrumentPicker.PlayPickedInstrumentsSound();
+                if (currentLevel == 4)
+                {
+                    randMedium = UnityEngine.Random.Range(1, 4);
+                    AmountOfInstrumentsMode(randMedium);
+                } else if (currentLevel == 5  || currentLevel == 6)
+                {
+                   // numberOfInstrumentsMode = false;
+                    HapticsAndSoundMode(2);
+                }
                 break;
             case Difficulty.Hard:
                 if (currentLevel == 7)
                 {
-                    haptics = true;
-                    instrumentPicker.PickInstrumentsPlayingSoundAndHaptics(2);
-                    instrumentPicker.PlayPickedInstrumentsSound();
-                    instrumentPicker.PlayPickedInstrumentHaptics();
-                    guesses = 1;
+                    HapticsOnlyMode(0);
                 }
-                if (currentLevel == 8)
+                else if (currentLevel == 8)
                 {
-                    haptics = true;
-                    guesses = 1;
-                    instrumentPicker.PickHapticsInstrument(true);
-                    instrumentPicker.PlayPickedInstrumentHaptics();
+                    int randRoundClip = UnityEngine.Random.Range(0, 6);
+                    HapticsOnlyMode(randRoundClip);;
+                }
+                else
+                {
+                    SoundOnlyMode(3);
                 }
                 break;
         }
-        
     }
+
+    private void SoundOnlyMode(int amount)
+    {
+        instrumentPicker.PickInstrumentsPlayingSound(amount);
+        instrumentPicker.PlayPickedInstrumentsSound();
+        guesses = amount;
+    }
+
+    private void HapticsAndSoundMode(int amountPlayingSound)
+    {
+        haptics = true;
+        instrumentPicker.PickInstrumentsPlayingSoundAndHaptics(amountPlayingSound);
+        instrumentPicker.PlayPickedInstrumentsSound();
+        instrumentPicker.PlayPickedInstrumentHaptics();
+        guesses = 1;
+    }
+
+    private void AmountOfInstrumentsMode(int amount)
+    {
+        numberOfInstrumentsMode = true;
+        instrumentPicker.PickInstrumentsPlayingSound(amount);
+        instrumentPicker.PlayPickedInstrumentsSound();
+        amountOfInstrumentsCanvas.gameObject.SetActive(true);
+        amountOfInstrumentsCanvas.GetComponent<AmountOfInstrumentsCanvas>().SetOptions(3);
+    }
+
+    private void HapticsOnlyMode(int roundClip)
+    {
+        haptics = true;
+        guesses = 1;
+        instrumentPicker.SetRoundClip(roundClip);
+        instrumentPicker.PickHapticsInstrument(true);
+        instrumentPicker.PlayPickedInstrumentHaptics();
+    }
+    
+    
     public override void SetRoundFunctionality()
     {
-        if (numberOfInstrumentsMode)
-        {
-            amountOfInstrumentsCanvas.gameObject.SetActive(true);
-        }
         round++;
         if (round < 4)
         {
@@ -229,7 +279,7 @@ public class TimbreManager : LevelManager
 
         for(int i = 0; i < instumentsGuessed.Count; i++)
         {
-            choosenInstruments[i] = instumentsGuessed[i].GetComponent<InstrumentBehavior>().name;
+            choosenInstruments[i] = instumentsGuessed[i].name;
         }
 
         JsonManager.WriteDataToFile<InstrumentIdentificationGameData>(

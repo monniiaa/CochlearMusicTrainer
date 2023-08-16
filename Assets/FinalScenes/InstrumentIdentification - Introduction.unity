@@ -674,7 +674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9027c1e86d12c7b4ba0534a06fccfd11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instrumentClip: {fileID: 2460798210113038985, guid: a6e506400d403164eb5c19d584845ce7, type: 3}
+  instrumentClip: {fileID: 2460798210113038985, guid: ed102e7120dbc3f48a23c110c090559c, type: 3}
 --- !u!114 &17021644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7334,7 +7334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9027c1e86d12c7b4ba0534a06fccfd11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instrumentClip: {fileID: 2460798210113038985, guid: 44043df2df8e97a45b11d4b7c27d345e, type: 3}
+  instrumentClip: {fileID: 2460798210113038985, guid: cce5ff32b9f72d64988271d99b5c621f, type: 3}
 --- !u!114 &181242127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19376,7 +19376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9027c1e86d12c7b4ba0534a06fccfd11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instrumentClip: {fileID: 2460798210113038985, guid: 5c2ae84cdbd22224f937bb6322efd8e6, type: 3}
+  instrumentClip: {fileID: 2460798210113038985, guid: 2c9c264f0c6660445b33e09a5a5da382, type: 3}
 --- !u!114 &712280347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19571,8 +19571,8 @@ GameObject:
   - component: {fileID: 739279968}
   - component: {fileID: 739279961}
   - component: {fileID: 739279960}
-  - component: {fileID: 739279967}
   - component: {fileID: 739279959}
+  - component: {fileID: 739279969}
   m_Layer: 0
   m_Name: Cello
   m_TagString: Untagged
@@ -19831,7 +19831,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 739279967}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InstrumentHaptics, Assembly-CSharp
         m_MethodName: PlayHapticClip
         m_Mode: 1
@@ -19882,7 +19882,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 739279967}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InstrumentHaptics, Assembly-CSharp
         m_MethodName: StopHaptics
         m_Mode: 1
@@ -20010,19 +20010,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 739279957}
   m_Mesh: {fileID: 1660520024948376979, guid: c08eb1857931bdd4aa94c3362521ea3c, type: 3}
---- !u!114 &739279967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739279957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9027c1e86d12c7b4ba0534a06fccfd11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  instrumentClip: {fileID: 2460798210113038985, guid: c956ed1e4292baa42a7e16015197f11d, type: 3}
 --- !u!114 &739279968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20035,6 +20022,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8495e041e2d35489090780643529ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &739279969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739279957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9027c1e86d12c7b4ba0534a06fccfd11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instrumentClip: {fileID: 2460798210113038985, guid: 6fbafa51143b83544b44f6af1bf2a73f, type: 3}
 --- !u!1 &745718373
 GameObject:
   m_ObjectHideFlags: 0
@@ -43562,7 +43562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9027c1e86d12c7b4ba0534a06fccfd11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instrumentClip: {fileID: 2460798210113038985, guid: 6adadfb9d41e7ae4e85864c2441afe4f, type: 3}
+  instrumentClip: {fileID: 2460798210113038985, guid: 5a0349099b63ee241b6472406a2dfa07, type: 3}
 --- !u!114 &1620210710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45130,7 +45130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9027c1e86d12c7b4ba0534a06fccfd11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instrumentClip: {fileID: 2460798210113038985, guid: 1a42a421406a5b14b932bb3c7f58a949, type: 3}
+  instrumentClip: {fileID: 2460798210113038985, guid: 9d92e4b155c16ee49a2b9de0e8f725b5, type: 3}
 --- !u!114 &1953464913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51442,7 +51442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9027c1e86d12c7b4ba0534a06fccfd11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instrumentClip: {fileID: 2460798210113038985, guid: 694e032e54cf8284981a99a04dcffc6f, type: 3}
+  instrumentClip: {fileID: 2460798210113038985, guid: 3c2f0d6bda476b84390dedd3d51ec1c7, type: 3}
 --- !u!114 &2092907370
 MonoBehaviour:
   m_ObjectHideFlags: 0
