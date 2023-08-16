@@ -44,7 +44,7 @@ public class TimbreManager : LevelManager
         gameData = DataManager.ReadJson(path);
 
         currentLevel = (_gameDataManager.currentLevel == 0) ? 1 : _gameDataManager.currentLevel;
-
+        currentLevel = 7;
         SetMode();
         if(currentLevel <=2)
         {
@@ -69,15 +69,22 @@ public class TimbreManager : LevelManager
         instructionText.gameObject.SetActive(true);
         if (!numberOfInstrumentsMode)
         {
-            if (instrumentsPlaying.Count > 1)
+            if (haptics == true)
             {
-                instructionText.text = "Vælg de " + instrumentsPlaying.Count + " instrumenter der spiller";
+                instructionText.text = "Flere instrumenter spiller, men vælg det der spiller og vibrere i controlleren";
             }
             else
             {
-                instructionText.text = "Vælg det instrument der spiller";
+                if (instrumentsPlaying.Count > 1)
+                {
+                    instructionText.text = "Vælg de " + instrumentsPlaying.Count + " instrumenter der spiller";
+                }
+                else
+                {
+                    instructionText.text = "Vælg det instrument der spiller";
+                }
             }
-            
+
         }
         else
         {
