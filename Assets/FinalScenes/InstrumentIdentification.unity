@@ -1851,6 +1851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1 &135260886
 GameObject:
@@ -7396,8 +7397,8 @@ MonoBehaviour:
         m_MethodName: InstrumentPicked
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 191860615}
-          m_ObjectArgumentAssemblyTypeName: InstrumentBehavior, Assembly-CSharp
+          m_ObjectArgument: {fileID: 191860606}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7597,6 +7598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1 &192724481
 GameObject:
@@ -7936,8 +7938,8 @@ MonoBehaviour:
         m_MethodName: InstrumentPicked
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 226765391}
-          m_ObjectArgumentAssemblyTypeName: InstrumentBehavior, Assembly-CSharp
+          m_ObjectArgument: {fileID: 226765389}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -8120,6 +8122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1 &242196759
 GameObject:
@@ -8664,8 +8667,8 @@ MonoBehaviour:
         m_MethodName: InstrumentPicked
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 259486351}
-          m_ObjectArgumentAssemblyTypeName: InstrumentBehavior, Assembly-CSharp
+          m_ObjectArgument: {fileID: 259486346}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -8931,6 +8934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1 &269150900
 GameObject:
@@ -16646,8 +16650,8 @@ MonoBehaviour:
         m_MethodName: InstrumentPicked
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 473878875}
-          m_ObjectArgumentAssemblyTypeName: InstrumentBehavior, Assembly-CSharp
+          m_ObjectArgument: {fileID: 473878866}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -16847,6 +16851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1 &478918863
 GameObject:
@@ -22288,8 +22293,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 533606856}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.17500049, y: 0, z: 0.39499968}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.17499685, y: 0, z: 0.3949976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -27767,8 +27772,8 @@ MonoBehaviour:
         m_MethodName: InstrumentPicked
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 550044766}
-          m_ObjectArgumentAssemblyTypeName: InstrumentBehavior, Assembly-CSharp
+          m_ObjectArgument: {fileID: 550044757}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -27968,6 +27973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1 &560861716
 GameObject:
@@ -33931,8 +33937,8 @@ MonoBehaviour:
         m_MethodName: InstrumentPicked
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 627482634}
-          m_ObjectArgumentAssemblyTypeName: InstrumentBehavior, Assembly-CSharp
+          m_ObjectArgument: {fileID: 627482629}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -34051,6 +34057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1 &633862189
 GameObject:
@@ -34849,6 +34856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1001 &665791015
 PrefabInstance:
@@ -35779,6 +35787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!224 &693986216 stripped
 RectTransform:
@@ -62583,7 +62592,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882573949}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.00000014901158, y: 0, z: 0.28800008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -63853,8 +63862,8 @@ MonoBehaviour:
         m_MethodName: InstrumentPicked
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 981935217}
-          m_ObjectArgumentAssemblyTypeName: InstrumentBehavior, Assembly-CSharp
+          m_ObjectArgument: {fileID: 981935213}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -63991,6 +64000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1 &985469995
 GameObject:
@@ -66113,8 +66123,8 @@ MonoBehaviour:
         m_MethodName: InstrumentPicked
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1145286267}
-          m_ObjectArgumentAssemblyTypeName: InstrumentBehavior, Assembly-CSharp
+          m_ObjectArgument: {fileID: 1145286260}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -66364,6 +66374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1 &1147952470
 GameObject:
@@ -76681,8 +76692,8 @@ MonoBehaviour:
         m_MethodName: InstrumentPicked
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1212182272}
-          m_ObjectArgumentAssemblyTypeName: InstrumentBehavior, Assembly-CSharp
+          m_ObjectArgument: {fileID: 1212182265}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -76932,6 +76943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1 &1212239423
 GameObject:
@@ -87418,6 +87430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1 &1258096143
 GameObject:
@@ -87657,8 +87670,8 @@ MonoBehaviour:
         m_MethodName: InstrumentPicked
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1258096145}
-          m_ObjectArgumentAssemblyTypeName: InstrumentBehavior, Assembly-CSharp
+          m_ObjectArgument: {fileID: 1258096143}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -87841,6 +87854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1001 &1268275149
 PrefabInstance:
@@ -99532,8 +99546,8 @@ MonoBehaviour:
         m_MethodName: InstrumentPicked
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1456166120}
-          m_ObjectArgumentAssemblyTypeName: InstrumentBehavior, Assembly-CSharp
+          m_ObjectArgument: {fileID: 1456166116}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -99670,6 +99684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1 &1467241014
 GameObject:
@@ -120246,6 +120261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1 &1563578330
 GameObject:
@@ -125252,6 +125268,7 @@ GameObject:
   - component: {fileID: 1568146439}
   - component: {fileID: 1568146441}
   - component: {fileID: 1568146442}
+  - component: {fileID: 1568146443}
   m_Layer: 0
   m_Name: MiniGame
   m_TagString: Untagged
@@ -125402,17 +125419,31 @@ MonoBehaviour:
   - {fileID: 1304518752}
   - {fileID: 1304518751}
   - {fileID: 1304518750}
-  instrumentFamilies:
-  - {fileID: 533606856}
-  - {fileID: 483210029}
-  - {fileID: 104945097}
-  - {fileID: 1394543365}
   CorrectInstrumentsCanvas: {fileID: 355713847}
   instructionText: {fileID: 781353954524895438}
   amountOfInstrumentsCanvas: {fileID: 31875879}
   easyModes:
   - {fileID: 1743504581}
   - {fileID: 613716271}
+--- !u!114 &1568146443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568146437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a373bfa3b91ae4fba9c7f2784efcd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instrumentFamilies:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  instrumentsPlayingSound: []
+  instrumentPlayingHaptics: {fileID: 0}
 --- !u!1 &1587385350
 GameObject:
   m_ObjectHideFlags: 0
@@ -127714,6 +127745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1 &1721178717
 GameObject:
@@ -128162,8 +128194,8 @@ MonoBehaviour:
         m_MethodName: InstrumentPicked
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1742087186}
-          m_ObjectArgumentAssemblyTypeName: InstrumentBehavior, Assembly-CSharp
+          m_ObjectArgument: {fileID: 1742087177}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -128363,6 +128395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1 &1743504581
 GameObject:
@@ -128957,8 +128990,8 @@ MonoBehaviour:
         m_MethodName: InstrumentPicked
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1801849973}
-          m_ObjectArgumentAssemblyTypeName: InstrumentBehavior, Assembly-CSharp
+          m_ObjectArgument: {fileID: 1801849968}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -129224,6 +129257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1 &1841843730
 GameObject:
@@ -129250,7 +129284,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841843730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0.288}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -144775,6 +144809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1 &1929904974
 GameObject:
@@ -150914,6 +150949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!1 &2076495104
 GameObject:
@@ -153251,8 +153287,8 @@ MonoBehaviour:
         m_MethodName: InstrumentPicked
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1790305723868431432}
-          m_ObjectArgumentAssemblyTypeName: InstrumentBehavior, Assembly-CSharp
+          m_ObjectArgument: {fileID: 1790305723868431423}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -153535,6 +153571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!23 &1792700626381657261
 MeshRenderer:
@@ -156440,8 +156477,8 @@ MonoBehaviour:
         m_MethodName: InstrumentPicked
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 3784292503872668150}
-          m_ObjectArgumentAssemblyTypeName: InstrumentBehavior, Assembly-CSharp
+          m_ObjectArgument: {fileID: 603634918836032748}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -156671,6 +156708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!23 &3855731584820723671
 MeshRenderer:
@@ -157204,8 +157242,8 @@ MonoBehaviour:
         m_MethodName: InstrumentPicked
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 4380311358734841815}
-          m_ObjectArgumentAssemblyTypeName: InstrumentBehavior, Assembly-CSharp
+          m_ObjectArgument: {fileID: 3999809264642157941}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -157366,6 +157404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!33 &4411116289585437205
 MeshFilter:
@@ -159533,8 +159572,8 @@ MonoBehaviour:
         m_MethodName: InstrumentPicked
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8026139115277227968}
-          m_ObjectArgumentAssemblyTypeName: InstrumentBehavior, Assembly-CSharp
+          m_ObjectArgument: {fileID: 8026139115277227960}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -159695,6 +159734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad429a6821262ad46ae4fe7c8b20d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instrumentClips: []
   folderName: 
 --- !u!33 &8123305843369080482
 MeshFilter:

@@ -44,6 +44,19 @@ public class InstrumentsCanvas : MonoBehaviour
         }
     }
     
+    public void SetCorrectInstrumentsText(InstrumentBehavior instrumentPlaying, bool correct)
+    {
+        titleText.text = "Det korrekte instrument var";
+        
+
+        correctInstrumentsText[0].text = instrumentPlaying.name;
+        
+        if (correct)
+        {
+            star.SetActive(true);
+        }
+    }
+    
     public void SetTextColor(int index, Color color)
     {
         correctInstrumentsText[index].color = color;
