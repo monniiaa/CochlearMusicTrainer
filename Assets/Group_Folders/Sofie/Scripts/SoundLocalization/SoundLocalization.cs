@@ -52,7 +52,6 @@ public class SoundLocalization : LevelManager
 
     private void Awake()
     {
-        round = 1;
         path = "SoundLocalization";
         gameDataManager = GameDataManager.Instance;
         _xrRayInteractor = FindObjectOfType<XRRayInteractor>();
@@ -81,7 +80,6 @@ public class SoundLocalization : LevelManager
         {
             star.gameObject.SetActive(false);
         }
-        StartRound();
     }
     
     private void OnEnable()
@@ -91,6 +89,8 @@ public class SoundLocalization : LevelManager
         {
             distanceTracker.distanceEvent += EndRound;
         }
+        RestartLevel();
+        StartRound();
     }
     
     private void OnDisable()
@@ -100,7 +100,6 @@ public class SoundLocalization : LevelManager
         {
             distanceTracker.distanceEvent -= EndRound;
         }
-        round = 0;
     }
     
     
@@ -181,15 +180,14 @@ public class SoundLocalization : LevelManager
 
     public override void SetRoundFunctionality()
     {
-
         round++;
         if (round < 4 && difficulty == Difficulty.Easy)
         {
-            StartCoroutine(WaitBeforStaring());
+             waitForTarget = StartCoroutine(WaitBeforStaring());
         }
         else if ( round < 4 && difficulty == Difficulty.Medium || difficulty == Difficulty.Hard)
         {
-            Debug.Log("starting");
+            
             StartRound();
             startTime = DateTime.Now;
         }
@@ -197,7 +195,7 @@ public class SoundLocalization : LevelManager
         {
             JsonManager.WriteDataToFile<ScoreData>(new ScoreData("Sound Localization", DateTime.Now,
                     currentScore, currentLevel));
-            StartCoroutine(End());
+            waitForTarget = StartCoroutine(End());
             
             if (currentLevel == gameData.level)
             {
@@ -212,6 +210,7 @@ public class SoundLocalization : LevelManager
         }
     }
     
+    
     private void RespawnSpeaker()
     {
         mediumHardSpeaker = speakerSpawner.SpawnSpeaker(mediumHardTargetPrefab);
@@ -223,7 +222,7 @@ public class SoundLocalization : LevelManager
                 meshRenderer.enabled = true;
                 if (round == 2)
                 {
-                    _alphaChange.MakeTransparent(mediumHardSpeaker.GetComponentInChildren<Renderer>(), 0.5f);
+                    _alphaChange.MakeTransparent(mediumHardSpeaker.GetComponentInChildren<Renderer>(), 0.3f);
                 }
                 else if (round == 3)
                 {
@@ -265,7 +264,16 @@ public class SoundLocalization : LevelManager
         {
             StartCoroutine(ResetEasyModeTargets());
         }
-        yield return new WaitForSeconds(2f);
+
+        if (difficulty == Difficulty.Hard)
+        {
+            foreach (GameObject instrument in pickedInstruments)
+            {
+                instrumentNameUI.gameObject.SetActive(false);
+                instrument.GetComponent<DeletusMaximus>().Destroy(); 
+            }
+        }
+        yield return new WaitForSeconds(0.8f);
         modeManager.EndGame();
         ShowStar(currentScore);
 
@@ -285,8 +293,8 @@ public class SoundLocalization : LevelManager
 
     public void PickTarget(GameObject target)
     {
-        
-        if (target.GetComponent<AudioSource>().clip != null)
+        if (waitForTarget != null) return;
+            if (target.GetComponent<AudioSource>().clip != null)
         {
             correctTarget = true;
             target.GetComponent<AudioSource>().Stop();
@@ -351,7 +359,7 @@ public class SoundLocalization : LevelManager
                     round));
             meshRenderer.enabled = true;
             waitForTarget = StartCoroutine(WaitForVisibleShootingDisc());
-        } else if (difficulty == Difficulty.Hard)
+        } else if ( difficulty == Difficulty.Hard)
         {
             if(waitForTarget != null) return;
             instrumentToLocate.GetComponentInChildren<MeshRenderer>().enabled = true;
@@ -392,7 +400,6 @@ public class SoundLocalization : LevelManager
                 instrument.GetComponentInChildren<AudioSource>().Stop();
                 
             }
-
             waitForTarget = StartCoroutine(WaitForInstrumentRound());
         }
     }
@@ -441,9 +448,11 @@ public class SoundLocalization : LevelManager
     {
         yield return new WaitForSeconds(1.5f);
         StartRound();
+        waitForTarget = null;
     }
     protected override void StartRound()
     {
+        Debug.Log("Starting round");
         SetDifficultyChanges();
     }
 
@@ -451,5 +460,6 @@ public class SoundLocalization : LevelManager
     {
         round = 1;
         currentScore = 0;
+        waitForTarget = null;
     }
 }
