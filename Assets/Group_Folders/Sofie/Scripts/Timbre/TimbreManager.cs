@@ -25,6 +25,7 @@ public class TimbreManager : LevelManager
     [SerializeField] private Canvas amountOfInstrumentsCanvas;
     [SerializeField] private GameObject[] easyModes = new GameObject[2];
     [SerializeField] private GameObject[] mediumModes = new GameObject[2];
+    
     bool haptics = false;
 
     private InstrumentPicker instrumentPicker;
@@ -54,16 +55,18 @@ public class TimbreManager : LevelManager
             easyModes[0].SetActive(false);
         }
 
-        if (currentLevel == 4)
+        if (currentLevel == 4 || currentLevel == 5)
         {
             mediumModes[0].SetActive(true);
             mediumModes[1].SetActive(false);
+
         }
-        else if(currentLevel == 5 || currentLevel == 6)
+        else if (currentLevel ==6)
         {
             mediumModes[0].SetActive(false);
             mediumModes[1].SetActive(true);
         }
+        
         CorrectInstrumentsCanvas.gameObject.SetActive(false);
         foreach (GameObject star in starAnimation)
         {
@@ -81,10 +84,10 @@ public class TimbreManager : LevelManager
             {
                 if(instrumentPicker.instrumentsPlayingSound.Count > 1)
                 {
-                    instructionText.text = "Flere instrumenter spiller, vælg det der spiller og vibrere i controlleren";
+                    instructionText.text = instrumentPicker.instrumentsPlayingSound.Count + " instrumenter spiller, vælg det der spiller og vibrere i controlleren";
                 } else
                 {
-                    instructionText.text = "Vælg det instrument der matcher vibrationerne i controlleren";
+                    instructionText.text = "Vælg det instrument der spiller";
                 }
             }
             else
@@ -174,32 +177,36 @@ public class TimbreManager : LevelManager
         switch (difficulty)
         {
             case Difficulty.Easy:
-                int amount;
-                if (currentLevel < 3) amount = 1;
-                else amount = UnityEngine.Random.Range(1, 3);
-                SoundOnlyMode(amount);
+                int amount = 1;
+                if (currentLevel < 3) HapticsAndSoundMode(amount);
+                else SoundOnlyMode(amount);
                 break;
             case Difficulty.Medium:
-                int randMedium;
                 if (currentLevel == 4)
                 {
-                    randMedium = UnityEngine.Random.Range(1, 4);
-                    AmountOfInstrumentsMode(randMedium);
-                } else if (currentLevel == 5  || currentLevel == 6)
-                {
-                   // numberOfInstrumentsMode = false;
                     HapticsAndSoundMode(2);
+                } else if (currentLevel == 5)
+                {
+                    SoundOnlyMode(2);
+                }
+                else
+                {
+                    int randMedium = UnityEngine.Random.Range(1, 4);
+                    AmountOfInstrumentsMode(randMedium);
                 }
                 break;
             case Difficulty.Hard:
-                if (currentLevel == 7)
+                if (currentLevel == 7) //From level 7 all instruments visible at a time
                 {
-                    HapticsOnlyMode(0);
+                    HapticsAndSoundMode(2);
                 }
                 else if (currentLevel == 8)
                 {
-                    int randRoundClip = UnityEngine.Random.Range(0, 6);
-                    HapticsOnlyMode(randRoundClip);;
+                    SoundOnlyMode(2);
+                }
+                else if (currentLevel == 9)
+                {
+                    HapticsAndSoundMode(3);
                 }
                 else
                 {

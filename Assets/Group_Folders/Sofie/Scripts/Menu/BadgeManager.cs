@@ -28,50 +28,30 @@ public class BadgeManager : MonoBehaviour
 
     private void SetBadge()
     {
-        Debug.Log(path + ": " + gameData.level);
-        if (gameData.level == 10)
+        int count = 0;
+        for (int i = 0; i < gameData.levelScore.Length; i++)
         {
-            int count = 0;
-            for (int i = 0; i < gameData.levelScore.Length; i++)
+            if (gameData.levelScore[i] == 3)
             {
-                if (gameData.levelScore[i] == 3)
-                {
-                    count++;
-                }
+                count++;
             }
+        }
 
-            if (count == 10)
-            {
-                badgeImage.sprite = goldBadge;
-            }
-            else if (count >= 1  && gameData.levelScore[9] > 0)
-            {
-                badgeImage.sprite = silverBadge;
-            }
-            else
-            {
-                badgeImage.sprite = noBadge;
-            }
+        if (count == 10 && gameData.level == 10)
+        {
+            badgeImage.sprite = goldBadge;
+        }
+        else if (count >= 1 && count < 10 && gameData.level == 10)
+        {
+            badgeImage.sprite = silverBadge;
+        }
+        else if (count >= 1 && count < 10 && gameData.level < 10)
+        {
+            badgeImage.sprite = bronzeBadge;
         }
         else
         {
-            int count = 0;
-            for (int i = 0; i < gameData.levelScore.Length; i++)
-            {
-                if (gameData.levelScore[i] == 3)
-                {
-                    count++;
-                }
-            }
-
-            if (count >= 1)
-            {
-                badgeImage.sprite = bronzeBadge;
-            }
-            else
-            {
-                badgeImage.sprite = noBadge;
-            }
+            badgeImage.sprite = noBadge;
         }
     }
 }
