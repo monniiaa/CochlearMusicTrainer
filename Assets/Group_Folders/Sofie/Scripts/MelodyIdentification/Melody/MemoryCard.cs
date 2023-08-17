@@ -77,8 +77,8 @@ public class MemoryCard : MonoBehaviour
 
     public void Matched()
     {
-        SpriteRenderer sorite = iAmPressed.GetComponent<SpriteRenderer>();
-        sorite.color = Color.green;
+        SpriteRenderer sprite = iAmPressed.GetComponent<SpriteRenderer>();
+        sprite.color = Color.green;
     }
     
     

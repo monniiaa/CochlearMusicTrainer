@@ -7,8 +7,8 @@ public class MelodyContoller : MonoBehaviour
 {
     public int numCards = 8;
 
-    private float offSetx = 200f;
-    private float offSety = 200f;
+    private float offSetx = 2f;
+    private float offSety = 2f;
 
     private int gridRows = 2;
     private int gridCols = 4;
@@ -26,6 +26,8 @@ public class MelodyContoller : MonoBehaviour
     
     private List<string> sprites = new List<string>();
     private List<string> audioclips = new List<string>();
+
+    [SerializeField] private Canvas gameCanvas;
     
     public bool canReveal
     {
@@ -35,6 +37,43 @@ public class MelodyContoller : MonoBehaviour
     private void Start()
     {
         int[] cardsIdexes = GenerateCardVector(numCards);
+        (audioclips, sprites) = GetComponent<RandomizeInstruments>().SelectAndRandomizeCards(numCards, similarCards, sameMelody);
+        gridCols = numCards / gridRows;
+
+        originalCard.transform.position = new Vector3((gridCols - 1), 1, 0);
+        
+        Vector3 startPos = originalCard.transform.position;
+
+        for (int i = 0; i < gridCols; i++)
+        {
+            for (int j = 0; j < gridRows; j++)
+            {
+                MemoryCard card;
+                if (i == 0 && j == 0)
+                {
+                    card = originalCard;
+                }
+                else
+                {
+                    card = Instantiate(originalCard) as MemoryCard;
+                }
+                int index = j * gridCols + i;
+                int id = cardsIdexes[index];
+
+                card._id = id;
+                Debug.Log(audioclips[id]);
+
+                card.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(sprites[id]);
+                card.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(audioclips[id]);
+                
+                float posX = (offSetx * i) + startPos.x;
+                float posY = -(offSety * j) + startPos.y;
+                card.transform.parent = gameCanvas.transform;
+                card.transform.localScale = new Vector3(22, 22, 110);
+               // Vector3 offset = new Vector3(-10, -10, 0);
+                card.transform.position = new Vector3(gameCanvas.transform.position.x + posX,gameCanvas.transform.position.y + posY, gameCanvas.transform.position.y + startPos.z) ;
+            }
+        }
     }
 
     private int[] GenerateCardVector(int nCards)
@@ -80,13 +119,60 @@ public class MelodyContoller : MonoBehaviour
         }
         else
         {
-            secondRevealed = card;
-            StartCoroutine(CheckMatch());
+            if (card != firstRevealed)
+            {
+                secondRevealed = card;
+                StartCoroutine(CheckMatch());
+            }
         }
     }
 
-    private string CheckMatch()
+    private IEnumerator CheckMatch()
     {
-        throw new NotImplementedException();
+        if (firstRevealed.Id == secondRevealed.Id &&
+            firstRevealed.transform.position != secondRevealed.transform.position &&
+            !matchId.Contains(firstRevealed.Id))
+        {
+            matchId.Add(firstRevealed.Id);
+            score++;
+            print($"Score: {score}");
+
+            firstRevealed.Reveal();
+            secondRevealed.Reveal();
+
+            firstRevealed.alreadyMatched = true;
+            secondRevealed.alreadyMatched = true;
+
+            firstRevealed.Matched();
+            secondRevealed.Matched();
+            new WaitForSeconds(1f);
+            //TODO: Play success feedback audio
+
+            if (score == (gridCols * gridRows) / 2)
+            {
+                yield return new WaitForSeconds(0.5f);
+                //TODO: Show end screen
+                firstRevealed.audioSource.Stop();
+                
+                secondRevealed.audioSource.Stop();
+            }
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.2f);
+                if(!matchId.Contains(firstRevealed.Id))
+                {
+                    firstRevealed.Unreveal();
+                    secondRevealed.Unreveal();
+                }
+        }
+        
+        firstRevealed = null;
+        secondRevealed = null;
+    }
+
+    private void CollectCardInfo()
+    {
+        //TODO: JSON file with recorded game information run when pressing either restart or homepage
     }
 }

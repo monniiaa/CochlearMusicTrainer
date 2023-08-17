@@ -229,19 +229,19 @@ public class RandomizeInstruments : MonoBehaviour
         
         for (int entry = 0; entry < selectedMelodies.Count; entry++)
         {
-            string soundPathFile = Path.Combine("Sounds", "Instruments", selectedInstruments[entry] + "_" + selectedMelodies[entry]);
+            string soundPathFile = Path.Combine("MemoryGameSounds", "Sounds", "Instruments", selectedInstruments[entry] + "_" + selectedMelodies[entry]);
             //string soundPathFile = "Sounds/Instruments/" + selectedInstruments[entry] + "_" + selectedMelodies[entry];
             audioClipArray.Add(soundPathFile);
 
-            string imagePathFile = Path.Combine("Sprites", "Cards", "Card" + selectedInstruments[entry]);
+            string imagePathFile = Path.Combine("MemoryGameSounds", "Sprites", "Cards", "Card" + selectedInstruments[entry]);
             //string imagePathFile = "Images/Cards/" + "Card" + selectedInstruments[entry];
             instrumentGameObjectArray.Add(imagePathFile);
 
         }
 
         // Print all selected audioclips and sprites
-        audioClipArray.ForEach(Debug.Log);
-        instrumentGameObjectArray.ForEach(Debug.Log);
+        //audioClipArray.ForEach(Debug.Log);
+        //instrumentGameObjectArray.ForEach(Debug.Log);
 
         return Tuple.Create(audioClipArray, instrumentGameObjectArray);
     }
