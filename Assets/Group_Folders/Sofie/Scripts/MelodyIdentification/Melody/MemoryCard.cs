@@ -19,6 +19,7 @@ public class MemoryCard : MonoBehaviour
     
     public AudioSource audioSource;
     private HapticClipPlayer hapticPlayer;
+    private HapticClip hapticClip;
     public int numClicks = 0;
     public int _id;
     
@@ -49,6 +50,16 @@ public class MemoryCard : MonoBehaviour
         audioSource.clip = sound;
         //if(hapticsOn) hapticPlayer = new HapticClipPlayer(hapticClip);
     }
+    public void StopHaptics()
+    {
+        if(hapticPlayer != null) hapticPlayer.Stop();
+    }
+    
+    public void SetHaptics(HapticClip haptic)
+    {
+        hapticClip = haptic;
+        hapticPlayer = new HapticClipPlayer(hapticClip);
+    }
 
     private void Pressed(SelectEnterEventArgs args)
     {
@@ -56,8 +67,8 @@ public class MemoryCard : MonoBehaviour
         {
             controller.CardRevealed(this);
             iAmPressed.SetActive(true);
-            GetComponent<AudioSource>().Play();
             audioSource.Play();
+            if(hapticPlayer != null) hapticPlayer.Play(HapticInstance.Hand.Right);
 
             numClicks++;
             imTouched = false;
@@ -101,5 +112,6 @@ public class MemoryCard : MonoBehaviour
         imHovered.SetActive(false);
         imTouched = false;
         audioSource.Stop();
+        StopHaptics();
     }
 }

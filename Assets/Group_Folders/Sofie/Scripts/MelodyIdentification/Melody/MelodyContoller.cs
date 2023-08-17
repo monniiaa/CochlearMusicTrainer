@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Oculus.Haptics;
 using UnityEngine;
 
 public class MelodyContoller : MonoBehaviour
@@ -26,8 +27,11 @@ public class MelodyContoller : MonoBehaviour
     
     private List<string> sprites = new List<string>();
     private List<string> audioclips = new List<string>();
+    private List<string> hapticClips = new List<string>();
 
     [SerializeField] private Canvas gameCanvas;
+    
+    [SerializeField] private bool hapticsOn = false;
     
     public bool canReveal
     {
@@ -37,7 +41,8 @@ public class MelodyContoller : MonoBehaviour
     private void Start()
     {
         int[] cardsIdexes = GenerateCardVector(numCards);
-        (audioclips, sprites) = GetComponent<RandomizeInstruments>().SelectAndRandomizeCards(numCards, similarCards, sameMelody);
+        if(!hapticsOn) (audioclips, sprites) = GetComponent<RandomizeInstruments>().SelectAndRandomizeCards(numCards, similarCards, sameMelody);
+        else (audioclips, sprites, hapticClips) = GetComponent<RandomizeInstruments>().SelectAndRandomizeCards(numCards, similarCards, sameMelody, hapticsOn );
         gridCols = numCards / gridRows;
 
         originalCard.transform.position = new Vector3((gridCols - 1), 1, 0);
@@ -61,10 +66,15 @@ public class MelodyContoller : MonoBehaviour
                 int id = cardsIdexes[index];
 
                 card._id = id;
-                Debug.Log(audioclips[id]);
 
                 card.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(sprites[id]);
                 card.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(audioclips[id]);
+                if (hapticsOn)
+                {
+                    HapticClip hapticClip = Resources.Load<HapticClip>(hapticClips[id]);
+                    card.SetHaptics(hapticClip);
+                }
+
                 
                 float posX = (offSetx * i) + startPos.x;
                 float posY = -(offSety * j) + startPos.y;
@@ -153,8 +163,12 @@ public class MelodyContoller : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
                 //TODO: Show end screen
                 firstRevealed.audioSource.Stop();
-                
                 secondRevealed.audioSource.Stop();
+                if (hapticsOn)
+                {
+                    firstRevealed.StopHaptics();
+                    secondRevealed.StopHaptics();
+                }
             }
         }
         else
