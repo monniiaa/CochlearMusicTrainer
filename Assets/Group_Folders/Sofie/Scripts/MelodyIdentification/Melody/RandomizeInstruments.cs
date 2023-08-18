@@ -26,6 +26,10 @@ public class RandomizeInstruments : MonoBehaviour
         { "Drums", 6 }
     };
 
+    private void Start()
+    {
+        SelectAndRandomizeCards(4, false, false);
+    }
 
 
     public Tuple<List<string>, List<string>> SelectAndRandomizeCards(int numberOfCards, bool similar, bool sameMelody)
@@ -44,15 +48,13 @@ public class RandomizeInstruments : MonoBehaviour
 
         // Compose the filenames for both sprites and audioclips
         List<string> audioClipArray = new List<string>();
-        List<string> hapticClipArray = new List<string>();
         List<string> instrumentGameObjectArray= new List<string>();
 
         // Container for selected instrument
         List<string> selectedInstruments = new List<string>(numberOfInstruments);
         // Container for selected melodies
         List<string> selectedMelodies = new List<string>(numberOfInstruments);
-        List<string> selectedHaptics = new List<string>(numberOfInstruments);
- 
+
         string path = "";
         string tmpInstrument = "";
         List<string> tmpMelody = new List<string>();
@@ -227,27 +229,23 @@ public class RandomizeInstruments : MonoBehaviour
         
         for (int entry = 0; entry < selectedMelodies.Count; entry++)
         {
-            Debug.Log(selectedInstruments[entry]);
+
             string soundPathFile = Path.Combine("MemoryGameSounds", "Sounds", "Instruments", selectedInstruments[entry] + "_" + selectedMelodies[entry]);
-            //string soundPathFile = "Sounds/Instruments/" + selectedInstruments[entry] + "_" + selectedMelodies[entry];
             audioClipArray.Add(soundPathFile);
 
-            string imagePathFile = Path.Combine("MemoryGameSounds", "Sprites", "Cards", "Card" + selectedInstruments[entry]);
-            //string imagePathFile = "Images/Cards/" + "Card" + selectedInstruments[entry];
-            instrumentGameObjectArray.Add(imagePathFile);
-            
-            string hapticPathFile = Path.Combine("MemoryGameSounds", "Haptics", selectedInstruments[entry] + "_" + selectedMelodies[entry]);
+            string prefabPathFile = Path.Combine("MemoryGameSounds", "Prefabs", "Instruments", "Instrument" + selectedInstruments[entry]);
+            instrumentGameObjectArray.Add(prefabPathFile);
 
         }
 
         // Print all selected audioclips and sprites
         //audioClipArray.ForEach(Debug.Log);
-        //instrumentGameObjectArray.ForEach(Debug.Log);
+        instrumentGameObjectArray.ForEach(Debug.Log);
 
         return Tuple.Create(audioClipArray, instrumentGameObjectArray);
     }
     
-     public Tuple<List<string>, List<string>, List<string>> SelectAndRandomizeCards(int numberOfCards, bool similar, bool sameMelody, bool hapticsOn =false)
+     public Tuple<List<string>, List<string>, List<string>> SelectAndRandomizeCards(int numberOfCards, bool similar, bool sameMelody, bool hapticsOn =true)
     {
 
         int numberOfInstruments = numberOfCards / 2;

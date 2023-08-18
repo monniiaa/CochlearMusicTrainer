@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Oculus.Haptics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MelodyContoller : MonoBehaviour
@@ -25,7 +26,7 @@ public class MelodyContoller : MonoBehaviour
     private int currentScene;
     private List<int> matchId = new List<int>();
     
-    private List<string> sprites = new List<string>();
+    private List<string> prefabs = new List<string>();
     private List<string> audioclips = new List<string>();
     private List<string> hapticClips = new List<string>();
 
@@ -33,6 +34,13 @@ public class MelodyContoller : MonoBehaviour
     
     [SerializeField] private bool hapticsOn = false;
     
+    CardSpawner cardSpawner;
+
+    private void Awake()
+    {
+        cardSpawner = GetComponent<CardSpawner>();
+    }
+
     public bool canReveal
     {
         get { return secondRevealed == null; }
@@ -41,49 +49,52 @@ public class MelodyContoller : MonoBehaviour
     private void Start()
     {
         int[] cardsIdexes = GenerateCardVector(numCards);
-        if(!hapticsOn) (audioclips, sprites) = GetComponent<RandomizeInstruments>().SelectAndRandomizeCards(numCards, similarCards, sameMelody);
-        else (audioclips, sprites, hapticClips) = GetComponent<RandomizeInstruments>().SelectAndRandomizeCards(numCards, similarCards, sameMelody, hapticsOn );
-        gridCols = numCards / gridRows;
-
-        originalCard.transform.position = new Vector3((gridCols - 1), 1, 0);
+        if(!hapticsOn) (audioclips, prefabs) = GetComponent<RandomizeInstruments>().SelectAndRandomizeCards(numCards, similarCards, sameMelody);
+        else (audioclips, prefabs, hapticClips) = GetComponent<RandomizeInstruments>().SelectAndRandomizeCards(numCards, similarCards, sameMelody, hapticsOn );
         
-        Vector3 startPos = originalCard.transform.position;
+        MemoryCard[] cards =  cardSpawner.SpawnCards(numCards, originalCard);
 
-        for (int i = 0; i < gridCols; i++)
+        for (int i = 0; i < cards.Length; i++)
         {
-            for (int j = 0; j < gridRows; j++)
+            MemoryCard card = cards[i];
+
+            int id = cardsIdexes[i];
+            card._id = id;
+            
+            card.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(audioclips[id]);
+            card.SetAndSpawnInstrument(Resources.Load<GameObject>(prefabs[id]));
+            
+            if (hapticsOn)
             {
-                MemoryCard card;
-                if (i == 0 && j == 0)
-                {
-                    card = originalCard;
-                }
-                else
-                {
-                    card = Instantiate(originalCard) as MemoryCard;
-                }
-                int index = j * gridCols + i;
-                int id = cardsIdexes[index];
-
-                card._id = id;
-
-                card.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(sprites[id]);
-                card.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(audioclips[id]);
-                if (hapticsOn)
-                {
-                    HapticClip hapticClip = Resources.Load<HapticClip>(hapticClips[id]);
-                    card.SetHaptics(hapticClip);
-                }
-
-                
-                float posX = (offSetx * i) + startPos.x;
-                float posY = -(offSety * j) + startPos.y;
-                card.transform.parent = gameCanvas.transform;
-                card.transform.localScale = new Vector3(22, 22, 110);
-               // Vector3 offset = new Vector3(-10, -10, 0);
-                card.transform.position = new Vector3(gameCanvas.transform.position.x + posX,gameCanvas.transform.position.y + posY, gameCanvas.transform.position.y + startPos.z) ;
+                HapticClip hapticClip = Resources.Load<HapticClip>(hapticClips[id]);
+               // card.SetHaptics(hapticClip);
             }
         }
+        /*  for (int i = 0; i < gridCols; i++)
+          {
+              for (int j = 0; j < gridRows; j++)
+              {
+                  MemoryCard card;
+                  if (i == 0 && j == 0)
+                  {
+                      card = originalCard;
+                  }
+                  else
+                  {
+                      card = Instantiate(originalCard) as MemoryCard;
+                  }
+                  int index = j * gridCols + i;
+                  int id = cardsIdexes[index];
+  
+                  card._id = id;
+  
+                  card.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(sprites[id]);
+                  card.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(audioclips[id]);
+                  if (hapticsOn)
+                  {
+                      HapticClip hapticClip = Resources.Load<HapticClip>(hapticClips[id]);
+                      card.SetHaptics(hapticClip);
+                  }*/
     }
 
     private int[] GenerateCardVector(int nCards)
@@ -132,12 +143,12 @@ public class MelodyContoller : MonoBehaviour
             if (card != firstRevealed)
             {
                 secondRevealed = card;
-                StartCoroutine(CheckMatch());
+               // StartCoroutine(CheckMatch());
             }
         }
     }
 
-    private IEnumerator CheckMatch()
+    /*private IEnumerator CheckMatch()
     {
         if (firstRevealed.Id == secondRevealed.Id &&
             firstRevealed.transform.position != secondRevealed.transform.position &&
@@ -183,7 +194,7 @@ public class MelodyContoller : MonoBehaviour
         
         firstRevealed = null;
         secondRevealed = null;
-    }
+    }*/
 
     private void CollectCardInfo()
     {

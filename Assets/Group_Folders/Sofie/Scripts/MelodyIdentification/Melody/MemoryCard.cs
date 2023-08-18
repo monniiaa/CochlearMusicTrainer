@@ -7,10 +7,8 @@ using Oculus.Haptics;
 
 public class MemoryCard : MonoBehaviour
 {
-
-    [SerializeField] GameObject cardBack;
-    [SerializeField] GameObject imHovered;
-    [SerializeField] GameObject iAmPressed;
+    public GameObject spawnpoint;
+    [SerializeField] public GameObject instrument;
     [SerializeField] private MelodyContoller controller;
     
     private XRSimpleInteractable interactableHandler;
@@ -23,12 +21,19 @@ public class MemoryCard : MonoBehaviour
     public int numClicks = 0;
     public int _id;
     
-    public int Id
+    public int Id   
     {
         get { return _id; }
     }
+    
+    public void SetAndSpawnInstrument(GameObject inst)
+    {
+        instrument = Instantiate(inst, spawnpoint.transform.position, spawnpoint.transform.rotation, spawnpoint.transform);
+        instrument.transform.localScale = new Vector3(0.5f,0.5f, 0.5f);
+    }
+    
 
-    private void Start()
+   /* private void Start()
     {
         interactableHandler = GetComponent<XRSimpleInteractable>();
         
@@ -113,5 +118,5 @@ public class MemoryCard : MonoBehaviour
         imTouched = false;
         audioSource.Stop();
         StopHaptics();
-    }
+    }*/
 }
