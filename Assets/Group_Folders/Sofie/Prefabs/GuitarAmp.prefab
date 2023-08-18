@@ -194,7 +194,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2657427166238719064}
   m_LocalRotation: {x: -0, y: 0.65257937, z: -0, w: 0.7577204}
-  m_LocalPosition: {x: 4.621, y: -1.517, z: 0.653}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.4672, y: 2.4672, z: 2.4672}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -289,6 +289,7 @@ MonoBehaviour:
   frequency2: 0
   sampleRate: 44100
   waveLengthInSeconds: 2
+  amplitude: 0
   playing: 0
 --- !u!1 &2657427166490656220
 GameObject:

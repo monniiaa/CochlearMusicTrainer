@@ -20,8 +20,8 @@ public class MelodyContoller : MonoBehaviour
     
     [SerializeField] MemoryCard originalCard;
     
-    private MemoryCard firstRevealed;
-    private MemoryCard secondRevealed;
+    public MemoryCard firstRevealed;
+    public MemoryCard secondRevealed;
     private int score = 0;
     private int currentScene;
     private List<int> matchId = new List<int>();
@@ -67,34 +67,9 @@ public class MelodyContoller : MonoBehaviour
             if (hapticsOn)
             {
                 HapticClip hapticClip = Resources.Load<HapticClip>(hapticClips[id]);
-               // card.SetHaptics(hapticClip);
+                card.SetHaptics(hapticClip);
             }
         }
-        /*  for (int i = 0; i < gridCols; i++)
-          {
-              for (int j = 0; j < gridRows; j++)
-              {
-                  MemoryCard card;
-                  if (i == 0 && j == 0)
-                  {
-                      card = originalCard;
-                  }
-                  else
-                  {
-                      card = Instantiate(originalCard) as MemoryCard;
-                  }
-                  int index = j * gridCols + i;
-                  int id = cardsIdexes[index];
-  
-                  card._id = id;
-  
-                  card.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(sprites[id]);
-                  card.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>(audioclips[id]);
-                  if (hapticsOn)
-                  {
-                      HapticClip hapticClip = Resources.Load<HapticClip>(hapticClips[id]);
-                      card.SetHaptics(hapticClip);
-                  }*/
     }
 
     private int[] GenerateCardVector(int nCards)
@@ -140,15 +115,12 @@ public class MelodyContoller : MonoBehaviour
         }
         else
         {
-            if (card != firstRevealed)
-            {
-                secondRevealed = card;
-               // StartCoroutine(CheckMatch());
-            }
+            secondRevealed = card;
+            StartCoroutine(CheckMatch());
         }
     }
 
-    /*private IEnumerator CheckMatch()
+    private IEnumerator CheckMatch()
     {
         if (firstRevealed.Id == secondRevealed.Id &&
             firstRevealed.transform.position != secondRevealed.transform.position &&
@@ -194,7 +166,7 @@ public class MelodyContoller : MonoBehaviour
         
         firstRevealed = null;
         secondRevealed = null;
-    }*/
+    }
 
     private void CollectCardInfo()
     {
