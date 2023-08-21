@@ -127,6 +127,7 @@ public class MemoryMelodyManager : LevelManager
     {
         JsonManager.WriteDataToFile<ScoreData>(new ScoreData("Melody Identification", DateTime.Now, currentScore, currentLevel));
         yield return new WaitForSeconds(0.5f);
+        currentScore = 3;
         ShowStar(currentScore);
         modeManager.EndGame();
     }
