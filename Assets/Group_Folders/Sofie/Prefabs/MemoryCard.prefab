@@ -597,6 +597,7 @@ GameObject:
   - component: {fileID: 5059515114066004457}
   - component: {fileID: 1315410363669711907}
   - component: {fileID: 2250719958796863938}
+  - component: {fileID: 1271060423265731931}
   m_Layer: 0
   m_Name: MemoryCard
   m_TagString: Untagged
@@ -787,7 +788,6 @@ MonoBehaviour:
   audioSource: {fileID: 5059515114066004457}
   numClicks: 0
   _id: 0
-  pressed: 0
 --- !u!82 &5059515114066004457
 AudioSource:
   m_ObjectHideFlags: 0
@@ -915,6 +915,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.38, y: 0.36416522, z: 0.175}
   m_Center: {x: 0, y: 0.18208261, z: -0.000000007450581}
+--- !u!95 &1271060423265731931
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5318527877879282096}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1a3b0b7dba983c84b8d4abe824cfc0f2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5417213439915926803
 GameObject:
   m_ObjectHideFlags: 0

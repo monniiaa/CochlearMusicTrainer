@@ -115,12 +115,6 @@ public class RandomizeInstruments : MonoBehaviour
         {
             Debug.LogError("Folder does not exist: " + folderPath);
         }
-
-
-
-
-
-
         // Create a list of instruments for each similarity group
         var instrumentGroups = instrumentSimilarity.GroupBy(x => x.Value).Select(x => x.Select(y => y.Key).ToList()).ToList();
 
@@ -225,8 +219,6 @@ public class RandomizeInstruments : MonoBehaviour
 
         }
 
-
-        
         for (int entry = 0; entry < selectedMelodies.Count; entry++)
         {
 
@@ -240,7 +232,7 @@ public class RandomizeInstruments : MonoBehaviour
 
         // Print all selected audioclips and sprites
         //audioClipArray.ForEach(Debug.Log);
-        instrumentGameObjectArray.ForEach(Debug.Log);
+        //instrumentGameObjectArray.ForEach(Debug.Log);
 
         return Tuple.Create(audioClipArray, instrumentGameObjectArray);
     }
@@ -444,14 +436,12 @@ public class RandomizeInstruments : MonoBehaviour
         
         for (int entry = 0; entry < selectedMelodies.Count; entry++)
         {
-            Debug.Log(selectedInstruments[entry]);
             string soundPathFile = Path.Combine("MemoryGameSounds", "Sounds", "Instruments", selectedInstruments[entry] + "_" + selectedMelodies[entry]);
             //string soundPathFile = "Sounds/Instruments/" + selectedInstruments[entry] + "_" + selectedMelodies[entry];
             audioClipArray.Add(soundPathFile);
 
-            string imagePathFile = Path.Combine("MemoryGameSounds", "Sprites", "Cards", "Card" + selectedInstruments[entry]);
-            //string imagePathFile = "Images/Cards/" + "Card" + selectedInstruments[entry];
-            instrumentGameObjectArray.Add(imagePathFile);
+            string prefabPathFile = Path.Combine("MemoryGameSounds", "Prefabs", "Instruments", "Instrument" + selectedInstruments[entry]);
+            instrumentGameObjectArray.Add(prefabPathFile);
             
             string hapticPathFile = Path.Combine("MemoryGameSounds", "Haptics", selectedInstruments[entry] + "_" + selectedMelodies[entry]);
             hapticClipArray.Add(hapticPathFile);
@@ -459,9 +449,9 @@ public class RandomizeInstruments : MonoBehaviour
         }
 
         // Print all selected audioclips and sprites
-        audioClipArray.ForEach(Debug.Log);
-        instrumentGameObjectArray.ForEach(Debug.Log);
-        hapticClipArray.ForEach(Debug.Log);
+        //audioClipArray.ForEach(Debug.Log);
+        //instrumentGameObjectArray.ForEach(Debug.Log);
+        //hapticClipArray.ForEach(Debug.Log);
 
         return Tuple.Create(audioClipArray, instrumentGameObjectArray, hapticClipArray);
     }

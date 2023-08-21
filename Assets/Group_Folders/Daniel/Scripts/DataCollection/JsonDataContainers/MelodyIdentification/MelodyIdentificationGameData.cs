@@ -6,26 +6,24 @@ using System;
 public class MelodyIdentificationGameData : AbstractDataContainer
 {
     public override string Path => "/MelodyIdentification/melody_identification_data.json";
+    
+    public string name;
+    public float clicks;
+    public float level;
+    public string melodyName;
+    public bool instr;
+    public bool mel;
+    public bool haptics;
 
-    public string time;
-    public string timeTakenToChooseSpeaker;
-    public string melodyReference;
-    public string chosenMelody;
-    public bool wasCorrect;
-    public string[] melodyOptions;
-    public int level;
-    public int round;
-
-    public MelodyIdentificationGameData(DateTime time, TimeSpan timeTakenToChooseSpeaker, string melodyReference, string chosenMelody, bool wasCorrect, string[] melodyOptions, int level, int round)
+    public MelodyIdentificationGameData(string name, float clicks, int level, string melodyName, bool similarInstruments, bool sameMelody, bool haptics)
     {
-        this.time = time.ToString("dd/MM/yyyy HH:mm:ss");
-        this.timeTakenToChooseSpeaker = timeTakenToChooseSpeaker.ToString("h'h 'm'm 's's'");;
-        this.melodyReference = melodyReference;
-        this.chosenMelody = chosenMelody;
-        this.wasCorrect = wasCorrect;
-        this.melodyOptions = melodyOptions;
+        this.name = name;
+        this.clicks = clicks;
         this.level = level;
-        this.round = round;
+        this.melodyName = melodyName;
+        this.instr = similarInstruments;
+        this.mel = sameMelody;
+        this.haptics = haptics;
     }
 
 }

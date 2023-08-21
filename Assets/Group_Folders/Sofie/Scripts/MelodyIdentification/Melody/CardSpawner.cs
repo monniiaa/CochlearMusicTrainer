@@ -39,4 +39,13 @@ public class CardSpawner : MonoBehaviour
         return cards;
     }
     
+    public void DestroyCards(MemoryCard[] cards)
+    {
+        for (int i = 0; i < cards.Length; i++)
+        {
+            Destroy(cards[i].instrument);
+            Destroy(cards[i].gameObject);
+        }
+    }
+    
 }

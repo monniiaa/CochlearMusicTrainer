@@ -4,17 +4,19 @@ using System.Collections.Generic;
 using Oculus.Haptics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class MelodyContoller : MonoBehaviour
 {
+    public delegate void End();
+    public event End EndEvent;
+    
+    public delegate void Match(bool match);
+    public event Match MatchEvent;
+
+
     public int numCards = 8;
 
-    private float offSetx = 2f;
-    private float offSety = 2f;
-
-    private int gridRows = 2;
-    private int gridCols = 4;
-    
     public bool similarCards = false;
     public bool sameMelody = false;
     
@@ -30,15 +32,15 @@ public class MelodyContoller : MonoBehaviour
     private List<string> audioclips = new List<string>();
     private List<string> hapticClips = new List<string>();
 
-    [SerializeField] private Canvas gameCanvas;
-    
     [SerializeField] private bool hapticsOn = false;
-    
     CardSpawner cardSpawner;
+    private MemoryCard[] cards;
+    
 
     private void Awake()
     {
         cardSpawner = GetComponent<CardSpawner>();
+
     }
 
     public bool canReveal
@@ -46,13 +48,21 @@ public class MelodyContoller : MonoBehaviour
         get { return secondRevealed == null; }
     }
 
-    private void Start()
+    public void SetDifficulty(int numCards, bool similarCards, bool sameMelody, bool hapticsOn)
+    {
+        this.numCards = numCards;
+        this.similarCards = similarCards;
+        this.sameMelody = sameMelody;
+        this.hapticsOn = hapticsOn;
+    }
+    
+        public void StartGame()
     {
         int[] cardsIdexes = GenerateCardVector(numCards);
         if(!hapticsOn) (audioclips, prefabs) = GetComponent<RandomizeInstruments>().SelectAndRandomizeCards(numCards, similarCards, sameMelody);
         else (audioclips, prefabs, hapticClips) = GetComponent<RandomizeInstruments>().SelectAndRandomizeCards(numCards, similarCards, sameMelody, hapticsOn );
         
-        MemoryCard[] cards =  cardSpawner.SpawnCards(numCards, originalCard);
+        cards = cardSpawner.SpawnCards(numCards, originalCard);
 
         for (int i = 0; i < cards.Length; i++)
         {
@@ -115,8 +125,12 @@ public class MelodyContoller : MonoBehaviour
         }
         else
         {
-            secondRevealed = card;
-            StartCoroutine(CheckMatch());
+            if (firstRevealed != card)
+            {
+                secondRevealed = card;
+                StartCoroutine(CheckMatch());
+            }
+            
         }
     }
 
@@ -139,19 +153,21 @@ public class MelodyContoller : MonoBehaviour
             firstRevealed.Matched();
             secondRevealed.Matched();
             new WaitForSeconds(1f);
-            //TODO: Play success feedback audio
+            MatchEvent?.Invoke(true);
 
-            if (score == (gridCols * gridRows) / 2)
+            if (score == numCards / 2)
             {
                 yield return new WaitForSeconds(0.5f);
-                //TODO: Show end screen
-                firstRevealed.audioSource.Stop();
-                secondRevealed.audioSource.Stop();
-                if (hapticsOn)
-                {
-                    firstRevealed.StopHaptics();
-                    secondRevealed.StopHaptics();
-                }
+               // firstRevealed.audioSource.Stop();
+               // secondRevealed.audioSource.Stop();
+               // if (hapticsOn)
+               // {
+               //     firstRevealed.StopHaptics();
+               //     secondRevealed.StopHaptics();
+               // }
+               CollectCardInfo();
+               StartCoroutine(WaitToDestroyCards());
+               EndEvent?.Invoke();
             }
         }
         else
@@ -163,13 +179,33 @@ public class MelodyContoller : MonoBehaviour
                     secondRevealed.Unreveal();
                 }
         }
-        
         firstRevealed = null;
         secondRevealed = null;
     }
 
     private void CollectCardInfo()
     {
-        //TODO: JSON file with recorded game information run when pressing either restart or homepage
+        foreach (MemoryCard card in cards)
+        {
+            JsonManager.WriteDataToFile<MelodyIdentificationGameData>(
+                new MelodyIdentificationGameData(
+                    card.instrument.gameObject.name,
+                    card.numClicks,
+                    FindObjectOfType<MemoryMelodyManager>().level,
+                    card.audioSource.clip.name,
+                    similarCards,
+                    sameMelody,
+                    hapticsOn
+                ));
+        }
+        
     }
+
+    IEnumerator WaitToDestroyCards()
+    {
+        yield return new WaitForSeconds(0.5f);
+        cardSpawner.DestroyCards(cards);
+    }
+    
+    
 }

@@ -19,8 +19,9 @@ public class MemoryCard : MonoBehaviour
     public AudioSource audioSource;
     private HapticClipPlayer hapticPlayer;
     private HapticClip hapticClip;
-    public int numClicks = 0;
     public int _id;
+    private Animator animator;
+    public int numClicks { get; private set; }
     
     
     public int Id   
@@ -31,13 +32,14 @@ public class MemoryCard : MonoBehaviour
     private void Start()
     {
         interactableHandler = GetComponent<XRSimpleInteractable>();
-
         interactableHandler.hoverEntered.AddListener(EnteredTrigger);
         interactableHandler.hoverExited.AddListener(ExitedTrigger);
         interactableHandler.selectEntered.AddListener(Pressed);
+        
         audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
         controller = FindObjectOfType<MelodyContoller>();
-
+        numClicks = 0;
     }
 
     public void StopHaptics()
@@ -83,12 +85,14 @@ public class MemoryCard : MonoBehaviour
     public void Matched()
     {
         hoverOutline.OutlineColor = Color.green;
+        
+
     }
     
     
     public void Reveal()
     {
-        GetComponent<MeshRenderer>().enabled = false;
+        animator.SetTrigger("Destroy");
         instrument.SetActive(true);
 
     }
@@ -115,7 +119,14 @@ public class MemoryCard : MonoBehaviour
     public void Reset(){
         if(controller.firstRevealed != this)hoverOutline.enabled = false;
         imTouched = false;
-        audioSource.Stop();
+        if (!alreadyMatched) audioSource.Stop();
+        else StartCoroutine(StopAudioAfterMatched());
         StopHaptics();
 }
+
+    private IEnumerator StopAudioAfterMatched()
+    {
+        yield return new WaitForSeconds(1f);
+        audioSource.Stop();
+    }
 }

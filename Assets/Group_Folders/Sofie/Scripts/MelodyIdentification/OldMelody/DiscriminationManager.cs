@@ -114,7 +114,7 @@ public class DiscriminationManager : LevelManager
     }
     protected override void EndRound()
     {
-        JsonManager.WriteDataToFile<MelodyIdentificationGameData>(
+       /* JsonManager.WriteDataToFile<MelodyIdentificationGameData>(
             new MelodyIdentificationGameData(
                 startTime,
                 DateTime.Now - startTime,
@@ -124,7 +124,7 @@ public class DiscriminationManager : LevelManager
                 new string[] { melodies[0].currentClip.name, melodies[1].currentClip.name, melodies[2].currentClip.name },
                 currentLevel,
                 round
-            ));
+            ));*/
         
         foreach (Oscillator osc in melodies)
         {
