@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using Mono.CSharp;
 using Unity.VisualScripting;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class PitchIdentification : LevelManager
 {
@@ -97,7 +98,11 @@ public class PitchIdentification : LevelManager
     {
         foreach (Speaker s in speakers)
         {
-            s.SwitchMaterial(failMaterial, material);
+            if(s != highestSpeaker) s.SwitchMaterial(failMaterial, material);
+            else
+            {
+                s.SwitchMaterial(sucessMaterial, material);
+            }
         }
 
         if (round < 4)
@@ -297,6 +302,12 @@ public class PitchIdentification : LevelManager
 
     public override void SetRoundFunctionality()
     {
+        XRSimpleInteractable[] interactables = FindObjectsOfType<XRSimpleInteractable>();
+        foreach (XRSimpleInteractable interactable in interactables)
+        {
+            interactable.enabled = false;
+        }
+
         EndRound();
         round++;
         if (round < 4)
@@ -362,6 +373,7 @@ public class PitchIdentification : LevelManager
             foreach (Speaker speaker in speakers)
             {
                 speaker.SetPickedState(false);
+                speaker.GetComponent<XRSimpleInteractable>().enabled = true;
             }
         }
         else
@@ -369,8 +381,10 @@ public class PitchIdentification : LevelManager
             foreach (MelodySpeaker s in melodySpeakers)
             {
                 s.SetPickedState(false);
+                s.GetComponent<XRSimpleInteractable>().enabled = true;
             }
         }
+        
     }
 
     IEnumerator WaitBeforeStart()
