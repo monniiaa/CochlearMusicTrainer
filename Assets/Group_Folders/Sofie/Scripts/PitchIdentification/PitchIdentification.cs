@@ -237,6 +237,7 @@ public class PitchIdentification : LevelManager
                 else if (currentLevel == 3)
                 {
                     melodySpeakers = GameObject.FindObjectsOfType<MelodySpeaker>();
+                    
                     SetRoundInstrumentVersions();
                 }
                 break;
