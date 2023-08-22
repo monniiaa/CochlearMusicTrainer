@@ -1344,6 +1344,7 @@ MonoBehaviour:
   firstRevealed: {fileID: 0}
   secondRevealed: {fileID: 0}
   hapticsOn: 0
+  cardSpawner: {fileID: 359671777}
 --- !u!114 &359671776
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,7 +7,6 @@ public class MemoryMelodyManager : LevelManager
 {
     
     private GameDataManager _gameDataManager;
-    private int currentScore;
     [SerializeField] private InstrumentSeparation modeManager;
     
     private MelodyContoller melodyContoller;

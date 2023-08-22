@@ -33,16 +33,10 @@ public class MelodyContoller : MonoBehaviour
     private List<string> hapticClips = new List<string>();
 
     [SerializeField] private bool hapticsOn = false;
-    CardSpawner cardSpawner;
+    [SerializeField] private CardSpawner cardSpawner;
     private MemoryCard[] cards;
     
-
-    private void Awake()
-    {
-        cardSpawner = GetComponent<CardSpawner>();
-
-    }
-
+    
     public bool canReveal
     {
         get { return secondRevealed == null; }
@@ -62,6 +56,7 @@ public class MelodyContoller : MonoBehaviour
         if(!hapticsOn) (audioclips, prefabs) = GetComponent<RandomizeInstruments>().SelectAndRandomizeCards(numCards, similarCards, sameMelody);
         else (audioclips, prefabs, hapticClips) = GetComponent<RandomizeInstruments>().SelectAndRandomizeCards(numCards, similarCards, sameMelody, hapticsOn );
         
+        Debug.Log(cardSpawner != null);
         cards = cardSpawner.SpawnCards(numCards, originalCard);
 
         for (int i = 0; i < cards.Length; i++)
