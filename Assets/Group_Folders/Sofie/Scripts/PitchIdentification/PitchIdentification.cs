@@ -22,7 +22,6 @@ public class PitchIdentification : LevelManager
     private DateTime startTime;
     [SerializeField]
     private Timer timer;
-    private bool OutOfTime = false;
     [SerializeField] private Material material;
     private float timerStart;
 
@@ -84,29 +83,29 @@ public class PitchIdentification : LevelManager
         }
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        if (difficulty == Difficulty.Hard)
-        {
-            if (currentLevel < 10)
-            {
-                if (timer.timeLeft <= 0 && OutOfTime == false)
-                {
-                    foreach (Speaker s in speakers)
-                    {
-                        s.SwitchMaterial(failMaterial, material);
-                    }
+        timer.OnTimeOut += TimerEnded;
+    }
 
-                    if (round < 4)
-                    {
-                        gameplayAudio.PlayOneShot(failAudio);
-                    }
-                    EndRound();
-                    OutOfTime = true;
-                    SetRoundFunctionality();
-                }
-            }
+    private void OnDisable()
+    {
+        timer.OnTimeOut -= TimerEnded;
+    }
+
+    private void TimerEnded()
+    {
+        foreach (Speaker s in speakers)
+        {
+            s.SwitchMaterial(failMaterial, material);
         }
+
+        if (round < 4)
+        {
+            gameplayAudio.PlayOneShot(failAudio);
+        }
+
+        SetRoundFunctionality();
     }
     
     protected override void RestartLevel()
@@ -262,6 +261,10 @@ public class PitchIdentification : LevelManager
                 else
                 {
                     melodySpeakers = GameObject.FindObjectsOfType<MelodySpeaker>();
+                    foreach(MelodySpeaker speaker in melodySpeakers)
+                    {
+                        speaker.GetComponent<AudioSource>().volume = 0.35f;
+                    }
                     SetRoundInstrumentVersions();
                 }
                 break;
@@ -299,7 +302,6 @@ public class PitchIdentification : LevelManager
         if (round < 4)
         {
             StartCoroutine(WaitBeforeStart());
-            OutOfTime = false;
         }
         else
         {
@@ -347,7 +349,6 @@ public class PitchIdentification : LevelManager
 
     protected override void StartRound()
     {
-        OutOfTime = false;
         startTime = DateTime.Now;
         if (timer != null && round != 1 && currentLevel > 6 && currentLevel < 10)
         {

@@ -6,6 +6,8 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
+    public delegate void TimeOut();
+    public  event TimeOut OnTimeOut;
     public float timeLeft = 10f;
 
     public bool timerOn = false;
@@ -63,6 +65,7 @@ public class Timer : MonoBehaviour
                 timeLeft = 0;
                 timerOn = false;
                 animator.SetBool("StartPopUp", false);
+                if(OnTimeOut != null)OnTimeOut?.Invoke();
             }
 
             if (timeLeft <= 3 && play)
@@ -81,9 +84,4 @@ public class Timer : MonoBehaviour
         timetTxt.text =  seconds.ToString();
 
     }
-    
-
-    
-    
-    
 }
