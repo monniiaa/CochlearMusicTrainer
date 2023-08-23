@@ -18,6 +18,7 @@ public class Timer : MonoBehaviour
     public TextMeshProUGUI timetTxt;
     private Color OGColor;
     Animator animator;
+    public bool updateTimer = true;
 
     private bool play = false;
 
@@ -56,11 +57,11 @@ public class Timer : MonoBehaviour
     {
         if(timerOn)
         {
-            if (timeLeft > 0)
+            if (timeLeft > 0 && updateTimer)
             {
                 timeLeft -= Time.deltaTime;
                 UpdateTimer(timeLeft);
-            }else
+            }else if (timeLeft <= 0)
             {
                 timeLeft = 0;
                 timerOn = false;

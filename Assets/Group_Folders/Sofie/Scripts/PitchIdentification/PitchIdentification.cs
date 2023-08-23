@@ -7,12 +7,13 @@ using System.Linq;
 using Mono.CSharp;
 using Unity.VisualScripting;
 using UnityEngine.XR.Interaction.Toolkit;
+using TMPro;
 
 public class PitchIdentification : LevelManager
 {
     private int maxLevel = 10;
 
-    private Speaker highestSpeaker;
+    private Speaker correctSpeaker;
     private bool correctPick;
     private GameDataManager _gameDataManager;
     
@@ -30,7 +31,10 @@ public class PitchIdentification : LevelManager
     
     private MelodySpeaker[] melodySpeakers;
     [SerializeField] private List<GameObject> pitchModes;
-
+    
+    private bool highestMode = false;
+    [SerializeField] private TextMeshProUGUI instructionText;
+    
     private void Awake()
     {
         pitchModes = new List<GameObject>();
@@ -57,6 +61,13 @@ public class PitchIdentification : LevelManager
             star.gameObject.SetActive(false);
         }
 
+    }
+
+    private void SetInstructionText()
+    {
+        if (highestMode) instructionText.text = "Vælg højtaleren der spiller den højeste frekvens";
+        
+        else instructionText.text = "Vælg højtaleren der spiller den laveste frekvens";
     }
 
     private void Start()
@@ -98,7 +109,7 @@ public class PitchIdentification : LevelManager
     {
         foreach (Speaker s in speakers)
         {
-            if(s != highestSpeaker) s.SwitchMaterial(failMaterial, material);
+            if(s != correctSpeaker) s.SwitchMaterial(failMaterial, material);
             else
             {
                 s.SwitchMaterial(sucessMaterial, material);
@@ -140,7 +151,7 @@ public class PitchIdentification : LevelManager
 
     public void SetPitchDifference( int upperInterval, int lowerinterval)
     {
-        highestSpeaker = speakers[0];
+        correctSpeaker = speakers[0];
         int randnote = UnityEngine.Random.Range(0, speakers[0].notes.Length);
         speakers[0].note = randnote;
         speakers[0].SetNote(randnote);
@@ -183,16 +194,27 @@ public class PitchIdentification : LevelManager
                     randomNotes.Add(note);
                 }
 
-                if (speakers[i].note > highestSpeaker.note)
+                if (highestMode)
                 {
-                    highestSpeaker = speakers[i];
-                }            
-            
+                    if (speakers[i].note > correctSpeaker.note)
+                    {
+                        correctSpeaker = speakers[i];
+                    }       
+                }
+                else
+                {
+                    if (speakers[i].note < correctSpeaker.note)
+                    {
+                        correctSpeaker = speakers[i];
+                    }       
+                }
+
         }
     }
 
     public void SpeakerPicked(Speaker speaker)
     {
+        timer.updateTimer = false;
         string[] options = new string[speakers.Length];
         for(int i =0 ; i < speakers.Length; i++)
         {
@@ -204,20 +226,20 @@ public class PitchIdentification : LevelManager
                 DateTime.Now,
                 DateTime.Now - startTime,
                 speaker.currentClip.name,
-                highestSpeaker.currentClip.name,
-                highestSpeaker.currentClip.name == speaker.currentClip.name,
+                correctSpeaker.currentClip.name,
+                correctSpeaker.currentClip.name == speaker.currentClip.name,
                 currentLevel,
                 round,
                 options
             ));
         
         EndRound();
-        if (speaker == highestSpeaker) {
+        if (speaker == correctSpeaker) {
             gameplayAudio.PlayOneShot(sucessAudio);
             speaker.GetComponent<MeshRenderer>().material = sucessMaterial;
             currentScore += 1;
 
-        } else if (speaker!= highestSpeaker)
+        } else if (speaker!= correctSpeaker)
         {
             gameplayAudio.PlayOneShot(failAudio);
             speaker.GetComponent<MeshRenderer>().material = failMaterial;
@@ -229,6 +251,8 @@ public class PitchIdentification : LevelManager
         switch (difficulty)
         {
             case Difficulty.Easy:
+                if (currentLevel == 1) highestMode = true;
+                else if ( currentLevel == 2) highestMode = false;
                 if (currentLevel <= 2)
                 {
                     speakers = GameObject.FindObjectsOfType<Speaker>();
@@ -236,33 +260,53 @@ public class PitchIdentification : LevelManager
                 }
                 else if (currentLevel == 3)
                 {
+                    highestMode = true;
                     melodySpeakers = GameObject.FindObjectsOfType<MelodySpeaker>();
-                    
                     SetRoundInstrumentVersions();
                 }
                 break;
             case Difficulty.Medium:
                 if (currentLevel == 4)
                 {
+                    highestMode = false;
                     melodySpeakers = GameObject.FindObjectsOfType<MelodySpeaker>();
                     SetRoundInstrumentVersions();
                 }
+                else if (currentLevel == 5)
+                {
+                    highestMode = true;
+                    speakers = GameObject.FindObjectsOfType<Speaker>();
+                    SetPitchDifference( 11-currentLevel, 1);
+                }
                 else
                 {
+                    highestMode = false;
                     speakers = GameObject.FindObjectsOfType<Speaker>();
                     SetPitchDifference( 11-currentLevel, 1);
                 }
                 break;
             case Difficulty.Hard:
+                if (currentLevel == 7) highestMode = true;
+                else if (currentLevel == 8) highestMode = false;
+                else
+                {
+                    int rand = UnityEngine.Random.Range(0, 2);
+                    if (rand == 1)
+                    {
+                        highestMode = true;
+                    }
+                    else
+                    {
+                        highestMode = false;
+                    }
+                }
                 if (currentLevel <= 9)
                 {
                     speakers = GameObject.FindObjectsOfType<Speaker>();
                     SetPitchDifference( 12-currentLevel, 1);
                     timer = FindObjectOfType<Timer>(true);
                     timer.gameObject.SetActive(true);
-                    if(currentLevel == 7) timerStart = 10;
-                    else if (currentLevel == 8) timerStart = 8;
-                    else if (currentLevel == 9) timerStart = 6;
+                    timerStart = 17 - currentLevel;
                 }
                 else
                 {
@@ -275,7 +319,7 @@ public class PitchIdentification : LevelManager
                 }
                 break;
         }
-
+        SetInstructionText();
     }
 
     IEnumerator End()
@@ -365,6 +409,7 @@ public class PitchIdentification : LevelManager
         if (timer != null && round != 1 && currentLevel > 6 && currentLevel < 10)
         {
             timer.timeLeft = timerStart;
+            timer.updateTimer = true;
             timer.StartCoroutine(timer.Reset());
         }
 
@@ -390,7 +435,7 @@ public class PitchIdentification : LevelManager
 
     IEnumerator WaitBeforeStart()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         StartRound();
     }
     
@@ -414,17 +459,22 @@ public class PitchIdentification : LevelManager
 
         if (rand == 0)
         {
-            melodySpeakers[0].tag = "HighestSpeaker";
+            if(highestMode ) melodySpeakers[0].tag = "HighestSpeaker";
+            else melodySpeakers[1].tag = "LowestSpeaker";
         }
         else
         {
-            melodySpeakers[1].tag = "HighestSpeaker";
+           if(highestMode) melodySpeakers[1].tag = "HighestSpeaker";
+              else melodySpeakers[0].tag = "LowestSpeaker";
         }
     }
     
     public void PickInstrumentSpeaker(MelodySpeaker melodyspeaker)
     {
-        MelodySpeaker highest = GameObject.FindWithTag("HighestSpeaker").GetComponent<MelodySpeaker>();
+        MelodySpeaker correct; 
+            
+        if(highestMode) correct = GameObject.FindWithTag("HighestSpeaker").GetComponent<MelodySpeaker>();
+        else correct = GameObject.FindWithTag("LowestSpeaker").GetComponent<MelodySpeaker>();
         string[] options = new string[melodySpeakers.Length];
         for(int i =0 ; i < melodySpeakers.Length; i++)
         {
@@ -435,13 +485,13 @@ public class PitchIdentification : LevelManager
                 DateTime.Now,
                 DateTime.Now - startTime,
                 melodyspeaker.GetComponent<AudioSource>().clip.name,
-                highest.GetComponent<AudioSource>().clip.name,
-                highest.GetComponent<AudioSource>().clip.name == melodyspeaker.GetComponent<AudioSource>().clip.name,
+                correct.GetComponent<AudioSource>().clip.name,
+                correct.GetComponent<AudioSource>().clip.name == melodyspeaker.GetComponent<AudioSource>().clip.name,
                 currentLevel,
                 round,
                 options
             ));
-        if (melodyspeaker.CompareTag("HighestSpeaker"))
+        if (melodyspeaker.CompareTag("HighestSpeaker") || melodyspeaker.CompareTag("LowestSpeaker"))
         {
             gameplayAudio.PlayOneShot(sucessAudio);
             melodyspeaker.GetComponent<MeshRenderer>().material = sucessMaterial;
