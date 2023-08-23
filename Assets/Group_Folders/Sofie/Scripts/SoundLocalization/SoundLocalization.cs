@@ -112,6 +112,9 @@ public class SoundLocalization : LevelManager
             case Difficulty.Easy:
                 _interactorLine.stopLineAtFirstRaycastHit = true;
                 _interactorLine.snapEndpointIfAvailable = true;
+                speakerSpawner.minDistanceToPlayer = 5;
+                speakerSpawner.roomSize = 5.5f;
+                speakerSpawner.height = 0.5f;
                 switch (currentLevel)
                 {
                     case 1:
