@@ -40,6 +40,8 @@ public class SoundLocalization : LevelManager
     private randomizeSoundLocation speakerSpawner;
     [SerializeField] RuntimeAnimatorController animatorcontrollerEasy;
     private InstrumentSeparation modeManager;
+    
+    bool allInvisible = false;
 
     private bool correctTarget = false;
     
@@ -134,32 +136,51 @@ public class SoundLocalization : LevelManager
                 _interactorLine.stopLineAtFirstRaycastHit = false;
                 _interactorLine.snapEndpointIfAvailable = false;
                 speakerSpawner.height = 0.2f;
-                mediumHardTargetPrefab.transform.localScale = new Vector3(1f, 1f, 1f);
+                switch (currentLevel)
+                {
+                    case 4:
+                        mediumHardTargetPrefab.transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
+                        break;
+                    case 5:
+                        mediumHardTargetPrefab.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
+                        break;
+                    case 6:
+                        mediumHardTargetPrefab.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+                        break;
+                }
+
                 RespawnSpeaker();
                 break;
             case Difficulty.Hard:
                 _interactorLine.stopLineAtFirstRaycastHit = false;
                 _interactorLine.snapEndpointIfAvailable = false;
                 instrumentNameUI.gameObject.SetActive(true);
+                allInvisible = true;
                 if (currentLevel == 7)
                 {
-                    SpawnInstruments(2);
+                    allInvisible = false;
+                    SpawnInstruments(2, allInvisible);
                 }
                 else if (currentLevel == 8)
                 {
+                    allInvisible = false;
+                    SpawnInstruments(UnityEngine.Random.Range(2,4), allInvisible);
+                }
+                else if (currentLevel == 9)
+                {
+                    SpawnInstruments(2, allInvisible);
                     
-                    SpawnInstruments(UnityEngine.Random.Range(2,4));
                 }
                 else
                 {
-                    SpawnInstruments(UnityEngine.Random.Range(2,6));
+                    SpawnInstruments(UnityEngine.Random.Range(2,4), allInvisible);
                 }
 
                 break;
         }
     }
 
-    private void SpawnInstruments(int amount)
+    private void SpawnInstruments(int amount, bool invisible)
     {
         pickedInstruments = randomInstrumentPicker.PickedInstruments(amount);
         int rand = Random.Range(0, 6); //amount of audioclips
@@ -170,6 +191,18 @@ public class SoundLocalization : LevelManager
         }
         pickedInstruments = speakerSpawner.SpawnInstruments(3, pickedInstruments.ToArray());
         SetInstrumentToLocate();
+        if (allInvisible)
+        {
+            SetInvisbile(pickedInstruments);
+        }
+    }
+
+    private void SetInvisbile(List<GameObject> instrument)
+    {
+        foreach (GameObject inst in instrument)
+        {
+            if(inst != instrumentToLocate) inst.GetComponentInChildren<MeshRenderer>().enabled = false;
+        }
     }
     
     private void SetInstrumentToLocate()
@@ -368,6 +401,17 @@ public class SoundLocalization : LevelManager
             instrumentToLocate.GetComponentInChildren<MeshRenderer>().enabled = true;
             
                 instrumentToLocate.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = true;
+                
+                if (allInvisible)
+                {
+                    foreach (GameObject instrument in pickedInstruments)
+                    {
+                        if (instrument != instrumentToLocate)
+                        {
+                            instrument.GetComponentInChildren<MeshRenderer>().enabled = true;
+                        }
+                    }
+                }
             
             if (CheckInstrumentHit())
             {
@@ -381,6 +425,7 @@ public class SoundLocalization : LevelManager
                 instrumentToLocate.GetComponentInChildren<Animator>().enabled = true;
                 gameplayAudio.PlayOneShot(sucessAudio);
                 currentScore++;
+                
             }
             else
             {
