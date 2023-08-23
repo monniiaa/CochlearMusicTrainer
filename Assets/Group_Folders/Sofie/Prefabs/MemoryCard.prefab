@@ -786,7 +786,6 @@ MonoBehaviour:
   controller: {fileID: 0}
   alreadyMatched: 0
   audioSource: {fileID: 5059515114066004457}
-  numClicks: 0
   _id: 0
 --- !u!82 &5059515114066004457
 AudioSource:
@@ -800,7 +799,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0

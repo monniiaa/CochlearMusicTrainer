@@ -8,6 +8,8 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class MelodyContoller : MonoBehaviour
 {
+    public delegate void LastTouched(MemoryCard card);
+    public event LastTouched OnLastTouchedEvent;
     public delegate void End();
     public event End EndEvent;
     
@@ -49,8 +51,20 @@ public class MelodyContoller : MonoBehaviour
         this.sameMelody = sameMelody;
         this.hapticsOn = hapticsOn;
     }
-    
-        public void StartGame()
+
+    private void OnDisable()
+    {
+        prefabs.Clear();
+        audioclips.Clear();
+        hapticClips.Clear();
+        cards = null;
+        firstRevealed = null;
+        secondRevealed = null;
+        matchId.Clear();
+        score = 0;
+    }
+
+    public void StartGame()
     {
         int[] cardsIdexes = GenerateCardVector(numCards);
         if(!hapticsOn) (audioclips, prefabs) = GetComponent<RandomizeInstruments>().SelectAndRandomizeCards(numCards, similarCards, sameMelody);
@@ -144,25 +158,21 @@ public class MelodyContoller : MonoBehaviour
 
             firstRevealed.alreadyMatched = true;
             secondRevealed.alreadyMatched = true;
+            if (OnLastTouchedEvent != null) OnLastTouchedEvent(secondRevealed);
 
             firstRevealed.Matched();
             secondRevealed.Matched();
             new WaitForSeconds(1f);
-            MatchEvent?.Invoke(true);
+            if(MatchEvent != null) MatchEvent?.Invoke(true);
 
             if (score == numCards / 2)
             {
                 yield return new WaitForSeconds(0.5f);
-               // firstRevealed.audioSource.Stop();
-               // secondRevealed.audioSource.Stop();
-               // if (hapticsOn)
-               // {
-               //     firstRevealed.StopHaptics();
-               //     secondRevealed.StopHaptics();
-               // }
-               CollectCardInfo();
+                firstRevealed = null;
+                secondRevealed = null;
+                CollectCardInfo();
                StartCoroutine(WaitToDestroyCards());
-               EndEvent?.Invoke();
+               if(EndEvent != null) EndEvent?.Invoke();
             }
         }
         else

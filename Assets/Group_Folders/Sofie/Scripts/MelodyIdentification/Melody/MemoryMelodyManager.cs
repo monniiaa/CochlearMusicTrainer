@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class MemoryMelodyManager : LevelManager
 {
-    
     private GameDataManager _gameDataManager;
     [SerializeField] private InstrumentSeparation modeManager;
     
@@ -107,6 +106,7 @@ public class MemoryMelodyManager : LevelManager
 
     protected override void EndRound()
     {
+        currentScore = 3;
         if(currentLevel == gameData.level)
         {
             gameData.level = (currentLevel == maxLevel) ? gameData.level : currentLevel + 1;
@@ -126,7 +126,6 @@ public class MemoryMelodyManager : LevelManager
     {
         JsonManager.WriteDataToFile<ScoreData>(new ScoreData("Melody Identification", DateTime.Now, currentScore, currentLevel));
         yield return new WaitForSeconds(0.5f);
-        currentScore = 3;
         ShowStar(currentScore);
         modeManager.EndGame();
     }
