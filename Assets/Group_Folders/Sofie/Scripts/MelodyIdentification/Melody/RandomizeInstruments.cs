@@ -28,7 +28,7 @@ public class RandomizeInstruments : MonoBehaviour
 
     private void Start()
     {
-        SelectAndRandomizeCards(4, false, false);
+        // SelectAndRandomizeCards(8, true, true);
     }
 
 
@@ -61,60 +61,30 @@ public class RandomizeInstruments : MonoBehaviour
         char[] wavChar = { '.', 'w', 'a', 'v' };
 
         // Load folder content
-        string folderPath = "Assets/Resources/MemoryGameSounds/Sounds/Instruments";
+        string folderPath = "MemoryGameSounds/Sounds/Instruments";
 
-        // Check if the folder exists
-        if (Directory.Exists(folderPath))
+        AudioClip[] audioClips = Resources.LoadAll(folderPath, typeof(AudioClip)).Cast<AudioClip>().ToArray();
+        foreach(AudioClip clip in audioClips)
         {
-            // Get all files and directories in the folder
-            string[] files = Directory.GetFiles(folderPath);
+            string[] content = clip.name.Split('_');
+            path = content[0];
 
-            // For each element in the folder
-            foreach (string file in files)
-            {
-                // If it's a .wav file
-                if (!file.Contains(".meta") & file.Contains(".wav"))
+            if(tmpInstrument != content[0])
                 {
-                    // Split instrument name and melody name
-                    string[] content = file.Split("\\");
-                    path = content[0];
-                    content = content[1].Split('_');
-
-                    // If it's a new instrument
-                    if (tmpInstrument != content[0])
-                    {
-
-                        // Clear tmpMelody if it's a new instrument
-                        tmpMelody = new List<string>(); ;
-
-                        // Save instrument
-                        tmpInstrument = content[0];
-                        // Save melody
-                        tmpMelody.Add(content[1].TrimEnd(wavChar));
-
-                        // Save the data in a new InstrumentContainer class
-                        instruments.Add(new InstrumentContainer(path, tmpInstrument, tmpMelody, instrumentSimilarity[tmpInstrument]));
-                    }
-                    else // If it's not a new intrument
-                    {
-                        // Add an element to tmpMelody and save
-                        tmpMelody.Add(content[1].TrimEnd(wavChar));
-                        // Replace the already stored list of melodies with the new one
-                        instruments[instruments.Count - 1].melodies = tmpMelody;
-                    }
+                    tmpMelody = new List<string>();
+                    tmpInstrument = content[0];
+                    tmpMelody.Add(content[1]);
+                    instruments.Add(new InstrumentContainer(path, tmpInstrument, tmpMelody, instrumentSimilarity[tmpInstrument]));
                 }
-                else  // Otherwise skip the file
+                else
                 {
-                    continue;
+                    tmpMelody.Add(content[1].TrimEnd(wavChar));
+                    instruments[instruments.Count - 1].melodies = tmpMelody;
                 }
-
-            }
-
+            
         }
-        else
-        {
-            Debug.LogError("Folder does not exist: " + folderPath);
-        }
+        
+       
         // Create a list of instruments for each similarity group
         var instrumentGroups = instrumentSimilarity.GroupBy(x => x.Value).Select(x => x.Select(y => y.Key).ToList()).ToList();
 
@@ -267,66 +237,30 @@ public class RandomizeInstruments : MonoBehaviour
         List<string> tmpMelody = new List<string>();
         char[] wavChar = { '.', 'w', 'a', 'v' };
 
+
         // Load folder content
-        string folderPath = "Assets/Resources/MemoryGameSounds/Sounds/Instruments";
+        string folderPath = "MemoryGameSounds/Sounds/Instruments";
 
-        // Check if the folder exists
-        if (Directory.Exists(folderPath))
+        AudioClip[] audioClips = Resources.LoadAll(folderPath, typeof(AudioClip)).Cast<AudioClip>().ToArray();
+        foreach(AudioClip clip in audioClips)
         {
-            // Get all files and directories in the folder
-            string[] files = Directory.GetFiles(folderPath);
+            string[] content = clip.name.Split('_');
+            path = content[0];
 
-            // For each element in the folder
-            foreach (string file in files)
+            if(tmpInstrument != content[0])
             {
-                // If it's a .wav file
-                if (!file.Contains(".meta") & file.Contains(".wav"))
-                {
-                    // Split instrument name and melody name
-                    string[] content = file.Split("\\");
-                    path = content[0];
-                    content = content[1].Split('_');
-
-                    // If it's a new instrument
-                    if (tmpInstrument != content[0])
-                    {
-
-                        // Clear tmpMelody if it's a new instrument
-                        tmpMelody = new List<string>(); ;
-
-                        // Save instrument
-                        tmpInstrument = content[0];
-                        // Save melody
-                        tmpMelody.Add(content[1].TrimEnd(wavChar));
-
-                        // Save the data in a new InstrumentContainer class
-                        instruments.Add(new InstrumentContainer(path, tmpInstrument, tmpMelody, instrumentSimilarity[tmpInstrument]));
-                    }
-                    else // If it's not a new intrument
-                    {
-                        // Add an element to tmpMelody and save
-                        tmpMelody.Add(content[1].TrimEnd(wavChar));
-                        // Replace the already stored list of melodies with the new one
-                        instruments[instruments.Count - 1].melodies = tmpMelody;
-                    }
-                }
-                else  // Otherwise skip the file
-                {
-                    continue;
-                }
-
+                tmpMelody = new List<string>();
+                tmpInstrument = content[0];
+                tmpMelody.Add(content[1]);
+                instruments.Add(new InstrumentContainer(path, tmpInstrument, tmpMelody, instrumentSimilarity[tmpInstrument]));
             }
-
+            else
+            {
+                tmpMelody.Add(content[1].TrimEnd(wavChar));
+                instruments[instruments.Count - 1].melodies = tmpMelody;
+            }
+            
         }
-        else
-        {
-            Debug.LogError("Folder does not exist: " + folderPath);
-        }
-
-
-
-
-
 
         // Create a list of instruments for each similarity group
         var instrumentGroups = instrumentSimilarity.GroupBy(x => x.Value).Select(x => x.Select(y => y.Key).ToList()).ToList();

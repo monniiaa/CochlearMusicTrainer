@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Oculus.Haptics;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
@@ -15,8 +17,6 @@ public class MelodyContoller : MonoBehaviour
     
     public delegate void Match(bool match);
     public event Match MatchEvent;
-
-
     public int numCards = 8;
 
     public bool similarCards = false;
@@ -38,7 +38,7 @@ public class MelodyContoller : MonoBehaviour
     [SerializeField] private CardSpawner cardSpawner;
     private MemoryCard[] cards;
     
-    
+
     public bool canReveal
     {
         get { return secondRevealed == null; }
@@ -70,7 +70,8 @@ public class MelodyContoller : MonoBehaviour
         if(!hapticsOn) (audioclips, prefabs) = GetComponent<RandomizeInstruments>().SelectAndRandomizeCards(numCards, similarCards, sameMelody);
         else (audioclips, prefabs, hapticClips) = GetComponent<RandomizeInstruments>().SelectAndRandomizeCards(numCards, similarCards, sameMelody, hapticsOn );
         
-        Debug.Log(cardSpawner != null);
+        
+        
         cards = cardSpawner.SpawnCards(numCards, originalCard);
 
         for (int i = 0; i < cards.Length; i++)

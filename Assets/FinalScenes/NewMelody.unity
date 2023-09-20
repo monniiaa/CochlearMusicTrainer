@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.10117787, g: 0.2880348, b: 0.5371327, a: 1}
+  m_IndirectSpecularColor: {r: 0.10063326, g: 0.28698754, b: 0.5346657, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1345,6 +1345,7 @@ MonoBehaviour:
   secondRevealed: {fileID: 0}
   hapticsOn: 0
   cardSpawner: {fileID: 359671777}
+  debugText: {fileID: 0}
 --- !u!114 &359671776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1397,8 +1398,10 @@ MonoBehaviour:
   - {fileID: 1143807734}
   - {fileID: 1525877356}
   - {fileID: 1868467163}
-  modeManager: {fileID: 0}
+  modeManager: {fileID: 862259375}
+  melodyContoller: {fileID: 359671775}
   level: 0
+  melodytxt: {fileID: 0}
 --- !u!1 &399511345
 GameObject:
   m_ObjectHideFlags: 0
@@ -2913,7 +2916,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &993330114
 Transform:
   m_ObjectHideFlags: 0
@@ -2954,7 +2957,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1118251602
 Transform:
   m_ObjectHideFlags: 0

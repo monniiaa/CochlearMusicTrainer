@@ -2,15 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class MemoryMelodyManager : LevelManager
 {
     private GameDataManager _gameDataManager;
     [SerializeField] private InstrumentSeparation modeManager;
     
-    private MelodyContoller melodyContoller;
+    [SerializeField]private MelodyContoller melodyContoller;
 
     public int level;
+    
 
     private void Awake()
     {
@@ -24,17 +26,27 @@ public class MemoryMelodyManager : LevelManager
         currentLevel = (_gameDataManager.currentLevel == 0) ? 1 : _gameDataManager.currentLevel;
         level = currentLevel;
         
+        SetMode();
+
+                
         foreach (GameObject star in starAnimation)
         {
             star.gameObject.SetActive(false);
         }
     }
     
+
+    private void Start()
+    {
+        StartRound();   
+    }
+    
+
     private void OnEnable()
     {
         melodyContoller.EndEvent += EndRound;
         melodyContoller.MatchEvent += Match;
-        StartRound();       
+    
     }
     
     private void OnDisable()
